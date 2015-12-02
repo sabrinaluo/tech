@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>小白妹妹写代码</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="小白妹妹写代码">
+<meta property="og:url" content="http://sabrinaluo.github.io/tech/index.html">
+<meta property="og:site_name" content="小白妹妹写代码">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="小白妹妹写代码">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="小白妹妹写代码" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/tech/css/style.css" type="text/css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">小白妹妹写代码</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">一个废话很多的程序媛 | 我这么可爱一定是男孩子</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://sabrinaluo.github.io/tech"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-promise" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/tech/2015/12/01/promise/" class="article-date">
+  <time datetime="2015-12-01T10:46:26.000Z" itemprop="datePublished">2015-12-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/tech/2015/12/01/promise/">我所理解的Promise</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//以下用setTimeout()模拟一个请求</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">"小白妹妹"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">greeting</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"你好，"</span> + name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//生成一个0到1000的随机数，模拟不确定的等待时间0-1秒</span></span><br><span class="line"><span class="keyword">var</span> randomTime = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * <span class="number">1000</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1秒之内给name赋值为 小白妹妹，但不知道具体时间</span></span><br><span class="line">setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  name = getName();</span><br><span class="line">&#125;, randomTime());</span><br><span class="line"></span><br><span class="line">greeting(name); <span class="comment">//以为得到name之后就可以开心的去打招呼啦，然而…</span></span><br></pre></td></tr></table></figure></p>
+<p>###这是错的！这是错的！这是错的！<br>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
+<p>再有点经验，就会知道，应该把<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#32780;&#35299;&#20915;&#22238;&#35843;&#22320;&#29425;&#20854;&#20013;&#19968;&#20010;&#24456;&#20248;&#38597;&#30340;&#26041;&#27861;&#65292;&#23601;&#26159;&#20351;&#29992;&#20256;&#35828;&#20013;&#30340;promise&#65281;&#10;&#10;&#20851;&#20110;promise&#36825;&#20010;&#27010;&#24565;&#25105;&#21069;&#21069;&#21518;&#21518;&#30475;&#20102;&#26377;&#19968;&#24180;&#20102;&#65292;&#21608;&#22260;&#20063;&#27809;&#26377;&#35748;&#35782;&#30340;&#20154;&#21487;&#20197;&#32473;&#25105;&#35762;&#65292;&#21482;&#33021;&#33258;&#24049;&#30475;&#30475;&#32593;&#19978;&#30340;&#25991;&#31456;&#65292;&#28982;&#32780;&#8230;~~&#24182;&#27809;&#26377;&#20160;&#20040;&#21365;&#29992;~~&#8230;&#32593;&#19978;&#30340;&#25991;&#31456;&#37117;&#26159;&#20247;&#35828;&#32439;&#32429;&#65292;&#26377;&#19968;&#19978;&#26469;&#23601;defer&#30340;[^1]&#65292;&#20063;&#26377;&#19968;&#19978;&#26469;&#23601;&#35828;&#22914;&#26524;&#20320;&#36824;&#22312;&#29992;defer&#20320;&#23601;&#29702;&#35299;&#38169;&#20102;Promise&#30340;[^2]&#65292;&#23601;&#25152;&#20197;&#25105;&#21040;&#29616;&#22312;&#20063;&#19981;&#30693;&#36947;&#31350;&#31455;&#20160;&#20040;&#26679;&#30340;&#29702;&#35299;&#25165;&#26159;&#23545;&#30340;&#8230;&#10;&#10;&#20851;&#20110;[Promise&#20197;&#21450;A+&#35268;&#33539;](http://segmentfault.com/a/1190000002452115)&#23601;&#19981;&#22312;&#27492;&#35814;&#36848;&#20102;&#65292;&#37027;&#20123;&#27010;&#24565;&#30340;&#19996;&#19996;&#65292;&#25105;&#20063;&#36824;&#27809;&#23436;&#20840;&#29702;&#35299;&#12290;&#25105;&#24819;&#20570;&#30340;&#26159;&#35753;&#36319;&#25105;&#19968;&#26679;&#30340;&#23567;&#30333;&#37117;&#33021;&#26126;&#30333;Promise&#26368;&#22522;&#26412;&#30340;&#29992;&#27861;&#12290;&#10;&#10;---&#10;&#20030;&#20010;&#26647;&#23376;&#8230;&#10;&#26377;&#19968;&#20010;&#31532;&#19977;&#26041;&#25552;&#20379;&#30340;API&#65292;&#35775;&#38382;API&#33021;&#22815;&#24471;&#21040;&#19968;&#20123;&#29992;&#25143;&#25968;&#25454;&#65288;&#27599;&#35775;&#38382;&#19968;&#27425;&#24471;&#21040;&#19968;&#39029;&#65292;&#20551;&#35774;&#30001;&#20110;&#26576;&#20123;&#38480;&#21046;&#19968;&#39029;&#21482;&#36820;&#22238;3&#20010;&#29992;&#25143;&#65289;&#20197;&#21450;&#19979;&#19968;&#39029;&#30340;index&#65307;&#38500;&#20102;&#31532;&#19968;&#39029;&#20043;&#22806;&#65292;&#20854;&#20182;&#30340;&#39029;&#38754;&#37117;&#38656;&#35201;&#19979;&#19968;&#39029;&#30340;index&#21442;&#25968;&#25165;&#33021;&#35775;&#38382;&#21040;&#12290;&#65288;&#20808;&#19981;&#31649;&#36825;&#20010;API&#35774;&#35745;&#30340;&#21512;&#19981;&#21512;&#29702;&#8230;Facebook&#23601;&#26377;&#36825;&#26679;&#30340;API&#65289;&#10;http://example.com/user  *--&#62;&#35775;&#38382;&#31532;&#19968;&#39029;&#30340;&#29992;&#25143;&#25968;&#25454;*&#10;http://example.com/user?next=xzmca  *--&#62;&#35775;&#38382;&#31532;&#20108;&#39029;&#30340;&#29992;&#25143;&#25968;&#25454;*&#10;&#35831;&#27714;&#31532;&#19968;&#39029;&#26102;&#36820;&#22238;&#32467;&#26524;&#22914;&#19979;&#65306;&#10;```json&#10;&#123;&#10;&#34;items&#34; : [&#123;&#10;  &#34;name&#34; : &#34;&#23567;&#30333;&#22969;&#22969;&#34;,&#10;   &#34;age&#34; : 10&#10;  &#125;, &#10;&#123;...&#125;, &#123;...&#125;],&#10;&#34;nextPage&#34; : &#34;xzmca&#34;,&#10;&#34;lastPage&#34; : null&#10;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>你可能会有这样的需求：你的APP一次需要显示6个甚至更多个的用户数据。而根据之前的API，一次只能拿到3个数据，那么就只能发出两次请求，并且<strong>第二次请求依赖于第一次请求的结果</strong>，由于异步的原因我们并不知道第一个请求什么时候才完成，<del>而我最初入坑时是让程序发完第一个请求后强制等2秒再发第二个请求我会告诉你们吗…</del></p>
+<p>下面为了方便，使用<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">```javascript&#10;//&#29983;&#25104;&#19968;&#20010;0&#21040;3000&#30340;&#38543;&#26426;&#25968;&#65292;&#27169;&#25311;&#19981;&#30830;&#23450;&#30340;&#31561;&#24453;&#26102;&#38388;0-3&#31186;&#10;var randomTime = function () &#123;&#10;  return Math.random() * 3000;&#10;&#125;;&#10;&#10;//&#21482;&#32771;&#34385;&#26368;&#31616;&#21333;&#30340;&#24773;&#20917;promise&#34987;resolve&#65292;&#26242;&#26102;&#19981;&#32771;&#34385;promise&#34987;reject&#30340;&#24773;&#20917;&#10;function req1() &#123;&#10;  return new Promise(function (resolve) &#123;&#10;&#10;    //&#20351;&#29992;setTimeout()&#26469;&#27169;&#25311;&#21457;&#36865;&#35831;&#27714;&#65292;data&#20026;&#35831;&#27714;&#24471;&#21040;&#30340;&#25968;&#25454;&#10;    setTimeout(function () &#123;&#10;      var data = &#123;&#10;        &#34;items&#34;: [&#123;&#10;          &#34;name&#34;: &#34;&#23567;&#30333;&#22969;&#22969;&#34;,&#10;          &#34;age&#34;: 10&#10;        &#125;, &#123;&#10;          &#34;name&#34;: &#34;&#23567;&#30333;&#34;,&#10;          &#34;age&#34;: 100&#10;        &#125;, &#123;&#10;          &#34;name&#34;: &#34;&#22969;&#22969;&#34;,&#10;          &#34;age&#34;: 111&#10;        &#125;],&#10;        &#34;nextPage&#34;: &#34;asdfa&#34;,&#10;        &#34;lastPage&#34;: null&#10;      &#125;;&#10;&#10;      resolve(data);&#10;      console.log(&#34;&#35831;&#27714;1&#23436;&#25104;&#34;);&#10;    &#125;, randomTime());&#10;  &#125;)&#10;&#125;&#10;&#10;function req2(dataFromReq1) &#123;&#10;  return new Promise(function (resolve) &#123;&#10;&#10;    setTimeout(function () &#123;&#10;      var data = &#123;&#10;        &#34;items&#34;: [&#123;&#10;          &#34;name&#34;: &#34;&#23567;&#40657;&#22992;&#22992;&#34;,&#10;          &#34;age&#34;: 20&#10;        &#125;, &#123;&#10;          &#34;name&#34;: &#34;&#23567;&#40657;&#34;,&#10;          &#34;age&#34;: 233&#10;        &#125;, &#123;&#10;          &#34;name&#34;: &#34;&#22992;&#22992;&#34;,&#10;          &#34;age&#34;: 250&#10;        &#125;],&#10;        &#34;nextPage&#34;: &#34;gwdfx&#34;,&#10;        &#34;lastPage&#34;: &#34;asdfa&#34;&#10;      &#125;;&#10;      console.log(dataFromReq1);&#10;      var finalUserData = dataFromReq1.items.concat(data.items); //&#23558;&#20004;&#27425;&#24471;&#21040;&#30340;&#29992;&#25143;&#25968;&#25454;&#21512;&#24182;&#10;      resolve(finalUserData);&#10;      console.log(&#34;&#35831;&#27714;2&#23436;&#25104;&#34;);&#10;    &#125;, randomTime());&#10;  &#125;)&#10;&#125;&#10;&#10;//&#35753;&#25968;&#25454;&#22312;promise&#38142;&#19978;&#27426;&#24555;&#30340;&#20256;&#36882;&#21543;&#65374;&#10;req1().then(req2).then(function (data) &#123;&#10;  console.log(data);&#10;&#125;);</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Q: 什么时候需要返回一个promise呢？<br>A: 当你的需求逻辑是，XXX的执行需要依赖OOO的结果，此时OOO就应该返回一个promise</p>
+<p>Q: 为什么req1要打括号，而req2不打括号？<br>A:这个我也没太搞清楚XD，我的理解是，<code>req1()</code>打括号执行后才会返回promise，不打括号就只是一个没有执行的函数，<code>req2</code>不打括号是因为then的入参只能是一个<strong>函数</strong>，如果打了括号执行后就不是函数了。</p>
+<p>Q: 最后一个then的function(data) data是哪里来的？<br>A: <code>req2</code>的定义中，有一句<code>resolve(finalUserData)</code>，在Promise Chain中，每个then的入参的入参也就是function(data)中的data都是由前一个promise resolve时传递而来的</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://sabrinaluo.github.io/tech/2015/12/01/promise/" data-id="cihoa6qmx0000zjdgd5b8uahw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tech/tags/promise/">promise</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+  
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tech/tags/promise/">promise</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tech/tags/promise/" style="font-size: 10px;">promise</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/tech/archives/2015/12/">December 2015</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/tech/2015/12/01/promise/">我所理解的Promise</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 Sabrina<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/tech/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/tech/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/tech/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
