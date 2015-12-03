@@ -1,66 +1,26 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <meta charset="utf-8">
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[小白妹妹写代码]]></title>
+  <subtitle><![CDATA[一个废话很多的程序媛 | 我这么可爱一定是男孩子]]></subtitle>
+  <link href="/tech/atom.xml" rel="self"/>
+  <link href="http://sabrinaluo.github.io/tech/"/>
+  <updated>2015-12-03T06:08:55.144Z</updated>
+  <id>http://sabrinaluo.github.io/tech/</id>
   
-  <title>我所理解的Promise | 小白妹妹写代码</title>
-  <meta name="author" content="Sabrina">
-  
-  <meta name="description" content="（嫌我话多的可以直接看分割线之后的部分…）以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现回调地狱(Callback Hell)太坑爹…为什么觉得异步坑爹？看看下">
-  
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-  <meta property="og:title" content="我所理解的Promise"/>
-  <meta property="og:site_name" content="小白妹妹写代码"/>
-
-  
-    <meta property="og:image" content="undefined"/>
-  
-
-  <link href="/tech/favicon.png" rel="icon">
-  <link rel="alternate" href="/tech/atom.xml" title="小白妹妹写代码" type="application/atom+xml">
-  <link rel="stylesheet" href="/tech/css/style.css" media="screen" type="text/css">
-  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  
-
-</head>
-
-
-<body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/tech/">小白妹妹写代码</a></h1>
-  <h2><a href="/tech/">一个废话很多的程序媛 | 我这么可爱一定是男孩子</a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
+  <author>
+    <name><![CDATA[Sabrina]]></name>
     
-      <li><a href="/">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div></header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  </author>
   
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time datetime="2015-12-01T10:46:26.000Z"><a href="/tech/2015/12/01/promise/">2015-12-01</a></time>
-      
-      
+  <generator uri="http://hexo.io/">Hexo</generator>
   
-    <h1 class="title">我所理解的Promise</h1>
-  
-
-    </header>
-    <div class="entry">
-      
-        <p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：</p>
+  <entry>
+    <title><![CDATA[我所理解的Promise]]></title>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/01/promise/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/01/promise/</id>
+    <published>2015-12-01T10:46:26.000Z</published>
+    <updated>2015-12-03T06:08:55.144Z</updated>
+    <content type="html"><![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：</p>
 <pre><code class="javascript"><span class="comment">//以下用setTimeout()模拟一个请求</span>
 <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>{
   <span class="keyword">return</span> <span class="string">"小白妹妹"</span>;
@@ -169,107 +129,13 @@ req1().then(req2).then(<span class="function"><span class="keyword">function</sp
 <li><p>Q: 最后一个then的function(data) data是哪里来的？<br>A: <code>req2</code>的定义中，有一句<code>resolve(finalUserData)</code>，在Promise Chain中，每个then的入参的入参也就是function(data)中的data都是由前一个promise resolve时传递而来的</p>
 </li>
 </ul>
-
-      
-    </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tech/tags/promise/">promise</a>
-  </div>
-
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://cal]]>
+    </summary>
     
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+      <category term="promise" scheme="http://sabrinaluo.github.io/tech/tags/promise/"/>
     
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">留言</h1>
-
+  </entry>
   
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://sabrinaluo.github.io/tech/2015/12/01/promise/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
-    <input type="hidden" name="q" value="site:sabrinaluo.github.io/tech">
-  </form>
-</div>
-
-  
-
-  
-<div class="widget tag">
-  <h3 class="title">標籤</h3>
-  <ul class="entry">
-  
-    <li><a href="/tech/tags/promise/">promise</a><small>1</small></li>
-  
-  </ul>
-</div>
-
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2015 Sabrina
-  
-</div>
-<div class="clearfix"></div></footer>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="/tech/js/jquery.imagesloaded.min.js"></script>
-<script src="/tech/js/gallery.js"></script>
-
-
-
-
-<link rel="stylesheet" href="/tech/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/tech/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
-
-</body>
-</html>
+</feed>
