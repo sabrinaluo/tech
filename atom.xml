@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一个废话很多的程序媛 | 我这么可爱一定是男孩子]]></subtitle>
   <link href="/tech/atom.xml" rel="self"/>
   <link href="http://sabrinaluo.github.io/tech/"/>
-  <updated>2015-12-03T06:08:55.144Z</updated>
+  <updated>2015-12-07T07:03:08.490Z</updated>
   <id>http://sabrinaluo.github.io/tech/</id>
   
   <author>
@@ -13,6 +13,81 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title></title>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/07/test/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/07/test/</id>
+    <published>2015-12-07T07:03:08.490Z</published>
+    <updated>2015-12-07T07:03:08.490Z</updated>
+    <content type="html"></content>
+    <summary type="html">
+    
+    </summary>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[版本控制及git常用基本命令]]></title>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/04/git-basic/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/04/git-basic/</id>
+    <published>2015-12-04T03:40:04.000Z</published>
+    <updated>2015-12-08T11:01:34.595Z</updated>
+    <content type="html"><![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
+<p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="external">Version Control</a>)工具。</p>
+<p>版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是<del>机智地</del></p>
+<blockquote>
+<ol>
+<li>创建了很多文件夹来放不同的模板</li>
+<li>不停的备份</li>
+<li>如果调整后正常运行和显示，那就使用最新的版本</li>
+<li>如果调整后不能正常运行同时又找不出问题所在，就是用备份的上一个版本来重新创作</li>
+</ol>
+</blockquote>
+<p>以上对应到版本控制系统分别是：</p>
+<blockquote>
+<ol>
+<li>创建分支(branch)</li>
+<li>提交代码(commit)</li>
+<li>合并分支(merge)</li>
+<li>版本回滚(checkout)</li>
+</ol>
+</blockquote>
+<p>关于git的概念及使用流程这里不详细讨论，暂时只讨论一些最基本的常用的git命令</p>
+<ul>
+<li><code>git init</code> 初始化一个git仓库，生成<code>.git</code>隐藏文件</li>
+<li><code>git status</code> 查看git仓库的状态，将会返回<strong>当前分支</strong>, <strong>文件状态</strong>等信息，可以使用<code>-s</code>参数查看只有文件状态的简洁版信息</li>
+<li><code>git clone &lt;repo location&gt; &lt;repo name&gt;</code> 将远程分支克隆到本地，<code>&lt;repo name&gt;</code>参数可选，为本地repo命名，若省略，则本地repo与远程同名</li>
+<li><code>git add &lt;file name&gt;</code> 将文件变为staged状态，也就是告诉git哪些新的文件和修改过的文件是之后要提交的；文件名支持正则表达式</li>
+<li><code>git rm &lt;file name&gt;</code> 将文件删除同时告诉git从git仓库中删除文件，可以使用 <code>--cached</code> 参数实现只从git仓库中删除而不删除本地文件</li>
+<li><code>git diff &lt;file name&gt;</code> 查看git仓库文件与本地文件的区别</li>
+<li><code>git commit -m &quot;some comment&quot;</code> 将修改提交到git仓库</li>
+<li><code>git show HEAD</code> 显示HEAD版本的相关信息，包括<strong>author</strong>，<strong>date</strong>，<strong>comment</strong>，<strong>diff</strong></li>
+<li><code>git log</code> 查看提交记录，包括提交的时间、作者、评论</li>
+<li><code>git reset SHA</code> 将git仓库回退到某个版本，其中<code>SHA</code>为版本log中commi后的一长串字符的前7位字符</li>
+<li><code>git reset HEAD &lt;file name&gt;</code> 将某个文件重置为git仓库的HEAD版本</li>
+<li><code>git checkout HEAD</code> 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令</li>
+<li><code>git branch</code> 查看分支信息，使用<code>-r</code>参数查看远程分支信息</li>
+<li><code>git branch &lt;branch name&gt;</code> 添加新的分支</li>
+<li><code>git brand -d &lt;branch name&gt;</code> 删除分支</li>
+<li><code>git checkout &lt;branch name&gt;</code> 切换分支</li>
+<li><code>git fetch</code> 获取远程origin/master分支最新版本，需要手动与本地文件merge</li>
+<li><code>git pull</code> 获取远程的最新版本并与本地merge<blockquote>
+<p>需要注意 <code>git fetch</code> 与 <code>git pull</code> 的不同，通常如果本地文件有改动，则应该先fetch在 <code>git merge origin/master</code> </p>
+</blockquote>
+</li>
+<li><code>git merge &lt;branch name&gt;</code> 合并分支，将指定分支与当前分支合并<blockquote>
+<p><code>origin/master</code>分支为远程主分支</p>
+</blockquote>
+</li>
+<li><code>git push origin &lt;branch name&gt;</code> 把分支推送到远程</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="externa]]>
+    </summary>
+    
+  </entry>
   
   <entry>
     <title><![CDATA[我所理解的Promise]]></title>

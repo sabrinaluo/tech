@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sabrinaluo.github.io/tech/2015/12/04/git-basic/</loc>
+    <lastmod>2015-12-08T11:01:34.595Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.github.io/tech/2015/12/07/test/</loc>
+    <lastmod>2015-12-07T07:03:08.490Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sabrinaluo.github.io/tech/2015/12/01/promise/</loc>
     <lastmod>2015-12-03T06:08:55.144Z</lastmod>
   </url>
