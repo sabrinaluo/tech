@@ -1,6 +1,6 @@
 title: 版本控制及git常用基本命令
 date: 2015-12-04 11:40:04
-tags:
+tags: git
 ---
 （此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。
 时间充裕的童鞋可以到[codecademy](https://www.codecademy.com/learn/learn-git)跟着教程一步步走）
