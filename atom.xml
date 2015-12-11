@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一个废话很多的程序媛 | 我这么可爱一定是男孩子]]></subtitle>
   <link href="/tech/atom.xml" rel="self"/>
   <link href="http://sabrinaluo.github.io/tech/"/>
-  <updated>2015-12-07T07:03:08.490Z</updated>
+  <updated>2015-12-11T11:44:52.407Z</updated>
   <id>http://sabrinaluo.github.io/tech/</id>
   
   <author>
@@ -15,14 +15,27 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://sabrinaluo.github.io/tech/2015/12/07/test/"/>
-    <id>http://sabrinaluo.github.io/tech/2015/12/07/test/</id>
-    <published>2015-12-07T07:03:08.490Z</published>
-    <updated>2015-12-07T07:03:08.490Z</updated>
-    <content type="html"></content>
+    <title><![CDATA[X-WSSE验证中关于SHA1编码方式的一些坑]]></title>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/11/x-wsse/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/11/x-wsse/</id>
+    <published>2015-12-11T09:08:38.000Z</published>
+    <updated>2015-12-11T11:44:52.407Z</updated>
+    <content type="html"><![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
+<p>关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与<a href="https://github.com/bouzuya/node-wsse" target="_blank" rel="external">node-wsse</a>的作者大战了好几个回合…</p>
+<hr>
+<p>此文章不讨论验证的原理，只讨论X-WSSE UsernameToken的生成方式，其中主要是生成<strong>passwordDigest</strong>。<br>验证嘛，用户名username，密码password肯定是少不了的，此外还需要nonce，timeStamp，有了这几样再按照下面的步骤一步步就可以生成符合WSSE标准的token了。</p>
+<p>UsernameToken的生成一共需要<strong>5个步骤</strong>：</p>
+<ol>
+<li>生成一个随机字符串nonce。不同公司的API对这个nonce的要求可能会不同，有一些要求采用<code>base64</code>编码方式，比如<a href="http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html#the-authentication-provider" target="_blank" rel="external">symfony给出的例子</a>；</li>
+<li>时间戳（timeStamp）。对于时间戳，统一采用<a href="http://baike.baidu.com/view/931641.htm" target="_blank" rel="external">ISO-8601</a>格式的字符串，但是不同公司的API对时区（timezone）的要求可能会不同，比如Emarsys要求UTC，Adobe要求GMT；</li>
+<li>把nonce，timeStamp，password这三个字符串按顺序连接起来形成一个新的字符串，并将这个字符串按照<a href="http://baike.baidu.com/view/1228622.htm" target="_blank" rel="external">SHA1</a>方法加密。<br><strong>坑来啦，坑来啦，坑来啦！！！</strong><br>一个字符串通常加密之后密码摘要默认是binary的，比如Adobe<a href="https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2" target="_blank" rel="external">^2</a>，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys<a href="http://documentation.emarsys.com/resource/developers/api/getting-started/authentication/" target="_blank" rel="external">^3</a>…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证<a href="http://book.soundonair.ru/web/web2apps-CHP-11-SECT-1.html#web2apps-CHP-11-SECT-1.8" target="_blank" rel="external">^4</a>；</li>
+<li>把上一步得到的密码摘要按照<code>base64</code>进行编码，就能得到passwordDigest；</li>
+<li>按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：<pre><code><span class="title">UsernameToken</span> Username=<span class="string">"username"</span>, PasswordDigest=<span class="string">"passwordDigest"</span>, Nonce=<span class="string">"nonce"</span>, Created=<span class="string">"timeStamp"</span>
+</code></pre></li>
+</ol>
+]]></content>
     <summary type="html">
-    
+    <![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="]]>
     </summary>
     
   </entry>
@@ -32,7 +45,7 @@
     <link href="http://sabrinaluo.github.io/tech/2015/12/04/git-basic/"/>
     <id>http://sabrinaluo.github.io/tech/2015/12/04/git-basic/</id>
     <published>2015-12-04T03:40:04.000Z</published>
-    <updated>2015-12-08T11:01:34.595Z</updated>
+    <updated>2015-12-11T02:51:39.419Z</updated>
     <content type="html"><![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
 <p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="external">Version Control</a>)工具。</p>
 <p>版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是<del>机智地</del></p>
@@ -86,6 +99,8 @@
     <summary type="html">
     <![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="externa]]>
     </summary>
+    
+      <category term="git" scheme="http://sabrinaluo.github.io/tech/tags/git/"/>
     
   </entry>
   
