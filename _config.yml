@@ -7,7 +7,7 @@ title: 小白妹妹写代码
 subtitle: 一个废话很多的程序媛 | 我这么可爱一定是男孩子
 description:
 author: Sabrina
-language:
+language: zh-CN
 timezone:
 
 # URL
@@ -63,18 +63,18 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: light
+theme: maupassant
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/sabrinaluo/tech.git
+  repo: git@github.com:sabrinaluo/tech.git
 
 # Google Analytics
 google_analytics: UA-52574938-4
 
-#markdown
+#marked setting for markdown
 marked:
   gfm: true
   pedantic: false
@@ -83,3 +83,32 @@ marked:
   breaks: true
   smartLists: true
   smartypants: true
+
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki/
+markdown:
+  plugins:
+    - markdown-it-footnote
+
+duoshuo: sabrinaluo
+disqus: ## Your disqus_shortname, e.g. haomwei
+google_search: true ## Use Google search, true/false
+baidu_search: ## Use Baidu search, true/false
+swiftype: ## Your swiftype_key, e.g. m7b11ZrsT8Me7gzApciT
+tinysou: ## Your tinysou_key, e.g. 4ac092ad8d749fdc6293
+menu:
+  - page: home
+    directory: /tech
+    icon: icon-home
+  - page: archive
+    directory: archives/
+    icon: icon-archive
+    icon: icon-about
+  - page: rss
+    directory: atom.xml
+    icon: icon-rss
+links:
+  - title: Github
+    url: http://github.com/sabrinaluo
+  - title: test
+    url: test
