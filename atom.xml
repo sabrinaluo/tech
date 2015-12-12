@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一个废话很多的程序媛 | 我这么可爱一定是男孩子]]></subtitle>
   <link href="/tech/atom.xml" rel="self"/>
   <link href="http://sabrinaluo.github.io/tech/"/>
-  <updated>2015-12-12T19:47:50.280Z</updated>
+  <updated>2015-12-12T20:00:38.901Z</updated>
   <id>http://sabrinaluo.github.io/tech/</id>
   
   <author>
@@ -19,14 +19,13 @@
     <link href="http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/"/>
     <id>http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/</id>
     <published>2015-12-12T16:34:42.000Z</published>
-    <updated>2015-12-12T19:47:50.280Z</updated>
+    <updated>2015-12-12T20:00:38.901Z</updated>
     <content type="html"><![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com" target="_blank" rel="external">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
 <hr>
 <p>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</p>
 <ol>
 <li>首先…你要有一个<del>男盆友</del>域名…没有的话就去godaddy买一个，假设是abc.com；</li>
-<li><p>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。</p>
-<pre><code class="bash">C:\&gt;ping yourname.github.io
+<li>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。<pre><code class="bash">C:\&gt;ping yourname.github.io
 正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:
 来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58
 来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58
@@ -37,7 +36,8 @@
 往返行程的估计时间(以毫秒为单位):
 最短 = 5ms，最长 = 12ms，平均 = 7ms
 </code></pre>
-<p>3 登录你的godday账号，设置一下DNS的A记录：</p>
+</li>
+<li><p>登录你的godday账号，设置一下DNS的A记录：</p>
 <ul>
 <li>找到你的domain，点manage DNS</li>
 <li><p>进入DNS设置页面后点Add Record，在弹出的对话框选A(Host)</p>
