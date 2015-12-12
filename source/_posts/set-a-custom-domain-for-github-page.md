@@ -21,7 +21,7 @@ C:\>ping yourname.github.io
 往返行程的估计时间(以毫秒为单位):
 最短 = 5ms，最长 = 12ms，平均 = 7ms
 ``` 
-3 登录你的godday账号，设置一下DNS的A记录：
+3. 登录你的godday账号，设置一下DNS的A记录：
   * 找到你的domain，点manage DNS
   * 进入DNS设置页面后点Add Record，在弹出的对话框选A(Host)
 > RECORD TYPE: A(Host)
