@@ -1,0 +1,140 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="telephone=no" name="format-detection"/><meta name="description"/><title>我所理解的Promise | 小白妹妹写代码</title><link rel="stylesheet" type="text/css" href="/tech//css/normalize.css"/><link rel="stylesheet" type="text/css" href="/tech//css/pure-min.css"/><link rel="stylesheet" type="text/css" href="/tech//css/grids-responsive-min.css"/><link rel="stylesheet" type="text/css" href="/tech//css/style.css"/><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"/><link rel="alternate" type="application/atom+xml" href="/atom.xml"/></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">我所理解的Promise</h1><a id="logo" href="/">小白妹妹写代码</a><p class="description">一个废话很多的程序媛 | 我这么可爱一定是男孩子</p></div><div id="nav-menu"><a href="/" class="current"><i class="icon-home"> 首页</i></a><a href="/tech/archives/"><i class="icon-archive"> 归档</i></a><a href="/tech/about/"><i class="icon-about"> 关于</i></a><a href="/tech/atom.xml"><i class="icon-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post post-page"><h1 class="post-title">我所理解的Promise</h1><div class="post-meta">2015-12-01 | </div><div class="post-content"><p>（嫌我话多的可以直接看分割线之后的部分…）
+以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…
+为什么觉得异步坑爹？看看下面这个例子：</p>
+<pre><code class="language-javascript">//以下用setTimeout()模拟一个请求
+function getName() {
+  return &quot;小白妹妹&quot;;
+}
+
+function greeting(name) {
+  console.log(&quot;你好，&quot; + name);
+}
+
+//生成一个0到1000的随机数，模拟不确定的等待时间0-1秒
+var randomTime = function () {
+  return Math.random() * 1000;
+};
+
+var name = &quot;&quot;;
+//1秒之内给name赋值为 小白妹妹，但不知道具体时间
+setTimeout(function () {
+  name = getName();
+}, randomTime());
+
+greeting(name); //以为得到name之后就可以开心的去打招呼啦，然而…
+</code></pre>
+<h3>这是错的！这是错的！这是错的！</h3>
+<p>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
+<p>再有点经验，就会知道，应该把 <code>greeting(name)</code> 写在回调函数里，这样就能保证在得到数据之后才运行 <code>greeting()</code> 函数，于是…当你有多个请求并且之间是有这种依赖关系的时候，可怕的回调地狱就出现了！
+而解决回调地狱其中一个很优雅的方法，就是使用传说中的promise！</p>
+<p>关于promise这个概念我前前后后看了有一年了，周围也没有认识的人可以给我讲，只能自己看看网上的文章，然而…<s>并没有什么卵用</s>…网上的文章都是众说纷纭，有一上来就defer的<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，也有一上来就说如果你还在用defer你就理解错了Promise的<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>，就所以我到现在也不知道究竟什么样的理解才是对的…</p>
+<p>关于<a href="http://segmentfault.com/a/1190000002452115" target="_blank" rel="external">Promise以及A+规范</a>就不在此详述了，那些概念的东东，我也还没完全理解。我想做的是让跟我一样的小白都能明白Promise最基本的用法。</p>
+<hr>
+<p>举个栗子…
+有一个第三方提供的API，访问API能够得到一些用户数据（每访问一次得到一页，假设由于某些限制一页只返回3个用户）以及下一页的index；除了第一页之外，其他的页面都需要下一页的index参数才能访问到。（先不管这个API设计的合不合理…Facebook就有这样的API）
+http://example.com/user  <em>--&gt;访问第一页的用户数据</em>
+http://example.com/user?next=xzmca  <em>--&gt;访问第二页的用户数据</em>
+请求第一页时返回结果如下：</p>
+<pre><code class="language-json">{
+&quot;items&quot; : [{
+  &quot;name&quot; : &quot;小白妹妹&quot;,
+   &quot;age&quot; : 10
+  }, 
+  {...},
+  {...}],
+&quot;nextPage&quot; : &quot;xzmca&quot;,
+&quot;lastPage&quot; : null
+}
+</code></pre>
+<p>你可能会有这样的需求：你的APP一次需要显示6个甚至更多个的用户数据。而根据之前的API，一次只能拿到3个数据，那么就只能发出两次请求，并且<strong>第二次请求依赖于第一次请求的结果</strong>，由于异步的原因我们并不知道第一个请求什么时候才完成，<s>而我最初入坑时是让程序发完第一个请求后强制等2秒再发第二个请求我会告诉你们吗…</s></p>
+<p>下面为了方便，使用<code>setTimeout()</code>函数和<a href="http://bluebirdjs.com/" target="_blank" rel="external">bluebird</a>库进行说明:</p>
+<pre><code class="language-javascript">//生成一个0到3000的随机数，模拟不确定的等待时间0-3秒
+var randomTime = function () {
+  return Math.random() * 3000;
+};
+
+//只考虑最简单的情况promise被resolve，暂时不考虑promise被reject的情况
+function req1() {
+  return new Promise(function (resolve) {
+    //使用setTimeout()来模拟发送请求，data为请求得到的数据
+    setTimeout(function () {
+      var data = {
+        &quot;items&quot;: [{
+          &quot;name&quot;: &quot;小白妹妹&quot;,
+          &quot;age&quot;: 10
+        }, {
+          &quot;name&quot;: &quot;小白&quot;,
+          &quot;age&quot;: 100
+        }, {
+          &quot;name&quot;: &quot;妹妹&quot;,
+          &quot;age&quot;: 111
+        }],
+        &quot;nextPage&quot;: &quot;asdfa&quot;,
+        &quot;lastPage&quot;: null
+      };
+      resolve(data);
+      console.log(&quot;请求1完成&quot;);
+    }, randomTime());
+  })
+}
+
+function req2(dataFromReq1) {
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      var data = {
+        &quot;items&quot;: [{
+          &quot;name&quot;: &quot;小黑姐姐&quot;,
+          &quot;age&quot;: 20
+        }, {
+          &quot;name&quot;: &quot;小黑&quot;,
+          &quot;age&quot;: 233
+        }, {
+          &quot;name&quot;: &quot;姐姐&quot;,
+          &quot;age&quot;: 250
+        }],
+        &quot;nextPage&quot;: &quot;gwdfx&quot;,
+        &quot;lastPage&quot;: &quot;asdfa&quot;
+      };
+      console.log(dataFromReq1);
+      var finalUserData = dataFromReq1.items.concat(data.items); //将两次得到的用户数据合并
+      resolve(finalUserData);
+      console.log(&quot;请求2完成&quot;);
+    }, randomTime());
+  })
+}
+
+//让数据在promise链上欢快的传递吧～
+req1().then(req2).then(function (data) {
+  console.log(data);
+});
+</code></pre>
+<ul>
+<li>
+<p>Q: 什么时候需要返回一个promise呢？
+A: 当你的需求逻辑是，XXX的执行需要依赖OOO的结果，此时OOO就应该返回一个promise</p>
+</li>
+<li>
+<p>Q: 为什么req1要打括号，而req2不打括号？
+A:这个我也没太搞清楚XD，我的理解是，<code>req1()</code>打括号执行后才会返回promise，不打括号就只是一个没有执行的函数，<code>req2</code>不打括号是因为then的入参只能是一个<strong>函数</strong>，如果打了括号执行后就不是函数了。</p>
+</li>
+<li>
+<p>Q: 最后一个then的function(data) data是哪里来的？
+A: <code>req2</code>的定义中，有一句<code>resolve(finalUserData)</code>，在Promise Chain中，每个then的入参的入参也就是function(data)中的data都是由前一个promise resolve时传递而来的</p>
+</li>
+</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>https://github.com/alsotang/node-lessons/tree/master/lesson17 <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>http://web.jobbole.com/82601/ <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+</div><div class="tags"><a href="/tech/tags/promise/">promise</a></div><div class="post-nav"><a href="/tech/2015/12/04/git-basic/" class="pre"><i class="icon-previous">版本控制及git常用基本命令</i></a></div></div></div></div><div class="pure-u-1-4"><div id="sidebar"><div class="widget"><form action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="text" name="q" maxlength="20" placeholder="Search" class="search-form-input"/><input type="hidden" name="sitesearch" value="http://sabrinaluo.github.io/tech"/></form></div><div class="widget"><div class="widget-title">分类</div></div><div class="widget"><div class="widget-title">标签</div><div class="tagcloud"><a href="/tech/tags/git/" style="font-size: 15px;">git</a> <a href="/tech/tags/X-WSSE/" style="font-size: 15px;">X-WSSE</a> <a href="/tech/tags/WSSE/" style="font-size: 15px;">WSSE</a> <a href="/tech/tags/auth/" style="font-size: 15px;">auth</a> <a href="/tech/tags/SHA1/" style="font-size: 15px;">SHA1</a> <a href="/tech/tags/promise/" style="font-size: 15px;">promise</a></div></div><div class="widget"><div class="widget-title">最新文章</div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/tech/2015/12/11/x-wsse/">X-WSSE验证中关于SHA1编码方式的一些坑</a></li><li class="post-list-item"><a class="post-list-link" href="/tech/2015/12/04/git-basic/">版本控制及git常用基本命令</a></li><li class="post-list-item"><a class="post-list-link" href="/tech/2015/12/01/promise/">我所理解的Promise</a></li></ul></div><div class="widget"><div class="widget-title">友情链接</div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><div id="footer">© <a href="/" rel="nofollow">小白妹妹写代码.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div><a id="rocket" href="#top" class="show"></a><script src="/tech//js/jquery.min.js" type="text/javascript"></script>
+<script src="/tech//js/totop.js" type="text/javascript"></script><script src="/tech//js/fancybox.pack.js" type="text/javascript"></script>
+<script src="/tech//js/jquery.fancybox.js" type="text/javascript"></script><link rel="stylesheet" href="/tech//css/jquery.fancybox.css" type="text/css"><script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*newDate();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+ga('create','UA-52574938-4','auto');ga('send','pageview');</script></div></body></html>
