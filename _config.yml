@@ -72,7 +72,7 @@ deploy:
   repo: git@github.com:sabrinaluo/tech.git
 
 # Google Analytics
-google_analytics: UA-52574938-4
+ga: UA-52574938-4
 
 #marked setting for markdown
 marked:
@@ -86,9 +86,7 @@ marked:
 
 # Markdown-it config
 ## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki/
-markdown:
-  plugins:
-    - markdown-it-footnote
+markdown: 'default'
 
 duoshuo: sabrinaluo
 disqus: ## Your disqus_shortname, e.g. haomwei
