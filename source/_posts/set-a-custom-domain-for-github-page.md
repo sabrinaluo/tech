@@ -6,8 +6,9 @@ tags: [github,github page, custom domain, 域名绑定]
 我本来的github page是[sabrinaluo.github.io](http://sabrinaluo.github.io)，花了一百多大洋把这个域名变成[sabrinaluo.com](http://sabrinaluo.com)，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ
 
 ---
-只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）
-1. 首先…你要有一个~~男盆友~~域名…没有的话就去godaddy买一个，假设是abc.com；
+~~只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）~~
+**先讨论一级域名的绑定，假设是www.abc.com** 
+1. 首先…你要有一个~~男盆友~~域名…没有的话就去godaddy买一个；
 2. 然后打开你的cmd console，ping一下你的github page，也就是输入```ping yourname.github.io```，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。
 ``` bash
 C:\>ping yourname.github.io
@@ -29,12 +30,22 @@ HOST: 这里填你在godday买的域名，例如abc.com
 POINTS TO: 这里填第三步获取到的IP地址
 TTL: 生效的时间，不知道最短是多久，我反正是选custom之后填了600，也就是10分钟 
 
-  * 然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了
-  * 最后，在你的yourname.github.io这个repo创建一个名为```CNAME```的文件，没有后缀名。文件内容如下：
+4. 然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了
+5. 最后，在你的yourname.github.io这个repo创建一个名为```CNAME```的文件，没有后缀名。文件内容如下：
 ``` 
 abc.com
 ``` 
 是的，你没看错，就是辣么简单！
+
+**二级域名的设置**
+假如你有两个github page，一个是blog，一个是news，那你的两个二级域名分别就是：
+* blog.abc.com
+* news.abc.com
+1. 到godday设置两条**A记录**，分别设置blog及news指向github page的IP
+2. 到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是
+``` 
+blog.abc.com
+``` 
 
 整个过程其实做的事情大概可以理解为：
 * 告诉godday，当别人访问我的域名abc.com的时候，请带他们去github
