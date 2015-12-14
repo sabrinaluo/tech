@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>GitHub Page如何绑定域名 | 小白妹妹写代码</title>
+  <title>JS注释中的感叹号是干什么用的/*! */ | 小白妹妹写代码</title>
   <meta name="author" content="Sabrina">
   
-  <meta name="description" content="本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！我本来的github page是sabrinaluo.github.io，花了一百多大洋把这个域名变成sabrinaluo.com，github">
+  <meta name="description" content="前几天看了一个帖子我招不到想要的程序员，里面有一点是说非极端情况下，一本以下的不要。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="GitHub Page如何绑定域名"/>
+  <meta property="og:title" content="JS注释中的感叹号是干什么用的/*! */"/>
   <meta property="og:site_name" content="小白妹妹写代码"/>
 
   
@@ -61,63 +61,36 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-12-12T16:34:42.000Z"><a href="/tech/2015/12/13/set-a-custom-domain-for-github-page/">2015-12-13</a></time>
+        <time datetime="2015-12-14T06:15:06.000Z"><a href="/tech/2015/12/14/JS-important-comment/">2015-12-14</a></time>
       
       
   
-    <h1 class="title">GitHub Page如何绑定域名</h1>
+    <h1 class="title">JS注释中的感叹号是干什么用的/*! */</h1>
   
 
     </header>
     <div class="entry">
       
-        <p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com" target="_blank" rel="external">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
-<hr>
-<p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
-<ol>
-<li>首先…你要有一个<del>男盆友</del>域名…没有的话就去godaddy买一个；</li>
-<li>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。<pre><code class="bash">C:\&gt;ping yourname.github.io
-正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:
-来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=8ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=12ms TTL=58
-103.245.222.133 的 Ping 统计信息:
-数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-最短 = 5ms，最长 = 12ms，平均 = 7ms
-</code></pre>
-</li>
-<li><p>登录你的godday账号，设置一下DNS的A记录：</p>
-<ul>
-<li>找到你的domain，点manage DNS</li>
-<li>进入DNS设置页面后点Add Record，在弹出的对话框选A(Host)<blockquote>
-<p>RECORD TYPE: A(Host)<br>HOST: 这里填你在godday买的域名，例如abc.com<br>POINTS TO: 这里填第三步获取到的IP地址<br>TTL: 生效的时间，不知道最短是多久，我反正是选custom之后填了600，也就是10分钟 </p>
+        <p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * EJS</span><br><span class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span><br><span class="line"> * MIT Licensed</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Module dependencies.</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
+<p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="external">TJ写的EJS模板引擎</a></p>
+<p>我就在QQ群里问了这样一个问题：</p>
+<blockquote>
+<p>第一个注释中的感叹号是什么意思，为什么第一个有感叹号，第二个没有？</p>
 </blockquote>
-</li>
-</ul>
-</li>
-<li><p>然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了</p>
-</li>
-<li>最后，在你的yourname.github.io这个repo创建一个名为<code>CNAME</code>的文件，没有后缀名。文件内容如下：<pre><code>abc.com
-</code></pre>是的，你没看错，就是辣么简单！</li>
-</ol>
-<p><strong>二级域名的设置</strong><br>假如你有两个github page，一个是blog，一个是news，那你的两个二级域名分别就是：</p>
+<p>然后似乎没有人知道，并且我到的回答基本都是诸如：那就是行注释没什么特别的意思、在意注释干嘛反正注释也没什么用……</p>
+<p>然后我就忽然有点明白了为什么一本以下的不要…</p>
+<p>类似这样的问题，为什么在网上很难找答案？可能是因为：</p>
 <ul>
-<li>blog.abc.com</li>
-<li>news.abc.com</li>
+<li>搜索引擎对于特殊符号的处理导致难以按照符号来搜索<br>包括google和stackoverflow中输入<code>/*!</code>并不能搜到结果</li>
+<li>因为缺乏经验而无法正确的描述问题，无法命中问题的关键字</li>
 </ul>
-<ol>
-<li>到godday设置两条<strong>A记录</strong>，分别设置blog及news指向github page的IP</li>
-<li>到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是<pre><code>blog.abc.com
-</code></pre></li>
-</ol>
-<p>整个过程其实做的事情大概可以理解为：</p>
-<ul>
-<li>告诉godday，当别人访问我的域名abc.com的时候，请带他们去github</li>
-<li>告诉你的github page，当别人是被abc.com带来github的时候，没错他们都是我派来的，请接收他们的访问</li>
-<li>告诉你的github page，当别人直接访问github page，也就是yourname.github.io的时候，请穿上花了一百多大洋买的马甲abc.com…（这其实是说，当你添加了cname记录之后，访问yourname.github.io，你在浏览器里看到的域名会自动变成abc.com）</li>
-</ul>
+<p>像我这样比较懒的人，最希望的就是能有一个在现实生活中认识的经验丰富的大神，这种弱鸡问题，一问就有答案了。然而我并不认识这样的大神。(ಥ_ಥ)</p>
+<p>直到后来无意中看到<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">阮一峰老师的SASS教程</a>，提到<strong>重要注释</strong>这个概念，受到一点启发，然后机智的我想到把感叹号直接翻译成英文，以’exclamation js comment’作为关键字来搜索，果然我不是一个人…（嗯，我变成了一条狗）<br><a href="http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files" target="_blank" rel="external">http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files</a></p>
+<blockquote>
+<p>我不是为了输赢，我就是认真 –罗永浩</p>
+</blockquote>
+<hr>
+<p>对前端工程化稍微有点知识的，就会知道在最后deploy之前会有一个步骤是minify / uglify，这个过程中注释都会被删除，而这个以<code>/*!</code>开头的重要注释则会被保留，通常重要注释是用来注释版权之类的信息<a href="https://zoompf.com/blog/2009/11/jsmin-important-comments-and-copyright-violations" target="_blank" rel="external">^1</a></p>
 
       
     </div>
@@ -127,7 +100,7 @@
         
   
   <div class="tags">
-    <a href="/tech/tags/custom-domain/">custom domain</a>, <a href="/tech/tags/github/">github</a>, <a href="/tech/tags/github-page/">github page</a>, <a href="/tech/tags/域名绑定/">域名绑定</a>
+    <a href="/tech/tags/js/">js</a>, <a href="/tech/tags/重要注释，感叹号/">重要注释，感叹号</a>
   </div>
 
         
@@ -170,7 +143,7 @@
   }(document, 'script', 'facebook-jssdk'));
 </script>
 
-<div class="fb-comments" data-href="http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+<div class="fb-comments" data-href="http://sabrinaluo.github.io/tech/2015/12/14/JS-important-comment/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
       
   
 </section>
