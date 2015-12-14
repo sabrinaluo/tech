@@ -21,6 +21,17 @@
   <link rel="stylesheet" href="/tech/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-52574938-4', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
 
 </head>
 
@@ -49,6 +60,85 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2015-12-12T16:34:42.000Z"><a href="/tech/2015/12/13/set-a-custom-domain-for-github-page/">2015-12-13</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/tech/2015/12/13/set-a-custom-domain-for-github-page/">GitHub Page如何绑定域名</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com" target="_blank" rel="external">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
+<hr>
+<p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
+<ol>
+<li>首先…你要有一个<del>男盆友</del>域名…没有的话就去godaddy买一个；</li>
+<li>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。<pre><code class="bash">C:\&gt;ping yourname.github.io
+正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:
+来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58
+来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58
+来自 103.245.222.133 的回复: 字节=32 时间=8ms TTL=58
+来自 103.245.222.133 的回复: 字节=32 时间=12ms TTL=58
+103.245.222.133 的 Ping 统计信息:
+数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+最短 = 5ms，最长 = 12ms，平均 = 7ms
+</code></pre>
+</li>
+<li><p>登录你的godday账号，设置一下DNS的A记录：</p>
+<ul>
+<li>找到你的domain，点manage DNS</li>
+<li>进入DNS设置页面后点Add Record，在弹出的对话框选A(Host)<blockquote>
+<p>RECORD TYPE: A(Host)<br>HOST: 这里填你在godday买的域名，例如abc.com<br>POINTS TO: 这里填第三步获取到的IP地址<br>TTL: 生效的时间，不知道最短是多久，我反正是选custom之后填了600，也就是10分钟 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了</p>
+</li>
+<li>最后，在你的yourname.github.io这个repo创建一个名为<code>CNAME</code>的文件，没有后缀名。文件内容如下：<pre><code>abc.com
+</code></pre>是的，你没看错，就是辣么简单！</li>
+</ol>
+<p><strong>二级域名的设置</strong><br>假如你有两个github page，一个是blog，一个是news，那你的两个二级域名分别就是：</p>
+<ul>
+<li>blog.abc.com</li>
+<li>news.abc.com</li>
+</ul>
+<ol>
+<li>到godday设置两条<strong>A记录</strong>，分别设置blog及news指向github page的IP</li>
+<li>到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是<pre><code>blog.abc.com
+</code></pre></li>
+</ol>
+<p>整个过程其实做的事情大概可以理解为：</p>
+<ul>
+<li>告诉godday，当别人访问我的域名abc.com的时候，请带他们去github</li>
+<li>告诉你的github page，当别人是被abc.com带来github的时候，没错他们都是我派来的，请接收他们的访问</li>
+<li>告诉你的github page，当别人直接访问github page，也就是yourname.github.io的时候，请穿上花了一百多大洋买的马甲abc.com…（这其实是说，当你添加了cname记录之后，访问yourname.github.io，你在浏览器里看到的域名会自动变成abc.com）</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2015-12-11T09:08:38.000Z"><a href="/tech/2015/12/11/x-wsse/">2015-12-11</a></time>
       
       
@@ -69,7 +159,7 @@
 <li>时间戳（timeStamp）。对于时间戳，统一采用<a href="http://baike.baidu.com/view/931641.htm" target="_blank" rel="external">ISO-8601</a>格式的字符串，但是不同公司的API对时区（timezone）的要求可能会不同，比如Emarsys要求UTC，Adobe要求GMT；</li>
 <li>把nonce，timeStamp，password这三个字符串按顺序连接起来形成一个新的字符串，并将这个字符串按照<a href="http://baike.baidu.com/view/1228622.htm" target="_blank" rel="external">SHA1</a>方法加密。<br><strong>坑来啦，坑来啦，坑来啦！！！</strong><br>一个字符串通常加密之后密码摘要默认是binary的，比如Adobe<a href="https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2" target="_blank" rel="external">^2</a>，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys<a href="http://documentation.emarsys.com/resource/developers/api/getting-started/authentication/" target="_blank" rel="external">^3</a>…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证<a href="http://book.soundonair.ru/web/web2apps-CHP-11-SECT-1.html#web2apps-CHP-11-SECT-1.8" target="_blank" rel="external">^4</a>；</li>
 <li>把上一步得到的密码摘要按照<code>base64</code>进行编码，就能得到passwordDigest；</li>
-<li>按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：<pre><code><span class="title">UsernameToken</span> Username=<span class="string">"username"</span>, PasswordDigest=<span class="string">"passwordDigest"</span>, Nonce=<span class="string">"nonce"</span>, Created=<span class="string">"timeStamp"</span>
+<li>按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：<pre><code>UsernameToken Username=&quot;username&quot;, PasswordDigest=&quot;passwordDigest&quot;, Nonce=&quot;nonce&quot;, Created=&quot;timeStamp&quot;
 </code></pre></li>
 </ol>
 
@@ -135,16 +225,34 @@
 <li><code>git commit -m &quot;some comment&quot;</code> 将修改提交到git仓库</li>
 <li><code>git show HEAD</code> 显示HEAD版本的相关信息，包括<strong>author</strong>，<strong>date</strong>，<strong>comment</strong>，<strong>diff</strong></li>
 <li><code>git log</code> 查看提交记录，包括提交的时间、作者、评论</li>
-<li><code>git reset SHA</code> 将git仓库回退到某个版本，其中<code>SHA</code>为版本log中commi后的一长串字符的前7位字符</li>
-<li><code>git reset HEAD &lt;file name&gt;</code> 将某个文件重置为git仓库的HEAD版本</li>
-<li><code>git checkout HEAD</code> 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令</li>
+<li><code>git reset SHA</code> 将本地git仓库回退到某个版本，其中<code>SHA</code>为版本log中commit后的一长串字符的前7位字符</li>
+<li><code>git reset HEAD &lt;file name&gt;</code> 将本地git仓库中的某个文件重置为git仓库的HEAD版本</li>
+<li><code>git checkout HEAD</code> 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令<blockquote>
+<p>需要注意<code>reset</code>是针对本地的git仓库，也就是你每次commit后，文件就会保存到的仓库。<br>而<code>checkout</code>是针对本地的工作副本，也就是你直接编辑的那些文件，会被overwrite</p>
+</blockquote>
+</li>
 <li><code>git branch</code> 查看分支信息，使用<code>-r</code>参数查看远程分支信息</li>
 <li><code>git branch &lt;branch name&gt;</code> 添加新的分支</li>
-<li><code>git brand -d &lt;branch name&gt;</code> 删除分支</li>
-<li><code>git checkout &lt;branch name&gt;</code> 切换分支</li>
+<li><code>git branch -d &lt;branch name&gt;</code> 删除分支</li>
+<li><code>git checkout &lt;branch name&gt;</code> 切换分支，可以使用<code>-b</code>参数，创建新分支并切换到新分支</li>
 <li><code>git fetch</code> 获取远程origin/master分支最新版本，需要手动与本地文件merge</li>
 <li><code>git pull</code> 获取远程的最新版本并与本地merge<blockquote>
 <p>需要注意 <code>git fetch</code> 与 <code>git pull</code> 的不同，通常如果本地文件有改动，则应该先fetch在 <code>git merge origin/master</code> </p>
+</blockquote>
+</li>
+<li><code>git stash</code> 将本地的工作副本暂时存起来</li>
+<li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
+<p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
+<pre><code class="javascript"><span class="comment">//git pop之后的冲突文件看起来长这样：</span>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; their code
+var a = 123;
+=======
+var a = 456;
+&gt;&gt;&gt;&gt;&gt;&gt; my code
+</code></pre>
+<pre><code class="javascript"><span class="comment">//冲突解决后，看起来应该长这样：</span>
+<span class="keyword">var</span> a = <span class="number">123</span>;
+</code></pre>
 </blockquote>
 </li>
 <li><code>git merge &lt;branch name&gt;</code> 合并分支，将指定分支与当前分支合并<blockquote>
@@ -208,7 +316,7 @@ setTimeout(<span class="function"><span class="keyword">function</span> (<span c
 
 greeting(name); <span class="comment">//以为得到name之后就可以开心的去打招呼啦，然而…</span>
 </code></pre>
-<h3 id="这是错的！这是错的！这是错的！">这是错的！这是错的！这是错的！</h3><p>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
+<h3 id="u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01"><a href="#u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01" class="headerlink" title="这是错的！这是错的！这是错的！"></a>这是错的！这是错的！这是错的！</h3><p>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
 <p>再有点经验，就会知道，应该把 <code>greeting(name)</code> 写在回调函数里，这样就能保证在得到数据之后才运行 <code>greeting()</code> 函数，于是…当你有多个请求并且之间是有这种依赖关系的时候，可怕的回调地狱就出现了！<br>而解决回调地狱其中一个很优雅的方法，就是使用传说中的promise！</p>
 <p>关于promise这个概念我前前后后看了有一年了，周围也没有认识的人可以给我讲，只能自己看看网上的文章，然而…<del>并没有什么卵用</del>…网上的文章都是众说纷纭，有一上来就defer的<a href="https://github.com/alsotang/node-lessons/tree/master/lesson17" target="_blank" rel="external">^1</a>，也有一上来就说如果你还在用defer你就理解错了Promise的<a href="http://web.jobbole.com/82601/" target="_blank" rel="external">^2</a>，就所以我到现在也不知道究竟什么样的理解才是对的…</p>
 <p>关于<a href="http://segmentfault.com/a/1190000002452115" target="_blank" rel="external">Promise以及A+规范</a>就不在此详述了，那些概念的东东，我也还没完全理解。我想做的是让跟我一样的小白都能明白Promise最基本的用法。</p>
@@ -227,7 +335,7 @@ greeting(name); <span class="comment">//以为得到name之后就可以开心的
 </code></pre>
 <p>你可能会有这样的需求：你的APP一次需要显示6个甚至更多个的用户数据。而根据之前的API，一次只能拿到3个数据，那么就只能发出两次请求，并且<strong>第二次请求依赖于第一次请求的结果</strong>，由于异步的原因我们并不知道第一个请求什么时候才完成，<del>而我最初入坑时是让程序发完第一个请求后强制等2秒再发第二个请求我会告诉你们吗…</del></p>
 <p>下面为了方便，使用<code>setTimeout()</code>函数和<a href="http://bluebirdjs.com/" target="_blank" rel="external">bluebird</a>库进行说明:</p>
-<pre><code><span class="comment">//生成一个0到3000的随机数，模拟不确定的等待时间0-3秒</span>
+<pre><code class="javascript"><span class="comment">//生成一个0到3000的随机数，模拟不确定的等待时间0-3秒</span>
 <span class="keyword">var</span> randomTime = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
   <span class="keyword">return</span> <span class="built_in">Math</span>.random() * <span class="number">3000</span>;
 };
@@ -286,7 +394,8 @@ greeting(name); <span class="comment">//以为得到name之后就可以开心的
 req1().then(req2).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{
   <span class="built_in">console</span>.log(data);
 });
-</code></pre><ul>
+</code></pre>
+<ul>
 <li><p>Q: 什么时候需要返回一个promise呢？<br>A: 当你的需求逻辑是，XXX的执行需要依赖OOO的结果，此时OOO就应该返回一个promise</p>
 </li>
 <li><p>Q: 为什么req1要打括号，而req2不打括号？<br>A:这个我也没太搞清楚XD，我的理解是，<code>req1()</code>打括号执行后才会返回promise，不打括号就只是一个没有执行的函数，<code>req2</code>不打括号是因为then的入参只能是一个<strong>函数</strong>，如果打了括号执行后就不是函数了。</p>
@@ -319,7 +428,7 @@ req1().then(req2).then(<span class="function"><span class="keyword">function</sp
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:sabrinaluo.github.io/tech">
   </form>
 </div>
@@ -328,12 +437,32 @@ req1().then(req2).then(<span class="function"><span class="keyword">function</sp
 
   
 <div class="widget tag">
-  <h3 class="title">標籤</h3>
+  <h3 class="title">标签</h3>
   <ul class="entry">
+  
+    <li><a href="/tech/tags/SHA1/">SHA1</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/WSSE/">WSSE</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/X-WSSE/">X-WSSE</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/auth/">auth</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/custom-domain/">custom domain</a><small>1</small></li>
   
     <li><a href="/tech/tags/git/">git</a><small>1</small></li>
   
+    <li><a href="/tech/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/github-page/">github page</a><small>1</small></li>
+  
     <li><a href="/tech/tags/promise/">promise</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/version-control/">version control</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/域名绑定/">域名绑定</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/版本控制/">版本控制</a><small>1</small></li>
   
   </ul>
 </div>

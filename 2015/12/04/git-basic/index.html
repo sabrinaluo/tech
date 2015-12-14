@@ -25,6 +25,17 @@ Git是一个分布式的版本管理(Version Control)工具。
   <link rel="stylesheet" href="/tech/css/style.css" media="screen" type="text/css">
   <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
   
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-52574938-4', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
 
 </head>
 
@@ -93,16 +104,34 @@ Git是一个分布式的版本管理(Version Control)工具。
 <li><code>git commit -m &quot;some comment&quot;</code> 将修改提交到git仓库</li>
 <li><code>git show HEAD</code> 显示HEAD版本的相关信息，包括<strong>author</strong>，<strong>date</strong>，<strong>comment</strong>，<strong>diff</strong></li>
 <li><code>git log</code> 查看提交记录，包括提交的时间、作者、评论</li>
-<li><code>git reset SHA</code> 将git仓库回退到某个版本，其中<code>SHA</code>为版本log中commi后的一长串字符的前7位字符</li>
-<li><code>git reset HEAD &lt;file name&gt;</code> 将某个文件重置为git仓库的HEAD版本</li>
-<li><code>git checkout HEAD</code> 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令</li>
+<li><code>git reset SHA</code> 将本地git仓库回退到某个版本，其中<code>SHA</code>为版本log中commit后的一长串字符的前7位字符</li>
+<li><code>git reset HEAD &lt;file name&gt;</code> 将本地git仓库中的某个文件重置为git仓库的HEAD版本</li>
+<li><code>git checkout HEAD</code> 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令<blockquote>
+<p>需要注意<code>reset</code>是针对本地的git仓库，也就是你每次commit后，文件就会保存到的仓库。<br>而<code>checkout</code>是针对本地的工作副本，也就是你直接编辑的那些文件，会被overwrite</p>
+</blockquote>
+</li>
 <li><code>git branch</code> 查看分支信息，使用<code>-r</code>参数查看远程分支信息</li>
 <li><code>git branch &lt;branch name&gt;</code> 添加新的分支</li>
-<li><code>git brand -d &lt;branch name&gt;</code> 删除分支</li>
-<li><code>git checkout &lt;branch name&gt;</code> 切换分支</li>
+<li><code>git branch -d &lt;branch name&gt;</code> 删除分支</li>
+<li><code>git checkout &lt;branch name&gt;</code> 切换分支，可以使用<code>-b</code>参数，创建新分支并切换到新分支</li>
 <li><code>git fetch</code> 获取远程origin/master分支最新版本，需要手动与本地文件merge</li>
 <li><code>git pull</code> 获取远程的最新版本并与本地merge<blockquote>
 <p>需要注意 <code>git fetch</code> 与 <code>git pull</code> 的不同，通常如果本地文件有改动，则应该先fetch在 <code>git merge origin/master</code> </p>
+</blockquote>
+</li>
+<li><code>git stash</code> 将本地的工作副本暂时存起来</li>
+<li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
+<p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
+<pre><code class="javascript"><span class="comment">//git pop之后的冲突文件看起来长这样：</span>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; their code
+var a = 123;
+=======
+var a = 456;
+&gt;&gt;&gt;&gt;&gt;&gt; my code
+</code></pre>
+<pre><code class="javascript"><span class="comment">//冲突解决后，看起来应该长这样：</span>
+<span class="keyword">var</span> a = <span class="number">123</span>;
+</code></pre>
 </blockquote>
 </li>
 <li><code>git merge &lt;branch name&gt;</code> 合并分支，将指定分支与当前分支合并<blockquote>
@@ -120,7 +149,7 @@ Git是一个分布式的版本管理(Version Control)工具。
         
   
   <div class="tags">
-    <a href="/tech/tags/git/">git</a>
+    <a href="/tech/tags/git/">git</a>, <a href="/tech/tags/version-control/">version control</a>, <a href="/tech/tags/版本控制/">版本控制</a>
   </div>
 
         
@@ -172,7 +201,7 @@ Git是一个分布式的版本管理(Version Control)工具。
     <aside id="sidebar" class="alignright">
   <div class="search">
   <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="搜尋">
+    <input type="search" name="q" results="0" placeholder="搜索">
     <input type="hidden" name="q" value="site:sabrinaluo.github.io/tech">
   </form>
 </div>
@@ -181,12 +210,32 @@ Git是一个分布式的版本管理(Version Control)工具。
 
   
 <div class="widget tag">
-  <h3 class="title">標籤</h3>
+  <h3 class="title">标签</h3>
   <ul class="entry">
+  
+    <li><a href="/tech/tags/SHA1/">SHA1</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/WSSE/">WSSE</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/X-WSSE/">X-WSSE</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/auth/">auth</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/custom-domain/">custom domain</a><small>1</small></li>
   
     <li><a href="/tech/tags/git/">git</a><small>1</small></li>
   
+    <li><a href="/tech/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/github-page/">github page</a><small>1</small></li>
+  
     <li><a href="/tech/tags/promise/">promise</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/version-control/">version control</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/域名绑定/">域名绑定</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/版本控制/">版本控制</a><small>1</small></li>
   
   </ul>
 </div>
