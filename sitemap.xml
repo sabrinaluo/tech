@@ -2,6 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sabrinaluo.github.io/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</loc>
+    <lastmod>2015-12-15T06:39:57.242Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/</loc>
+    <lastmod>2015-12-15T03:19:06.086Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sabrinaluo.github.io/tech/2015/12/14/how-to-setup-dynamodb-at-local/</loc>
     <lastmod>2015-12-14T07:08:08.991Z</lastmod>
   </url>
@@ -14,11 +24,6 @@
   <url>
     <loc>http://sabrinaluo.github.io/tech/2015/12/04/git-basic/</loc>
     <lastmod>2015-12-14T03:47:46.687Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/</loc>
-    <lastmod>2015-12-14T02:46:47.383Z</lastmod>
   </url>
   
   <url>

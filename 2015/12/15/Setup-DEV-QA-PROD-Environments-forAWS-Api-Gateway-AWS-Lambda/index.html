@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Setup DEV QA PROD Environments forAWS API Gateway &amp; AWS Lambda | 小白妹妹写代码</title>
+  <meta name="author" content="Sabrina">
+  
+  <meta name="description" content="本文不是介绍 AWS API Gateway 和 AWS Lambda的基本用法的…=(:з」∠)_
+简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Setup DEV QA PROD Environments forAWS API Gateway &amp; AWS Lambda"/>
+  <meta property="og:site_name" content="小白妹妹写代码"/>
+
+  
+    <meta property="og:image" content="undefined"/>
+  
+
+  <link href="/tech/favicon.png" rel="icon">
+  <link rel="alternate" href="/tech/atom.xml" title="小白妹妹写代码" type="application/atom+xml">
+  <link rel="stylesheet" href="/tech/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	ga('create', 'UA-52574938-4', 'auto');
+	ga('send', 'pageview');
+
+</script>
+
+
+</head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/tech/">小白妹妹写代码</a></h1>
+  <h2><a href="/tech/">一个废话很多的程序媛 | 我这么可爱一定是男孩子</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div></header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-15T02:55:13.000Z"><a href="/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/">2015-12-15</a></time>
+      
+      
+  
+    <h1 class="title">Setup DEV QA PROD Environments forAWS API Gateway &amp; AWS Lambda</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="external">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
+<p>简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（<em>最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！</em>），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！</p>
+<p>再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后<strong>“做一堆事”</strong>完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。</p>
+<blockquote>
+<p>通常如果浏览器端使用ajax访问这个URL都会存在跨域的问题，API Gateway当然很贴心的提供了enable CROS选项！</p>
+</blockquote>
+<p>AWS Lambda目前支持python，JAVA，NodeJS。这个Lambda函数呢，只是叫Lambda而已，实际写起来跟函数式编程也没有太大的关系，以前怎么写现在也还是一样的写…神奇的是，Lambda之间可以相互调用，另外除了API Gateway之外，很多别的跟API Gateway无关的事件event也可以作为trigger（<em>比如当DynamoDB的某个Table新增一条用户记录的时候，调用一个名称为<code>sendWelcomeEmailToUser()</code>的Lambda函数，给用户发欢迎邮件</em>）</p>
+<p>那么，问题来了…<del>挖掘机技术哪家强</del><br>如何设置AWS API Gateway和AWS Lambda来实现开发/测试/生产环境的需求呢？难道要同一个功能的API建3个、同一个功能的lambda建3个？！</p>
+<hr>
+<p>以下所有内容都是在AWS的WEB UI中进行设置的。<em>（除了在UI中设置，还可以写Shell脚本去批量执行这些设置，当然啦，这个我还没学会…）</em></p>
+<p>哦，忘了说…首先你要有个…API，然后你还要有个Lambda。<br>假设：</p>
+<ul>
+<li><strong>API endpoint是 /stageTest，方法是<code>GET</code>。</strong> <em>（成就GET√  =(:з」∠)_）</em></li>
+<li><strong>Lambda名为stageTest。</strong> <em>（endpoint的名字和lambda名字可以不同…原谅我是取名无能星人…）</em></li>
+</ul>
+<h3 id="DEV_/_QA_/_PROD__u73AF_u5883_u7684_u8BBE_u7F6E"><a href="#DEV_/_QA_/_PROD__u73AF_u5883_u7684_u8BBE_u7F6E" class="headerlink" title="DEV / QA / PROD 环境的设置"></a>DEV / QA / PROD 环境的设置</h3><ol>
+<li><strong>为API Gateway创建不同的stage<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^1</a>，假设创建了3个分别是dev，qa，prod。</strong> <em>（教程是官方英文的，点引用的链接就可以看到，憋让我翻译，我懒…我知道还有pre-prod，多加一个下面的解释就得多写好多字(ಥ_ಥ)）</em><blockquote>
+<p>设置了stage之后你的api endpoin看起来大概长这样：</p>
+<ul>
+<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/dev</aws-region></aws-apiid></li>
+<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/qa</aws-region></aws-apiid></li>
+<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/prod</aws-region></aws-apiid></li>
+</ul>
+</blockquote>
+</li>
+<li><strong>为每个的Stage设置stageVariables<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^2</a>，假设为每个Stage都设置了一个名为env的变量</strong><ul>
+<li>dev这个stage中env变量的值为DEV</li>
+<li>qa这个stage中env变量的值为QA</li>
+<li>prod这个stage中env变量的值为PROD</li>
+</ul>
+</li>
+<li><strong>Lambda stageTest()函数创建不同的alias<a href="http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html" target="_blank" rel="external">^3</a>，假设创建了3个分别是DEV，QA，PROD，分别指向不同的版本。</strong><blockquote>
+<ul>
+<li>在每次deploy后，都是$LATEST版本，点action&gt;publish new version发布不同的版本</li>
+<li>建议DEV指向$LATEST版本，QA和PROD指向其他稳定的版本</li>
+<li>为Lambda创建了alias之后，其实这个lambda访问的名称就有了以下四种：<code>stageTest</code>，<code>stageTest:DEV</code>，<code>stageTest:QA</code>，<code>stageTest:PROD</code>，其中<code>stageTest</code>永远指向$LATEST版本，其他指向之前设置的各个版本</li>
+</ul>
+</blockquote>
+</li>
+<li><strong>整合API /stageTest 的GET方法与Lambda stageTest()<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html" target="_blank" rel="external">^5</a></strong><ul>
+<li>首先在API Gateway的界面中设置每个API方法的<strong>Integration Request</strong>：Integration Type选择Lambda Function；Lambda Function填<code>stageTest:${stageVariables.env}</code>，<strong>${stageVariables.env}</strong>就是第2步中，设置的变量。</li>
+<li>设置Lambda Function名称的时候一定要记得点旁边的√保存，保存的时候，AWS会弹出一个对话框，需要给函数加上权限才能使用stageVariables变量。加的时候记得要执行三次命令，也就是在AWS给出的命令的对应的位置改成 <code>stageTest:DEV</code>，<code>stageTest:QA</code>，<code>stageTest:PROD</code> 每个执行一次。</li>
+<li>执行以上命令之前，你必须：<ul>
+<li>安装AWS CLI</li>
+<li>执行命令<code>aws configure</code>，填写你的AWS ID和key，设施default region为你的lambda function所在的region</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>那么，问题又来了…</p>
+<ul>
+<li>如果你已经部署了很多lambda和api却没有使用stage的话…似乎是不太可能手动去AWS界面上一个一个设置的</li>
+<li>就算你已经在使用stage了，似乎也不太可能每次都手动去AWS界面上一个一个deploy最新的版本以及改变alias指向的版本的…</li>
+</ul>
+<p>这个时候，你就必须研究<a href="https://aws.amazon.com/cli/" target="_blank" rel="external">AWS CLI</a>，然后写shell以及借助其他工具来进行自动化部署了…</p>
+<p>其他参考：</p>
+<ul>
+<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html</a></li>
+<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tech/tags/API-Gateway/">API Gateway</a>, <a href="/tech/tags/AWS/">AWS</a>, <a href="/tech/tags/AWS-Lambda/">AWS Lambda</a>, <a href="/tech/tags/RESTful/">RESTful</a>, <a href="/tech/tags/开发环境/">开发环境</a>, <a href="/tech/tags/测试环境/">测试环境</a>, <a href="/tech/tags/环境配置/">环境配置</a>, <a href="/tech/tags/生产环境/">生产环境</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">留言</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://sabrinaluo.github.io/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
+</section>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="搜索">
+    <input type="hidden" name="q" value="site:sabrinaluo.github.io/tech">
+  </form>
+</div>
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tech/tags/API-Gateway/">API Gateway</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/AWS/">AWS</a><small>2</small></li>
+  
+    <li><a href="/tech/tags/AWS-Lambda/">AWS Lambda</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/DynamoDB/">DynamoDB</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/RESTful/">RESTful</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/SHA1/">SHA1</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/WSSE/">WSSE</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/X-WSSE/">X-WSSE</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/auth/">auth</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/custom-domain/">custom domain</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/git/">git</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/github/">github</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/github-page/">github page</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/js/">js</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/promise/">promise</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/version-control/">version control</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/二级域名/">二级域名</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/云服务/">云服务</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/亚马逊/">亚马逊</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/域名绑定/">域名绑定</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/域名解析/">域名解析</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/开发环境/">开发环境</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/感叹号/">感叹号</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/本地安装/">本地安装</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/测试环境/">测试环境</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/版本控制/">版本控制</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/环境配置/">环境配置</a><small>2</small></li>
+  
+    <li><a href="/tech/tags/生产环境/">生产环境</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/重要注释/">重要注释</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 Sabrina
+  
+</div>
+<div class="clearfix"></div></footer>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/tech/js/jquery.imagesloaded.min.js"></script>
+<script src="/tech/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/tech/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/tech/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
