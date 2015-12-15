@@ -1,6 +1,6 @@
 title: GitHub Page如何绑定域名
 date: 2015-12-13 00:34:42
-tags: [github,github page, custom domain, 域名绑定]
+tags: [github,github page, custom domain, 域名绑定, 二级域名, 域名解析]
 ---
 本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！
 我本来的github page是[sabrinaluo.github.io](http://sabrinaluo.github.io)，花了一百多大洋把这个域名变成[sabrinaluo.com](http://sabrinaluo.com)，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ
