@@ -1,0 +1,183 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta http-equiv='content-type'content='text/html; charset=utf-8'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">This website</span>
+            <input type="text" class="form-control" placeholder="search">
+          </div>
+        </div>
+      </form>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/tech/">Home</a></li>
+        <li><a href="#">Archieve</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#">
+            <i class="fa fa-rss"></i>
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
+            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">
+                <i class="fa fa-qq"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">I have nothing to say</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<main class="container">
+  <header>
+  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
+    <div class="col-sm-6 ">
+      <h2 style="margin-bottom:0">
+        <i class="fa fa-book text-muted"></i>
+        <a href="/tech/">小白妹妹写代码</a>
+      </h2>
+      <p class="text-muted">
+        一个废话很多的程序媛 | 我这么可爱一定是男孩子
+      </p>
+
+    </div>
+    <div class="col-sm-6 hidden-xs" style="padding-right:0">
+      <div class="pull-right" style="line-height:73px;">
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
+          <button type="button" class="btn btn-default">
+            8
+          </button>
+        </div>
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
+          <button type="button" class="btn btn-default">
+            33
+          </button>
+        </div>
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
+          <button type="button" class="btn btn-default">
+            0
+          </button>
+        </div>
+        <!--end btn-group-->
+
+      </div>
+    </div>
+  </div>
+</header>
+  <div class="row">
+    <div class="col-sm-9">
+      
+<h2><a href="http://sabrinaluo.com/2015/12/14/JS-important-comment/">JS注释中的感叹号是干什么用的/*! */</a></h2>
+<article>
+  <p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * EJS</span><br><span class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span><br><span class="line"> * MIT Licensed</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Module dependencies.</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
+<p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="external">TJ写的EJS模板引擎</a></p>
+<p>我就在QQ群里问了这样一个问题：</p>
+<blockquote>
+<p>第一个注释中的感叹号是什么意思，为什么第一个有感叹号，第二个没有？</p>
+</blockquote>
+<p>然后似乎没有人知道，并且我到的回答基本都是诸如：那就是行注释没什么特别的意思、在意注释干嘛反正注释也没什么用……</p>
+<p>然后我就忽然有点明白了为什么一本以下的不要…</p>
+<p>类似这样的问题，为什么在网上很难找答案？可能是因为：</p>
+<ul>
+<li>搜索引擎对于特殊符号的处理导致难以按照符号来搜索<br>包括google和stackoverflow中输入<code>/*!</code>并不能搜到结果</li>
+<li>因为缺乏经验而无法正确的描述问题，无法命中问题的关键字</li>
+</ul>
+<p>像我这样比较懒的人，最希望的就是能有一个在现实生活中认识的经验丰富的大神，这种弱鸡问题，一问就有答案了。然而我并不认识这样的大神。(ಥ_ಥ)</p>
+<p>直到后来无意中看到<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">阮一峰老师的SASS教程</a>，提到<strong>重要注释</strong>这个概念，受到一点启发，然后机智的我想到把感叹号直接翻译成英文，以’exclamation js comment’作为关键字来搜索，果然我不是一个人…（嗯，我变成了一条狗）<br><a href="http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files" target="_blank" rel="external">http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files</a></p>
+<blockquote>
+<p>我不是为了输赢，我就是认真 –罗永浩</p>
+</blockquote>
+<hr>
+<p>对前端工程化稍微有点知识的，就会知道在最后deploy之前会有一个步骤是minify / uglify，这个过程中注释都会被删除，而这个以<code>/*!</code>开头的重要注释则会被保留，通常重要注释是用来注释版权之类的信息<a href="https://zoompf.com/blog/2009/11/jsmin-important-comments-and-copyright-violations" target="_blank" rel="external">^1</a></p>
+
+</article>
+
+    </div>
+    <div class="col-sm-3">
+      
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>About Me</h4>
+      <p>
+        123
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Recent Post</h4>
+    </div>
+  </div>
+
+
+  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
+
+    <div class="col-sm-12">
+      <h4>Categories</h4> 123
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Tags</h4>
+    </div>
+  </div>
+
+
+    </div>
+  </div>
+</main>
+</body>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>
