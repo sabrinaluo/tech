@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Setup DEV QA PROD Environments forAWS API Gateway &amp; AWS Lambda | 小白妹妹写代码</title>
+  <title>AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置 | 小白妹妹写代码</title>
   <meta name="author" content="Sabrina">
   
   <meta name="description" content="本文不是介绍 AWS API Gateway 和 AWS Lambda的基本用法的…=(:з」∠)_
@@ -12,7 +12,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="Setup DEV QA PROD Environments forAWS API Gateway &amp; AWS Lambda"/>
+  <meta property="og:title" content="AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置"/>
   <meta property="og:site_name" content="小白妹妹写代码"/>
 
   
@@ -66,7 +66,7 @@
       
       
   
-    <h1 class="title">Setup DEV QA PROD Environments forAWS API Gateway &amp; AWS Lambda</h1>
+    <h1 class="title">AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置</h1>
   
 
     </header>
@@ -76,7 +76,7 @@
 <p>简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（<em>最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！</em>），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！</p>
 <p>再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后<strong>“做一堆事”</strong>完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。</p>
 <blockquote>
-<p>通常如果浏览器端使用ajax访问这个URL都会存在跨域的问题，API Gateway当然很贴心的提供了enable CROS选项！</p>
+<p>通常如果浏览器端使用ajax访问这个URL都会存在跨域的问题，API Gateway当然很贴心的提供了enable CORS选项！</p>
 </blockquote>
 <p>AWS Lambda目前支持python，JAVA，NodeJS。这个Lambda函数呢，只是叫Lambda而已，实际写起来跟函数式编程也没有太大的关系，以前怎么写现在也还是一样的写…神奇的是，Lambda之间可以相互调用，另外除了API Gateway之外，很多别的跟API Gateway无关的事件event也可以作为trigger（<em>比如当DynamoDB的某个Table新增一条用户记录的时候，调用一个名称为<code>sendWelcomeEmailToUser()</code>的Lambda函数，给用户发欢迎邮件</em>）</p>
 <p>那么，问题来了…<del>挖掘机技术哪家强</del><br>如何设置AWS API Gateway和AWS Lambda来实现开发/测试/生产环境的需求呢？难道要同一个功能的API建3个、同一个功能的lambda建3个？！</p>
@@ -214,6 +214,10 @@
   
     <li><a href="/tech/tags/DynamoDB/">DynamoDB</a><small>1</small></li>
   
+    <li><a href="/tech/tags/Module-exports/">Module.exports</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/NodeJS/">NodeJS</a><small>1</small></li>
+  
     <li><a href="/tech/tags/RESTful/">RESTful</a><small>1</small></li>
   
     <li><a href="/tech/tags/SHA1/">SHA1</a><small>1</small></li>
@@ -225,6 +229,8 @@
     <li><a href="/tech/tags/auth/">auth</a><small>1</small></li>
   
     <li><a href="/tech/tags/custom-domain/">custom domain</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/exports/">exports</a><small>1</small></li>
   
     <li><a href="/tech/tags/git/">git</a><small>1</small></li>
   
@@ -253,6 +259,8 @@
     <li><a href="/tech/tags/感叹号/">感叹号</a><small>1</small></li>
   
     <li><a href="/tech/tags/本地安装/">本地安装</a><small>1</small></li>
+  
+    <li><a href="/tech/tags/模块导出/">模块导出</a><small>1</small></li>
   
     <li><a href="/tech/tags/测试环境/">测试环境</a><small>1</small></li>
   
