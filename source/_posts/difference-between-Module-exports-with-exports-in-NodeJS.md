@@ -1,8 +1,12 @@
-title: 对Module.exports和exports的一些理解
+title: 对module.exports和exports的一些理解
 date: 2015-12-16 11:00:27
 tags: [NodeJS, Module.exports, exports, 模块导出]
 ---
 可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。
+
+**`module.exports`和`exports`的区别就是`var a={}; var b=a;`，a和b的区别**
+
+看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来
 
 关于Module.exports和exports有什么区别，网上一搜一大把，但是说的都太复杂了…
 听说exports是Module.exports对象的一个引用(reference)[^1]，什么是引用？！…\_(:з」∠)\_
@@ -16,7 +20,7 @@ tags: [NodeJS, Module.exports, exports, 模块导出]
 ```
 console.log(module);
 ```
-然后在CMD里执行这个文件`node mo.js`，就能看到module其实是一个Module实例，你可以这么理解，NodeJS中定义了一个Module类，这个类中有很多属性和方法，exports是其中的一个方法：
+然后在CMD里执行这个文件`node mo.js`，就能看到module其实是一个Module实例，你可以这么理解，NodeJS中定义了一个Module类，这个类中有很多属性和方法，exports是其中的一个属性：
 ```
 function Module {
   id : 'blabla',
@@ -50,7 +54,7 @@ console.log(exports); //你会看到Module中的exports为空对象{}
 module.exports = {
   print : function(){console.log(12345)}
 }
-console.log(module); //你会看到Module中的exports对象不仅有了print()方法
+console.log(module); //你会看到Module中的exports对象有了print()方法
 exports.name = '小白妹妹';
 console.log(module); //你会看到Module中的exports对象不仅有了print()方法，还有了name属性
 ``` 
@@ -98,9 +102,9 @@ module.exports = {
 };
 console.log(module); //你会看到Module的exports中还是只有name属性！！！
 ``` 
-
 # 总结
-* 改变`exports`的指向后所添加的`exports.xxx`都是无效的。因为require返回的只会是`module.exports`
+还是那一句话，`module.exports`和`exports`的区别就是`var a={}; var b=a;`，a和b的区别
+>* 改变`exports`的指向后所添加的`exports.xxx`都是无效的。因为require返回的只会是`module.exports`
 * 不能在使用了`exports.xxx`之后，改变`module.exports`的指向。因为`exports.xxx`添加的属性和方法并不存在于`module.exports`所指向的新对象中。
 
 感觉自己说的还是挺清楚哒～
