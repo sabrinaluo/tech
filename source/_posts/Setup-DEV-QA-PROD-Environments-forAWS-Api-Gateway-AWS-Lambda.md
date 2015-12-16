@@ -1,4 +1,4 @@
-title: 'Setup DEV QA PROD Environments forAWS API Gateway & AWS Lambda'
+title: AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置
 date: 2015-12-15 10:55:13
 tags: [AWS, API Gateway, AWS Lambda, RESTful, 开发环境, 测试环境, 生产环境, 环境配置]
 ---
@@ -8,7 +8,7 @@ tags: [AWS, API Gateway, AWS Lambda, RESTful, 开发环境, 测试环境, 生产
 
 再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后**“做一堆事”**完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。
 
-> 通常如果浏览器端使用ajax访问这个URL都会存在跨域的问题，API Gateway当然很贴心的提供了enable CROS选项！
+> 通常如果浏览器端使用ajax访问这个URL都会存在跨域的问题，API Gateway当然很贴心的提供了enable CORS选项！
 
 AWS Lambda目前支持python，JAVA，NodeJS。这个Lambda函数呢，只是叫Lambda而已，实际写起来跟函数式编程也没有太大的关系，以前怎么写现在也还是一样的写…神奇的是，Lambda之间可以相互调用，另外除了API Gateway之外，很多别的跟API Gateway无关的事件event也可以作为trigger（*比如当DynamoDB的某个Table新增一条用户记录的时候，调用一个名称为`sendWelcomeEmailToUser()`的Lambda函数，给用户发欢迎邮件*）
 
