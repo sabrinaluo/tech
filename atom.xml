@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[小白妹妹写代码]]></title>
+  
+  <link href="/tech/atom.xml" rel="self"/>
+  <link href="http://sabrinaluo.com/tech/"/>
+  <updated>2015-12-16T16:14:50.064Z</updated>
+  <id>http://sabrinaluo.com/tech/</id>
+  
+  <author>
+    <name><![CDATA[Sabrina]]></name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title><![CDATA[对module.exports和exports的一些理解]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</id>
+    <published>2015-12-16T03:00:27.000Z</published>
+    <updated>2015-12-16T16:14:50.064Z</updated>
+    <content type="html"><![CDATA[<p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
+<p><strong><code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别</strong></p>
+<p>看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来</p>
+<p>关于Module.exports和exports有什么区别，网上一搜一大把，但是说的都太复杂了…<br>听说exports是Module.exports对象的一个引用(reference)<a href="https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_exports_alias" target="_blank" rel="external">^1</a>，什么是引用？！…_(:з」∠)_</p>
+<p>当然啦，如果要彻底理解这两个导出的区别，最好肯定是去看源码，看看都是怎么封装的，功力深厚的童鞋应该一看就懂了。不过，源码我也是看不懂的…(ಥ_ಥ)</p>
+<p>但是最近感觉杂七杂八看了好多文章做了好多实验之后，像是打开了任督二脉，机智的我好像有点上道了…</p>
+<h1 id="module"><a href="#module" class="headerlink" title="module"></a>module</h1><p>首先要明确的一点，module是一个<strong>对象</strong> <code>{Object}</code>。<br>当你新建一个文件，比如mo.js，文件内容如下：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>);</span><br></pre></td></tr></table></figure></p>
+<p>然后在CMD里执行这个文件<code>node mo.js</code>，就能看到module其实是一个Module实例，你可以这么理解，NodeJS中定义了一个Module类，这个类中有很多属性和方法，exports是其中的一个属性：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">function</span> <span class="tag">Module</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">id </span>:<span class="value"> <span class="string">'blabla'</span>,</span><br><span class="line">  exports : &#123;</span></span></span>&#125;,</span><br><span class="line">  <span class="tag">blabla</span>...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当每个js文件在执行或被require的时候，NodeJS其实创建了一个新的实例<code>var module = new Module()</code>，这个实例名叫<code>module</code>。<br><strong>这也就是为什么你并没有定义<code>module</code>这个变量，却能console.log出来而不会报错的原因</strong>。</p>
+<h1 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h1><p>假设我有一个JS文件内容如下：</p>
+<pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
+<span class="built_in">module</span>.exports = {
+  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
+}
+<span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象已经有了print()方法</span>
+</code></pre>
+<p>有了上面的基础，很容易理解<code>module.export</code>其实是<strong>给Module实例中的exports对象中添加方法/属性</strong>。</p>
+<h1 id="exports"><a href="#exports" class="headerlink" title="exports"></a>exports</h1><p>通常使用exports的时候，是这么用的：</p>
+<pre><code class="javascript">exports.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
+</code></pre>
+<p>假设我有一个JS文件内容如下：</p>
+<pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
+<span class="built_in">console</span>.log(exports); <span class="comment">//你会看到Module中的exports为空对象{}</span>
+<span class="built_in">module</span>.exports = {
+  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
+}
+<span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象有了print()方法</span>
+exports.name = <span class="string">'小白妹妹'</span>;
+<span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象不仅有了print()方法，还有了name属性</span>
+</code></pre>
+<p>由此也能看出，传说中的<strong><code>exports</code>其实是<code>module.exports</code>的引用</strong>，你可以这么理解，NodeJS在你的代码<strong>之前</strong>悄悄的加了以下代码：</p>
+<pre><code>var module = new Module();
+var exports = module.exports;
+</code></pre><p><strong>这也就是为什么你并没有定义<code>exports</code>这个变量，却能console.log出来而不会报错的原因</strong>。</p>
+<h1 id="require"><a href="#require" class="headerlink" title="require"></a>require</h1><p>当你从外部调用某个模块，require其实是在require什么？<a href="https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_module_require_id" target="_blank" rel="external">^2</a><br>require的时候NodeJS会<del>到处</del>去找有没有这个模块，如果有，return的就是module.exports里的东东。</p>
+<h1 id="DOs__26amp_3B_DONTs"><a href="#DOs__26amp_3B_DONTs" class="headerlink" title="DOs &amp; DONTs"></a>DOs &amp; DONTs</h1><ul>
+<li>√你可以这样：<pre><code>module.exports.name = &apos;小白妹妹&apos;;
+exports.age = 10;
+module.exports.print = function(){console.log(12345)};
+</code></pre>如果只是使用<code>.</code>来添加属性和方法，<code>module.exports</code>和<code>exports</code>混用是完全可以的，这种情况下，感觉<code>exports</code>就是给懒人用的…毕竟能少写几个7个字符呢！</li>
+<li>√也可以这样：<pre><code>module.exports = {
+name = &apos;小白妹妹&apos;;
+};
+exports.age = 10;
+module.exports.print = function(){console.log(12345)};
+</code></pre></li>
+<li><strong>×但不可以这样</strong>：<pre><code>module.exports = {
+name = &apos;小白妹妹&apos;;
+};
+exports = {age:10}; // exports现在是{age:10}这个对象的引用，不再是module.exports的引用了
+console.log(module); //你会看到Module的exports中只有name属性！！！
+</code></pre></li>
+<li><strong>×也不可以这样</strong>：<pre><code>exports.age = 10; 
+console.log(module); //你会看到Module的exports中多了age属性
+module.exports = {
+name = &apos;小白妹妹&apos;;
+};
+console.log(module); //你会看到Module的exports中还是只有name属性！！！
+</code></pre><h1 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h1>还是那一句话，<code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别<blockquote>
+<ul>
+<li>改变<code>exports</code>的指向后所添加的<code>exports.xxx</code>都是无效的。因为require返回的只会是<code>module.exports</code></li>
+</ul>
+</blockquote>
+</li>
+<li>不能在使用了<code>exports.xxx</code>之后，改变<code>module.exports</code>的指向。因为<code>exports.xxx</code>添加的属性和方法并不存在于<code>module.exports</code>所指向的新对象中。</li>
+</ul>
+<p>感觉自己说的还是挺清楚哒～<br>不管你清不清楚，我反正是清楚了。_(:з」∠)_</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
+<p><strong><code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=]]>
+    </summary>
+    
+      <category term="Module.exports" scheme="http://sabrinaluo.com/tech/tags/Module-exports/"/>
+    
+      <category term="NodeJS" scheme="http://sabrinaluo.com/tech/tags/NodeJS/"/>
+    
+      <category term="exports" scheme="http://sabrinaluo.com/tech/tags/exports/"/>
+    
+      <category term="模块导出" scheme="http://sabrinaluo.com/tech/tags/%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%87%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</id>
+    <published>2015-12-15T02:55:13.000Z</published>
+    <updated>2015-12-16T16:14:50.063Z</updated>
+    <content type="html"><![CDATA[<p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="external">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
+<p>简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（<em>最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！</em>），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！</p>
+<p>再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后<strong>“做一堆事”</strong>完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。</p>
+<blockquote>
+<p>通常如果浏览器端使用ajax访问这个URL都会存在跨域的问题，API Gateway当然很贴心的提供了enable CORS选项！</p>
+</blockquote>
+<p>AWS Lambda目前支持python，JAVA，NodeJS。这个Lambda函数呢，只是叫Lambda而已，实际写起来跟函数式编程也没有太大的关系，以前怎么写现在也还是一样的写…神奇的是，Lambda之间可以相互调用，另外除了API Gateway之外，很多别的跟API Gateway无关的事件event也可以作为trigger（<em>比如当DynamoDB的某个Table新增一条用户记录的时候，调用一个名称为<code>sendWelcomeEmailToUser()</code>的Lambda函数，给用户发欢迎邮件</em>）</p>
+<p>那么，问题来了…<del>挖掘机技术哪家强</del><br>如何设置AWS API Gateway和AWS Lambda来实现开发/测试/生产环境的需求呢？难道要同一个功能的API建3个、同一个功能的lambda建3个？！</p>
+<hr>
+<p>以下所有内容都是在AWS的WEB UI中进行设置的。<em>（除了在UI中设置，还可以写Shell脚本去批量执行这些设置，当然啦，这个我还没学会…）</em></p>
+<p>哦，忘了说…首先你要有个…API，然后你还要有个Lambda。<br>假设：</p>
+<ul>
+<li><strong>API endpoint是 /stageTest，方法是<code>GET</code>。</strong> <em>（成就GET√  =(:з」∠)_）</em></li>
+<li><strong>Lambda名为stageTest。</strong> <em>（endpoint的名字和lambda名字可以不同…原谅我是取名无能星人…）</em></li>
+</ul>
+<h3 id="DEV_/_QA_/_PROD__u73AF_u5883_u7684_u8BBE_u7F6E"><a href="#DEV_/_QA_/_PROD__u73AF_u5883_u7684_u8BBE_u7F6E" class="headerlink" title="DEV / QA / PROD 环境的设置"></a>DEV / QA / PROD 环境的设置</h3><ol>
+<li><strong>为API Gateway创建不同的stage<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^1</a>，假设创建了3个分别是dev，qa，prod。</strong> <em>（教程是官方英文的，点引用的链接就可以看到，憋让我翻译，我懒…我知道还有pre-prod，多加一个下面的解释就得多写好多字(ಥ_ಥ)）</em><blockquote>
+<p>设置了stage之后你的api endpoin看起来大概长这样：</p>
+<ul>
+<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/dev</aws-region></aws-apiid></li>
+<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/qa</aws-region></aws-apiid></li>
+<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/prod</aws-region></aws-apiid></li>
+</ul>
+</blockquote>
+</li>
+<li><strong>为每个的Stage设置stageVariables<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^2</a>，假设为每个Stage都设置了一个名为env的变量</strong><ul>
+<li>dev这个stage中env变量的值为DEV</li>
+<li>qa这个stage中env变量的值为QA</li>
+<li>prod这个stage中env变量的值为PROD</li>
+</ul>
+</li>
+<li><strong>Lambda stageTest()函数创建不同的alias<a href="http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html" target="_blank" rel="external">^3</a>，假设创建了3个分别是DEV，QA，PROD，分别指向不同的版本。</strong><blockquote>
+<ul>
+<li>在每次deploy后，都是$LATEST版本，点action&gt;publish new version发布不同的版本</li>
+<li>建议DEV指向$LATEST版本，QA和PROD指向其他稳定的版本</li>
+<li>为Lambda创建了alias之后，其实这个lambda访问的名称就有了以下四种：<code>stageTest</code>，<code>stageTest:DEV</code>，<code>stageTest:QA</code>，<code>stageTest:PROD</code>，其中<code>stageTest</code>永远指向$LATEST版本，其他指向之前设置的各个版本</li>
+</ul>
+</blockquote>
+</li>
+<li><strong>整合API /stageTest 的GET方法与Lambda stageTest()<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html" target="_blank" rel="external">^5</a></strong><ul>
+<li>首先在API Gateway的界面中设置每个API方法的<strong>Integration Request</strong>：Integration Type选择Lambda Function；Lambda Function填<code>stageTest:${stageVariables.env}</code>，<strong>${stageVariables.env}</strong>就是第2步中，设置的变量。</li>
+<li>设置Lambda Function名称的时候一定要记得点旁边的√保存，保存的时候，AWS会弹出一个对话框，需要给函数加上权限才能使用stageVariables变量。加的时候记得要执行三次命令，也就是在AWS给出的命令的对应的位置改成 <code>stageTest:DEV</code>，<code>stageTest:QA</code>，<code>stageTest:PROD</code> 每个执行一次。</li>
+<li>执行以上命令之前，你必须：<ul>
+<li>安装AWS CLI</li>
+<li>执行命令<code>aws configure</code>，填写你的AWS ID和key，设施default region为你的lambda function所在的region</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>那么，问题又来了…</p>
+<ul>
+<li>如果你已经部署了很多lambda和api却没有使用stage的话…似乎是不太可能手动去AWS界面上一个一个设置的</li>
+<li>就算你已经在使用stage了，似乎也不太可能每次都手动去AWS界面上一个一个deploy最新的版本以及改变alias指向的版本的…</li>
+</ul>
+<p>这个时候，你就必须研究<a href="https://aws.amazon.com/cli/" target="_blank" rel="external">AWS CLI</a>，然后写shell以及借助其他工具来进行自动化部署了…</p>
+<p>其他参考：</p>
+<ul>
+<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html</a></li>
+<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference</a></li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https]]>
+    </summary>
+    
+      <category term="API Gateway" scheme="http://sabrinaluo.com/tech/tags/API-Gateway/"/>
+    
+      <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
+    
+      <category term="AWS Lambda" scheme="http://sabrinaluo.com/tech/tags/AWS-Lambda/"/>
+    
+      <category term="RESTful" scheme="http://sabrinaluo.com/tech/tags/RESTful/"/>
+    
+      <category term="开发环境" scheme="http://sabrinaluo.com/tech/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+    
+      <category term="测试环境" scheme="http://sabrinaluo.com/tech/tags/%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83/"/>
+    
+      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+      <category term="生产环境" scheme="http://sabrinaluo.com/tech/tags/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[AWS DynamoDB的本地安装及环境配置]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</id>
+    <published>2015-12-14T06:39:35.000Z</published>
+    <updated>2015-12-16T16:14:50.067Z</updated>
+    <content type="html"><![CDATA[<p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚马逊AWS云服务提供的一个NoSQL的数据库…</p>
+<p>在这里我必须安利一下Amazon家的服务真是业界良心：前不久，可能是因为我自己蠢，英文不好没看懂免费用一年的各种限制，也不知道写了什么奇怪的东东用自己的账号测试dynamoDB被扣了几刀，写邮件去投诉说你们不是免费吗为啥扣费，然后就得到回复解释了一下为啥扣钱，说我用超过限制了，然后表示个人账号里扣了的钱会<strong>退退退</strong>！（我说明了之后会用公司账号测试，请帮我关了我的个人账户）</p>
+<hr>
+<p>本文是Linux环境下的安装和配置，windows下我还不会…</p>
+<ol>
+<li><p>安装JAVA SDK</p>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="instruction"> add-apt-repository </span>ppa:webupd8team/java</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install oracle-java8-installer</span><br><span class="line">$ sudo apt-get install oracle-java8-set-default</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装dynamodb-local</p>
+<ul>
+<li>下载daynamodb-local：<a href="http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz" target="_blank" rel="external">点这里下载</a></li>
+<li>解压文件</li>
+<li>进入文件目录执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+</code></pre></li>
+</ul>
+</li>
+<li>安装awscli，执行以下命令：<pre><code>pip install awscli
+</code></pre></li>
+<li>配置环境变量，执行以下命令：<pre><code>aws configure
+</code></pre><ul>
+<li>这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要<strong>成功注册AWS服务</strong>之后在AWS的网站上会看到</li>
+<li>AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为<code>us-east-1</code></li>
+</ul>
+</li>
+<li>启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
+</code></pre></li>
+</ol>
+<p>参考：<br>[1] <a href="http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/" target="_blank" rel="external">http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/</a><br>[2] <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html#Tools.DynamoDBLocal.DownloadingAndRunning" target="_blank" rel="external">DynamoDBLocal Downloading And Running</a><br>[3] <a href="http://aws.amazon.com/cli/" target="_blank" rel="external">http://aws.amazon.com/cli/</a><br>[4] <a href="http://boto3.readthedocs.org/en/latest/guide/configuration.html" target="_blank" rel="external">http://boto3.readthedocs.org/en/latest/guide/configuration.html</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚]]>
+    </summary>
+    
+      <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
+    
+      <category term="DynamoDB" scheme="http://sabrinaluo.com/tech/tags/DynamoDB/"/>
+    
+      <category term="云服务" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
+    
+      <category term="亚马逊" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%9A%E9%A9%AC%E9%80%8A/"/>
+    
+      <category term="本地安装" scheme="http://sabrinaluo.com/tech/tags/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85/"/>
+    
+      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[JS注释中的感叹号是干什么用的/*! */]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</id>
+    <published>2015-12-14T06:15:06.000Z</published>
+    <updated>2015-12-16T16:14:50.062Z</updated>
+    <content type="html"><![CDATA[<p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * EJS</span><br><span class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span><br><span class="line"> * MIT Licensed</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Module dependencies.</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
+<p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="external">TJ写的EJS模板引擎</a></p>
+<p>我就在QQ群里问了这样一个问题：</p>
+<blockquote>
+<p>第一个注释中的感叹号是什么意思，为什么第一个有感叹号，第二个没有？</p>
+</blockquote>
+<p>然后似乎没有人知道，并且我到的回答基本都是诸如：那就是行注释没什么特别的意思、在意注释干嘛反正注释也没什么用……</p>
+<p>然后我就忽然有点明白了为什么一本以下的不要…</p>
+<p>类似这样的问题，为什么在网上很难找答案？可能是因为：</p>
+<ul>
+<li>搜索引擎对于特殊符号的处理导致难以按照符号来搜索<br>包括google和stackoverflow中输入<code>/*!</code>并不能搜到结果</li>
+<li>因为缺乏经验而无法正确的描述问题，无法命中问题的关键字</li>
+</ul>
+<p>像我这样比较懒的人，最希望的就是能有一个在现实生活中认识的经验丰富的大神，这种弱鸡问题，一问就有答案了。然而我并不认识这样的大神。(ಥ_ಥ)</p>
+<p>直到后来无意中看到<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">阮一峰老师的SASS教程</a>，提到<strong>重要注释</strong>这个概念，受到一点启发，然后机智的我想到把感叹号直接翻译成英文，以’exclamation js comment’作为关键字来搜索，果然我不是一个人…（嗯，我变成了一条狗）<br><a href="http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files" target="_blank" rel="external">http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files</a></p>
+<blockquote>
+<p>我不是为了输赢，我就是认真 –罗永浩</p>
+</blockquote>
+<hr>
+<p>对前端工程化稍微有点知识的，就会知道在最后deploy之前会有一个步骤是minify / uglify，这个过程中注释都会被删除，而这个以<code>/*!</code>开头的重要注释则会被保留，通常重要注释是用来注释版权之类的信息<a href="https://zoompf.com/blog/2009/11/jsmin-important-comments-and-copyright-violations" target="_blank" rel="external">^1</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</str]]>
+    </summary>
+    
+      <category term="js" scheme="http://sabrinaluo.com/tech/tags/js/"/>
+    
+      <category term="感叹号" scheme="http://sabrinaluo.com/tech/tags/%E6%84%9F%E5%8F%B9%E5%8F%B7/"/>
+    
+      <category term="重要注释" scheme="http://sabrinaluo.com/tech/tags/%E9%87%8D%E8%A6%81%E6%B3%A8%E9%87%8A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[GitHub Page如何绑定域名]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/</id>
+    <published>2015-12-12T16:34:42.000Z</published>
+    <updated>2015-12-16T16:14:50.069Z</updated>
+    <content type="html"><![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" target="_blank" rel="external">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
+<hr>
+<p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
+<ol>
+<li>首先…你要有一个<del>男盆友</del>域名…没有的话就去godaddy买一个；</li>
+<li>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。<pre><code class="bash">C:\&gt;ping yourname.github.io
+正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:
+来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58
+来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58
+来自 103.245.222.133 的回复: 字节=32 时间=8ms TTL=58
+来自 103.245.222.133 的回复: 字节=32 时间=12ms TTL=58
+103.245.222.133 的 Ping 统计信息:
+数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
+往返行程的估计时间(以毫秒为单位):
+最短 = 5ms，最长 = 12ms，平均 = 7ms
+</code></pre>
+</li>
+<li><p>登录你的godday账号，设置一下DNS的A记录：</p>
+<ul>
+<li>找到你的domain，点manage DNS</li>
+<li>进入DNS设置页面后点Add Record，在弹出的对话框选A(Host)<blockquote>
+<p>RECORD TYPE: A(Host)<br>HOST: 这里填你在godday买的域名，例如abc.com<br>POINTS TO: 这里填第三步获取到的IP地址<br>TTL: 生效的时间，不知道最短是多久，我反正是选custom之后填了600，也就是10分钟 </p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了</p>
+</li>
+<li>最后，在你的yourname.github.io这个repo创建一个名为<code>CNAME</code>的文件，没有后缀名。文件内容如下：<pre><code>abc.com
+</code></pre>是的，你没看错，就是辣么简单！</li>
+</ol>
+<p><strong>二级域名的设置</strong><br>假如你有两个github page，一个是blog，一个是news，那你的两个二级域名分别就是：</p>
+<ul>
+<li>blog.abc.com</li>
+<li>news.abc.com</li>
+</ul>
+<ol>
+<li>到godday设置两条<strong>A记录</strong>，分别设置blog及news指向github page的IP</li>
+<li>到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是<pre><code>blog.abc.com
+</code></pre></li>
+</ol>
+<p>整个过程其实做的事情大概可以理解为：</p>
+<ul>
+<li>告诉godday，当别人访问我的域名abc.com的时候，请带他们去github</li>
+<li>告诉你的github page，当别人是被abc.com带来github的时候，没错他们都是我派来的，请接收他们的访问</li>
+<li>告诉你的github page，当别人直接访问github page，也就是yourname.github.io的时候，请穿上花了一百多大洋买的马甲abc.com…（这其实是说，当你添加了cname记录之后，访问yourname.github.io，你在浏览器里看到的域名会自动变成abc.com）</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" t]]>
+    </summary>
+    
+      <category term="custom domain" scheme="http://sabrinaluo.com/tech/tags/custom-domain/"/>
+    
+      <category term="github" scheme="http://sabrinaluo.com/tech/tags/github/"/>
+    
+      <category term="github page" scheme="http://sabrinaluo.com/tech/tags/github-page/"/>
+    
+      <category term="二级域名" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D/"/>
+    
+      <category term="域名绑定" scheme="http://sabrinaluo.com/tech/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/"/>
+    
+      <category term="域名解析" scheme="http://sabrinaluo.com/tech/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[X-WSSE验证中关于SHA1编码方式的一些坑]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/11/x-wsse/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</id>
+    <published>2015-12-11T09:08:38.000Z</published>
+    <updated>2015-12-11T12:51:38.930Z</updated>
+    <content type="html"><![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
+<p>关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与<a href="https://github.com/bouzuya/node-wsse" target="_blank" rel="external">node-wsse</a>的作者大战了好几个回合…</p>
+<hr>
+<p>此文章不讨论验证的原理，只讨论X-WSSE UsernameToken的生成方式，其中主要是生成<strong>passwordDigest</strong>。<br>验证嘛，用户名username，密码password肯定是少不了的，此外还需要nonce，timeStamp，有了这几样再按照下面的步骤一步步就可以生成符合WSSE标准的token了。</p>
+<p>UsernameToken的生成一共需要<strong>5个步骤</strong>：</p>
+<ol>
+<li>生成一个随机字符串nonce。不同公司的API对这个nonce的要求可能会不同，有一些要求采用<code>base64</code>编码方式，比如<a href="http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html#the-authentication-provider" target="_blank" rel="external">symfony给出的例子</a>；</li>
+<li>时间戳（timeStamp）。对于时间戳，统一采用<a href="http://baike.baidu.com/view/931641.htm" target="_blank" rel="external">ISO-8601</a>格式的字符串，但是不同公司的API对时区（timezone）的要求可能会不同，比如Emarsys要求UTC，Adobe要求GMT；</li>
+<li>把nonce，timeStamp，password这三个字符串按顺序连接起来形成一个新的字符串，并将这个字符串按照<a href="http://baike.baidu.com/view/1228622.htm" target="_blank" rel="external">SHA1</a>方法加密。<br><strong>坑来啦，坑来啦，坑来啦！！！</strong><br>一个字符串通常加密之后密码摘要默认是binary的，比如Adobe<a href="https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2" target="_blank" rel="external">^2</a>，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys<a href="http://documentation.emarsys.com/resource/developers/api/getting-started/authentication/" target="_blank" rel="external">^3</a>…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证<a href="http://book.soundonair.ru/web/web2apps-CHP-11-SECT-1.html#web2apps-CHP-11-SECT-1.8" target="_blank" rel="external">^4</a>；</li>
+<li>把上一步得到的密码摘要按照<code>base64</code>进行编码，就能得到passwordDigest；</li>
+<li>按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：<pre><code>UsernameToken Username=&quot;username&quot;, PasswordDigest=&quot;passwordDigest&quot;, Nonce=&quot;nonce&quot;, Created=&quot;timeStamp&quot;
+</code></pre></li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="]]>
+    </summary>
+    
+      <category term="SHA1" scheme="http://sabrinaluo.com/tech/tags/SHA1/"/>
+    
+      <category term="WSSE" scheme="http://sabrinaluo.com/tech/tags/WSSE/"/>
+    
+      <category term="X-WSSE" scheme="http://sabrinaluo.com/tech/tags/X-WSSE/"/>
+    
+      <category term="auth" scheme="http://sabrinaluo.com/tech/tags/auth/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[版本控制及git常用基本命令]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/04/git-basic/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/04/git-basic/</id>
+    <published>2015-12-04T03:40:04.000Z</published>
+    <updated>2015-12-16T16:14:50.066Z</updated>
+    <content type="html"><![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
+<p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="external">Version Control</a>)工具。</p>
+<p>版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是<del>机智地</del></p>
+<blockquote>
+<ol>
+<li>创建了很多文件夹来放不同的模板</li>
+<li>不停的备份</li>
+<li>如果调整后正常运行和显示，那就使用最新的版本</li>
+<li>如果调整后不能正常运行同时又找不出问题所在，就是用备份的上一个版本来重新创作</li>
+</ol>
+</blockquote>
+<p>以上对应到版本控制系统分别是：</p>
+<blockquote>
+<ol>
+<li>创建分支(branch)</li>
+<li>提交代码(commit)</li>
+<li>合并分支(merge)</li>
+<li>版本回滚(checkout)</li>
+</ol>
+</blockquote>
+<p>关于git的概念及使用流程这里不详细讨论，暂时只讨论一些最基本的常用的git命令</p>
+<ul>
+<li><code>git init</code> 初始化一个git仓库，生成<code>.git</code>隐藏文件</li>
+<li><code>git status</code> 查看git仓库的状态，将会返回<strong>当前分支</strong>, <strong>文件状态</strong>等信息，可以使用<code>-s</code>参数查看只有文件状态的简洁版信息</li>
+<li><code>git clone &lt;repo location&gt; &lt;repo name&gt;</code> 将远程分支克隆到本地，<code>&lt;repo name&gt;</code>参数可选，为本地repo命名，若省略，则本地repo与远程同名</li>
+<li><code>git add &lt;file name&gt;</code> 将文件变为staged状态，也就是告诉git哪些新的文件和修改过的文件是之后要提交的；文件名支持正则表达式</li>
+<li><code>git rm &lt;file name&gt;</code> 将文件删除同时告诉git从git仓库中删除文件，可以使用 <code>--cached</code> 参数实现只从git仓库中删除而不删除本地文件</li>
+<li><code>git diff &lt;file name&gt;</code> 查看git仓库文件与本地文件的区别</li>
+<li><code>git commit -m &quot;some comment&quot;</code> 将修改提交到git仓库</li>
+<li><code>git show HEAD</code> 显示HEAD版本的相关信息，包括<strong>author</strong>，<strong>date</strong>，<strong>comment</strong>，<strong>diff</strong></li>
+<li><code>git log</code> 查看提交记录，包括提交的时间、作者、评论</li>
+<li><code>git reset SHA</code> 将本地git仓库回退到某个版本，其中<code>SHA</code>为版本log中commit后的一长串字符的前7位字符</li>
+<li><code>git reset HEAD &lt;file name&gt;</code> 将本地git仓库中的某个文件重置为git仓库的HEAD版本</li>
+<li><code>git checkout HEAD</code> 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令<blockquote>
+<p>需要注意<code>reset</code>是针对本地的git仓库，也就是你每次commit后，文件就会保存到的仓库。<br>而<code>checkout</code>是针对本地的工作副本，也就是你直接编辑的那些文件，会被overwrite</p>
+</blockquote>
+</li>
+<li><code>git branch</code> 查看分支信息，使用<code>-r</code>参数查看远程分支信息</li>
+<li><code>git branch &lt;branch name&gt;</code> 添加新的分支</li>
+<li><code>git branch -d &lt;branch name&gt;</code> 删除分支</li>
+<li><code>git checkout &lt;branch name&gt;</code> 切换分支，可以使用<code>-b</code>参数，创建新分支并切换到新分支</li>
+<li><code>git fetch</code> 获取远程origin/master分支最新版本，需要手动与本地文件merge</li>
+<li><code>git pull</code> 获取远程的最新版本并与本地merge<blockquote>
+<p>需要注意 <code>git fetch</code> 与 <code>git pull</code> 的不同，通常如果本地文件有改动，则应该先fetch在 <code>git merge origin/master</code> </p>
+</blockquote>
+</li>
+<li><code>git stash</code> 将本地的工作副本暂时存起来</li>
+<li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
+<p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
+<pre><code class="javascript"><span class="comment">//git pop之后的冲突文件看起来长这样：</span>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; their code
+var a = 123;
+=======
+var a = 456;
+&gt;&gt;&gt;&gt;&gt;&gt; my code
+</code></pre>
+<pre><code class="javascript"><span class="comment">//冲突解决后，看起来应该长这样：</span>
+<span class="keyword">var</span> a = <span class="number">123</span>;
+</code></pre>
+</blockquote>
+</li>
+<li><code>git merge &lt;branch name&gt;</code> 合并分支，将指定分支与当前分支合并<blockquote>
+<p><code>origin/master</code>分支为远程主分支</p>
+</blockquote>
+</li>
+<li><code>git push origin &lt;branch name&gt;</code> 把分支推送到远程</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="externa]]>
+    </summary>
+    
+      <category term="git" scheme="http://sabrinaluo.com/tech/tags/git/"/>
+    
+      <category term="version control" scheme="http://sabrinaluo.com/tech/tags/version-control/"/>
+    
+      <category term="版本控制" scheme="http://sabrinaluo.com/tech/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title><![CDATA[我所理解的Promise]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/01/promise/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/01/promise/</id>
+    <published>2015-12-01T10:46:26.000Z</published>
+    <updated>2015-12-11T14:03:01.386Z</updated>
+    <content type="html"><![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：</p>
+<pre><code class="javascript"><span class="comment">//以下用setTimeout()模拟一个请求</span>
+<span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="string">"小白妹妹"</span>;
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">greeting</span>(<span class="params">name</span>) </span>{
+  <span class="built_in">console</span>.log(<span class="string">"你好，"</span> + name);
+}
+
+<span class="comment">//生成一个0到1000的随机数，模拟不确定的等待时间0-1秒</span>
+<span class="keyword">var</span> randomTime = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * <span class="number">1000</span>;
+};
+
+<span class="keyword">var</span> name = <span class="string">""</span>;
+<span class="comment">//1秒之内给name赋值为 小白妹妹，但不知道具体时间</span>
+setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+  name = getName();
+}, randomTime());
+
+greeting(name); <span class="comment">//以为得到name之后就可以开心的去打招呼啦，然而…</span>
+</code></pre>
+<h3 id="u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01"><a href="#u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01" class="headerlink" title="这是错的！这是错的！这是错的！"></a>这是错的！这是错的！这是错的！</h3><p>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
+<p>再有点经验，就会知道，应该把 <code>greeting(name)</code> 写在回调函数里，这样就能保证在得到数据之后才运行 <code>greeting()</code> 函数，于是…当你有多个请求并且之间是有这种依赖关系的时候，可怕的回调地狱就出现了！<br>而解决回调地狱其中一个很优雅的方法，就是使用传说中的promise！</p>
+<p>关于promise这个概念我前前后后看了有一年了，周围也没有认识的人可以给我讲，只能自己看看网上的文章，然而…<del>并没有什么卵用</del>…网上的文章都是众说纷纭，有一上来就defer的<a href="https://github.com/alsotang/node-lessons/tree/master/lesson17" target="_blank" rel="external">^1</a>，也有一上来就说如果你还在用defer你就理解错了Promise的<a href="http://web.jobbole.com/82601/" target="_blank" rel="external">^2</a>，就所以我到现在也不知道究竟什么样的理解才是对的…</p>
+<p>关于<a href="http://segmentfault.com/a/1190000002452115" target="_blank" rel="external">Promise以及A+规范</a>就不在此详述了，那些概念的东东，我也还没完全理解。我想做的是让跟我一样的小白都能明白Promise最基本的用法。</p>
+<hr>
+<p>举个栗子…<br>有一个第三方提供的API，访问API能够得到一些用户数据（每访问一次得到一页，假设由于某些限制一页只返回3个用户）以及下一页的index；除了第一页之外，其他的页面都需要下一页的index参数才能访问到。（先不管这个API设计的合不合理…Facebook就有这样的API）<br><a href="http://example.com/user" target="_blank" rel="external">http://example.com/user</a>  <em>–&gt;访问第一页的用户数据</em><br><a href="http://example.com/user?next=xzmca" target="_blank" rel="external">http://example.com/user?next=xzmca</a>  <em>–&gt;访问第二页的用户数据</em><br>请求第一页时返回结果如下：</p>
+<pre><code class="json">{
+&quot;items&quot; : [{
+  &quot;name&quot; : &quot;小白妹妹&quot;,
+   &quot;age&quot; : 10
+  }, 
+  {...},
+  {...}],
+&quot;nextPage&quot; : &quot;xzmca&quot;,
+&quot;lastPage&quot; : null
+}
+</code></pre>
+<p>你可能会有这样的需求：你的APP一次需要显示6个甚至更多个的用户数据。而根据之前的API，一次只能拿到3个数据，那么就只能发出两次请求，并且<strong>第二次请求依赖于第一次请求的结果</strong>，由于异步的原因我们并不知道第一个请求什么时候才完成，<del>而我最初入坑时是让程序发完第一个请求后强制等2秒再发第二个请求我会告诉你们吗…</del></p>
+<p>下面为了方便，使用<code>setTimeout()</code>函数和<a href="http://bluebirdjs.com/" target="_blank" rel="external">bluebird</a>库进行说明:</p>
+<pre><code class="javascript"><span class="comment">//生成一个0到3000的随机数，模拟不确定的等待时间0-3秒</span>
+<span class="keyword">var</span> randomTime = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * <span class="number">3000</span>;
+};
+
+<span class="comment">//只考虑最简单的情况promise被resolve，暂时不考虑promise被reject的情况</span>
+<span class="function"><span class="keyword">function</span> <span class="title">req1</span>(<span class="params"></span>) </span>{
+  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>{
+    <span class="comment">//使用setTimeout()来模拟发送请求，data为请求得到的数据</span>
+    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+      <span class="keyword">var</span> data = {
+        <span class="string">"items"</span>: [{
+          <span class="string">"name"</span>: <span class="string">"小白妹妹"</span>,
+          <span class="string">"age"</span>: <span class="number">10</span>
+        }, {
+          <span class="string">"name"</span>: <span class="string">"小白"</span>,
+          <span class="string">"age"</span>: <span class="number">100</span>
+        }, {
+          <span class="string">"name"</span>: <span class="string">"妹妹"</span>,
+          <span class="string">"age"</span>: <span class="number">111</span>
+        }],
+        <span class="string">"nextPage"</span>: <span class="string">"asdfa"</span>,
+        <span class="string">"lastPage"</span>: <span class="literal">null</span>
+      };
+      resolve(data);
+      <span class="built_in">console</span>.log(<span class="string">"请求1完成"</span>);
+    }, randomTime());
+  })
+}
+
+<span class="function"><span class="keyword">function</span> <span class="title">req2</span>(<span class="params">dataFromReq1</span>) </span>{
+  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>{
+    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
+      <span class="keyword">var</span> data = {
+        <span class="string">"items"</span>: [{
+          <span class="string">"name"</span>: <span class="string">"小黑姐姐"</span>,
+          <span class="string">"age"</span>: <span class="number">20</span>
+        }, {
+          <span class="string">"name"</span>: <span class="string">"小黑"</span>,
+          <span class="string">"age"</span>: <span class="number">233</span>
+        }, {
+          <span class="string">"name"</span>: <span class="string">"姐姐"</span>,
+          <span class="string">"age"</span>: <span class="number">250</span>
+        }],
+        <span class="string">"nextPage"</span>: <span class="string">"gwdfx"</span>,
+        <span class="string">"lastPage"</span>: <span class="string">"asdfa"</span>
+      };
+      <span class="built_in">console</span>.log(dataFromReq1);
+      <span class="keyword">var</span> finalUserData = dataFromReq1.items.concat(data.items); <span class="comment">//将两次得到的用户数据合并</span>
+      resolve(finalUserData);
+      <span class="built_in">console</span>.log(<span class="string">"请求2完成"</span>);
+    }, randomTime());
+  })
+}
+
+<span class="comment">//让数据在promise链上欢快的传递吧～</span>
+req1().then(req2).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{
+  <span class="built_in">console</span>.log(data);
+});
+</code></pre>
+<ul>
+<li><p>Q: 什么时候需要返回一个promise呢？<br>A: 当你的需求逻辑是，XXX的执行需要依赖OOO的结果，此时OOO就应该返回一个promise</p>
+</li>
+<li><p>Q: 为什么req1要打括号，而req2不打括号？<br>A:这个我也没太搞清楚XD，我的理解是，<code>req1()</code>打括号执行后才会返回promise，不打括号就只是一个没有执行的函数，<code>req2</code>不打括号是因为then的入参只能是一个<strong>函数</strong>，如果打了括号执行后就不是函数了。</p>
+</li>
+<li><p>Q: 最后一个then的function(data) data是哪里来的？<br>A: <code>req2</code>的定义中，有一句<code>resolve(finalUserData)</code>，在Promise Chain中，每个then的入参的入参也就是function(data)中的data都是由前一个promise resolve时传递而来的</p>
+</li>
+</ul>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://cal]]>
+    </summary>
+    
+      <category term="promise" scheme="http://sabrinaluo.com/tech/tags/promise/"/>
+    
+  </entry>
+  
+</feed>

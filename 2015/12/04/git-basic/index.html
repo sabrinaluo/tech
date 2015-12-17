@@ -1,0 +1,246 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta http-equiv='content-type'content='text/html; charset=utf-8'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">This website</span>
+            <input type="text" class="form-control" placeholder="search">
+          </div>
+        </div>
+      </form>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/tech/">Home</a></li>
+        <li><a href="#">Archieve</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#">
+            <i class="fa fa-rss"></i>
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
+            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">
+                <i class="fa fa-qq"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">I have nothing to say</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<main class="container">
+  <header>
+  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
+    <div class="col-sm-6 ">
+      <h2 style="margin-bottom:0">
+        <i class="fa fa-book text-muted"></i>
+        <a href="/tech/">小白妹妹写代码</a>
+      </h2>
+      <p class="text-muted">
+        一个废话很多的程序媛 | 我这么可爱一定是男孩子
+      </p>
+
+    </div>
+    <div class="col-sm-6 hidden-xs" style="padding-right:0">
+      <div class="pull-right" style="line-height:73px;">
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
+          <button type="button" class="btn btn-default">
+            8
+          </button>
+        </div>
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
+          <button type="button" class="btn btn-default">
+            33
+          </button>
+        </div>
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
+          <button type="button" class="btn btn-default">
+            0
+          </button>
+        </div>
+        <!--end btn-group-->
+
+      </div>
+    </div>
+  </div>
+</header>
+  <div class="row">
+    <div class="col-sm-9">
+      <h2><a href="http://sabrinaluo.com/tech/2015/12/04/git-basic/">版本控制及git常用基本命令</a></h2>
+<article>
+  <p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
+<p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="external">Version Control</a>)工具。</p>
+<p>版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是<del>机智地</del></p>
+<blockquote>
+<ol>
+<li>创建了很多文件夹来放不同的模板</li>
+<li>不停的备份</li>
+<li>如果调整后正常运行和显示，那就使用最新的版本</li>
+<li>如果调整后不能正常运行同时又找不出问题所在，就是用备份的上一个版本来重新创作</li>
+</ol>
+</blockquote>
+<p>以上对应到版本控制系统分别是：</p>
+<blockquote>
+<ol>
+<li>创建分支(branch)</li>
+<li>提交代码(commit)</li>
+<li>合并分支(merge)</li>
+<li>版本回滚(checkout)</li>
+</ol>
+</blockquote>
+<p>关于git的概念及使用流程这里不详细讨论，暂时只讨论一些最基本的常用的git命令</p>
+<ul>
+<li><code>git init</code> 初始化一个git仓库，生成<code>.git</code>隐藏文件</li>
+<li><code>git status</code> 查看git仓库的状态，将会返回<strong>当前分支</strong>, <strong>文件状态</strong>等信息，可以使用<code>-s</code>参数查看只有文件状态的简洁版信息</li>
+<li><code>git clone &lt;repo location&gt; &lt;repo name&gt;</code> 将远程分支克隆到本地，<code>&lt;repo name&gt;</code>参数可选，为本地repo命名，若省略，则本地repo与远程同名</li>
+<li><code>git add &lt;file name&gt;</code> 将文件变为staged状态，也就是告诉git哪些新的文件和修改过的文件是之后要提交的；文件名支持正则表达式</li>
+<li><code>git rm &lt;file name&gt;</code> 将文件删除同时告诉git从git仓库中删除文件，可以使用 <code>--cached</code> 参数实现只从git仓库中删除而不删除本地文件</li>
+<li><code>git diff &lt;file name&gt;</code> 查看git仓库文件与本地文件的区别</li>
+<li><code>git commit -m &quot;some comment&quot;</code> 将修改提交到git仓库</li>
+<li><code>git show HEAD</code> 显示HEAD版本的相关信息，包括<strong>author</strong>，<strong>date</strong>，<strong>comment</strong>，<strong>diff</strong></li>
+<li><code>git log</code> 查看提交记录，包括提交的时间、作者、评论</li>
+<li><code>git reset SHA</code> 将本地git仓库回退到某个版本，其中<code>SHA</code>为版本log中commit后的一长串字符的前7位字符</li>
+<li><code>git reset HEAD &lt;file name&gt;</code> 将本地git仓库中的某个文件重置为git仓库的HEAD版本</li>
+<li><code>git checkout HEAD</code> 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令<blockquote>
+<p>需要注意<code>reset</code>是针对本地的git仓库，也就是你每次commit后，文件就会保存到的仓库。<br>而<code>checkout</code>是针对本地的工作副本，也就是你直接编辑的那些文件，会被overwrite</p>
+</blockquote>
+</li>
+<li><code>git branch</code> 查看分支信息，使用<code>-r</code>参数查看远程分支信息</li>
+<li><code>git branch &lt;branch name&gt;</code> 添加新的分支</li>
+<li><code>git branch -d &lt;branch name&gt;</code> 删除分支</li>
+<li><code>git checkout &lt;branch name&gt;</code> 切换分支，可以使用<code>-b</code>参数，创建新分支并切换到新分支</li>
+<li><code>git fetch</code> 获取远程origin/master分支最新版本，需要手动与本地文件merge</li>
+<li><code>git pull</code> 获取远程的最新版本并与本地merge<blockquote>
+<p>需要注意 <code>git fetch</code> 与 <code>git pull</code> 的不同，通常如果本地文件有改动，则应该先fetch在 <code>git merge origin/master</code> </p>
+</blockquote>
+</li>
+<li><code>git stash</code> 将本地的工作副本暂时存起来</li>
+<li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
+<p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
+<pre><code class="javascript"><span class="comment">//git pop之后的冲突文件看起来长这样：</span>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; their code
+var a = 123;
+=======
+var a = 456;
+&gt;&gt;&gt;&gt;&gt;&gt; my code
+</code></pre>
+<pre><code class="javascript"><span class="comment">//冲突解决后，看起来应该长这样：</span>
+<span class="keyword">var</span> a = <span class="number">123</span>;
+</code></pre>
+</blockquote>
+</li>
+<li><code>git merge &lt;branch name&gt;</code> 合并分支，将指定分支与当前分支合并<blockquote>
+<p><code>origin/master</code>分支为远程主分支</p>
+</blockquote>
+</li>
+<li><code>git push origin &lt;branch name&gt;</code> 把分支推送到远程</li>
+</ul>
+
+</article>
+<div class="duoshuo">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="" data-title="版本控制及git常用基本命令" data-url="http://sabrinaluo.com/tech/2015/12/04/git-basic/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"sabrinaluo"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+          || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</div>
+    </div>
+    <div class="col-sm-3">
+      
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>About Me</h4>
+      <p>
+        123
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Recent Post</h4>
+    </div>
+  </div>
+
+
+  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
+
+    <div class="col-sm-12">
+      <h4>Categories</h4> 123
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Tags</h4>
+    </div>
+  </div>
+
+
+    </div>
+  </div>
+</main>
+</body>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>

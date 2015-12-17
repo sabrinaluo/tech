@@ -1,0 +1,176 @@
+<!DOCTYPE>
+<html>
+<head>
+  <meta http-equiv='content-type'content='text/html; charset=utf-8'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+<nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">This website</span>
+            <input type="text" class="form-control" placeholder="search">
+          </div>
+        </div>
+      </form>
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/tech/">Home</a></li>
+        <li><a href="#">Archieve</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <a href="#">
+            <i class="fa fa-rss"></i>
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
+            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="#">
+                <i class="fa fa-qq"></i>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">I have nothing to say</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<main class="container">
+  <header>
+  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
+    <div class="col-sm-6 ">
+      <h2 style="margin-bottom:0">
+        <i class="fa fa-book text-muted"></i>
+        <a href="/tech/">小白妹妹写代码</a>
+      </h2>
+      <p class="text-muted">
+        一个废话很多的程序媛 | 我这么可爱一定是男孩子
+      </p>
+
+    </div>
+    <div class="col-sm-6 hidden-xs" style="padding-right:0">
+      <div class="pull-right" style="line-height:73px;">
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
+          <button type="button" class="btn btn-default">
+            8
+          </button>
+        </div>
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
+          <button type="button" class="btn btn-default">
+            33
+          </button>
+        </div>
+        <div class="btn-group btn-group-xs" role="group">
+          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
+          <button type="button" class="btn btn-default">
+            0
+          </button>
+        </div>
+        <!--end btn-group-->
+
+      </div>
+    </div>
+  </div>
+</header>
+  <div class="row">
+    <div class="col-sm-9">
+      
+<h2><a href="http://sabrinaluo.com/tech/2015/12/11/x-wsse/">X-WSSE验证中关于SHA1编码方式的一些坑</a></h2>
+<article>
+  <p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
+<p>关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与<a href="https://github.com/bouzuya/node-wsse" target="_blank" rel="external">node-wsse</a>的作者大战了好几个回合…</p>
+<hr>
+<p>此文章不讨论验证的原理，只讨论X-WSSE UsernameToken的生成方式，其中主要是生成<strong>passwordDigest</strong>。<br>验证嘛，用户名username，密码password肯定是少不了的，此外还需要nonce，timeStamp，有了这几样再按照下面的步骤一步步就可以生成符合WSSE标准的token了。</p>
+<p>UsernameToken的生成一共需要<strong>5个步骤</strong>：</p>
+<ol>
+<li>生成一个随机字符串nonce。不同公司的API对这个nonce的要求可能会不同，有一些要求采用<code>base64</code>编码方式，比如<a href="http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html#the-authentication-provider" target="_blank" rel="external">symfony给出的例子</a>；</li>
+<li>时间戳（timeStamp）。对于时间戳，统一采用<a href="http://baike.baidu.com/view/931641.htm" target="_blank" rel="external">ISO-8601</a>格式的字符串，但是不同公司的API对时区（timezone）的要求可能会不同，比如Emarsys要求UTC，Adobe要求GMT；</li>
+<li>把nonce，timeStamp，password这三个字符串按顺序连接起来形成一个新的字符串，并将这个字符串按照<a href="http://baike.baidu.com/view/1228622.htm" target="_blank" rel="external">SHA1</a>方法加密。<br><strong>坑来啦，坑来啦，坑来啦！！！</strong><br>一个字符串通常加密之后密码摘要默认是binary的，比如Adobe<a href="https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2" target="_blank" rel="external">^2</a>，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys<a href="http://documentation.emarsys.com/resource/developers/api/getting-started/authentication/" target="_blank" rel="external">^3</a>…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证<a href="http://book.soundonair.ru/web/web2apps-CHP-11-SECT-1.html#web2apps-CHP-11-SECT-1.8" target="_blank" rel="external">^4</a>；</li>
+<li>把上一步得到的密码摘要按照<code>base64</code>进行编码，就能得到passwordDigest；</li>
+<li>按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：<pre><code>UsernameToken Username=&quot;username&quot;, PasswordDigest=&quot;passwordDigest&quot;, Nonce=&quot;nonce&quot;, Created=&quot;timeStamp&quot;
+</code></pre></li>
+</ol>
+
+</article>
+
+    </div>
+    <div class="col-sm-3">
+      
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>About Me</h4>
+      <p>
+        123
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Recent Post</h4>
+    </div>
+  </div>
+
+
+  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
+
+    <div class="col-sm-12">
+      <h4>Categories</h4> 123
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Tags</h4>
+    </div>
+  </div>
+
+
+    </div>
+  </div>
+</main>
+</body>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+</html>
