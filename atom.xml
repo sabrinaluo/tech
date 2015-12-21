@@ -3,9 +3,9 @@
   <title><![CDATA[小白妹妹写代码]]></title>
   
   <link href="/tech/atom.xml" rel="self"/>
-  <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2015-12-16T16:14:50.064Z</updated>
-  <id>http://sabrinaluo.com/tech/</id>
+  <link href="http://sabrinaluo.github.io/tech/"/>
+  <updated>2015-12-19T13:10:52.082Z</updated>
+  <id>http://sabrinaluo.github.io/tech/</id>
   
   <author>
     <name><![CDATA[Sabrina]]></name>
@@ -15,9 +15,123 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[对JS闭包(Closure)的一些理解]]></title>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/19/understand-js-closure/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/19/understand-js-closure/</id>
+    <published>2015-12-19T11:22:27.000Z</published>
+    <updated>2015-12-19T13:10:52.082Z</updated>
+    <content type="html"><![CDATA[<p>昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…</p>
+<pre><code>function isType(type) {
+  return function(obj) {
+    return {}.toString.call(obj) === &apos;[object &apos; + type + &apos;]&apos;
+  }
+}
+</code></pre><p><em>以上来自目测是个阿里女神的repo: <a href="https://github.com/fool2fish/utilx/blob/master/lib/index.js" target="_blank" rel="external">utilx</a></em></p>
+<p>很久之前就听过<strong>闭包</strong>这个概念，看了一些相关的资料，依旧无法明白到底是个什么东东。各种作用域scope，看得我头都大了。_(:з」∠)_</p>
+<p>我在这里呢，也不会讲继续什么变量作用域，什么从外部读取局部变量之类的！@#￥%…的东东，我试图用最简单粗暴连隔壁卖红薯的大妈都能理解的方法，来说说我对闭包的理解。</p>
+<p>###闭包长什么样子？</p>
+<pre><code>function bibao(a){
+  return function(b){
+    return a+b;
+  }
+}
+</code></pre><p>上面的例子就是一个闭包。<br>我的理解是，闭包有这么几个元素：</p>
+<ol>
+<li>最外层是一个有名字的函数，通常都需要传入参数或者在这一层定义一些变量。</li>
+<li>这个有名字的函数返回一个匿名函数，通常都需要传入参数或者定义一些变量。</li>
+<li>这个匿名函数返回的值通常跟上面两点中的入参或者变量有关。</li>
+</ol>
+<h3 id="u5982_u4F55_u4F7F_u7528_u95ED_u5305_uFF1F"><a href="#u5982_u4F55_u4F7F_u7528_u95ED_u5305_uFF1F" class="headerlink" title="如何使用闭包？"></a>如何使用闭包？</h3><p>这个问题其实也就是说，当你调用闭包的时候你其实是在调用什么？<br>我觉得搞清楚这个问题对于简单粗暴的理解闭包非常有用。</p>
+<p>用上面的闭包作为例子，通常闭包是这么用的：</p>
+<pre><code>//例1，分两次传入参数
+var hello = bibao(&apos;你好&apos;)；
+var text = hello(&apos;小白妹妹&apos;);
+console.log(text); //你会看到 你好小白妹妹
+</code></pre><p>上面这个例子，其实就是：</p>
+<pre><code>//例2，一次传入两个参数
+var text = bibao(&apos;你好&apos;)(&apos;小白妹妹&apos;)
+</code></pre><p>所以基本上可以理解为，有这么一个函数<code>bibao(a)(b)</code>，调用的时候需要传入两个参数<code>a</code>和<code>b</code>，你可以<strong>分开传</strong>，也可以<strong>一起传</strong>。</p>
+<p>大多数情况下，都是像例1一样，分开两次传入参数的。当你分开传的时候，第一次传入参数<code>a</code>，也就是<code>var hello = bibao(&#39;你好&#39;);</code>其实等于：</p>
+<pre><code>var hello = function(b){
+  return &apos;你好&apos;+b;  
+}
+</code></pre><p>所以当你给<code>hello()</code>传入参数<code>b</code>的时候，<code>var text = hello(&#39;小白妹妹&#39;)</code>，返回的是“你好小白妹妹”。也就等于说，当你在调用<code>hello()</code>这个函数的时候，其实访问到了bibao()这个函数中的变量<code>a</code>，值为’你好’。</p>
+<p>闭包中<code>a</code>是定义在匿名函数外部的，这就是传说中的：<strong>内部函数可以访问外部函数的变量</strong>。</p>
+<h3 id="u4E3A_u4EC0_u4E48_u8981_u4F7F_u7528_u95ED_u5305_uFF1F_u4F7F_u7528_u95ED_u5305_u6709_u4EC0_u4E48_u597D_u5904_uFF1F"><a href="#u4E3A_u4EC0_u4E48_u8981_u4F7F_u7528_u95ED_u5305_uFF1F_u4F7F_u7528_u95ED_u5305_u6709_u4EC0_u4E48_u597D_u5904_uFF1F" class="headerlink" title="为什么要使用闭包？使用闭包有什么好处？"></a>为什么要使用闭包？使用闭包有什么好处？</h3><p>我有一个强烈的感觉闭包是一个懒人发明的…（当然我是瞎说的_(:з」∠)_）<br>假如我的老板认识了一大堆妹子，要我写个程序跟她们每个人说早安、午安、晚安，并告诉他们昨天是几号，最后还要问候他的老婆，“吃饭了吗？亲爱的”<br>通常我会这么实现：</p>
+<pre><code>function yesterday(){
+ return new Date().getDate() -1;
+}
+function goodmorning(name){
+  return &apos;早安&apos;+name + &apos;昨天是&apos; + yesterday() + &apos;号&apos;;
+}
+function goodafternoon(name){
+  return &apos;午安&apos;+name + &apos;昨天是&apos; + yesterday() + &apos;号&apos;;
+}
+function goodnight(name){
+  return &apos;晚安&apos;+name + &apos;昨天是&apos; + yesterday() + &apos;号&apos;;
+}
+//eating()这个函数不一定非要定义，可以直接console.log()也能满足需求，
+//但是想到老板将来又会去问候其他的人，吃饭了吗？xxx，
+//所以定义了一个函数，以便将来可以偷懒
+function eating(name){
+  return &apos;吃饭了吗？&apos; + name;
+}
+var list = [&apos;小白妹妹&apos;,&apos;小红妹妹&apos;,&apos;小黑妹妹&apos;,&apos;小灰妹妹&apos;];
+list.forEach(function(item){
+  console.log(goodmorning(item));
+  console.log(goodafternoon(item));
+  console.log(goodnight(item));
+});
+console.log(eating(&apos;亲爱的&apos;))
+</code></pre><p>使用闭包这么实现：</p>
+<pre><code>function yesterday(){
+ return new Date().getDate()-1;
+}
+function bibao(greeting){
+  return function(name){
+    return greeting + name +&apos;昨天是&apos; + yesterday() + &apos;号&apos;;
+  }
+}
+var goodmorning = bibao(&apos;早安&apos;);
+var goodafternoon = bibao(&apos;午安&apos;);
+var goodnight = bibao(&apos;晚安&apos;);
+var list = [&apos;小白妹妹&apos;,&apos;小红妹妹&apos;,&apos;小黑妹妹&apos;,&apos;小灰妹妹&apos;];
+list.forEach(function(item){
+  console.log(goodmorning(item));
+  console.log(goodafternoon(item));
+  console.log(goodnight(item));
+});
+var eating = bibao(&apos;吃饭了吗？&apos;);
+console.log(eating(&apos;亲爱的&apos;));
+</code></pre><p>可以看到，使用了闭包就不用重复定义<strong>行为类似</strong>的函数，<code>+ name +&#39;昨天是&#39; + yesterday() + &#39;号&#39;;</code>这个也只用写一遍就可以了，免去了很多重复劳动，看起来简洁了很多，最重要是…显得逼格高…</p>
+<h3 id="u4EC0_u4E48_u65F6_u5019_u7528_u95ED_u5305_uFF1F"><a href="#u4EC0_u4E48_u65F6_u5019_u7528_u95ED_u5305_uFF1F" class="headerlink" title="什么时候用闭包？"></a>什么时候用闭包？</h3><p>我自己的感觉是，当你需要定义很多行为类似的函数的，重复写很多基本类似的内容的时候，就可以考虑用闭包来让整个代码的结构更加简洁。（总觉得使用闭包，可读性就不那么强了，毕竟我这种小白还是不太一眼就看得出来一个闭包到底输入啥返回啥的…）</p>
+<p>另外就也不太清楚具体的使用场景了，反正我平时很少用到…少用到的可能有这么几个：</p>
+<ul>
+<li>对闭包的理解不够深入，其实还是不太知道这个东东到底干啥用的</li>
+<li>通常用别的简单粗暴的方法来代替闭包实现的功能，简单的来说比如一个人不知道switch，但是知道if else，于是用if else来实现跟switch一样的功能</li>
+</ul>
+<p>我不知道有没有什么情况是除了闭包就没办法解决的…如果没有…那么用其他方法代替实现就可以了，实在搞不明白也没什么关系…</p>
+<p>###使用闭包的坏处？<br>据说是可能出现内存泄露的问题<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript#内存泄露" target="_blank" rel="external">^1</a>，这个就更高深了…以后有了深入的理解再来补充吧</p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…</p>
+<pre><code>function isType(type) {
+  return function(obj) {
+    return {}.toString.ca]]>
+    </summary>
+    
+      <category term="JS" scheme="http://sabrinaluo.github.io/tech/tags/JS/"/>
+    
+      <category term="closure" scheme="http://sabrinaluo.github.io/tech/tags/closure/"/>
+    
+      <category term="闭包" scheme="http://sabrinaluo.github.io/tech/tags/%E9%97%AD%E5%8C%85/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[对module.exports和exports的一些理解]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</id>
     <published>2015-12-16T03:00:27.000Z</published>
     <updated>2015-12-16T16:14:50.064Z</updated>
     <content type="html"><![CDATA[<p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
@@ -93,20 +207,20 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
 <p><strong><code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=]]>
     </summary>
     
-      <category term="Module.exports" scheme="http://sabrinaluo.com/tech/tags/Module-exports/"/>
+      <category term="Module.exports" scheme="http://sabrinaluo.github.io/tech/tags/Module-exports/"/>
     
-      <category term="NodeJS" scheme="http://sabrinaluo.com/tech/tags/NodeJS/"/>
+      <category term="NodeJS" scheme="http://sabrinaluo.github.io/tech/tags/NodeJS/"/>
     
-      <category term="exports" scheme="http://sabrinaluo.com/tech/tags/exports/"/>
+      <category term="exports" scheme="http://sabrinaluo.github.io/tech/tags/exports/"/>
     
-      <category term="模块导出" scheme="http://sabrinaluo.com/tech/tags/%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%87%BA/"/>
+      <category term="模块导出" scheme="http://sabrinaluo.github.io/tech/tags/%E6%A8%A1%E5%9D%97%E5%AF%BC%E5%87%BA/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</id>
     <published>2015-12-15T02:55:13.000Z</published>
     <updated>2015-12-16T16:14:50.063Z</updated>
     <content type="html"><![CDATA[<p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="external">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
@@ -175,28 +289,28 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <![CDATA[<p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https]]>
     </summary>
     
-      <category term="API Gateway" scheme="http://sabrinaluo.com/tech/tags/API-Gateway/"/>
+      <category term="API Gateway" scheme="http://sabrinaluo.github.io/tech/tags/API-Gateway/"/>
     
-      <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
+      <category term="AWS" scheme="http://sabrinaluo.github.io/tech/tags/AWS/"/>
     
-      <category term="AWS Lambda" scheme="http://sabrinaluo.com/tech/tags/AWS-Lambda/"/>
+      <category term="AWS Lambda" scheme="http://sabrinaluo.github.io/tech/tags/AWS-Lambda/"/>
     
-      <category term="RESTful" scheme="http://sabrinaluo.com/tech/tags/RESTful/"/>
+      <category term="RESTful" scheme="http://sabrinaluo.github.io/tech/tags/RESTful/"/>
     
-      <category term="开发环境" scheme="http://sabrinaluo.com/tech/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
+      <category term="开发环境" scheme="http://sabrinaluo.github.io/tech/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/"/>
     
-      <category term="测试环境" scheme="http://sabrinaluo.com/tech/tags/%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83/"/>
+      <category term="测试环境" scheme="http://sabrinaluo.github.io/tech/tags/%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83/"/>
     
-      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="http://sabrinaluo.github.io/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
-      <category term="生产环境" scheme="http://sabrinaluo.com/tech/tags/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/"/>
+      <category term="生产环境" scheme="http://sabrinaluo.github.io/tech/tags/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[AWS DynamoDB的本地安装及环境配置]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/14/how-to-setup-dynamodb-at-local/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/14/how-to-setup-dynamodb-at-local/</id>
     <published>2015-12-14T06:39:35.000Z</published>
     <updated>2015-12-16T16:14:50.067Z</updated>
     <content type="html"><![CDATA[<p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚马逊AWS云服务提供的一个NoSQL的数据库…</p>
@@ -232,24 +346,24 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <![CDATA[<p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚]]>
     </summary>
     
-      <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
+      <category term="AWS" scheme="http://sabrinaluo.github.io/tech/tags/AWS/"/>
     
-      <category term="DynamoDB" scheme="http://sabrinaluo.com/tech/tags/DynamoDB/"/>
+      <category term="DynamoDB" scheme="http://sabrinaluo.github.io/tech/tags/DynamoDB/"/>
     
-      <category term="云服务" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
+      <category term="云服务" scheme="http://sabrinaluo.github.io/tech/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
     
-      <category term="亚马逊" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%9A%E9%A9%AC%E9%80%8A/"/>
+      <category term="亚马逊" scheme="http://sabrinaluo.github.io/tech/tags/%E4%BA%9A%E9%A9%AC%E9%80%8A/"/>
     
-      <category term="本地安装" scheme="http://sabrinaluo.com/tech/tags/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85/"/>
+      <category term="本地安装" scheme="http://sabrinaluo.github.io/tech/tags/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85/"/>
     
-      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="环境配置" scheme="http://sabrinaluo.github.io/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[JS注释中的感叹号是干什么用的/*! */]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/14/JS-important-comment/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/14/JS-important-comment/</id>
     <published>2015-12-14T06:15:06.000Z</published>
     <updated>2015-12-16T16:14:50.062Z</updated>
     <content type="html"><![CDATA[<p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * EJS</span><br><span class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span><br><span class="line"> * MIT Licensed</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Module dependencies.</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
@@ -277,21 +391,21 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <![CDATA[<p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</str]]>
     </summary>
     
-      <category term="js" scheme="http://sabrinaluo.com/tech/tags/js/"/>
+      <category term="js" scheme="http://sabrinaluo.github.io/tech/tags/js/"/>
     
-      <category term="感叹号" scheme="http://sabrinaluo.com/tech/tags/%E6%84%9F%E5%8F%B9%E5%8F%B7/"/>
+      <category term="感叹号" scheme="http://sabrinaluo.github.io/tech/tags/%E6%84%9F%E5%8F%B9%E5%8F%B7/"/>
     
-      <category term="重要注释" scheme="http://sabrinaluo.com/tech/tags/%E9%87%8D%E8%A6%81%E6%B3%A8%E9%87%8A/"/>
+      <category term="重要注释" scheme="http://sabrinaluo.github.io/tech/tags/%E9%87%8D%E8%A6%81%E6%B3%A8%E9%87%8A/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[GitHub Page如何绑定域名]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/</id>
     <published>2015-12-12T16:34:42.000Z</published>
     <updated>2015-12-16T16:14:50.069Z</updated>
-    <content type="html"><![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" target="_blank" rel="external">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
+    <content type="html"><![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com" target="_blank" rel="external">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
 <hr>
 <p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
 <ol>
@@ -340,27 +454,27 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
 </ul>
 ]]></content>
     <summary type="html">
-    <![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" t]]>
+    <![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io">s]]>
     </summary>
     
-      <category term="custom domain" scheme="http://sabrinaluo.com/tech/tags/custom-domain/"/>
+      <category term="custom domain" scheme="http://sabrinaluo.github.io/tech/tags/custom-domain/"/>
     
-      <category term="github" scheme="http://sabrinaluo.com/tech/tags/github/"/>
+      <category term="github" scheme="http://sabrinaluo.github.io/tech/tags/github/"/>
     
-      <category term="github page" scheme="http://sabrinaluo.com/tech/tags/github-page/"/>
+      <category term="github page" scheme="http://sabrinaluo.github.io/tech/tags/github-page/"/>
     
-      <category term="二级域名" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D/"/>
+      <category term="二级域名" scheme="http://sabrinaluo.github.io/tech/tags/%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D/"/>
     
-      <category term="域名绑定" scheme="http://sabrinaluo.com/tech/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/"/>
+      <category term="域名绑定" scheme="http://sabrinaluo.github.io/tech/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/"/>
     
-      <category term="域名解析" scheme="http://sabrinaluo.com/tech/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/"/>
+      <category term="域名解析" scheme="http://sabrinaluo.github.io/tech/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[X-WSSE验证中关于SHA1编码方式的一些坑]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/11/x-wsse/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/11/x-wsse/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/11/x-wsse/</id>
     <published>2015-12-11T09:08:38.000Z</published>
     <updated>2015-12-11T12:51:38.930Z</updated>
     <content type="html"><![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
@@ -381,20 +495,20 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="]]>
     </summary>
     
-      <category term="SHA1" scheme="http://sabrinaluo.com/tech/tags/SHA1/"/>
+      <category term="SHA1" scheme="http://sabrinaluo.github.io/tech/tags/SHA1/"/>
     
-      <category term="WSSE" scheme="http://sabrinaluo.com/tech/tags/WSSE/"/>
+      <category term="WSSE" scheme="http://sabrinaluo.github.io/tech/tags/WSSE/"/>
     
-      <category term="X-WSSE" scheme="http://sabrinaluo.com/tech/tags/X-WSSE/"/>
+      <category term="X-WSSE" scheme="http://sabrinaluo.github.io/tech/tags/X-WSSE/"/>
     
-      <category term="auth" scheme="http://sabrinaluo.com/tech/tags/auth/"/>
+      <category term="auth" scheme="http://sabrinaluo.github.io/tech/tags/auth/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[版本控制及git常用基本命令]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/04/git-basic/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/04/git-basic/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/04/git-basic/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/04/git-basic/</id>
     <published>2015-12-04T03:40:04.000Z</published>
     <updated>2015-12-16T16:14:50.066Z</updated>
     <content type="html"><![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
@@ -469,18 +583,18 @@ var a = 456;
     <![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="externa]]>
     </summary>
     
-      <category term="git" scheme="http://sabrinaluo.com/tech/tags/git/"/>
+      <category term="git" scheme="http://sabrinaluo.github.io/tech/tags/git/"/>
     
-      <category term="version control" scheme="http://sabrinaluo.com/tech/tags/version-control/"/>
+      <category term="version control" scheme="http://sabrinaluo.github.io/tech/tags/version-control/"/>
     
-      <category term="版本控制" scheme="http://sabrinaluo.com/tech/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+      <category term="版本控制" scheme="http://sabrinaluo.github.io/tech/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
     
   </entry>
   
   <entry>
     <title><![CDATA[我所理解的Promise]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/01/promise/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/01/promise/</id>
+    <link href="http://sabrinaluo.github.io/tech/2015/12/01/promise/"/>
+    <id>http://sabrinaluo.github.io/tech/2015/12/01/promise/</id>
     <published>2015-12-01T10:46:26.000Z</published>
     <updated>2015-12-11T14:03:01.386Z</updated>
     <content type="html"><![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：</p>
@@ -598,7 +712,7 @@ req1().then(req2).then(<span class="function"><span class="keyword">function</sp
     <![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://cal]]>
     </summary>
     
-      <category term="promise" scheme="http://sabrinaluo.com/tech/tags/promise/"/>
+      <category term="promise" scheme="http://sabrinaluo.github.io/tech/tags/promise/"/>
     
   </entry>
   
