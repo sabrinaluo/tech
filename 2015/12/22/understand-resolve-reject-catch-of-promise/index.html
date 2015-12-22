@@ -5,10 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>JS变量提升(Hoisting)</title>
+  <title>对Promise中的resolve，reject，catch的理解</title>
   <meta name="description" content="null">
   
-  <meta name="keywords" content="hoisting,变量提升">
+  <meta name="keywords" content="promise chain,promise链">
   
   <meta name="author" content="Sabrina">
 
@@ -117,42 +117,80 @@
 </header>
   <div class="row">
     <div class="col-sm-9">
-      <h2><a href="http://sabrinaluo.github.io/tech/2015/12/21/hoisting/">JS变量提升(Hoisting)</a></h2>
+      <h2><a href="http://sabrinaluo.github.io/tech/2015/12/22/understand-resolve-reject-catch-of-promise/">对Promise中的resolve，reject，catch的理解</a></h2>
 <article>
-  <p>写了无数JS也依旧没听过变量提升…</p>
-<p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
-<p>我写了这么久JS，从来也不会先用变量后定义的呀，而且别的语言好像根本没有这个概念，难怪我从来没有遇到相关问题，难怪我没听过这个概念。难怪写强类型语言的各大神都是JS一生黑…</p>
-<p>后来大概问了问各种前辈，纷纷表示，这个概念在面试的时候和检查别人Bug的时候才会用到… (︶︿︶)</p>
-<p>解释器是什么东东我还没搞明白…但是变量提升其实可以转换成另一个问题：<br>当你在定义一个变量的时候，解释器是怎么解析的？</p>
-<p>先看一个例子：</p>
-<pre><code>function test(){
-  console.log(a);
-  var a = 123;
+  <p>对promise这个概念之前已经有了一些浅显的理解，<a href="http://sabrinaluo.com/tech/2015/12/01/promise/" target="_blank" rel="external">相关文章-&gt;戳这里</a>，最近又有了一些新的理解。</p>
+<h3 id="then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026"><a href="#then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026" class="headerlink" title=".then()的时候到底是在then什么…"></a>.then()的时候到底是在then什么…</h3><ul>
+<li>首先要理解…Promise是一个对象，有then()方法的对象</li>
+<li>then()的入参是一个函数，通常在promise链中，入参是<strong>一个返回promise的函数</strong>，这句话好像有点拗口，就是说入参是一个函数，这个函数会return一个promise对象</li>
+</ul>
+<h3 id="u5982_u4F55_u7834_u574Fpromise_u94FE"><a href="#u5982_u4F55_u7834_u574Fpromise_u94FE" class="headerlink" title="如何破坏promise链"></a>如何破坏promise链</h3><p>如果有这样一个promise链：</p>
+<pre><code>p1().then(p2).then(p3)
+  .then(function(data) {
+    console.log(&apos;data: &apos; + data);
+  })
+  .catch(function(error) {
+    console.log(&apos;error: &apos; + error);
+  });
+
+function p1() {
+  return new Promise(function(resolve, reject) {
+    console.log(&apos;p1 resolved&apos;);
+    resolve(123);
+  });
 }
-test(); //调用这个函数，你会看到console中输出的是undefined
-</code></pre><pre><code>function test(){
-  var a = 123;
+
+function p2() {
+  return new Promise(function(resolve, reject) {
+    console.log(&apos;p2 rejected&apos;);
+    reject(456);
+  });
 }
-</code></pre><p>上面的代码，解释器是这么理解的：</p>
-<pre><code>function test(){
-  var a; 
-  a = 123;
+
+function p3() {
+  return new Promise(function(resolve, reject) {
+    console.log(&apos;p3 resolved&apos;);
+    resolve(789);
+  });
 }
-</code></pre><p>而最开始的例子中，解释器是这么理解的：</p>
-<pre><code>function test(){
-  var a;
-  console.log(a);
-  a = 123;
-}
-</code></pre><p>一句话总结：变量提升就是JS解释器在解析JS的时候会把所有变量的<strong>声明</strong>提升到该变量作用域的最顶端。</p>
-<blockquote>
-<p>请注意：<strong>只提升声明，不提升赋值</strong>！</p>
+</code></pre><p>上面这个例子，你看到的console.log会是这样：</p>
+<pre><code>p1 resolved
+p2 rejected
+error: 456
+</code></pre><p>并没有看到<code>p3</code>的log，而是看到了error message，也就是说：</p>
+<p><strong>在一个promise链中，只要任何一个promise被reject，promise链就被破坏了，reject之后的promise都不会再执行，而是直接调用<code>.catch</code>方法</strong>。</p>
+<p>这也是为什么在standard practice中，一定要在最后加上<code>.catch</code>的原因。通过<code>.catch</code>能够清楚的判断出promise链在哪个环节出了问题。</p>
+<h3 id="u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise"><a href="#u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise" class="headerlink" title="如何按顺序执行已经定义的promise"></a>如何按顺序执行已经定义的promise</h3><p>这个情况在什么时候会用到呢？比如你有一个队列，队列里有很多任务，这些任务并不互相依赖执行后返回的结果。每个任务完成的时间都是不确定的，并且计算资源只允许一次执行一个任务。简单的来说，就是<strong>做完A之后再去做B，并且AB是相互独立的</strong></p>
+<p>假如我现在有一堆promise对象，大概长这样：</p>
+<pre><code>//p2, p3与p1相似
+//当doSomething()执行完毕的时候，调用resolve()
+//使得当前promise状态转变为fulfilled即可
+var p1 = new Promise(function(resolve, reject) {
+  //do something here
+  //when do something done
+  resolve();
+});
+
+p1.then(function() {
+    return p2
+  })
+  .then(function() {
+    return p3
+  })
+  .catch()
+</code></pre><blockquote>
+<p>请注意，前一部破坏Promise链中分定义的p1 p2 p3是<strong>函数</strong>，而此部分定义的p1 p2 p3是<strong>对象！对象！对象！</strong></p>
 </blockquote>
+<ul>
+<li>如前面提到，promise是一个有then方法的对象，因此p1可以直接调用then<br>Q:为什么开头调用不是<code>p1().then</code>？<br>A: 因为p1是一个对象啊！！！对象啊！！！象啊！！！啊！！！</li>
+<li>然而promise链中then方法的入参是<strong>一个返回promise对象的函数</strong>，p2并不是一个函数，因此不能then(p2)；</li>
+<li>但p2是一个promise对象，已经满足了then方法入参的一半需求，那么写一个函数并且返回p2，就满足了入参的全部需求</li>
+</ul>
 
 </article>
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="JS变量提升(Hoisting)" data-url="http://sabrinaluo.github.io/tech/2015/12/21/hoisting/"></div>
+  <div class="ds-thread" data-thread-key="" data-title="对Promise中的resolve，reject，catch的理解" data-url="http://sabrinaluo.github.io/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

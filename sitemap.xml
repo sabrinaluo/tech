@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://sabrinaluo.github.io/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</loc>
+    <lastmod>2015-12-22T04:11:10.785Z</lastmod>
+  </url>
+  
+  <url>
     <loc>http://sabrinaluo.github.io/tech/2015/12/21/hoisting/</loc>
     <lastmod>2015-12-21T04:00:42.171Z</lastmod>
   </url>

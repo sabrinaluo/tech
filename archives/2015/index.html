@@ -1,9 +1,21 @@
 <!DOCTYPE>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta http-equiv='content-type'content='text/html; charset=utf-8'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>小白妹妹写代码 | 一个废话很多的程序媛 | 我这么可爱一定是男孩子</title>
+  <meta name="description" content="null">
+  
+  <meta name="author" content="Sabrina">
+
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -80,13 +92,13 @@
         <div class="btn-group btn-group-xs" role="group">
           <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
           <button type="button" class="btn btn-default">
-            10
+            11
           </button>
         </div>
         <div class="btn-group btn-group-xs" role="group">
           <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
           <button type="button" class="btn btn-default">
-            38
+            40
           </button>
         </div>
         <div class="btn-group btn-group-xs" role="group">
@@ -104,6 +116,78 @@
   <div class="row">
     <div class="col-sm-9">
       
+<h2><a href="http://sabrinaluo.github.io/tech/2015/12/22/understand-resolve-reject-catch-of-promise/">对Promise中的resolve，reject，catch的理解</a></h2>
+<article>
+  <p>对promise这个概念之前已经有了一些浅显的理解，<a href="http://sabrinaluo.com/tech/2015/12/01/promise/" target="_blank" rel="external">相关文章-&gt;戳这里</a>，最近又有了一些新的理解。</p>
+<h3 id="then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026"><a href="#then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026" class="headerlink" title=".then()的时候到底是在then什么…"></a>.then()的时候到底是在then什么…</h3><ul>
+<li>首先要理解…Promise是一个对象，有then()方法的对象</li>
+<li>then()的入参是一个函数，通常在promise链中，入参是<strong>一个返回promise的函数</strong>，这句话好像有点拗口，就是说入参是一个函数，这个函数会return一个promise对象</li>
+</ul>
+<h3 id="u5982_u4F55_u7834_u574Fpromise_u94FE"><a href="#u5982_u4F55_u7834_u574Fpromise_u94FE" class="headerlink" title="如何破坏promise链"></a>如何破坏promise链</h3><p>如果有这样一个promise链：</p>
+<pre><code>p1().then(p2).then(p3)
+  .then(function(data) {
+    console.log(&apos;data: &apos; + data);
+  })
+  .catch(function(error) {
+    console.log(&apos;error: &apos; + error);
+  });
+
+function p1() {
+  return new Promise(function(resolve, reject) {
+    console.log(&apos;p1 resolved&apos;);
+    resolve(123);
+  });
+}
+
+function p2() {
+  return new Promise(function(resolve, reject) {
+    console.log(&apos;p2 rejected&apos;);
+    reject(456);
+  });
+}
+
+function p3() {
+  return new Promise(function(resolve, reject) {
+    console.log(&apos;p3 resolved&apos;);
+    resolve(789);
+  });
+}
+</code></pre><p>上面这个例子，你看到的console.log会是这样：</p>
+<pre><code>p1 resolved
+p2 rejected
+error: 456
+</code></pre><p>并没有看到<code>p3</code>的log，而是看到了error message，也就是说：</p>
+<p><strong>在一个promise链中，只要任何一个promise被reject，promise链就被破坏了，reject之后的promise都不会再执行，而是直接调用<code>.catch</code>方法</strong>。</p>
+<p>这也是为什么在standard practice中，一定要在最后加上<code>.catch</code>的原因。通过<code>.catch</code>能够清楚的判断出promise链在哪个环节出了问题。</p>
+<h3 id="u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise"><a href="#u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise" class="headerlink" title="如何按顺序执行已经定义的promise"></a>如何按顺序执行已经定义的promise</h3><p>这个情况在什么时候会用到呢？比如你有一个队列，队列里有很多任务，这些任务并不互相依赖执行后返回的结果。每个任务完成的时间都是不确定的，并且计算资源只允许一次执行一个任务。简单的来说，就是<strong>做完A之后再去做B，并且AB是相互独立的</strong></p>
+<p>假如我现在有一堆promise对象，大概长这样：</p>
+<pre><code>//p2, p3与p1相似
+//当doSomething()执行完毕的时候，调用resolve()
+//使得当前promise状态转变为fulfilled即可
+var p1 = new Promise(function(resolve, reject) {
+  //do something here
+  //when do something done
+  resolve();
+});
+
+p1.then(function() {
+    return p2
+  })
+  .then(function() {
+    return p3
+  })
+  .catch()
+</code></pre><blockquote>
+<p>请注意，前一部破坏Promise链中分定义的p1 p2 p3是<strong>函数</strong>，而此部分定义的p1 p2 p3是<strong>对象！对象！对象！</strong></p>
+</blockquote>
+<ul>
+<li>如前面提到，promise是一个有then方法的对象，因此p1可以直接调用then<br>Q:为什么开头调用不是<code>p1().then</code>？<br>A: 因为p1是一个对象啊！！！对象啊！！！象啊！！！啊！！！</li>
+<li>然而promise链中then方法的入参是<strong>一个返回promise对象的函数</strong>，p2并不是一个函数，因此不能then(p2)；</li>
+<li>但p2是一个promise对象，已经满足了then方法入参的一半需求，那么写一个函数并且返回p2，就满足了入参的全部需求</li>
+</ul>
+
+</article>
+
 <h2><a href="http://sabrinaluo.github.io/tech/2015/12/21/hoisting/">JS变量提升(Hoisting)</a></h2>
 <article>
   <p>写了无数JS也依旧没听过变量提升…</p>
@@ -569,121 +653,6 @@ var a = 456;
 </blockquote>
 </li>
 <li><code>git push origin &lt;branch name&gt;</code> 把分支推送到远程</li>
-</ul>
-
-</article>
-
-<h2><a href="http://sabrinaluo.github.io/tech/2015/12/01/promise/">我所理解的Promise</a></h2>
-<article>
-  <p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：</p>
-<pre><code class="javascript"><span class="comment">//以下用setTimeout()模拟一个请求</span>
-<span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>{
-  <span class="keyword">return</span> <span class="string">"小白妹妹"</span>;
-}
-
-<span class="function"><span class="keyword">function</span> <span class="title">greeting</span>(<span class="params">name</span>) </span>{
-  <span class="built_in">console</span>.log(<span class="string">"你好，"</span> + name);
-}
-
-<span class="comment">//生成一个0到1000的随机数，模拟不确定的等待时间0-1秒</span>
-<span class="keyword">var</span> randomTime = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * <span class="number">1000</span>;
-};
-
-<span class="keyword">var</span> name = <span class="string">""</span>;
-<span class="comment">//1秒之内给name赋值为 小白妹妹，但不知道具体时间</span>
-setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-  name = getName();
-}, randomTime());
-
-greeting(name); <span class="comment">//以为得到name之后就可以开心的去打招呼啦，然而…</span>
-</code></pre>
-<h3 id="u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01"><a href="#u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01" class="headerlink" title="这是错的！这是错的！这是错的！"></a>这是错的！这是错的！这是错的！</h3><p>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
-<p>再有点经验，就会知道，应该把 <code>greeting(name)</code> 写在回调函数里，这样就能保证在得到数据之后才运行 <code>greeting()</code> 函数，于是…当你有多个请求并且之间是有这种依赖关系的时候，可怕的回调地狱就出现了！<br>而解决回调地狱其中一个很优雅的方法，就是使用传说中的promise！</p>
-<p>关于promise这个概念我前前后后看了有一年了，周围也没有认识的人可以给我讲，只能自己看看网上的文章，然而…<del>并没有什么卵用</del>…网上的文章都是众说纷纭，有一上来就defer的<a href="https://github.com/alsotang/node-lessons/tree/master/lesson17" target="_blank" rel="external">^1</a>，也有一上来就说如果你还在用defer你就理解错了Promise的<a href="http://web.jobbole.com/82601/" target="_blank" rel="external">^2</a>，就所以我到现在也不知道究竟什么样的理解才是对的…</p>
-<p>关于<a href="http://segmentfault.com/a/1190000002452115" target="_blank" rel="external">Promise以及A+规范</a>就不在此详述了，那些概念的东东，我也还没完全理解。我想做的是让跟我一样的小白都能明白Promise最基本的用法。</p>
-<hr>
-<p>举个栗子…<br>有一个第三方提供的API，访问API能够得到一些用户数据（每访问一次得到一页，假设由于某些限制一页只返回3个用户）以及下一页的index；除了第一页之外，其他的页面都需要下一页的index参数才能访问到。（先不管这个API设计的合不合理…Facebook就有这样的API）<br><a href="http://example.com/user" target="_blank" rel="external">http://example.com/user</a>  <em>–&gt;访问第一页的用户数据</em><br><a href="http://example.com/user?next=xzmca" target="_blank" rel="external">http://example.com/user?next=xzmca</a>  <em>–&gt;访问第二页的用户数据</em><br>请求第一页时返回结果如下：</p>
-<pre><code class="json">{
-&quot;items&quot; : [{
-  &quot;name&quot; : &quot;小白妹妹&quot;,
-   &quot;age&quot; : 10
-  }, 
-  {...},
-  {...}],
-&quot;nextPage&quot; : &quot;xzmca&quot;,
-&quot;lastPage&quot; : null
-}
-</code></pre>
-<p>你可能会有这样的需求：你的APP一次需要显示6个甚至更多个的用户数据。而根据之前的API，一次只能拿到3个数据，那么就只能发出两次请求，并且<strong>第二次请求依赖于第一次请求的结果</strong>，由于异步的原因我们并不知道第一个请求什么时候才完成，<del>而我最初入坑时是让程序发完第一个请求后强制等2秒再发第二个请求我会告诉你们吗…</del></p>
-<p>下面为了方便，使用<code>setTimeout()</code>函数和<a href="http://bluebirdjs.com/" target="_blank" rel="external">bluebird</a>库进行说明:</p>
-<pre><code class="javascript"><span class="comment">//生成一个0到3000的随机数，模拟不确定的等待时间0-3秒</span>
-<span class="keyword">var</span> randomTime = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-  <span class="keyword">return</span> <span class="built_in">Math</span>.random() * <span class="number">3000</span>;
-};
-
-<span class="comment">//只考虑最简单的情况promise被resolve，暂时不考虑promise被reject的情况</span>
-<span class="function"><span class="keyword">function</span> <span class="title">req1</span>(<span class="params"></span>) </span>{
-  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>{
-    <span class="comment">//使用setTimeout()来模拟发送请求，data为请求得到的数据</span>
-    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-      <span class="keyword">var</span> data = {
-        <span class="string">"items"</span>: [{
-          <span class="string">"name"</span>: <span class="string">"小白妹妹"</span>,
-          <span class="string">"age"</span>: <span class="number">10</span>
-        }, {
-          <span class="string">"name"</span>: <span class="string">"小白"</span>,
-          <span class="string">"age"</span>: <span class="number">100</span>
-        }, {
-          <span class="string">"name"</span>: <span class="string">"妹妹"</span>,
-          <span class="string">"age"</span>: <span class="number">111</span>
-        }],
-        <span class="string">"nextPage"</span>: <span class="string">"asdfa"</span>,
-        <span class="string">"lastPage"</span>: <span class="literal">null</span>
-      };
-      resolve(data);
-      <span class="built_in">console</span>.log(<span class="string">"请求1完成"</span>);
-    }, randomTime());
-  })
-}
-
-<span class="function"><span class="keyword">function</span> <span class="title">req2</span>(<span class="params">dataFromReq1</span>) </span>{
-  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span> (<span class="params">resolve</span>) </span>{
-    setTimeout(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>{
-      <span class="keyword">var</span> data = {
-        <span class="string">"items"</span>: [{
-          <span class="string">"name"</span>: <span class="string">"小黑姐姐"</span>,
-          <span class="string">"age"</span>: <span class="number">20</span>
-        }, {
-          <span class="string">"name"</span>: <span class="string">"小黑"</span>,
-          <span class="string">"age"</span>: <span class="number">233</span>
-        }, {
-          <span class="string">"name"</span>: <span class="string">"姐姐"</span>,
-          <span class="string">"age"</span>: <span class="number">250</span>
-        }],
-        <span class="string">"nextPage"</span>: <span class="string">"gwdfx"</span>,
-        <span class="string">"lastPage"</span>: <span class="string">"asdfa"</span>
-      };
-      <span class="built_in">console</span>.log(dataFromReq1);
-      <span class="keyword">var</span> finalUserData = dataFromReq1.items.concat(data.items); <span class="comment">//将两次得到的用户数据合并</span>
-      resolve(finalUserData);
-      <span class="built_in">console</span>.log(<span class="string">"请求2完成"</span>);
-    }, randomTime());
-  })
-}
-
-<span class="comment">//让数据在promise链上欢快的传递吧～</span>
-req1().then(req2).then(<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{
-  <span class="built_in">console</span>.log(data);
-});
-</code></pre>
-<ul>
-<li><p>Q: 什么时候需要返回一个promise呢？<br>A: 当你的需求逻辑是，XXX的执行需要依赖OOO的结果，此时OOO就应该返回一个promise</p>
-</li>
-<li><p>Q: 为什么req1要打括号，而req2不打括号？<br>A:这个我也没太搞清楚XD，我的理解是，<code>req1()</code>打括号执行后才会返回promise，不打括号就只是一个没有执行的函数，<code>req2</code>不打括号是因为then的入参只能是一个<strong>函数</strong>，如果打了括号执行后就不是函数了。</p>
-</li>
-<li><p>Q: 最后一个then的function(data) data是哪里来的？<br>A: <code>req2</code>的定义中，有一句<code>resolve(finalUserData)</code>，在Promise Chain中，每个then的入参的入参也就是function(data)中的data都是由前一个promise resolve时传递而来的</p>
-</li>
 </ul>
 
 </article>
