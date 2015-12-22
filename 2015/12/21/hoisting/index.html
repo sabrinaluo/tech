@@ -103,60 +103,42 @@
 </header>
   <div class="row">
     <div class="col-sm-9">
-      <h2><a href="http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/">GitHub Page如何绑定域名</a></h2>
+      <h2><a href="http://sabrinaluo.github.io/tech/2015/12/21/hoisting/">JS变量提升(Hoisting)</a></h2>
 <article>
-  <p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com" target="_blank" rel="external">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
-<hr>
-<p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
-<ol>
-<li>首先…你要有一个<del>男盆友</del>域名…没有的话就去godaddy买一个；</li>
-<li>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。<pre><code class="bash">C:\&gt;ping yourname.github.io
-正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:
-来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=8ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=12ms TTL=58
-103.245.222.133 的 Ping 统计信息:
-数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-最短 = 5ms，最长 = 12ms，平均 = 7ms
-</code></pre>
-</li>
-<li><p>登录你的godday账号，设置一下DNS的A记录：</p>
-<ul>
-<li>找到你的domain，点manage DNS</li>
-<li>进入DNS设置页面后点Add Record，在弹出的对话框选A(Host)<blockquote>
-<p>RECORD TYPE: A(Host)<br>HOST: 这里填你在godday买的域名，例如abc.com<br>POINTS TO: 这里填第三步获取到的IP地址<br>TTL: 生效的时间，不知道最短是多久，我反正是选custom之后填了600，也就是10分钟 </p>
+  <p>写了无数JS也依旧没听过变量提升…</p>
+<p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
+<p>我写了这么久JS，从来也不会先用变量后定义的呀，而且别的语言好像根本没有这个概念，难怪我从来没有遇到相关问题，难怪我没听过这个概念。难怪写强类型语言的各大神都是JS一生黑…</p>
+<p>后来大概问了问各种前辈，纷纷表示，这个概念在面试的时候和检查别人Bug的时候才会用到… (︶︿︶)</p>
+<p>解释器是什么东东我还没搞明白…但是变量提升其实可以转换成另一个问题：<br>当你在定义一个变量的时候，解释器是怎么解析的？</p>
+<p>先看一个例子：</p>
+<pre><code>function test(){
+  console.log(a);
+  var a = 123;
+}
+test(); //调用这个函数，你会看到console中输出的是undefined
+</code></pre><pre><code>function test(){
+  var a = 123;
+}
+</code></pre><p>上面的代码，解释器是这么理解的：</p>
+<pre><code>function test(){
+  var a; 
+  a = 123;
+}
+</code></pre><p>而最开始的例子中，解释器是这么理解的：</p>
+<pre><code>function test(){
+  var a;
+  console.log(a);
+  a = 123;
+}
+</code></pre><p>一句话总结：变量提升就是JS解释器在解析JS的时候会把所有变量的<strong>声明</strong>提升到该变量作用域的最顶端。</p>
+<blockquote>
+<p>请注意：<strong>只提升声明，不提升赋值</strong>！</p>
 </blockquote>
-</li>
-</ul>
-</li>
-<li><p>然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了</p>
-</li>
-<li>最后，在你的yourname.github.io这个repo创建一个名为<code>CNAME</code>的文件，没有后缀名。文件内容如下：<pre><code>abc.com
-</code></pre>是的，你没看错，就是辣么简单！</li>
-</ol>
-<p><strong>二级域名的设置</strong><br>假如你有两个github page，一个是blog，一个是news，那你的两个二级域名分别就是：</p>
-<ul>
-<li>blog.abc.com</li>
-<li>news.abc.com</li>
-</ul>
-<ol>
-<li>到godday设置两条<strong>A记录</strong>，分别设置blog及news指向github page的IP</li>
-<li>到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是<pre><code>blog.abc.com
-</code></pre></li>
-</ol>
-<p>整个过程其实做的事情大概可以理解为：</p>
-<ul>
-<li>告诉godday，当别人访问我的域名abc.com的时候，请带他们去github</li>
-<li>告诉你的github page，当别人是被abc.com带来github的时候，没错他们都是我派来的，请接收他们的访问</li>
-<li>告诉你的github page，当别人直接访问github page，也就是yourname.github.io的时候，请穿上花了一百多大洋买的马甲abc.com…（这其实是说，当你添加了cname记录之后，访问yourname.github.io，你在浏览器里看到的域名会自动变成abc.com）</li>
-</ul>
 
 </article>
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="GitHub Page如何绑定域名" data-url="http://sabrinaluo.github.io/tech/2015/12/13/set-a-custom-domain-for-github-page/"></div>
+  <div class="ds-thread" data-thread-key="" data-title="JS变量提升(Hoisting)" data-url="http://sabrinaluo.github.io/tech/2015/12/21/hoisting/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
