@@ -8,7 +8,7 @@ subtitle: 一个废话很多的程序媛
 description: 我这么可爱一定是男孩子
 author: Sabrina
 language: zh-CN
-timezone:
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
