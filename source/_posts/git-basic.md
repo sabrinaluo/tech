@@ -1,0 +1,61 @@
+title: 版本控制及git常用基本命令
+date: 2015-12-04 11:40:04
+tags: [git, version control, 版本控制]
+---
+（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。
+时间充裕的童鞋可以到[codecademy](https://www.codecademy.com/learn/learn-git)跟着教程一步步走）
+
+[Git](https://git-scm.com/)是一个分布式的版本管理([Version Control](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control))工具。
+
+版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是~~机智地~~
+> 1. 创建了很多文件夹来放不同的模板
+2. 不停的备份
+3. 如果调整后正常运行和显示，那就使用最新的版本
+4. 如果调整后不能正常运行同时又找不出问题所在，就是用备份的上一个版本来重新创作
+
+以上对应到版本控制系统分别是：
+> 1. 创建分支(branch)
+2. 提交代码(commit)
+3. 合并分支(merge)
+4. 版本回滚(checkout)
+
+关于git的概念及使用流程这里不详细讨论，暂时只讨论一些最基本的常用的git命令
+* `git init` 初始化一个git仓库，生成`.git`隐藏文件
+* `git status` 查看git仓库的状态，将会返回**当前分支**, **文件状态**等信息，可以使用`-s`参数查看只有文件状态的简洁版信息
+* `git clone <repo location> <repo name>` 将远程分支克隆到本地，`<repo name>`参数可选，为本地repo命名，若省略，则本地repo与远程同名
+* `git add <file name>` 将文件变为staged状态，也就是告诉git哪些新的文件和修改过的文件是之后要提交的；文件名支持正则表达式
+* `git rm <file name>` 将文件删除同时告诉git从git仓库中删除文件，可以使用 `--cached` 参数实现只从git仓库中删除而不删除本地文件
+* `git diff <file name>` 查看git仓库文件与本地文件的区别
+* `git commit -m "some comment"` 将修改提交到git仓库
+* `git show HEAD` 显示HEAD版本的相关信息，包括**author**，**date**，**comment**，**diff**
+* `git log` 查看提交记录，包括提交的时间、作者、评论
+* `git reset SHA` 将本地git仓库回退到某个版本，其中`SHA`为版本log中commit后的一长串字符的前7位字符
+* `git reset HEAD <file name>` 将本地git仓库中的某个文件重置为git仓库的HEAD版本
+* `git checkout HEAD` 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令
+> 需要注意`reset`是针对本地的git仓库，也就是你每次commit后，文件就会保存到的仓库。
+而`checkout`是针对本地的工作副本，也就是你直接编辑的那些文件，会被overwrite
+* `git branch` 查看分支信息，使用`-r`参数查看远程分支信息
+* `git branch <branch name>` 添加新的分支
+* `git branch -d <branch name>` 删除分支
+* `git checkout <branch name>` 切换分支，可以使用`-b`参数，创建新分支并切换到新分支
+* `git fetch` 获取远程origin/master分支最新版本，需要手动与本地文件merge
+* `git pull` 获取远程的最新版本并与本地merge
+> 需要注意 `git fetch` 与 `git pull` 的不同，通常如果本地文件有改动，则应该先fetch在 `git merge origin/master` 
+* `git stash` 将本地的工作副本暂时存起来
+* `git pop` 将存起来的工作副本放出来…
+> `git stash` 和 `git pop` 通常在`git pull`或`git merge`的时候如果有冲突(conflict)的时候使用，`pop`之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括<<< ===>>>这些行也要删除，让代码看起来和正常的代码一样。
+``` javascript
+//git pop之后的冲突文件看起来长这样：
+ <<<<<<< their code
+ var a = 123;
+ =======
+ var a = 456;
+ >>>>>>> my code
+``` 
+``` javascript
+//冲突解决后，看起来应该长这样：
+ var a = 123;
+``` 
+* `git merge <branch name>` 合并分支，将指定分支与当前分支合并
+> `origin/master`分支为远程主分支
+* `git push origin <branch name>` 把分支推送到远程
