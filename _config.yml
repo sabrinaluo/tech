@@ -4,15 +4,15 @@
 
 # Site
 title: 小白妹妹写代码
-subtitle: 一个废话很多的程序媛 | 我这么可爱一定是男孩子
-description:
+subtitle: 一个废话很多的程序媛
+description: 我这么可爱一定是男孩子
 author: Sabrina
 language: zh-CN
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://sabrinaluo.github.io/tech
+url: http://sabrinaluo.com/tech
 root: /tech/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -63,13 +63,14 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: maupassant
+theme: replica
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
   repo: git@github.com:sabrinaluo/tech.git
+  branch: gh-pages
 
 # Google Analytics
 ga: UA-52574938-4
@@ -84,29 +85,6 @@ marked:
   smartLists: true
   smartypants: true
 
-# Markdown-it config
-## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki/
-markdown: 'default'
-
 duoshuo: sabrinaluo
 disqus: ## Your disqus_shortname, e.g. haomwei
 google_search: true ## Use Google search, true/false
-baidu_search: ## Use Baidu search, true/false
-swiftype: ## Your swiftype_key, e.g. m7b11ZrsT8Me7gzApciT
-tinysou: ## Your tinysou_key, e.g. 4ac092ad8d749fdc6293
-menu:
-  - page: home
-    directory: /tech
-    icon: icon-home
-  - page: archive
-    directory: archives/
-    icon: icon-archive
-    icon: icon-about
-  - page: rss
-    directory: atom.xml
-    icon: icon-rss
-links:
-  - title: Github
-    url: http://github.com/sabrinaluo
-  - title: test
-    url: test
