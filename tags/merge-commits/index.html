@@ -116,75 +116,37 @@
   <div class="row">
     <div class="col-sm-9">
       
-<h2><a href="http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/">对Promise中的resolve，reject，catch的理解</a></h2>
+<h2><a href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/">git merge commits 如何合并多个提交为一个</a></h2>
 <article>
-  <p>对promise这个概念之前已经有了一些浅显的理解，<a href="http://sabrinaluo.com/tech/2015/12/01/promise/">相关文章-&gt;戳这里</a>，最近又有了一些新的理解。</p>
-<h3 id="then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026"><a href="#then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026" class="headerlink" title=".then()的时候到底是在then什么…"></a>.then()的时候到底是在then什么…</h3><ul>
-<li>首先要理解…Promise是一个对象，有then()方法的对象</li>
-<li>then()的入参是一个函数，通常在promise链中，入参是<strong>一个返回promise的函数</strong>，这句话好像有点拗口，就是说入参是一个函数，这个函数会return一个promise对象</li>
-</ul>
-<h3 id="u5982_u4F55_u7834_u574Fpromise_u94FE"><a href="#u5982_u4F55_u7834_u574Fpromise_u94FE" class="headerlink" title="如何破坏promise链"></a>如何破坏promise链</h3><p>如果有这样一个promise链：</p>
-<pre><code>p1().then(p2).then(p3)
-  .then(function(data) {
-    console.log(&apos;data: &apos; + data);
-  })
-  .catch(function(error) {
-    console.log(&apos;error: &apos; + error);
-  });
-
-function p1() {
-  return new Promise(function(resolve, reject) {
-    console.log(&apos;p1 resolved&apos;);
-    resolve(123);
-  });
-}
-
-function p2() {
-  return new Promise(function(resolve, reject) {
-    console.log(&apos;p2 rejected&apos;);
-    reject(456);
-  });
-}
-
-function p3() {
-  return new Promise(function(resolve, reject) {
-    console.log(&apos;p3 resolved&apos;);
-    resolve(789);
-  });
-}
-</code></pre><p>上面这个例子，你看到的console.log会是这样：</p>
-<pre><code>p1 resolved
-p2 rejected
-error: 456
-</code></pre><p>并没有看到<code>p3</code>的log，而是看到了error message，也就是说：</p>
-<p><strong>在一个promise链中，只要任何一个promise被reject，promise链就被破坏了，reject之后的promise都不会再执行，而是直接调用<code>.catch</code>方法</strong>。</p>
-<p>这也是为什么在standard practice中，一定要在最后加上<code>.catch</code>的原因。通过<code>.catch</code>能够清楚的判断出promise链在哪个环节出了问题。</p>
-<h3 id="u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise"><a href="#u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise" class="headerlink" title="如何按顺序执行已经定义的promise"></a>如何按顺序执行已经定义的promise</h3><p>这个情况在什么时候会用到呢？比如你有一个队列，队列里有很多任务，这些任务并不互相依赖执行后返回的结果。每个任务完成的时间都是不确定的，并且计算资源只允许一次执行一个任务。简单的来说，就是<strong>做完A之后再去做B，并且AB是相互独立的</strong></p>
-<p>假如我现在有一堆promise对象，大概长这样：</p>
-<pre><code>//p2, p3与p1相似
-//当doSomething()执行完毕的时候，调用resolve()
-//使得当前promise状态转变为fulfilled即可
-var p1 = new Promise(function(resolve, reject) {
-  //do something here
-  //when do something done
-  resolve();
-});
-
-p1.then(function() {
-    return p2
-  })
-  .then(function() {
-    return p3
-  })
-  .catch()
+  <p>因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。</p>
+<p>关于合并多个提交，主要是要搞清楚<code>rebase</code>的用法。</p>
+<h3 id="u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log"><a href="#u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log" class="headerlink" title="查看提交历史，git log"></a>查看提交历史，git log</h3><p>首先你要知道自己想合并的是哪几个提交，可以使用<code>git log</code>命令来查看提交历史，假如最近4条历史如下：</p>
+<pre><code>commit ada2cd944fc81cf0051c6b6cac62fad9ae6830d3
+commit 0e25f1237eeaf9ae02b5b48b888a844ed288e7e3
+commit ddbd8fd1d52aec0bbedc65a1a0add159344d4ae2
+commit 2aad0182a613b2e73b44ebbf0d5536126f714cb9
+</code></pre><p>历史记录是按照时间排序的，时间近的排在前面。</p>
+<h3 id="git_rebase"><a href="#git_rebase" class="headerlink" title="git rebase"></a>git rebase</h3><p>想要合并1-3条，有两个方法</p>
+<ol>
+<li>从HEAD版本开始往过去数3个版本<pre><code>git rebase -i HEAD~3
+</code></pre></li>
+<li>指名要合并的版本之前的版本号<pre><code>git rebase -i 2aad018
 </code></pre><blockquote>
-<p>请注意，前一部破坏Promise链中分定义的p1 p2 p3是<strong>函数</strong>，而此部分定义的p1 p2 p3是<strong>对象！对象！对象！</strong></p>
+<p>请注意<strong>2aad018</strong>这个版本是不参与合并的，可以把它当做一个坐标</p>
 </blockquote>
-<ul>
-<li>如前面提到，promise是一个有then方法的对象，因此p1可以直接调用then<br>Q:为什么开头调用不是<code>p1().then</code>？<br>A: 因为p1是一个对象啊！！！对象啊！！！象啊！！！啊！！！</li>
-<li>然而promise链中then方法的入参是<strong>一个返回promise对象的函数</strong>，p2并不是一个函数，因此不能then(p2)；</li>
-<li>但p2是一个promise对象，已经满足了then方法入参的一半需求，那么写一个函数并且返回p2，就满足了入参的全部需求</li>
-</ul>
+</li>
+</ol>
+<h3 id="u9009_u53D6_u8981_u5408_u5E76_u7684_u63D0_u4EA4"><a href="#u9009_u53D6_u8981_u5408_u5E76_u7684_u63D0_u4EA4" class="headerlink" title="选取要合并的提交"></a>选取要合并的提交</h3><p>执行了rebase命令之后，会弹出一个窗口，头几行如下：</p>
+<pre><code>pick ada2cd9
+pick 0e25f12
+pick ddbd8fd
+...
+</code></pre><p>将<code>pick</code>改为<code>squash</code>或者<code>s</code>，之后保存并关闭文本编辑窗口即可。改完之后文本内容如下：</p>
+<pre><code>s ada2cd9
+s 0e25f12
+s ddbd8fd
+...
+</code></pre><p>参考：<br>[1] <a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="external">https://git-scm.com/docs/git-rebase</a><br>[2] <a href="http://blog.csdn.net/yangcs2009/article/details/47166361" target="_blank" rel="external">http://blog.csdn.net/yangcs2009/article/details/47166361</a></p>
 
 </article>
 
