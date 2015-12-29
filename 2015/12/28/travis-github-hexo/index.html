@@ -5,10 +5,10 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>X-WSSE验证中关于SHA1编码方式的一些坑</title>
+  <title>利用travis自动部署hexo搭建在github的博客</title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
-  <meta name="keywords" content="SHA1,WSSE,X-WSSE,auth">
+  <meta name="keywords" content="github,hexo,travis,博客,持续集成,自动部署">
   
   <meta name="author" content="Sabrina">
 
@@ -117,26 +117,60 @@
 </header>
   <div class="row">
     <div class="col-sm-9">
-      <h2><a href="http://sabrinaluo.com/tech/2015/12/11/x-wsse/">X-WSSE验证中关于SHA1编码方式的一些坑</a></h2>
+      <h2><a href="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/">利用travis自动部署hexo搭建在github的博客</a></h2>
 <article>
-  <p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
-<p>关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与<a href="https://github.com/bouzuya/node-wsse" target="_blank" rel="external">node-wsse</a>的作者大战了好几个回合…</p>
-<hr>
-<p>此文章不讨论验证的原理，只讨论X-WSSE UsernameToken的生成方式，其中主要是生成<strong>passwordDigest</strong>。<br>验证嘛，用户名username，密码password肯定是少不了的，此外还需要nonce，timeStamp，有了这几样再按照下面的步骤一步步就可以生成符合WSSE标准的token了。</p>
-<p>UsernameToken的生成一共需要<strong>5个步骤</strong>：</p>
+  <p>这篇应该属于不务正业系列…<br>自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。</p>
+<p><a href="https://travis-ci.org" target="_blank" rel="external">Travis</a>是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～</p>
+<p>最初知道travis是因为总在github商看到这种小图标，虽然不知道是什么东东，但是觉得逼格特别高…<br><a href="https://travis-ci.org/sabrinaluo/tech" target="_blank" rel="external"><img src="https://travis-ci.org/sabrinaluo/tech.svg?branch=master" alt="Build Status"></a></p>
+<p>关于Hexo和github page这里就不讨论了，教程网上一搜一大堆。用travis属于进阶内容了，能搜到这篇文章的，应该也都具备了最基础的知识。</p>
+<p>为什么需要travis来自动部署博客呢，像我这种废话多的人，倾诉欲随时随地会喷发…然后如果当时手边没有电脑，或者有电脑了但不是我的电脑，欲火就被一盆水浇灭了…而有了travis之后呢，只要给我一台能上网的电脑，分分钟就能发博客并且更新到自己的网站…</p>
+<p><a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">具体教程（来自Hexo的作者Tommy）</a>网上已经有一些了，但不是很多，这里主要说一说其中容易遇到的坑。</p>
+<h3 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h3><p>注册一个travis账号，绑定github，并为相应的repo开启travis服务<br>在repo中添加<code>.travis.yml</code>文件，下面是我个人的配置。我是将source和public放在同一个repo的不同分支里，源文件放在master分支，生成后的网页放在gh-pages分支。<br><script src="//gist.github.com/d905eeed53d9368fdee6.js"></script></p>
+<pre><code>## 目录结构如下，其中.travis文件夹用于存放github的sshkey加密文件，以及ssh的相关配置
+└── blog
+    ├── _config.yml
+    ├── package.json
+    ├── README.md
+    ├── scaffolds
+    ├── source
+    │   └── _posts
+    ├── .travis
+    │   ├── id_rsa.enc
+    │   └── ssh_config
+    └── .travis.yml
+</code></pre><h3 id="u6CE8_u610F_u4E8B_u9879"><a href="#u6CE8_u610F_u4E8B_u9879" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>before_install:
+- openssl aes-256-cbc -K $encrypted_e011a6d7eebf_key -iv $encrypted_e011a6d7eebf_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+</code></pre><ul>
+<li><strong>$encrypted_e011a6d7eebf_key</strong>这一串加密的key每个人都不同，请不要直接复制。请使用<br><code>$ travis encrypt-file ssh_key --add</code> 这条命令将相应的key写入<code>.travis.yml</code>中。</li>
+<li><strong>记得检查<code>.travis.yml</code>文件</strong>，因为在自动写入文件的过程中很可能出现了<strong>自动换行</strong>的问题（我是linuxmint 用webstorm遇到了这个问题），如果有换行的问题把换行符删除即可，否则会导致travis在命令跑到这里的时候出问题使得building failed。</li>
+<li>另外如果有将相应的文件移到相应的文件夹中，请记得在命令中修改相应的path</li>
+<li>如果你最后deploy的不是master分支，请在<code>packag.json</code>中使用下面的依赖<pre><code>&quot;hexo-deployer-git&quot;: &quot;hexojs/hexo-deployer-git#495fc6d&quot;
+</code></pre>hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。</li>
+</ul>
+<h3 id="travis-yml_u6587_u4EF6_u89E3_u91CA"><a href="#travis-yml_u6587_u4EF6_u89E3_u91CA" class="headerlink" title=".travis.yml文件解释"></a><code>.travis.yml</code>文件解释</h3><p>整个配置其实是告诉travis：</p>
 <ol>
-<li>生成一个随机字符串nonce。不同公司的API对这个nonce的要求可能会不同，有一些要求采用<code>base64</code>编码方式，比如<a href="http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html#the-authentication-provider" target="_blank" rel="external">symfony给出的例子</a>；</li>
-<li>时间戳（timeStamp）。对于时间戳，统一采用<a href="http://baike.baidu.com/view/931641.htm" target="_blank" rel="external">ISO-8601</a>格式的字符串，但是不同公司的API对时区（timezone）的要求可能会不同，比如Emarsys要求UTC，Adobe要求GMT；</li>
-<li>把nonce，timeStamp，password这三个字符串按顺序连接起来形成一个新的字符串，并将这个字符串按照<a href="http://baike.baidu.com/view/1228622.htm" target="_blank" rel="external">SHA1</a>方法加密。<br><strong>坑来啦，坑来啦，坑来啦！！！</strong><br>一个字符串通常加密之后密码摘要默认是binary的，比如Adobe<a href="https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2" target="_blank" rel="external">^2</a>，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys<a href="http://documentation.emarsys.com/resource/developers/api/getting-started/authentication/" target="_blank" rel="external">^3</a>…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证<a href="http://book.soundonair.ru/web/web2apps-CHP-11-SECT-1.html#web2apps-CHP-11-SECT-1.8" target="_blank" rel="external">^4</a>；</li>
-<li>把上一步得到的密码摘要按照<code>base64</code>进行编码，就能得到passwordDigest；</li>
-<li>按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：<pre><code>UsernameToken Username=&quot;username&quot;, PasswordDigest=&quot;passwordDigest&quot;, Nonce=&quot;nonce&quot;, Created=&quot;timeStamp&quot;
-</code></pre></li>
+<li>使用node 4.0版本来build我的程序</li>
+<li>只有当master分支有commit的时候才自动部署</li>
+<li>在安装之前先解密ssh key以便获得github的写权限（这样才能push到gh-pages分支）；全局安装hexo（这样才能直接执行hexo命令）；配置git设定（这样才能用git）</li>
+<li>克隆主题<blockquote>
+<p>（如果想省略这一步，你可以把主题<code>themes</code>文件夹也放在博客repo的master分支中）</p>
+</blockquote>
+</li>
+<li>克隆gh-pages分支到<code>.deploy_git</code>文件夹<blockquote>
+<p>（hexo 默认会将生成的用于deploy的文件都放在这个文件夹；如果不需要gh-pages分支的相关commit记录，这一步可以省略。省略后该分支永远只有最近的一次commit…）</p>
+</blockquote>
+</li>
+<li>跑一下<code>hexo g</code>命令，看看是否会有错<blockquote>
+<p>请注意，这一步并不能保证博客生成的样式问题，只是查看主题是否有错误。如果你每次都是克隆主题，并不能保证你克隆的版本每次都能顺利生成所有文件，可能会存在bug</p>
+</blockquote>
+</li>
+<li>如果能够顺利生成网页则执行<code>hexo d</code>，将博客push到gh-pages分支 </li>
 </ol>
 
 </article>
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="X-WSSE验证中关于SHA1编码方式的一些坑" data-url="http://sabrinaluo.com/tech/2015/12/11/x-wsse/"></div>
+  <div class="ds-thread" data-thread-key="" data-title="利用travis自动部署hexo搭建在github的博客" data-url="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

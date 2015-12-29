@@ -3,67 +3,72 @@
   
   <url>
     <loc>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/12/set-a-custom-domain-for-github-page/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/01/promise/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/21/hoisting/</loc>
-    <lastmod>2015-12-28T03:57:08.116Z</lastmod>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</loc>
-    <lastmod>2015-12-28T03:57:08.112Z</lastmod>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/12/set-a-custom-domain-for-github-page/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/01/promise/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/21/hoisting/</loc>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/2015/12/04/git-basic/</loc>
-    <lastmod>2015-12-28T03:57:08.112Z</lastmod>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</loc>
-    <lastmod>2015-12-28T03:57:08.112Z</lastmod>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</loc>
-    <lastmod>2015-12-28T03:57:08.112Z</lastmod>
+    <lastmod>2015-12-29T10:07:45.839Z</lastmod>
   </url>
   
 </urlset>

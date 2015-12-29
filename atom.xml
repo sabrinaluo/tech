@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一个废话很多的程序媛]]></subtitle>
   <link href="/tech/atom.xml" rel="self"/>
   <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2015-12-28T03:57:08.116Z</updated>
+  <updated>2015-12-29T10:07:45.839Z</updated>
   <id>http://sabrinaluo.com/tech/</id>
   
   <author>
@@ -15,11 +15,84 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[利用travis自动部署hexo搭建在github的博客]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/</id>
+    <published>2015-12-28T04:00:56.000Z</published>
+    <updated>2015-12-29T10:07:45.839Z</updated>
+    <content type="html"><![CDATA[<p>这篇应该属于不务正业系列…<br>自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。</p>
+<p><a href="https://travis-ci.org" target="_blank" rel="external">Travis</a>是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～</p>
+<p>最初知道travis是因为总在github商看到这种小图标，虽然不知道是什么东东，但是觉得逼格特别高…<br><a href="https://travis-ci.org/sabrinaluo/tech" target="_blank" rel="external"><img src="https://travis-ci.org/sabrinaluo/tech.svg?branch=master" alt="Build Status"></a></p>
+<p>关于Hexo和github page这里就不讨论了，教程网上一搜一大堆。用travis属于进阶内容了，能搜到这篇文章的，应该也都具备了最基础的知识。</p>
+<p>为什么需要travis来自动部署博客呢，像我这种废话多的人，倾诉欲随时随地会喷发…然后如果当时手边没有电脑，或者有电脑了但不是我的电脑，欲火就被一盆水浇灭了…而有了travis之后呢，只要给我一台能上网的电脑，分分钟就能发博客并且更新到自己的网站…</p>
+<p><a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">具体教程（来自Hexo的作者Tommy）</a>网上已经有一些了，但不是很多，这里主要说一说其中容易遇到的坑。</p>
+<h3 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h3><p>注册一个travis账号，绑定github，并为相应的repo开启travis服务<br>在repo中添加<code>.travis.yml</code>文件，下面是我个人的配置。我是将source和public放在同一个repo的不同分支里，源文件放在master分支，生成后的网页放在gh-pages分支。<br><script src="//gist.github.com/d905eeed53d9368fdee6.js"></script></p>
+<pre><code>## 目录结构如下，其中.travis文件夹用于存放github的sshkey加密文件，以及ssh的相关配置
+└── blog
+    ├── _config.yml
+    ├── package.json
+    ├── README.md
+    ├── scaffolds
+    ├── source
+    │   └── _posts
+    ├── .travis
+    │   ├── id_rsa.enc
+    │   └── ssh_config
+    └── .travis.yml
+</code></pre><h3 id="u6CE8_u610F_u4E8B_u9879"><a href="#u6CE8_u610F_u4E8B_u9879" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>before_install:
+- openssl aes-256-cbc -K $encrypted_e011a6d7eebf_key -iv $encrypted_e011a6d7eebf_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+</code></pre><ul>
+<li><strong>$encrypted_e011a6d7eebf_key</strong>这一串加密的key每个人都不同，请不要直接复制。请使用<br><code>$ travis encrypt-file ssh_key --add</code> 这条命令将相应的key写入<code>.travis.yml</code>中。</li>
+<li><strong>记得检查<code>.travis.yml</code>文件</strong>，因为在自动写入文件的过程中很可能出现了<strong>自动换行</strong>的问题（我是linuxmint 用webstorm遇到了这个问题），如果有换行的问题把换行符删除即可，否则会导致travis在命令跑到这里的时候出问题使得building failed。</li>
+<li>另外如果有将相应的文件移到相应的文件夹中，请记得在命令中修改相应的path</li>
+<li>如果你最后deploy的不是master分支，请在<code>packag.json</code>中使用下面的依赖<pre><code>&quot;hexo-deployer-git&quot;: &quot;hexojs/hexo-deployer-git#495fc6d&quot;
+</code></pre>hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。</li>
+</ul>
+<h3 id="travis-yml_u6587_u4EF6_u89E3_u91CA"><a href="#travis-yml_u6587_u4EF6_u89E3_u91CA" class="headerlink" title=".travis.yml文件解释"></a><code>.travis.yml</code>文件解释</h3><p>整个配置其实是告诉travis：</p>
+<ol>
+<li>使用node 4.0版本来build我的程序</li>
+<li>只有当master分支有commit的时候才自动部署</li>
+<li>在安装之前先解密ssh key以便获得github的写权限（这样才能push到gh-pages分支）；全局安装hexo（这样才能直接执行hexo命令）；配置git设定（这样才能用git）</li>
+<li>克隆主题<blockquote>
+<p>（如果想省略这一步，你可以把主题<code>themes</code>文件夹也放在博客repo的master分支中）</p>
+</blockquote>
+</li>
+<li>克隆gh-pages分支到<code>.deploy_git</code>文件夹<blockquote>
+<p>（hexo 默认会将生成的用于deploy的文件都放在这个文件夹；如果不需要gh-pages分支的相关commit记录，这一步可以省略。省略后该分支永远只有最近的一次commit…）</p>
+</blockquote>
+</li>
+<li>跑一下<code>hexo g</code>命令，看看是否会有错<blockquote>
+<p>请注意，这一步并不能保证博客生成的样式问题，只是查看主题是否有错误。如果你每次都是克隆主题，并不能保证你克隆的版本每次都能顺利生成所有文件，可能会存在bug</p>
+</blockquote>
+</li>
+<li>如果能够顺利生成网页则执行<code>hexo d</code>，将博客push到gh-pages分支 </li>
+</ol>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>这篇应该属于不务正业系列…<br>自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。</p>
+<p><a href="https://travis-ci.org" target="_blank" rel="external]]>
+    </summary>
+    
+      <category term="github" scheme="http://sabrinaluo.com/tech/tags/github/"/>
+    
+      <category term="hexo" scheme="http://sabrinaluo.com/tech/tags/hexo/"/>
+    
+      <category term="travis" scheme="http://sabrinaluo.com/tech/tags/travis/"/>
+    
+      <category term="博客" scheme="http://sabrinaluo.com/tech/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+      <category term="持续集成" scheme="http://sabrinaluo.com/tech/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+      <category term="自动部署" scheme="http://sabrinaluo.com/tech/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[git merge commits 如何合并多个提交为一个]]></title>
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</id>
     <published>2015-12-24T07:08:49.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。</p>
 <p>关于合并多个提交，主要是要搞清楚<code>rebase</code>的用法。</p>
 <h3 id="u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log"><a href="#u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log" class="headerlink" title="查看提交历史，git log"></a>查看提交历史，git log</h3><p>首先你要知道自己想合并的是哪几个提交，可以使用<code>git log</code>命令来查看提交历史，假如最近4条历史如下：</p>
@@ -69,7 +142,7 @@ s ddbd8fd
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</id>
     <published>2015-12-24T06:58:32.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>为什么我每天都会有一些奇奇怪怪的需求…</p>
 <p>我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推<code>push -f</code>，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！</p>
 <h3 id="u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93"><a href="#u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：</p>
@@ -113,7 +186,7 @@ git merge repo2
     <link href="http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"/>
     <id>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</id>
     <published>2015-12-22T03:36:07.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>对promise这个概念之前已经有了一些浅显的理解，<a href="http://sabrinaluo.com/tech/2015/12/01/promise/">相关文章-&gt;戳这里</a>，最近又有了一些新的理解。</p>
 <h3 id="then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026"><a href="#then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026" class="headerlink" title=".then()的时候到底是在then什么…"></a>.then()的时候到底是在then什么…</h3><ul>
 <li>首先要理解…Promise是一个对象，有then()方法的对象</li>
@@ -198,7 +271,7 @@ p1.then(function() {
     <link href="http://sabrinaluo.com/tech/2015/12/21/hoisting/"/>
     <id>http://sabrinaluo.com/tech/2015/12/21/hoisting/</id>
     <published>2015-12-21T02:24:02.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>写了无数JS也依旧没听过变量提升…</p>
 <p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
 <p>我写了这么久JS，从来也不会先用变量后定义的呀，而且别的语言好像根本没有这个概念，难怪我从来没有遇到相关问题，难怪我没听过这个概念。难怪写强类型语言的各大神都是JS一生黑…</p>
@@ -245,7 +318,7 @@ test(); //调用这个函数，你会看到console中输出的是undefined
     <link href="http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/"/>
     <id>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</id>
     <published>2015-12-19T11:22:27.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…</p>
 <pre><code>function isType(type) {
   return function(obj) {
@@ -359,7 +432,7 @@ console.log(eating(&apos;亲爱的&apos;));
     <link href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"/>
     <id>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</id>
     <published>2015-12-16T03:00:27.000Z</published>
-    <updated>2015-12-28T03:57:08.112Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
 <p><strong><code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别</strong></p>
 <p>看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来</p>
@@ -448,7 +521,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"/>
     <id>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</id>
     <published>2015-12-15T02:55:13.000Z</published>
-    <updated>2015-12-28T03:57:08.112Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="external">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
 <p>简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（<em>最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！</em>），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！</p>
 <p>再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后<strong>“做一堆事”</strong>完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。</p>
@@ -538,7 +611,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"/>
     <id>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</id>
     <published>2015-12-14T06:39:35.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚马逊AWS云服务提供的一个NoSQL的数据库…</p>
 <p>在这里我必须安利一下Amazon家的服务真是业界良心：前不久，可能是因为我自己蠢，英文不好没看懂免费用一年的各种限制，也不知道写了什么奇怪的东东用自己的账号测试dynamoDB被扣了几刀，写邮件去投诉说你们不是免费吗为啥扣费，然后就得到回复解释了一下为啥扣钱，说我用超过限制了，然后表示个人账号里扣了的钱会<strong>退退退</strong>！（我说明了之后会用公司账号测试，请帮我关了我的个人账户）</p>
 <hr>
@@ -591,7 +664,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/"/>
     <id>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</id>
     <published>2015-12-14T06:15:06.000Z</published>
-    <updated>2015-12-28T03:57:08.112Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * EJS</span><br><span class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span><br><span class="line"> * MIT Licensed</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Module dependencies.</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
 <p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="external">TJ写的EJS模板引擎</a></p>
 <p>我就在QQ群里问了这样一个问题：</p>
@@ -630,7 +703,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/12/set-a-custom-domain-for-github-page/"/>
     <id>http://sabrinaluo.com/tech/2015/12/12/set-a-custom-domain-for-github-page/</id>
     <published>2015-12-12T16:34:42.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" target="_blank" rel="external">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
 <hr>
 <p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
@@ -702,7 +775,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/11/x-wsse/"/>
     <id>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</id>
     <published>2015-12-11T09:08:38.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
 <p>关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与<a href="https://github.com/bouzuya/node-wsse" target="_blank" rel="external">node-wsse</a>的作者大战了好几个回合…</p>
 <hr>
@@ -736,7 +809,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/04/git-basic/"/>
     <id>http://sabrinaluo.com/tech/2015/12/04/git-basic/</id>
     <published>2015-12-04T03:40:04.000Z</published>
-    <updated>2015-12-28T03:57:08.112Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
 <p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="external">Version Control</a>)工具。</p>
 <p>版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是<del>机智地</del></p>
@@ -822,7 +895,7 @@ var a = 456;
     <link href="http://sabrinaluo.com/tech/2015/12/01/promise/"/>
     <id>http://sabrinaluo.com/tech/2015/12/01/promise/</id>
     <published>2015-12-01T10:46:26.000Z</published>
-    <updated>2015-12-28T03:57:08.116Z</updated>
+    <updated>2015-12-29T10:07:45.839Z</updated>
     <content type="html"><![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：</p>
 <pre><code class="javascript"><span class="comment">//以下用setTimeout()模拟一个请求</span>
 <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>{

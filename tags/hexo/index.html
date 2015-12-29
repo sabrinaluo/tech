@@ -116,28 +116,55 @@
   <div class="row">
     <div class="col-sm-9">
       
-<h2><a href="http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/">JS注释中的感叹号是干什么用的/*! */</a></h2>
+<h2><a href="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/">利用travis自动部署hexo搭建在github的博客</a></h2>
 <article>
-  <p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * EJS</span><br><span class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span><br><span class="line"> * MIT Licensed</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Module dependencies.</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
-<p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="external">TJ写的EJS模板引擎</a></p>
-<p>我就在QQ群里问了这样一个问题：</p>
-<blockquote>
-<p>第一个注释中的感叹号是什么意思，为什么第一个有感叹号，第二个没有？</p>
-</blockquote>
-<p>然后似乎没有人知道，并且我到的回答基本都是诸如：那就是行注释没什么特别的意思、在意注释干嘛反正注释也没什么用……</p>
-<p>然后我就忽然有点明白了为什么一本以下的不要…</p>
-<p>类似这样的问题，为什么在网上很难找答案？可能是因为：</p>
-<ul>
-<li>搜索引擎对于特殊符号的处理导致难以按照符号来搜索<br>包括google和stackoverflow中输入<code>/*!</code>并不能搜到结果</li>
-<li>因为缺乏经验而无法正确的描述问题，无法命中问题的关键字</li>
+  <p>这篇应该属于不务正业系列…<br>自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。</p>
+<p><a href="https://travis-ci.org" target="_blank" rel="external">Travis</a>是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～</p>
+<p>最初知道travis是因为总在github商看到这种小图标，虽然不知道是什么东东，但是觉得逼格特别高…<br><a href="https://travis-ci.org/sabrinaluo/tech" target="_blank" rel="external"><img src="https://travis-ci.org/sabrinaluo/tech.svg?branch=master" alt="Build Status"></a></p>
+<p>关于Hexo和github page这里就不讨论了，教程网上一搜一大堆。用travis属于进阶内容了，能搜到这篇文章的，应该也都具备了最基础的知识。</p>
+<p>为什么需要travis来自动部署博客呢，像我这种废话多的人，倾诉欲随时随地会喷发…然后如果当时手边没有电脑，或者有电脑了但不是我的电脑，欲火就被一盆水浇灭了…而有了travis之后呢，只要给我一台能上网的电脑，分分钟就能发博客并且更新到自己的网站…</p>
+<p><a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">具体教程（来自Hexo的作者Tommy）</a>网上已经有一些了，但不是很多，这里主要说一说其中容易遇到的坑。</p>
+<h3 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h3><p>注册一个travis账号，绑定github，并为相应的repo开启travis服务<br>在repo中添加<code>.travis.yml</code>文件，下面是我个人的配置。我是将source和public放在同一个repo的不同分支里，源文件放在master分支，生成后的网页放在gh-pages分支。<br><script src="//gist.github.com/d905eeed53d9368fdee6.js"></script></p>
+<pre><code>## 目录结构如下，其中.travis文件夹用于存放github的sshkey加密文件，以及ssh的相关配置
+└── blog
+    ├── _config.yml
+    ├── package.json
+    ├── README.md
+    ├── scaffolds
+    ├── source
+    │   └── _posts
+    ├── .travis
+    │   ├── id_rsa.enc
+    │   └── ssh_config
+    └── .travis.yml
+</code></pre><h3 id="u6CE8_u610F_u4E8B_u9879"><a href="#u6CE8_u610F_u4E8B_u9879" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>before_install:
+- openssl aes-256-cbc -K $encrypted_e011a6d7eebf_key -iv $encrypted_e011a6d7eebf_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
+</code></pre><ul>
+<li><strong>$encrypted_e011a6d7eebf_key</strong>这一串加密的key每个人都不同，请不要直接复制。请使用<br><code>$ travis encrypt-file ssh_key --add</code> 这条命令将相应的key写入<code>.travis.yml</code>中。</li>
+<li><strong>记得检查<code>.travis.yml</code>文件</strong>，因为在自动写入文件的过程中很可能出现了<strong>自动换行</strong>的问题（我是linuxmint 用webstorm遇到了这个问题），如果有换行的问题把换行符删除即可，否则会导致travis在命令跑到这里的时候出问题使得building failed。</li>
+<li>另外如果有将相应的文件移到相应的文件夹中，请记得在命令中修改相应的path</li>
+<li>如果你最后deploy的不是master分支，请在<code>packag.json</code>中使用下面的依赖<pre><code>&quot;hexo-deployer-git&quot;: &quot;hexojs/hexo-deployer-git#495fc6d&quot;
+</code></pre>hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。</li>
 </ul>
-<p>像我这样比较懒的人，最希望的就是能有一个在现实生活中认识的经验丰富的大神，这种弱鸡问题，一问就有答案了。然而我并不认识这样的大神。(ಥ_ಥ)</p>
-<p>直到后来无意中看到<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">阮一峰老师的SASS教程</a>，提到<strong>重要注释</strong>这个概念，受到一点启发，然后机智的我想到把感叹号直接翻译成英文，以’exclamation js comment’作为关键字来搜索，果然我不是一个人…（嗯，我变成了一条狗）<br><a href="http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files" target="_blank" rel="external">http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files</a></p>
-<blockquote>
-<p>我不是为了输赢，我就是认真 –罗永浩</p>
+<h3 id="travis-yml_u6587_u4EF6_u89E3_u91CA"><a href="#travis-yml_u6587_u4EF6_u89E3_u91CA" class="headerlink" title=".travis.yml文件解释"></a><code>.travis.yml</code>文件解释</h3><p>整个配置其实是告诉travis：</p>
+<ol>
+<li>使用node 4.0版本来build我的程序</li>
+<li>只有当master分支有commit的时候才自动部署</li>
+<li>在安装之前先解密ssh key以便获得github的写权限（这样才能push到gh-pages分支）；全局安装hexo（这样才能直接执行hexo命令）；配置git设定（这样才能用git）</li>
+<li>克隆主题<blockquote>
+<p>（如果想省略这一步，你可以把主题<code>themes</code>文件夹也放在博客repo的master分支中）</p>
 </blockquote>
-<hr>
-<p>对前端工程化稍微有点知识的，就会知道在最后deploy之前会有一个步骤是minify / uglify，这个过程中注释都会被删除，而这个以<code>/*!</code>开头的重要注释则会被保留，通常重要注释是用来注释版权之类的信息<a href="https://zoompf.com/blog/2009/11/jsmin-important-comments-and-copyright-violations" target="_blank" rel="external">^1</a></p>
+</li>
+<li>克隆gh-pages分支到<code>.deploy_git</code>文件夹<blockquote>
+<p>（hexo 默认会将生成的用于deploy的文件都放在这个文件夹；如果不需要gh-pages分支的相关commit记录，这一步可以省略。省略后该分支永远只有最近的一次commit…）</p>
+</blockquote>
+</li>
+<li>跑一下<code>hexo g</code>命令，看看是否会有错<blockquote>
+<p>请注意，这一步并不能保证博客生成的样式问题，只是查看主题是否有错误。如果你每次都是克隆主题，并不能保证你克隆的版本每次都能顺利生成所有文件，可能会存在bug</p>
+</blockquote>
+</li>
+<li>如果能够顺利生成网页则执行<code>hexo d</code>，将博客push到gh-pages分支 </li>
+</ol>
 
 </article>
 
