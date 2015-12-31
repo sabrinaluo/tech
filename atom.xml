@@ -4,7 +4,7 @@
   <subtitle><![CDATA[一个废话很多的程序媛]]></subtitle>
   <link href="/tech/atom.xml" rel="self"/>
   <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2015-12-29T10:07:45.839Z</updated>
+  <updated>2015-12-31T05:06:49.471Z</updated>
   <id>http://sabrinaluo.com/tech/</id>
   
   <author>
@@ -15,11 +15,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title><![CDATA[对JS类和继承的一些理解]]></title>
+    <link href="http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/</id>
+    <published>2015-12-31T03:36:54.000Z</published>
+    <updated>2015-12-31T05:06:49.471Z</updated>
+    <content type="html"><![CDATA[<p>本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看<a href="http://book.douban.com/subject/10546125/" target="_blank" rel="external">《JavaScript高级程序设计》</a>）。</p>
+<p>直到ES5，JS也还是一个没有类的语言，虽然ES6中可以使用class关键字，但据说也只是语法糖。(不知道好不好吃ԅ(¯﹃¯ԅ))</p>
+<h3 id="u7C7B_u7684_u5B9E_u73B0"><a href="#u7C7B_u7684_u5B9E_u73B0" class="headerlink" title="类的实现"></a>类的实现</h3><p>类的两个基本元素就是<strong>属性</strong>和<strong>方法</strong>。</p>
+<p>JS中类的实现有很多种，构造函数模式、原型模式等等，各有各的优缺点，最常用的是混合了构造函数和原型模式的混合模式。<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span> Person(<span class="keyword">name</span>) &#123;</span><br><span class="line">  this.<span class="keyword">name</span> = <span class="keyword">name</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> &#123;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="string">'Hi, '</span> + this.<span class="keyword">name</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用构造函数来构造<strong>属性</strong>，然后往原型对象添加<strong>方法</strong>。这样的好处是：</p>
+<ul>
+<li>每个实例之间不用共享属性，拥有各自独立的属性。也就可以避免当属性为引用类型（数组、对象）时，修改一个实例的属性会影响到其他实例的情况。</li>
+<li>每个实例之间共用原型对象上的方法，实现了函数复用。</li>
+</ul>
+<h3 id="u7EE7_u627F_u7684_u5B9E_u73B0"><a href="#u7EE7_u627F_u7684_u5B9E_u73B0" class="headerlink" title="继承的实现"></a>继承的实现</h3><p>JS中继承的实现也有很多种，借用构造函数，原型链等等。<br>子类继承父类，当然继承的就是父类的<strong>属性和方法</strong>。JS中继承的实现，最常用的也是混合模式。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  Person.call(<span class="keyword">this</span>, name);</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Student.prototype.constructor); <span class="comment">// Student</span></span><br><span class="line"></span><br><span class="line">Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(Student.prototype.constructor); <span class="comment">// Person</span></span><br><span class="line"></span><br><span class="line">Student.prototype.constructor = Student; <span class="comment">// 重写constructor</span></span><br><span class="line"></span><br><span class="line">Student.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"I'm "</span> + <span class="keyword">this</span>.age)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用<strong>借用构造函数</strong>的方式来继承<strong>属性</strong>，然后使用<strong>原型链</strong>来继承<strong>方法</strong>。通过将子类的原型对象指向父类的实例，子类的实例就可以通过原型链向上查找到父类原型上的方法。</p>
+<h3 id="u91CD_u5199_u5B50_u7C7B_u6784_u9020_u51FD_u6570_u7684_u610F_u4E49"><a href="#u91CD_u5199_u5B50_u7C7B_u6784_u9020_u51FD_u6570_u7684_u610F_u4E49" class="headerlink" title="重写子类构造函数的意义"></a>重写子类构造函数的意义</h3><p><code>Student.prototype = new Person();</code>这一步完全改变了Student原型对象的引用，<code>Student.prototype.constructor</code> 变为了Person原型对象的constructor。<br>个人觉得重写<code>Student.prototype.constructor = Student;</code>没有什么实际意义，可能只是<strong>约定俗成的一种潜规则</strong>。<br>人们通常可能已经习惯了使用new操作符的时候，构造函数的一致性<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Student.prototype.constructor = Student; 在上面的代码中注释掉这一句</span></span><br><span class="line"><span class="keyword">var</span> xiaobai = <span class="keyword">new</span> Student(<span class="string">'小白妹妹'</span>, <span class="number">10</span>);</span><br><span class="line">xiaobai.<span class="keyword">constructor</span>; <span class="comment">// Person</span></span><br></pre></td></tr></table></figure></p>
+<p>当你在代码中遇到上面这种情况，如果不去查看之前的代码的话，肯定会觉得奇怪，为什么明明通过Student构造函数new了一个Student实例，而这个实例，却说自己的构造函数是Person？！？！WTF？！</p>
+<h3 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h3><p>[1] <a href="http://stackoverflow.com/questions/4012998/what-it-the-significance-of-the-javascript-constructor-property" target="_blank" rel="external">http://stackoverflow.com/questions/4012998/what-it-the-significance-of-the-javascript-constructor-property</a></p>
+]]></content>
+    <summary type="html">
+    <![CDATA[<p>本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看<a href="http://book.douban.com/subject/10546125/" target="_blank" rel="external">《JavaScript高级程序设计》]]>
+    </summary>
+    
+      <category term="JS" scheme="http://sabrinaluo.com/tech/tags/JS/"/>
+    
+      <category term="prototype" scheme="http://sabrinaluo.com/tech/tags/prototype/"/>
+    
+      <category term="原型" scheme="http://sabrinaluo.com/tech/tags/%E5%8E%9F%E5%9E%8B/"/>
+    
+      <category term="继承" scheme="http://sabrinaluo.com/tech/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+  </entry>
+  
+  <entry>
     <title><![CDATA[利用travis自动部署hexo搭建在github的博客]]></title>
     <link href="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"/>
     <id>http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/</id>
     <published>2015-12-28T04:00:56.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>这篇应该属于不务正业系列…<br>自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。</p>
 <p><a href="https://travis-ci.org" target="_blank" rel="external">Travis</a>是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～</p>
 <p>最初知道travis是因为总在github商看到这种小图标，虽然不知道是什么东东，但是觉得逼格特别高…<br><a href="https://travis-ci.org/sabrinaluo/tech" target="_blank" rel="external"><img src="https://travis-ci.org/sabrinaluo/tech.svg?branch=master" alt="Build Status"></a></p>
@@ -92,7 +127,7 @@
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</id>
     <published>2015-12-24T07:08:49.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。</p>
 <p>关于合并多个提交，主要是要搞清楚<code>rebase</code>的用法。</p>
 <h3 id="u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log"><a href="#u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log" class="headerlink" title="查看提交历史，git log"></a>查看提交历史，git log</h3><p>首先你要知道自己想合并的是哪几个提交，可以使用<code>git log</code>命令来查看提交历史，假如最近4条历史如下：</p>
@@ -142,7 +177,7 @@ s ddbd8fd
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</id>
     <published>2015-12-24T06:58:32.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>为什么我每天都会有一些奇奇怪怪的需求…</p>
 <p>我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推<code>push -f</code>，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！</p>
 <h3 id="u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93"><a href="#u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：</p>
@@ -186,7 +221,7 @@ git merge repo2
     <link href="http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"/>
     <id>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</id>
     <published>2015-12-22T03:36:07.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>对promise这个概念之前已经有了一些浅显的理解，<a href="http://sabrinaluo.com/tech/2015/12/01/promise/">相关文章-&gt;戳这里</a>，最近又有了一些新的理解。</p>
 <h3 id="then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026"><a href="#then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026" class="headerlink" title=".then()的时候到底是在then什么…"></a>.then()的时候到底是在then什么…</h3><ul>
 <li>首先要理解…Promise是一个对象，有then()方法的对象</li>
@@ -271,7 +306,7 @@ p1.then(function() {
     <link href="http://sabrinaluo.com/tech/2015/12/21/hoisting/"/>
     <id>http://sabrinaluo.com/tech/2015/12/21/hoisting/</id>
     <published>2015-12-21T02:24:02.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>写了无数JS也依旧没听过变量提升…</p>
 <p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
 <p>我写了这么久JS，从来也不会先用变量后定义的呀，而且别的语言好像根本没有这个概念，难怪我从来没有遇到相关问题，难怪我没听过这个概念。难怪写强类型语言的各大神都是JS一生黑…</p>
@@ -318,7 +353,7 @@ test(); //调用这个函数，你会看到console中输出的是undefined
     <link href="http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/"/>
     <id>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</id>
     <published>2015-12-19T11:22:27.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…</p>
 <pre><code>function isType(type) {
   return function(obj) {
@@ -432,7 +467,7 @@ console.log(eating(&apos;亲爱的&apos;));
     <link href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"/>
     <id>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</id>
     <published>2015-12-16T03:00:27.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
 <p><strong><code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别</strong></p>
 <p>看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来</p>
@@ -521,7 +556,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"/>
     <id>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</id>
     <published>2015-12-15T02:55:13.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="external">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
 <p>简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（<em>最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！</em>），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！</p>
 <p>再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后<strong>“做一堆事”</strong>完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。</p>
@@ -611,7 +646,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"/>
     <id>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</id>
     <published>2015-12-14T06:39:35.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚马逊AWS云服务提供的一个NoSQL的数据库…</p>
 <p>在这里我必须安利一下Amazon家的服务真是业界良心：前不久，可能是因为我自己蠢，英文不好没看懂免费用一年的各种限制，也不知道写了什么奇怪的东东用自己的账号测试dynamoDB被扣了几刀，写邮件去投诉说你们不是免费吗为啥扣费，然后就得到回复解释了一下为啥扣钱，说我用超过限制了，然后表示个人账号里扣了的钱会<strong>退退退</strong>！（我说明了之后会用公司账号测试，请帮我关了我的个人账户）</p>
 <hr>
@@ -664,7 +699,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/"/>
     <id>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</id>
     <published>2015-12-14T06:15:06.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span><br><span class="line"> * EJS</span><br><span class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span><br><span class="line"> * MIT Licensed</span><br><span class="line"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> * Module dependencies.</span><br><span class="line"> */</span></span><br></pre></td></tr></table></figure></p>
 <p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="external">TJ写的EJS模板引擎</a></p>
 <p>我就在QQ群里问了这样一个问题：</p>
@@ -700,10 +735,10 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
   
   <entry>
     <title><![CDATA[GitHub Page如何绑定域名]]></title>
-    <link href="http://sabrinaluo.com/tech/2015/12/12/set-a-custom-domain-for-github-page/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/12/set-a-custom-domain-for-github-page/</id>
+    <link href="http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/"/>
+    <id>http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/</id>
     <published>2015-12-12T16:34:42.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" target="_blank" rel="external">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
 <hr>
 <p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
@@ -775,7 +810,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/11/x-wsse/"/>
     <id>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</id>
     <published>2015-12-11T09:08:38.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
 <p>关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与<a href="https://github.com/bouzuya/node-wsse" target="_blank" rel="external">node-wsse</a>的作者大战了好几个回合…</p>
 <hr>
@@ -809,7 +844,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/04/git-basic/"/>
     <id>http://sabrinaluo.com/tech/2015/12/04/git-basic/</id>
     <published>2015-12-04T03:40:04.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
 <p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="external">Version Control</a>)工具。</p>
 <p>版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是<del>机智地</del></p>
@@ -895,7 +930,7 @@ var a = 456;
     <link href="http://sabrinaluo.com/tech/2015/12/01/promise/"/>
     <id>http://sabrinaluo.com/tech/2015/12/01/promise/</id>
     <published>2015-12-01T10:46:26.000Z</published>
-    <updated>2015-12-29T10:07:45.839Z</updated>
+    <updated>2015-12-31T05:06:49.471Z</updated>
     <content type="html"><![CDATA[<p>（嫌我话多的可以直接看分割线之后的部分…）<br>以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现<a href="http://callbackhell.com/" target="_blank" rel="external">回调地狱(Callback Hell)</a>太坑爹…<br>为什么觉得异步坑爹？看看下面这个例子：</p>
 <pre><code class="javascript"><span class="comment">//以下用setTimeout()模拟一个请求</span>
 <span class="function"><span class="keyword">function</span> <span class="title">getName</span>(<span class="params"></span>) </span>{
