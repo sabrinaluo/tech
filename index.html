@@ -92,13 +92,13 @@
         <div class="btn-group btn-group-xs" role="group">
           <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
           <button type="button" class="btn btn-default">
-            16
+            17
           </button>
         </div>
         <div class="btn-group btn-group-xs" role="group">
           <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
           <button type="button" class="btn btn-default">
-            55
+            56
           </button>
         </div>
         <div class="btn-group btn-group-xs" role="group">
@@ -116,6 +116,57 @@
   <div class="row">
     <div class="col-sm-9">
       
+<h2><a href="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/">递归实现按顺序执行Promise</a></h2>
+<article>
+  <p>之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？</p>
+<p>网上搜到的大多数教程都是建一个数组<code>array</code>，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用<code>Promise.all(array)</code>。然而这只适用于数组中的<strong>promise对象不互相依赖</strong>的情况。</p>
+<h3 id="u95EE_u9898"><a href="#u95EE_u9898" class="headerlink" title="问题"></a>问题</h3><p>我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ <a href="https://developers.facebook.com/docs/graph-api/using-graph-api#paging" target="_blank" rel="external">Cursor-based Pagination</a>），API的Response如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">data</span>": <span class="value">[</span><br><span class="line">     ... Endpoint data is here</span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">paging</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">cursors</span>": <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">after</span>": <span class="value"><span class="string">"MTAxNTExOTQ1MjAwNzI5NDE="</span></span>,</span><br><span class="line">      "<span class="attribute">before</span>": <span class="value"><span class="string">"NDMyNzQyODI3OTQw"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">previous</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;before=NDMyNzQyODI3OTQw"</span></span>,</span><br><span class="line">    "<span class="attribute">next</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE="</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>简单的一个例子是，当我想要获取一个人的完整好友列表（Friend List），但是这个人好友太多了，分成了很多页。显然这些结果是互相依赖的。我必须先拿到第一页的<code>paging.next</code>，才能进行下一次请求。（别跟我说改query string <code>limit</code>后面的值，limit是有最大限制的=，=）</p>
+<h3 id="u89E3_u51B3_u65B9_u6848"><a href="#u89E3_u51B3_u65B9_u6848" class="headerlink" title="解决方案"></a>解决方案</h3><h5 id="u5F53_u77E5_u9053_u603B_u5171_u6709_u591A_u5C11_u9875_u7684_u65F6_u5019"><a href="#u5F53_u77E5_u9053_u603B_u5171_u6709_u591A_u5C11_u9875_u7684_u65F6_u5019" class="headerlink" title="当知道总共有多少页的时候"></a>当知道总共有多少页的时候</h5><p>(假设request是一个返回promise对象的函数,resolve的是上面的json)</p>
+<ul>
+<li>普通程序员这么做<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var url = <span class="string">'http://xxx'</span>; //first page</span><br><span class="line">request(url)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request(data.<span class="built_in">next</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request(data.<span class="built_in">next</span>);</span><br><span class="line">  &#125;) //....<span class="keyword">then</span> <span class="keyword">then</span> <span class="keyword">then</span>...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>其实这么一直then下去也是可以的…</p>
+<ul>
+<li>二逼程序员这么做<br>回调函数层层嵌套…Callback Hell。</li>
+</ul>
+<h5 id="u5F53_u4E0D_u77E5_u9053_u603B_u5171_u591A_u5C11_u9875_u7684_u65F6_u5019"><a href="#u5F53_u4E0D_u77E5_u9053_u603B_u5171_u591A_u5C11_u9875_u7684_u65F6_u5019" class="headerlink" title="当不知道总共多少页的时候"></a>当不知道总共多少页的时候</h5><p>不停then的方法就不行了，于是有了文艺的程序员</p>
+<ul>
+<li>文艺程序员这么做<br>首先要知道的一点是，当没有下一页的时候，返回的<code>next=null</code>，于是我们就有了递归的终止条件。<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">(url)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (url) &#123;</span><br><span class="line">    request(url).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span><br><span class="line">      run(data.paging.next);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://xxx'</span>; <span class="comment">// first page</span></span><br><span class="line">run(url);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="u778E_u626F"><a href="#u778E_u626F" class="headerlink" title="瞎扯"></a>瞎扯</h3><p>嵌套的Promise其实<strong>可能</strong>是反模式（anti-pattern）<a href="http://taoofcode.net/promise-anti-patterns/" target="_blank" rel="external">^1</a>，但是本文中的情况，如果不递归用嵌套的promise，我实在想不出别的办法来了（ (๑•́ ₃ •̀)宝宝心里苦，但宝宝不说）</p>
+<p>为什么说可能是呢，因为谷歌一搜“promise anti pattern nesting”，总能搜出一大堆关于嵌套promise是反模式的文章。然而bluebird的wiki<a href="https://github.com/petkaantonov/bluebird/wiki/Promise-anti-patterns" target="_blank" rel="external">^2</a>中，并没有提到嵌套的promise是反模式。</p>
+<p>所以到底是不是反模式，我也不知道=，=大概的想法是，在能不嵌套的时候就不要嵌套，否则还不如用callback。</p>
+<p>能不嵌套的情况是说，then的都是完全不同的promise，如果都是then类似的promise，那么，懒人还是递归吧…</p>
+
+</article>
+
+<div class="duoshuo">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="" data-title="递归实现按顺序执行Promise"
+       data-url="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name: "sabrinaluo"};
+    (function () {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';
+      ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
 <h2><a href="http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/">对generator和yield的一些理解</a></h2>
 <article>
   <p>于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯ES6的小白假装会写ES6…</p>
@@ -158,6 +209,10 @@
 <li><p>yield用在表达式中必须加括号扩起来，比如这样<code>var a = 1 + (yield 1+1)</code>，有点类似于把一个函数写到表达式中要用括号括起来</p>
 <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span> + (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="number">123</span>&#125;());</span><br></pre></td></tr></table></figure>
 </li>
+</ul>
+<h3 id="u597D_u5947_u5B9D_u5B9D"><a href="#u597D_u5947_u5B9D_u5B9D" class="headerlink" title="好奇宝宝"></a>好奇宝宝</h3><ul>
+<li>往<code>next()</code>里传入参数的用法，在什么场景下适用？</li>
+<li>通常是不是都通过<code>.next().value</code>来获取当前暂停的<code>yield</code>后面的表达式？</li>
 </ul>
 
 </article>
@@ -767,96 +822,6 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="" data-title="对module.exports和exports的一些理解"
        data-url="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/">AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置</a></h2>
-<article>
-  <p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="external">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
-<p>简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（<em>最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！</em>），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！</p>
-<p>再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后<strong>“做一堆事”</strong>完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。</p>
-<blockquote>
-<p>通常如果浏览器端使用ajax访问这个URL都会存在跨域的问题，API Gateway当然很贴心的提供了enable CORS选项！</p>
-</blockquote>
-<p>AWS Lambda目前支持python，JAVA，NodeJS。这个Lambda函数呢，只是叫Lambda而已，实际写起来跟函数式编程也没有太大的关系，以前怎么写现在也还是一样的写…神奇的是，Lambda之间可以相互调用，另外除了API Gateway之外，很多别的跟API Gateway无关的事件event也可以作为trigger（<em>比如当DynamoDB的某个Table新增一条用户记录的时候，调用一个名称为<code>sendWelcomeEmailToUser()</code>的Lambda函数，给用户发欢迎邮件</em>）</p>
-<p>那么，问题来了…<del>挖掘机技术哪家强</del><br>如何设置AWS API Gateway和AWS Lambda来实现开发/测试/生产环境的需求呢？难道要同一个功能的API建3个、同一个功能的lambda建3个？！</p>
-<hr>
-<p>以下所有内容都是在AWS的WEB UI中进行设置的。<em>（除了在UI中设置，还可以写Shell脚本去批量执行这些设置，当然啦，这个我还没学会…）</em></p>
-<p>哦，忘了说…首先你要有个…API，然后你还要有个Lambda。<br>假设：</p>
-<ul>
-<li><strong>API endpoint是 /stageTest，方法是<code>GET</code>。</strong> <em>（成就GET√  =(:з」∠)_）</em></li>
-<li><strong>Lambda名为stageTest。</strong> <em>（endpoint的名字和lambda名字可以不同…原谅我是取名无能星人…）</em></li>
-</ul>
-<h3 id="DEV_/_QA_/_PROD__u73AF_u5883_u7684_u8BBE_u7F6E"><a href="#DEV_/_QA_/_PROD__u73AF_u5883_u7684_u8BBE_u7F6E" class="headerlink" title="DEV / QA / PROD 环境的设置"></a>DEV / QA / PROD 环境的设置</h3><ol>
-<li><strong>为API Gateway创建不同的stage<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^1</a>，假设创建了3个分别是dev，qa，prod。</strong> <em>（教程是官方英文的，点引用的链接就可以看到，憋让我翻译，我懒…我知道还有pre-prod，多加一个下面的解释就得多写好多字(ಥ_ಥ)）</em><blockquote>
-<p>设置了stage之后你的api endpoin看起来大概长这样：</p>
-<ul>
-<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/dev</aws-region></aws-apiid></li>
-<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/qa</aws-region></aws-apiid></li>
-<li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/prod</aws-region></aws-apiid></li>
-</ul>
-</blockquote>
-</li>
-<li><strong>为每个的Stage设置stageVariables<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^2</a>，假设为每个Stage都设置了一个名为env的变量</strong><ul>
-<li>dev这个stage中env变量的值为DEV</li>
-<li>qa这个stage中env变量的值为QA</li>
-<li>prod这个stage中env变量的值为PROD</li>
-</ul>
-</li>
-<li><strong>Lambda stageTest()函数创建不同的alias<a href="http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html" target="_blank" rel="external">^3</a>，假设创建了3个分别是DEV，QA，PROD，分别指向不同的版本。</strong><blockquote>
-<ul>
-<li>在每次deploy后，都是$LATEST版本，点action&gt;publish new version发布不同的版本</li>
-<li>建议DEV指向$LATEST版本，QA和PROD指向其他稳定的版本</li>
-<li>为Lambda创建了alias之后，其实这个lambda访问的名称就有了以下四种：<code>stageTest</code>，<code>stageTest:DEV</code>，<code>stageTest:QA</code>，<code>stageTest:PROD</code>，其中<code>stageTest</code>永远指向$LATEST版本，其他指向之前设置的各个版本</li>
-</ul>
-</blockquote>
-</li>
-<li><strong>整合API /stageTest 的GET方法与Lambda stageTest()<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html" target="_blank" rel="external">^5</a></strong><ul>
-<li>首先在API Gateway的界面中设置每个API方法的<strong>Integration Request</strong>：Integration Type选择Lambda Function；Lambda Function填<code>stageTest:${stageVariables.env}</code>，<strong>${stageVariables.env}</strong>就是第2步中，设置的变量。</li>
-<li>设置Lambda Function名称的时候一定要记得点旁边的√保存，保存的时候，AWS会弹出一个对话框，需要给函数加上权限才能使用stageVariables变量。加的时候记得要执行三次命令，也就是在AWS给出的命令的对应的位置改成 <code>stageTest:DEV</code>，<code>stageTest:QA</code>，<code>stageTest:PROD</code> 每个执行一次。</li>
-<li>执行以上命令之前，你必须：<ul>
-<li>安装AWS CLI</li>
-<li>执行命令<code>aws configure</code>，填写你的AWS ID和key，设施default region为你的lambda function所在的region</li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>那么，问题又来了…</p>
-<ul>
-<li>如果你已经部署了很多lambda和api却没有使用stage的话…似乎是不太可能手动去AWS界面上一个一个设置的</li>
-<li>就算你已经在使用stage了，似乎也不太可能每次都手动去AWS界面上一个一个deploy最新的版本以及改变alias指向的版本的…</li>
-</ul>
-<p>这个时候，你就必须研究<a href="https://aws.amazon.com/cli/" target="_blank" rel="external">AWS CLI</a>，然后写shell以及借助其他工具来进行自动化部署了…</p>
-<p>其他参考：</p>
-<ul>
-<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html</a></li>
-<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference</a></li>
-</ul>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置"
-       data-url="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
