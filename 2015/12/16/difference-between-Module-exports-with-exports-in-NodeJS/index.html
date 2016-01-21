@@ -1,125 +1,99 @@
 <!DOCTYPE>
 <html lang="zh-CN">
+
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>对module.exports和exports的一些理解</title>
+  <title>
+    对module.exports和exports的一些理解 | 小白妹妹写代码
+  </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
-  <meta name="keywords" content="Module.exports,NodeJS,exports,模块导出">
+  <meta name="keywords" content="
+  Module.exports,NodeJS,exports,模块导出
+  ">
   
   <meta name="author" content="Sabrina">
 
+  <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
-<body>
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
-    </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2">This website</span>
-            <input type="text" class="form-control" placeholder="search">
-          </div>
-        </div>
+<body>
+<nav>
+  <div class="container">
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form>
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input type="text" placeholder="Search">
+        </label>
       </form>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/tech/">Home</a></li>
-        <li><a href="#">Archieve</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">
-            <i class="fa fa-rss"></i>
-          </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
-            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
-            <li role="separator" class="divider"></li>
-            <li>
-              <a href="#">
-                <i class="fa fa-qq"></i>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">I have nothing to say</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
-    <!-- /.navbar-collapse -->
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+    </ul>
   </div>
-  <!-- /.container-fluid -->
 </nav>
+
 <main class="container">
   <header>
-  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
-    <div class="col-sm-6 ">
-      <h2 style="margin-bottom:0">
-        <i class="fa fa-book text-muted"></i>
-        <a href="/tech/">小白妹妹写代码</a>
-      </h2>
-      <p class="text-muted">
-        我这么可爱一定是男孩子
-      </p>
-
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
+      <a href="/" class="btn btn-group-right"> 17 </a>
     </div>
-    <div class="col-sm-6 hidden-xs" style="padding-right:0">
-      <div class="pull-right" style="line-height:73px;">
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
-          <button type="button" class="btn btn-default">
-            17
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
-          <button type="button" class="btn btn-default">
-            56
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
-          <button type="button" class="btn btn-default">
-            0
-          </button>
-        </div>
-        <!--end btn-group-->
 
-      </div>
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
+      <a href="/" class="btn btn-group-right"> 56 </a>
+    </div>
+
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-list-ul"></i> Categories </a>
+      <a href="/"
+         class="btn btn-group-right"> 0 </a>
     </div>
   </div>
 </header>
-  <div class="row">
-    <div class="col-sm-9">
-      <h2><a href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/">对module.exports和exports的一些理解</a></h2>
-<article>
-  <p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
+
+
+<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
+  <h3>
+    <i class="fa fa-user"></i>
+     <a>Sabrina</a>
+    <span>
+      <i class="fa fa-pencil"></i> Published: 2015-12-16 11:00:27
+      
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-01-21 18:53:06
+      
+    </span>
+  </h3>
+  <article>
+    <h1>对module.exports和exports的一些理解</h1>
+    <p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
 <p><strong><code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别</strong></p>
 <p>看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来</p>
 <p>关于Module.exports和exports有什么区别，网上一搜一大把，但是说的都太复杂了…<br>听说exports是Module.exports对象的一个引用(reference)<a href="https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_exports_alias" target="_blank" rel="external">^1</a>，什么是引用？！…_(:з」∠)_</p>
@@ -187,7 +161,9 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
 </ul>
 <p>感觉自己说的还是挺清楚哒～<br>不管你清不清楚，我反正是清楚了。_(:з」∠)_</p>
 
-</article>
+  </article>
+</div>
+
 
 <div class="duoshuo">
   <!-- 多说评论框 start -->
@@ -212,49 +188,22 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
 
 
 
-
-    </div>
-    <div class="col-sm-3">
-      
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>About Me</h4>
-      <p>
-        123
-      </p>
-    </div>
+</main>
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    <li><a href="undefined">Github</a></li>
+    <li><a href="undefined">Weibo</li>
+    <li><a href="undefined">Linkedin</a></li>
+  </ul>
+  <div class="theme-info">Theme <a
+          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
+          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Recent Post</h4>
-    </div>
-  </div>
-
-
-  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
-
-    <div class="col-sm-12">
-      <h4>Categories</h4> 123
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Tags</h4>
-    </div>
-  </div>
-
-
-    </div>
-  </div>
-  <footer>
-theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a href="http://github.com/sabrinaluo">sabrinaluo</a> | powered by Hexo
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>
 
-</main>
-</body>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -276,4 +225,5 @@ theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by 
 
 
 
+</body>
 </html>

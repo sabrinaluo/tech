@@ -1,889 +1,208 @@
 <!DOCTYPE>
 <html lang="zh-CN">
+
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>小白妹妹写代码 | 一个废话很多的程序媛</title>
+  <title>
+    小白妹妹写代码
+  </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="author" content="Sabrina">
 
+  <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
+
 <body>
-<nav class="navbar navbar-default">
+<nav>
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2">This website</span>
-            <input type="text" class="form-control" placeholder="search">
-          </div>
-        </div>
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form>
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input type="text" placeholder="Search">
+        </label>
       </form>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/tech/">Home</a></li>
-        <li><a href="#">Archieve</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">
-            <i class="fa fa-rss"></i>
-          </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
-            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
-            <li role="separator" class="divider"></li>
-            <li>
-              <a href="#">
-                <i class="fa fa-qq"></i>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">I have nothing to say</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
-    <!-- /.navbar-collapse -->
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+    </ul>
   </div>
-  <!-- /.container-fluid -->
 </nav>
+
 <main class="container">
-  <header>
-  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
-    <div class="col-sm-6 ">
-      <h2 style="margin-bottom:0">
-        <i class="fa fa-book text-muted"></i>
-        <a href="/tech/">小白妹妹写代码</a>
-      </h2>
-      <p class="text-muted">
-        我这么可爱一定是男孩子
-      </p>
+  
+<div class="column about-me  read-more">
+  <img class="arvatar" src="https://octodex.github.com/images/baracktocat.jpg">
+  <h1 class="blog-info">
+    <span class="blog-info-title">
+      小白妹妹写代码
+    </span>
+    <span class="blog-info-author">
+      Sabrina
+    </span>
+  </h1>
+  <ul class="details">
+    <li><i class="fa fa-map-marker"></i>null</li>
+    <li>
+      <i class="fa fa-envelope-o"></i><a
+              href="mailto:null">null</a>
+    </li>
+    <li>
+      <i class="fa fa-link"></i><a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
+    </li>
+    <li><i class="fa fa-clock-o"></i>Started from 14th Dec 2015
+    </li>
+  </ul>
 
-    </div>
-    <div class="col-sm-6 hidden-xs" style="padding-right:0">
-      <div class="pull-right" style="line-height:73px;">
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
-          <button type="button" class="btn btn-default">
-            17
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
-          <button type="button" class="btn btn-default">
-            56
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
-          <button type="button" class="btn btn-default">
-            0
-          </button>
-        </div>
-        <!--end btn-group-->
+  <ul class="stat">
+    <li>
+      <a href="/tech/archives">
+        <div class="stat-count">17</div>
+        <div class="stat-name">Posts</div>
+      </a>
+    </li>
+    <li>
+      <a href="/tech/tags">
+        <div class="stat-count">56</div>
+        <div class="stat-name">Tags</div>
+      </a>
+    </li>
+    <li>
+      <a href="/tech/categories">
+        <div class="stat-count">0</div>
+        <div class="stat-name">Categories</div>
+      </a>
+    </li>
+  </ul>
 
-      </div>
-    </div>
-  </div>
-</header>
-  <div class="row">
-    <div class="col-sm-9">
+  <ul class="social-network">
+    <li>
+      <a href="null"><i class="fa fa-github"></i></a>
+    </li>
+    <li>
+      <a href="null"><i class="fa fa-weibo"></i></a>
+    </li>
+    <li>
+      <a href="null"> <i class="fa fa-linkedin"></i></a>
+    </li>
+  </ul>
+</div>
+
+<div class="column recent-post read-more">
+  <div class="boxed-group">
+    <h3>
+      Recent Post
+    </h3>
+    <ul>
       
-<h2><a href="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/">递归实现按顺序执行Promise</a></h2>
-<article>
-  <p>之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？</p>
-<p>网上搜到的大多数教程都是建一个数组<code>array</code>，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用<code>Promise.all(array)</code>。然而这只适用于数组中的<strong>promise对象不互相依赖</strong>的情况。</p>
-<h3 id="u95EE_u9898"><a href="#u95EE_u9898" class="headerlink" title="问题"></a>问题</h3><p>我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ <a href="https://developers.facebook.com/docs/graph-api/using-graph-api#paging" target="_blank" rel="external">Cursor-based Pagination</a>），API的Response如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">data</span>": <span class="value">[</span><br><span class="line">     ... Endpoint data is here</span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">paging</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">cursors</span>": <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">after</span>": <span class="value"><span class="string">"MTAxNTExOTQ1MjAwNzI5NDE="</span></span>,</span><br><span class="line">      "<span class="attribute">before</span>": <span class="value"><span class="string">"NDMyNzQyODI3OTQw"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">previous</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;before=NDMyNzQyODI3OTQw"</span></span>,</span><br><span class="line">    "<span class="attribute">next</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE="</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>简单的一个例子是，当我想要获取一个人的完整好友列表（Friend List），但是这个人好友太多了，分成了很多页。显然这些结果是互相依赖的。我必须先拿到第一页的<code>paging.next</code>，才能进行下一次请求。（别跟我说改query string <code>limit</code>后面的值，limit是有最大限制的=，=）</p>
-<h3 id="u89E3_u51B3_u65B9_u6848"><a href="#u89E3_u51B3_u65B9_u6848" class="headerlink" title="解决方案"></a>解决方案</h3><h5 id="u5F53_u77E5_u9053_u603B_u5171_u6709_u591A_u5C11_u9875_u7684_u65F6_u5019"><a href="#u5F53_u77E5_u9053_u603B_u5171_u6709_u591A_u5C11_u9875_u7684_u65F6_u5019" class="headerlink" title="当知道总共有多少页的时候"></a>当知道总共有多少页的时候</h5><p>(假设request是一个返回promise对象的函数,resolve的是上面的json)</p>
-<ul>
-<li>普通程序员这么做<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var url = <span class="string">'http://xxx'</span>; //first page</span><br><span class="line">request(url)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request(data.<span class="built_in">next</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request(data.<span class="built_in">next</span>);</span><br><span class="line">  &#125;) //....<span class="keyword">then</span> <span class="keyword">then</span> <span class="keyword">then</span>...</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>其实这么一直then下去也是可以的…</p>
-<ul>
-<li>二逼程序员这么做<br>回调函数层层嵌套…Callback Hell。</li>
-</ul>
-<h5 id="u5F53_u4E0D_u77E5_u9053_u603B_u5171_u591A_u5C11_u9875_u7684_u65F6_u5019"><a href="#u5F53_u4E0D_u77E5_u9053_u603B_u5171_u591A_u5C11_u9875_u7684_u65F6_u5019" class="headerlink" title="当不知道总共多少页的时候"></a>当不知道总共多少页的时候</h5><p>不停then的方法就不行了，于是有了文艺的程序员</p>
-<ul>
-<li>文艺程序员这么做<br>首先要知道的一点是，当没有下一页的时候，返回的<code>next=null</code>，于是我们就有了递归的终止条件。<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">(url)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (url) &#123;</span><br><span class="line">    request(url).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span><br><span class="line">      run(data.paging.next);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://xxx'</span>; <span class="comment">// first page</span></span><br><span class="line">run(url);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="u778E_u626F"><a href="#u778E_u626F" class="headerlink" title="瞎扯"></a>瞎扯</h3><p>嵌套的Promise其实<strong>可能</strong>是反模式（anti-pattern）<a href="http://taoofcode.net/promise-anti-patterns/" target="_blank" rel="external">^1</a>，但是本文中的情况，如果不递归用嵌套的promise，我实在想不出别的办法来了（ (๑•́ ₃ •̀)宝宝心里苦，但宝宝不说）</p>
-<p>为什么说可能是呢，因为谷歌一搜“promise anti pattern nesting”，总能搜出一大堆关于嵌套promise是反模式的文章。然而bluebird的wiki<a href="https://github.com/petkaantonov/bluebird/wiki/Promise-anti-patterns" target="_blank" rel="external">^2</a>中，并没有提到嵌套的promise是反模式。</p>
-<p>所以到底是不是反模式，我也不知道=，=大概的想法是，在能不嵌套的时候就不要嵌套，否则还不如用callback。</p>
-<p>能不嵌套的情况是说，then的都是完全不同的promise，如果都是then类似的promise，那么，懒人还是递归吧…</p>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="递归实现按顺序执行Promise"
-       data-url="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/">对generator和yield的一些理解</a></h2>
-<article>
-  <p>于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯ES6的小白假装会写ES6…</p>
-<p>简单的看了一下相关的概念，觉得还不太理解…就好像最开始看<em>原型链</em>一样，花了一年多才慢慢理解继承啊什么的，但<code>constructor</code>和<code>__proto__</code>之类的东东我也还（4声）没整明白…真是资质愚钝QAQ</p>
-<h3 id="generator_function"><a href="#generator_function" class="headerlink" title="generator function"></a>generator function</h3><p>一个generator函数大概长这样：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">function* <span class="title">foo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="number">111</span>);</span><br><span class="line">  yield <span class="number">123</span>;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="number">222</span>);</span><br><span class="line">  yield <span class="number">456</span>;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="number">333</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var a = foo(<span class="number">3</span>); <span class="comment">//此时函数不会执行</span></span><br><span class="line">a.next(); <span class="comment">//此时函数执行到第一句含有yield的语句时就暂停了，也就是只打印了 111</span></span><br><span class="line">a.next(); <span class="comment">//此时函数执行到第二句含有yield的语句时暂停，打印了 222</span></span><br><span class="line">a.next(); <span class="comment">//已经没有yield语句了，将会打印333，函数执行完毕</span></span><br><span class="line">a.next(); <span class="comment">//已经没有yiedl语句了，什么也不会打印</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>定义的时候多加一个星星号<strong>function*</strong></li>
-<li>generator函数中通常都会有yield，如果没有yield那就定义一个普通函数就好了</li>
-<li>函数不会立即执行，使用<code>.next()</code>方法时，函数才会执行；</li>
-</ul>
-<h3 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h3><p>yield到底是一个什么东东呢？操作符？对象？还是别的什么，这个我还没搞明白。</p>
-<p>看看阮一峰老师的这个例子，有助于理解参数的一些问题：<br><figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function* foo(x) &#123;</span><br><span class="line">  var y = <span class="number">2</span> * (<span class="keyword">yield</span> (x + <span class="number">1</span>));</span><br><span class="line">  var z = <span class="keyword">yield</span> (y / <span class="number">3</span>);</span><br><span class="line">  <span class="keyword">return</span> (x + y + z);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var a = foo(<span class="number">5</span>);</span><br><span class="line">a.<span class="keyword">next</span>(); <span class="regexp">//</span> <span class="constant">Object</span>&#123;<span class="symbol">value:</span><span class="number">6</span>, <span class="symbol">done:</span><span class="literal">false</span>&#125;</span><br><span class="line">a.<span class="keyword">next</span>(); <span class="regexp">//</span> <span class="constant">Object</span>&#123;<span class="symbol">value:</span><span class="constant">NaN</span>, <span class="symbol">done:</span><span class="literal">false</span>&#125;</span><br><span class="line">a.<span class="keyword">next</span>(); <span class="regexp">//</span> <span class="constant">Object</span>&#123;<span class="symbol">value:</span><span class="constant">NaN</span>, <span class="symbol">done:</span><span class="literal">false</span>&#125;</span><br><span class="line"></span><br><span class="line">var b = foo(<span class="number">5</span>);</span><br><span class="line">b.<span class="keyword">next</span>(); <span class="regexp">//</span> &#123; <span class="symbol">value:</span><span class="number">6</span>, <span class="symbol">done:</span><span class="literal">false</span> &#125; ，此时x=<span class="number">5</span>，var y还没执行</span><br><span class="line">b.<span class="keyword">next</span>(<span class="number">12</span>); <span class="regexp">//</span> &#123; <span class="symbol">value:</span><span class="number">8</span>, <span class="symbol">done:</span><span class="literal">false</span> &#125;，此时x=<span class="number">5</span>，y=<span class="number">24</span>，var z还没执行</span><br><span class="line">b.<span class="keyword">next</span>(<span class="number">13</span>); <span class="regexp">//</span> &#123; <span class="symbol">value:</span><span class="number">42</span>, <span class="symbol">done:</span><span class="literal">true</span> &#125;，此时x=<span class="number">5</span>，y=<span class="number">24</span>，</span><br></pre></td></tr></table></figure></p>
-<p>当上面的函数运行<code>b.next(12)</code>这一句时，x=5，y=24，var z还没执行，返回对象为{ value:8, done:false }</p>
-<blockquote>
-<p>Q: 为什么y=24？<br>A: 因为第二个next方法的参数传给<em>上一个yield</em>，也就是第一个yield，所以var y = 2 * 12</p>
-<p>Q: 为什么返回对象value为8？<br>A: 因为第二个yield后面跟的表达式是 y/3，y=24，所以返回的对象value为8</p>
-</blockquote>
-<ul>
-<li>yield是一个<strong>暂停的标记</strong>，使用<code>.next()</code>方法运行函数时，遇到yield就会暂停</li>
-<li>yield用在表达式中必须加括号扩起来，比如这样<code>var a = 1 + (yield 1+1)</code></li>
-<li>调用<code>.next()</code>方法时会返回一个对象，长这样：<code>{ value: xxx, done: false }</code><ul>
-<li>有两个key，一个是value，一个是done</li>
-<li>value的值是，该次暂停遇到的这个<code>yield</code> 后面跟的表达式的值。比如上面的例子中第一次调用<code>b.next()</code>时，遇到第一个yield而暂停，<code>var y = 2 * (yield (x + 1));</code>，yield后面跟的表达式是(x+1)，所以返回的对象value是6</li>
-<li>当<code>done</code>为<code>true</code>说明后面没有yield了，之后再调用<code>.next()</code>方法返回的value都是<code>undefined</code></li>
-<li>如果generator函数没有返回值，那么最后一个yield之后再调用的<code>.next()</code>方法返回的就是<code>{ value:undefined, done: true }</code></li>
-<li>如果generator函数有返回值，那么最后一个yield之后再调用<code>.next()</code>方法返回的对象value是函数的返回值</li>
-</ul>
-</li>
-<li>调用<code>.next()</code>方法时，可以传入参数<ul>
-<li>该参数是传给<strong>上一个yield</strong>，所以第一次调用<code>.next()</code>时不能传入参数。<em>可能会报错，也可能参数会被忽略，取决于浏览器是怎么实现的</em></li>
-</ul>
-</li>
-<li>不传入参数时，yield语句返回的值为<code>undefined</code></li>
-</ul>
-<h3 id="u778E_u626F"><a href="#u778E_u626F" class="headerlink" title="瞎扯"></a>瞎扯</h3><ul>
-<li>感觉yield像一个“函数”，执行的时候遇到这个函数就会暂停</li>
-<li><p>这个函数返回的值等于<code>.next(xxx)</code>调用时传入的参数xxx，如果没有参数，返回值就是<code>undefined</code></p>
-<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function* foo() &#123;</span><br><span class="line">  console.log(<span class="keyword">yield</span>);</span><br><span class="line">  console.log(<span class="keyword">yield</span>);</span><br><span class="line">&#125;</span><br><span class="line">var a=foo();</span><br><span class="line">a.<span class="keyword">next</span>(); <span class="regexp">//</span> 遇到第一个<span class="keyword">yield</span>暂停，什么也不打印</span><br><span class="line">a.<span class="keyword">next</span>(); <span class="regexp">//</span> 遇到第二个<span class="keyword">yield</span>暂停，打印上一句console.log(<span class="keyword">yield</span>)，由于没有传入参数，<span class="keyword">yield</span>返回undefined</span><br><span class="line">a.<span class="keyword">next</span>(<span class="string">'hello'</span>); <span class="regexp">//</span>后面没有<span class="keyword">yield</span>了，函数执行完毕，打印第二个console.log，由于传入参数，将会打印出hello</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>yield用在表达式中必须加括号扩起来，比如这样<code>var a = 1 + (yield 1+1)</code>，有点类似于把一个函数写到表达式中要用括号括起来</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span> + (<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;<span class="keyword">return</span> <span class="number">123</span>&#125;());</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="u597D_u5947_u5B9D_u5B9D"><a href="#u597D_u5947_u5B9D_u5B9D" class="headerlink" title="好奇宝宝"></a>好奇宝宝</h3><ul>
-<li>往<code>next()</code>里传入参数的用法，在什么场景下适用？</li>
-<li>通常是不是都通过<code>.next().value</code>来获取当前暂停的<code>yield</code>后面的表达式？</li>
-</ul>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="对generator和yield的一些理解"
-       data-url="http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/">对JS类和继承的一些理解</a></h2>
-<article>
-  <p>本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看<a href="http://book.douban.com/subject/10546125/" target="_blank" rel="external">《JavaScript高级程序设计》</a>）。</p>
-<p>直到ES5，JS也还是一个没有类的语言，虽然ES6中可以使用class关键字，但据说也只是语法糖。(不知道好不好吃ԅ(¯﹃¯ԅ))</p>
-<h3 id="u7C7B_u7684_u5B9E_u73B0"><a href="#u7C7B_u7684_u5B9E_u73B0" class="headerlink" title="类的实现"></a>类的实现</h3><p>类的两个基本元素就是<strong>属性</strong>和<strong>方法</strong>。</p>
-<p>JS中类的实现有很多种，构造函数模式、原型模式等等，各有各的优缺点，最常用的是混合了构造函数和原型模式的混合模式。<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span></span> Person(<span class="keyword">name</span>) &#123;</span><br><span class="line">  this.<span class="keyword">name</span> = <span class="keyword">name</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.sayHi = <span class="function"><span class="keyword">function</span><span class="params">()</span></span> &#123;</span><br><span class="line">  console.<span class="built_in">log</span>(<span class="string">'Hi, '</span> + this.<span class="keyword">name</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用构造函数来构造<strong>属性</strong>，然后往原型对象添加<strong>方法</strong>。这样的好处是：</p>
-<ul>
-<li>每个实例之间不用共享属性，拥有各自独立的属性。也就可以避免当属性为引用类型（数组、对象）时，修改一个实例的属性会影响到其他实例的情况。</li>
-<li>每个实例之间共用原型对象上的方法，实现了函数复用。</li>
-</ul>
-<h3 id="u7EE7_u627F_u7684_u5B9E_u73B0"><a href="#u7EE7_u627F_u7684_u5B9E_u73B0" class="headerlink" title="继承的实现"></a>继承的实现</h3><p>JS中继承的实现也有很多种，借用构造函数，原型链等等。<br>子类继承父类，当然继承的就是父类的<strong>属性和方法</strong>。JS中继承的实现，最常用的也是混合模式。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  Person.call(<span class="keyword">this</span>, name);</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Student.prototype.constructor); <span class="comment">// Student</span></span><br><span class="line"></span><br><span class="line">Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(Student.prototype.constructor); <span class="comment">// Person</span></span><br><span class="line"></span><br><span class="line">Student.prototype.constructor = Student; <span class="comment">// 重写constructor</span></span><br><span class="line"></span><br><span class="line">Student.prototype.sayAge = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">"I'm "</span> + <span class="keyword">this</span>.age)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用<strong>借用构造函数</strong>的方式来继承<strong>属性</strong>，然后使用<strong>原型链</strong>来继承<strong>方法</strong>。通过将子类的原型对象指向父类的实例，子类的实例就可以通过原型链向上查找到父类原型上的方法。</p>
-<h3 id="u91CD_u5199_u5B50_u7C7B_u6784_u9020_u51FD_u6570_u7684_u610F_u4E49"><a href="#u91CD_u5199_u5B50_u7C7B_u6784_u9020_u51FD_u6570_u7684_u610F_u4E49" class="headerlink" title="重写子类构造函数的意义"></a>重写子类构造函数的意义</h3><p><code>Student.prototype = new Person();</code>这一步完全改变了Student原型对象的引用，<code>Student.prototype.constructor</code> 变为了Person原型对象的constructor。<br>个人觉得重写<code>Student.prototype.constructor = Student;</code>没有什么实际意义，可能只是<strong>约定俗成的一种潜规则</strong>。<br>人们通常可能已经习惯了使用new操作符的时候，构造函数的一致性<br><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Student.prototype.constructor = Student; 在上面的代码中注释掉这一句</span></span><br><span class="line"><span class="keyword">var</span> xiaobai = <span class="keyword">new</span> Student(<span class="string">'小白妹妹'</span>, <span class="number">10</span>);</span><br><span class="line">xiaobai.<span class="keyword">constructor</span>; <span class="comment">// Person</span></span><br></pre></td></tr></table></figure></p>
-<p>当你在代码中遇到上面这种情况，如果不去查看之前的代码的话，肯定会觉得奇怪，为什么明明通过Student构造函数new了一个Student实例，而这个实例，却说自己的构造函数是Person？！？！WTF？！</p>
-<h3 id="u53C2_u8003"><a href="#u53C2_u8003" class="headerlink" title="参考"></a>参考</h3><p>[1] <a href="http://stackoverflow.com/questions/4012998/what-it-the-significance-of-the-javascript-constructor-property" target="_blank" rel="external">http://stackoverflow.com/questions/4012998/what-it-the-significance-of-the-javascript-constructor-property</a></p>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="对JS类和继承的一些理解"
-       data-url="http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/">利用travis自动部署hexo搭建在github的博客</a></h2>
-<article>
-  <p>这篇应该属于不务正业系列…<br>自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。</p>
-<p><a href="https://travis-ci.org" target="_blank" rel="external">Travis</a>是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～</p>
-<p>最初知道travis是因为总在github商看到这种小图标，虽然不知道是什么东东，但是觉得逼格特别高…<br><a href="https://travis-ci.org/sabrinaluo/tech" target="_blank" rel="external"><img src="https://travis-ci.org/sabrinaluo/tech.svg?branch=master" alt="Build Status"></a></p>
-<p>关于Hexo和github page这里就不讨论了，教程网上一搜一大堆。用travis属于进阶内容了，能搜到这篇文章的，应该也都具备了最基础的知识。</p>
-<p>为什么需要travis来自动部署博客呢，像我这种废话多的人，倾诉欲随时随地会喷发…然后如果当时手边没有电脑，或者有电脑了但不是我的电脑，欲火就被一盆水浇灭了…而有了travis之后呢，只要给我一台能上网的电脑，分分钟就能发博客并且更新到自己的网站…</p>
-<p><a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">具体教程（来自Hexo的作者Tommy）</a>网上已经有一些了，但不是很多，这里主要说一说其中容易遇到的坑。</p>
-<h3 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h3><p>注册一个travis账号，绑定github，并为相应的repo开启travis服务<br>在repo中添加<code>.travis.yml</code>文件，下面是我个人的配置。我是将source和public放在同一个repo的不同分支里，源文件放在master分支，生成后的网页放在gh-pages分支。<br><script src="//gist.github.com/d905eeed53d9368fdee6.js"></script></p>
-<pre><code>## 目录结构如下，其中.travis文件夹用于存放github的sshkey加密文件，以及ssh的相关配置
-└── blog
-    ├── _config.yml
-    ├── package.json
-    ├── README.md
-    ├── scaffolds
-    ├── source
-    │   └── _posts
-    ├── .travis
-    │   ├── id_rsa.enc
-    │   └── ssh_config
-    └── .travis.yml
-</code></pre><h3 id="u6CE8_u610F_u4E8B_u9879"><a href="#u6CE8_u610F_u4E8B_u9879" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>before_install:
-- openssl aes-256-cbc -K $encrypted_e011a6d7eebf_key -iv $encrypted_e011a6d7eebf_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
-</code></pre><ul>
-<li><strong>$encrypted_e011a6d7eebf_key</strong>这一串加密的key每个人都不同，请不要直接复制。请使用<br><code>$ travis encrypt-file ssh_key --add</code> 这条命令将相应的key写入<code>.travis.yml</code>中。</li>
-<li><strong>记得检查<code>.travis.yml</code>文件</strong>，因为在自动写入文件的过程中很可能出现了<strong>自动换行</strong>的问题（我是linuxmint 用webstorm遇到了这个问题），如果有换行的问题把换行符删除即可，否则会导致travis在命令跑到这里的时候出问题使得building failed。</li>
-<li>另外如果有将相应的文件移到相应的文件夹中，请记得在命令中修改相应的path</li>
-<li>如果你最后deploy的不是master分支，请在<code>packag.json</code>中使用下面的依赖<pre><code>&quot;hexo-deployer-git&quot;: &quot;hexojs/hexo-deployer-git#495fc6d&quot;
-</code></pre>hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。</li>
-</ul>
-<h3 id="travis-yml_u6587_u4EF6_u89E3_u91CA"><a href="#travis-yml_u6587_u4EF6_u89E3_u91CA" class="headerlink" title=".travis.yml文件解释"></a><code>.travis.yml</code>文件解释</h3><p>整个配置其实是告诉travis：</p>
-<ol>
-<li>使用node 4.0版本来build我的程序</li>
-<li>只有当master分支有commit的时候才自动部署</li>
-<li>在安装之前先解密ssh key以便获得github的写权限（这样才能push到gh-pages分支）；全局安装hexo（这样才能直接执行hexo命令）；配置git设定（这样才能用git）</li>
-<li>克隆主题<blockquote>
-<p>（如果想省略这一步，你可以把主题<code>themes</code>文件夹也放在博客repo的master分支中）</p>
-</blockquote>
-</li>
-<li>克隆gh-pages分支到<code>.deploy_git</code>文件夹<blockquote>
-<p>（hexo 默认会将生成的用于deploy的文件都放在这个文件夹；如果不需要gh-pages分支的相关commit记录，这一步可以省略。省略后该分支永远只有最近的一次commit…）</p>
-</blockquote>
-</li>
-<li>跑一下<code>hexo g</code>命令，看看是否会有错<blockquote>
-<p>请注意，这一步并不能保证博客生成的样式问题，只是查看主题是否有错误。如果你每次都是克隆主题，并不能保证你克隆的版本每次都能顺利生成所有文件，可能会存在bug</p>
-</blockquote>
-</li>
-<li>如果能够顺利生成网页则执行<code>hexo d</code>，将博客push到gh-pages分支 </li>
-</ol>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="利用travis自动部署hexo搭建在github的博客"
-       data-url="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/">git merge commits 如何合并多个提交为一个</a></h2>
-<article>
-  <p>因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。</p>
-<p>关于合并多个提交，主要是要搞清楚<code>rebase</code>的用法。</p>
-<h3 id="u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log"><a href="#u67E5_u770B_u63D0_u4EA4_u5386_u53F2_uFF0Cgit_log" class="headerlink" title="查看提交历史，git log"></a>查看提交历史，git log</h3><p>首先你要知道自己想合并的是哪几个提交，可以使用<code>git log</code>命令来查看提交历史，假如最近4条历史如下：</p>
-<pre><code>commit ada2cd944fc81cf0051c6b6cac62fad9ae6830d3
-commit 0e25f1237eeaf9ae02b5b48b888a844ed288e7e3
-commit ddbd8fd1d52aec0bbedc65a1a0add159344d4ae2
-commit 2aad0182a613b2e73b44ebbf0d5536126f714cb9
-</code></pre><p>历史记录是按照时间排序的，时间近的排在前面。</p>
-<h3 id="git_rebase"><a href="#git_rebase" class="headerlink" title="git rebase"></a>git rebase</h3><p>想要合并1-3条，有两个方法</p>
-<ol>
-<li>从HEAD版本开始往过去数3个版本<pre><code>git rebase -i HEAD~3
-</code></pre></li>
-<li>指名要合并的版本之前的版本号<pre><code>git rebase -i 2aad018
-</code></pre><blockquote>
-<p>请注意<strong>2aad018</strong>这个版本是不参与合并的，可以把它当做一个坐标</p>
-</blockquote>
-</li>
-</ol>
-<h3 id="u9009_u53D6_u8981_u5408_u5E76_u7684_u63D0_u4EA4"><a href="#u9009_u53D6_u8981_u5408_u5E76_u7684_u63D0_u4EA4" class="headerlink" title="选取要合并的提交"></a>选取要合并的提交</h3><p>执行了rebase命令之后，会弹出一个窗口，头几行如下：</p>
-<pre><code>pick ada2cd9
-pick 0e25f12
-pick ddbd8fd
-...
-</code></pre><p>将<code>pick</code>改为<code>squash</code>或者<code>s</code>，之后保存并关闭文本编辑窗口即可。改完之后文本内容如下：</p>
-<pre><code>s ada2cd9
-s 0e25f12
-s ddbd8fd
-...
-</code></pre><p>参考：<br>[1] <a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="external">https://git-scm.com/docs/git-rebase</a><br>[2] <a href="http://blog.csdn.net/yangcs2009/article/details/47166361" target="_blank" rel="external">http://blog.csdn.net/yangcs2009/article/details/47166361</a></p>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="git merge commits 如何合并多个提交为一个"
-       data-url="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/">git merge repo 如何合并两个仓库</a></h2>
-<article>
-  <p>为什么我每天都会有一些奇奇怪怪的需求…</p>
-<p>我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推<code>push -f</code>，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！</p>
-<h3 id="u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93"><a href="#u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：</p>
-<pre><code class="bash"><span class="built_in">cd</span> repo1
-git remote add other ../repo2
-git fetch other
-git checkout -b repo2 other/master
-git checkout master
-git merge repo2
-</code></pre>
-<p>解释：</p>
-<ol>
-<li>进入repo1文件夹</li>
-<li>添加repo2作为repo1的远程仓库，并命名为other</li>
-<li>将repo2的内容获取到repo1<blockquote>
-<p>注意，使用fetch而不是pull，关于fetch和pull的区别<a href="https://stackoverflow.com/questions/292357/what-are-the-differences-between-git-pull-and-git-fetch" target="_blank" rel="external">请戳这里</a></p>
-</blockquote>
-</li>
-<li>在repo1中创建名为repo2的新分支，同时切换到该分支，并且使用上一步获取的内容中的master分支的内容</li>
-<li>切换到repo1的master分支</li>
-<li>将repo2分支的内容合并到master分支</li>
-</ol>
-<h3 id="u4E00_u53E5_u8BDD_u603B_u7ED3"><a href="#u4E00_u53E5_u8BDD_u603B_u7ED3" class="headerlink" title="一句话总结"></a>一句话总结</h3><p>将一个仓库的内容checkout到另一个仓库的一个分支，将该分支与master分支合并</p>
-<p>参考：<br>[1] <a href="http://blog.csdn.net/gouboft/article/details/8450696" target="_blank" rel="external">http://blog.csdn.net/gouboft/article/details/8450696</a></p>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="git merge repo 如何合并两个仓库"
-       data-url="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/">对Promise中的resolve，reject，catch的理解</a></h2>
-<article>
-  <p>对promise这个概念之前已经有了一些浅显的理解，<a href="http://sabrinaluo.com/tech/2015/12/01/promise/">相关文章-&gt;戳这里</a>，最近又有了一些新的理解。</p>
-<h3 id="then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026"><a href="#then_28_29_u7684_u65F6_u5019_u5230_u5E95_u662F_u5728then_u4EC0_u4E48_u2026" class="headerlink" title=".then()的时候到底是在then什么…"></a>.then()的时候到底是在then什么…</h3><ul>
-<li>首先要理解…Promise是一个对象，有then()方法的对象</li>
-<li>then()的入参是一个函数，通常在promise链中，入参是<strong>一个返回promise的函数</strong>，这句话好像有点拗口，就是说入参是一个函数，这个函数会return一个promise对象</li>
-</ul>
-<h3 id="u5982_u4F55_u7834_u574Fpromise_u94FE"><a href="#u5982_u4F55_u7834_u574Fpromise_u94FE" class="headerlink" title="如何破坏promise链"></a>如何破坏promise链</h3><p>如果有这样一个promise链：</p>
-<pre><code>p1().then(p2).then(p3)
-  .then(function(data) {
-    console.log(&apos;data: &apos; + data);
-  })
-  .catch(function(error) {
-    console.log(&apos;error: &apos; + error);
-  });
-
-function p1() {
-  return new Promise(function(resolve, reject) {
-    console.log(&apos;p1 resolved&apos;);
-    resolve(123);
-  });
-}
-
-function p2() {
-  return new Promise(function(resolve, reject) {
-    console.log(&apos;p2 rejected&apos;);
-    reject(456);
-  });
-}
-
-function p3() {
-  return new Promise(function(resolve, reject) {
-    console.log(&apos;p3 resolved&apos;);
-    resolve(789);
-  });
-}
-</code></pre><p>上面这个例子，你看到的console.log会是这样：</p>
-<pre><code>p1 resolved
-p2 rejected
-error: 456
-</code></pre><p>并没有看到<code>p3</code>的log，而是看到了error message，也就是说：</p>
-<p><strong>在一个promise链中，只要任何一个promise被reject，promise链就被破坏了，reject之后的promise都不会再执行，而是直接调用<code>.catch</code>方法</strong>。</p>
-<p>这也是为什么在standard practice中，一定要在最后加上<code>.catch</code>的原因。通过<code>.catch</code>能够清楚的判断出promise链在哪个环节出了问题。</p>
-<h3 id="u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise"><a href="#u5982_u4F55_u6309_u987A_u5E8F_u6267_u884C_u5DF2_u7ECF_u5B9A_u4E49_u7684promise" class="headerlink" title="如何按顺序执行已经定义的promise"></a>如何按顺序执行已经定义的promise</h3><p>这个情况在什么时候会用到呢？比如你有一个队列，队列里有很多任务，这些任务并不互相依赖执行后返回的结果。每个任务完成的时间都是不确定的，并且计算资源只允许一次执行一个任务。简单的来说，就是<strong>做完A之后再去做B，并且AB是相互独立的</strong></p>
-<p>假如我现在有一堆promise对象，大概长这样：</p>
-<pre><code>//p2, p3与p1相似
-//当doSomething()执行完毕的时候，调用resolve()
-//使得当前promise状态转变为fulfilled即可
-var p1 = new Promise(function(resolve, reject) {
-  //do something here
-  //when do something done
-  resolve();
-});
-
-p1.then(function() {
-    return p2
-  })
-  .then(function() {
-    return p3
-  })
-  .catch()
-</code></pre><blockquote>
-<p>请注意，前一部破坏Promise链中分定义的p1 p2 p3是<strong>函数</strong>，而此部分定义的p1 p2 p3是<strong>对象！对象！对象！</strong></p>
-</blockquote>
-<ul>
-<li>如前面提到，promise是一个有then方法的对象，因此p1可以直接调用then<br>Q:为什么开头调用不是<code>p1().then</code>？<br>A: 因为p1是一个对象啊！！！对象啊！！！象啊！！！啊！！！</li>
-<li>然而promise链中then方法的入参是<strong>一个返回promise对象的函数</strong>，p2并不是一个函数，因此不能then(p2)；</li>
-<li>但p2是一个promise对象，已经满足了then方法入参的一半需求，那么写一个函数并且返回p2，就满足了入参的全部需求</li>
-</ul>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="对Promise中的resolve，reject，catch的理解"
-       data-url="http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/21/hoisting/">JS变量提升(Hoisting)</a></h2>
-<article>
-  <p>写了无数JS也依旧没听过变量提升…</p>
-<p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
-<p>我写了这么久JS，从来也不会先用变量后定义的呀，而且别的语言好像根本没有这个概念，难怪我从来没有遇到相关问题，难怪我没听过这个概念。难怪写强类型语言的各大神都是JS一生黑…</p>
-<p>后来大概问了问各种前辈，纷纷表示，这个概念在面试的时候和检查别人Bug的时候才会用到… (︶︿︶)</p>
-<p>解释器是什么东东我还没搞明白…但是变量提升其实可以转换成另一个问题：<br>当你在定义一个变量的时候，解释器是怎么解析的？</p>
-<p>先看一个例子：</p>
-<pre><code>function test(){
-  console.log(a);
-  var a = 123;
-}
-test(); //调用这个函数，你会看到console中输出的是undefined
-</code></pre><pre><code>function test(){
-  var a = 123;
-}
-</code></pre><p>上面的代码，解释器是这么理解的：</p>
-<pre><code>function test(){
-  var a; 
-  a = 123;
-}
-</code></pre><p>而最开始的例子中，解释器是这么理解的：</p>
-<pre><code>function test(){
-  var a;
-  console.log(a);
-  a = 123;
-}
-</code></pre><p>一句话总结：变量提升就是JS解释器在解析JS的时候会把所有变量的<strong>声明</strong>提升到该变量作用域的最顶端。</p>
-<blockquote>
-<p>请注意：<strong>只提升声明，不提升赋值</strong>！</p>
-</blockquote>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="JS变量提升(Hoisting)"
-       data-url="http://sabrinaluo.com/tech/2015/12/21/hoisting/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/">对JS闭包(Closure)的一些理解</a></h2>
-<article>
-  <p>昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…</p>
-<pre><code>function isType(type) {
-  return function(obj) {
-    return {}.toString.call(obj) === &apos;[object &apos; + type + &apos;]&apos;
-  }
-}
-</code></pre><p><em>以上来自目测是个阿里女神的repo: <a href="https://github.com/fool2fish/utilx/blob/master/lib/index.js" target="_blank" rel="external">utilx</a></em></p>
-<p>很久之前就听过<strong>闭包</strong>这个概念，看了一些相关的资料，依旧无法明白到底是个什么东东。各种作用域scope，看得我头都大了。_(:з」∠)_</p>
-<p>我在这里呢，也不会讲继续什么变量作用域，什么从外部读取局部变量之类的！@#￥%…的东东，我试图用最简单粗暴连隔壁卖红薯的大妈都能理解的方法，来说说我对闭包的理解。</p>
-<p>###闭包长什么样子？</p>
-<pre><code>function bibao(a){
-  return function(b){
-    return a+b;
-  }
-}
-</code></pre><p>上面的例子就是一个闭包。<br>我的理解是，闭包有这么几个元素：</p>
-<ol>
-<li>最外层是一个有名字的函数，通常都需要传入参数或者在这一层定义一些变量。</li>
-<li>这个有名字的函数返回一个匿名函数，通常都需要传入参数或者定义一些变量。</li>
-<li>这个匿名函数返回的值通常跟上面两点中的入参或者变量有关。</li>
-</ol>
-<h3 id="u5982_u4F55_u4F7F_u7528_u95ED_u5305_uFF1F"><a href="#u5982_u4F55_u4F7F_u7528_u95ED_u5305_uFF1F" class="headerlink" title="如何使用闭包？"></a>如何使用闭包？</h3><p>这个问题其实也就是说，当你调用闭包的时候你其实是在调用什么？<br>我觉得搞清楚这个问题对于简单粗暴的理解闭包非常有用。</p>
-<p>用上面的闭包作为例子，通常闭包是这么用的：</p>
-<pre><code>//例1，分两次传入参数
-var hello = bibao(&apos;你好&apos;)；
-var text = hello(&apos;小白妹妹&apos;);
-console.log(text); //你会看到 你好小白妹妹
-</code></pre><p>上面这个例子，其实就是：</p>
-<pre><code>//例2，一次传入两个参数
-var text = bibao(&apos;你好&apos;)(&apos;小白妹妹&apos;)
-</code></pre><p>所以基本上可以理解为，有这么一个函数<code>bibao(a)(b)</code>，调用的时候需要传入两个参数<code>a</code>和<code>b</code>，你可以<strong>分开传</strong>，也可以<strong>一起传</strong>。</p>
-<p>大多数情况下，都是像例1一样，分开两次传入参数的。当你分开传的时候，第一次传入参数<code>a</code>，也就是<code>var hello = bibao(&#39;你好&#39;);</code>其实等于：</p>
-<pre><code>var hello = function(b){
-  return &apos;你好&apos;+b;  
-}
-</code></pre><p>所以当你给<code>hello()</code>传入参数<code>b</code>的时候，<code>var text = hello(&#39;小白妹妹&#39;)</code>，返回的是“你好小白妹妹”。也就等于说，当你在调用<code>hello()</code>这个函数的时候，其实访问到了bibao()这个函数中的变量<code>a</code>，值为’你好’。</p>
-<p>闭包中<code>a</code>是定义在匿名函数外部的，这就是传说中的：<strong>内部函数可以访问外部函数的变量</strong>。</p>
-<h3 id="u4E3A_u4EC0_u4E48_u8981_u4F7F_u7528_u95ED_u5305_uFF1F_u4F7F_u7528_u95ED_u5305_u6709_u4EC0_u4E48_u597D_u5904_uFF1F"><a href="#u4E3A_u4EC0_u4E48_u8981_u4F7F_u7528_u95ED_u5305_uFF1F_u4F7F_u7528_u95ED_u5305_u6709_u4EC0_u4E48_u597D_u5904_uFF1F" class="headerlink" title="为什么要使用闭包？使用闭包有什么好处？"></a>为什么要使用闭包？使用闭包有什么好处？</h3><p>我有一个强烈的感觉闭包是一个懒人发明的…（当然我是瞎说的_(:з」∠)_）<br>假如我的老板认识了一大堆妹子，要我写个程序跟她们每个人说早安、午安、晚安，并告诉他们昨天是几号，最后还要问候他的老婆，“吃饭了吗？亲爱的”<br>通常我会这么实现：</p>
-<pre><code>function yesterday(){
- return new Date().getDate() -1;
-}
-function goodmorning(name){
-  return &apos;早安&apos;+name + &apos;昨天是&apos; + yesterday() + &apos;号&apos;;
-}
-function goodafternoon(name){
-  return &apos;午安&apos;+name + &apos;昨天是&apos; + yesterday() + &apos;号&apos;;
-}
-function goodnight(name){
-  return &apos;晚安&apos;+name + &apos;昨天是&apos; + yesterday() + &apos;号&apos;;
-}
-//eating()这个函数不一定非要定义，可以直接console.log()也能满足需求，
-//但是想到老板将来又会去问候其他的人，吃饭了吗？xxx，
-//所以定义了一个函数，以便将来可以偷懒
-function eating(name){
-  return &apos;吃饭了吗？&apos; + name;
-}
-var list = [&apos;小白妹妹&apos;,&apos;小红妹妹&apos;,&apos;小黑妹妹&apos;,&apos;小灰妹妹&apos;];
-list.forEach(function(item){
-  console.log(goodmorning(item));
-  console.log(goodafternoon(item));
-  console.log(goodnight(item));
-});
-console.log(eating(&apos;亲爱的&apos;))
-</code></pre><p>使用闭包这么实现：</p>
-<pre><code>function yesterday(){
- return new Date().getDate()-1;
-}
-function bibao(greeting){
-  return function(name){
-    return greeting + name +&apos;昨天是&apos; + yesterday() + &apos;号&apos;;
-  }
-}
-var goodmorning = bibao(&apos;早安&apos;);
-var goodafternoon = bibao(&apos;午安&apos;);
-var goodnight = bibao(&apos;晚安&apos;);
-var list = [&apos;小白妹妹&apos;,&apos;小红妹妹&apos;,&apos;小黑妹妹&apos;,&apos;小灰妹妹&apos;];
-list.forEach(function(item){
-  console.log(goodmorning(item));
-  console.log(goodafternoon(item));
-  console.log(goodnight(item));
-});
-var eating = bibao(&apos;吃饭了吗？&apos;);
-console.log(eating(&apos;亲爱的&apos;));
-</code></pre><p>可以看到，使用了闭包就不用重复定义<strong>行为类似</strong>的函数，<code>+ name +&#39;昨天是&#39; + yesterday() + &#39;号&#39;;</code>这个也只用写一遍就可以了，免去了很多重复劳动，看起来简洁了很多，最重要是…显得逼格高…</p>
-<h3 id="u4EC0_u4E48_u65F6_u5019_u7528_u95ED_u5305_uFF1F"><a href="#u4EC0_u4E48_u65F6_u5019_u7528_u95ED_u5305_uFF1F" class="headerlink" title="什么时候用闭包？"></a>什么时候用闭包？</h3><p>我自己的感觉是，当你需要定义很多行为类似的函数的，重复写很多基本类似的内容的时候，就可以考虑用闭包来让整个代码的结构更加简洁。（总觉得使用闭包，可读性就不那么强了，毕竟我这种小白还是不太一眼就看得出来一个闭包到底输入啥返回啥的…）</p>
-<p>另外就也不太清楚具体的使用场景了，反正我平时很少用到…少用到的可能有这么几个：</p>
-<ul>
-<li>对闭包的理解不够深入，其实还是不太知道这个东东到底干啥用的</li>
-<li>通常用别的简单粗暴的方法来代替闭包实现的功能，简单的来说比如一个人不知道switch，但是知道if else，于是用if else来实现跟switch一样的功能</li>
-</ul>
-<p>我不知道有没有什么情况是除了闭包就没办法解决的…如果没有…那么用其他方法代替实现就可以了，实在搞不明白也没什么关系…</p>
-<p>###使用闭包的坏处？<br>据说是可能出现内存泄露的问题<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript#内存泄露" target="_blank" rel="external">^1</a>，这个就更高深了…以后有了深入的理解再来补充吧</p>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="对JS闭包(Closure)的一些理解"
-       data-url="http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-<h2><a href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/">对module.exports和exports的一些理解</a></h2>
-<article>
-  <p>可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。</p>
-<p><strong><code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别</strong></p>
-<p>看起来木有什么太大区别，但实际用起来的时候却又有区别，这是为啥呢，请听我细细道来</p>
-<p>关于Module.exports和exports有什么区别，网上一搜一大把，但是说的都太复杂了…<br>听说exports是Module.exports对象的一个引用(reference)<a href="https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_exports_alias" target="_blank" rel="external">^1</a>，什么是引用？！…_(:з」∠)_</p>
-<p>当然啦，如果要彻底理解这两个导出的区别，最好肯定是去看源码，看看都是怎么封装的，功力深厚的童鞋应该一看就懂了。不过，源码我也是看不懂的…(ಥ_ಥ)</p>
-<p>但是最近感觉杂七杂八看了好多文章做了好多实验之后，像是打开了任督二脉，机智的我好像有点上道了…</p>
-<h1 id="module"><a href="#module" class="headerlink" title="module"></a>module</h1><p>首先要明确的一点，module是一个<strong>对象</strong> <code>{Object}</code>。<br>当你新建一个文件，比如mo.js，文件内容如下：<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">module</span>);</span><br></pre></td></tr></table></figure></p>
-<p>然后在CMD里执行这个文件<code>node mo.js</code>，就能看到module其实是一个Module实例，你可以这么理解，NodeJS中定义了一个Module类，这个类中有很多属性和方法，exports是其中的一个属性：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">function</span> <span class="tag">Module</span> <span class="rules">&#123;</span><br><span class="line">  <span class="rule"><span class="attribute">id </span>:<span class="value"> <span class="string">'blabla'</span>,</span><br><span class="line">  exports : &#123;</span></span></span>&#125;,</span><br><span class="line">  <span class="tag">blabla</span>...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>当每个js文件在执行或被require的时候，NodeJS其实创建了一个新的实例<code>var module = new Module()</code>，这个实例名叫<code>module</code>。<br><strong>这也就是为什么你并没有定义<code>module</code>这个变量，却能console.log出来而不会报错的原因</strong>。</p>
-<h1 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h1><p>假设我有一个JS文件内容如下：</p>
-<pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
-<span class="built_in">module</span>.exports = {
-  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
-}
-<span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象已经有了print()方法</span>
-</code></pre>
-<p>有了上面的基础，很容易理解<code>module.export</code>其实是<strong>给Module实例中的exports对象中添加方法/属性</strong>。</p>
-<h1 id="exports"><a href="#exports" class="headerlink" title="exports"></a>exports</h1><p>通常使用exports的时候，是这么用的：</p>
-<pre><code class="javascript">exports.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
-</code></pre>
-<p>假设我有一个JS文件内容如下：</p>
-<pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
-<span class="built_in">console</span>.log(exports); <span class="comment">//你会看到Module中的exports为空对象{}</span>
-<span class="built_in">module</span>.exports = {
-  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
-}
-<span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象有了print()方法</span>
-exports.name = <span class="string">'小白妹妹'</span>;
-<span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象不仅有了print()方法，还有了name属性</span>
-</code></pre>
-<p>由此也能看出，传说中的<strong><code>exports</code>其实是<code>module.exports</code>的引用</strong>，你可以这么理解，NodeJS在你的代码<strong>之前</strong>悄悄的加了以下代码：</p>
-<pre><code>var module = new Module();
-var exports = module.exports;
-</code></pre><p><strong>这也就是为什么你并没有定义<code>exports</code>这个变量，却能console.log出来而不会报错的原因</strong>。</p>
-<h1 id="require"><a href="#require" class="headerlink" title="require"></a>require</h1><p>当你从外部调用某个模块，require其实是在require什么？<a href="https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_module_require_id" target="_blank" rel="external">^2</a><br>require的时候NodeJS会<del>到处</del>去找有没有这个模块，如果有，return的就是module.exports里的东东。</p>
-<h1 id="DOs__26amp_3B_DONTs"><a href="#DOs__26amp_3B_DONTs" class="headerlink" title="DOs &amp; DONTs"></a>DOs &amp; DONTs</h1><ul>
-<li>√你可以这样：<pre><code>module.exports.name = &apos;小白妹妹&apos;;
-exports.age = 10;
-module.exports.print = function(){console.log(12345)};
-</code></pre>如果只是使用<code>.</code>来添加属性和方法，<code>module.exports</code>和<code>exports</code>混用是完全可以的，这种情况下，感觉<code>exports</code>就是给懒人用的…毕竟能少写几个7个字符呢！</li>
-<li>√也可以这样：<pre><code>module.exports = {
-name = &apos;小白妹妹&apos;;
-};
-exports.age = 10;
-module.exports.print = function(){console.log(12345)};
-</code></pre></li>
-<li><strong>×但不可以这样</strong>：<pre><code>module.exports = {
-name = &apos;小白妹妹&apos;;
-};
-exports = {age:10}; // exports现在是{age:10}这个对象的引用，不再是module.exports的引用了
-console.log(module); //你会看到Module的exports中只有name属性！！！
-</code></pre></li>
-<li><strong>×也不可以这样</strong>：<pre><code>exports.age = 10; 
-console.log(module); //你会看到Module的exports中多了age属性
-module.exports = {
-name = &apos;小白妹妹&apos;;
-};
-console.log(module); //你会看到Module的exports中还是只有name属性！！！
-</code></pre><h1 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h1>还是那一句话，<code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别<blockquote>
-<ul>
-<li>改变<code>exports</code>的指向后所添加的<code>exports.xxx</code>都是无效的。因为require返回的只会是<code>module.exports</code></li>
-</ul>
-</blockquote>
-</li>
-<li>不能在使用了<code>exports.xxx</code>之后，改变<code>module.exports</code>的指向。因为<code>exports.xxx</code>添加的属性和方法并不存在于<code>module.exports</code>所指向的新对象中。</li>
-</ul>
-<p>感觉自己说的还是挺清楚哒～<br>不管你清不清楚，我反正是清楚了。_(:з」∠)_</p>
-
-</article>
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="对module.exports和exports的一些理解"
-       data-url="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
-
-
-
-    </div>
-    <div class="col-sm-3">
+      <li>
+        <a href="/tech/2016/01/18/sequentialize-promise-by-recursion/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">递归实现按顺序执行Promise</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？ 
+ 网上搜到的大多数教程都是建一个数组 array ，把promise对象放到数组里，然后数组中的promise全部执行完
+          </span>
+        </a>
+      </li>
       
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>About Me</h4>
-      <p>
-        123
-      </p>
-    </div>
+      <li>
+        <a href="/tech/2016/01/12/ES6-generator-yield/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">对generator和yield的一些理解</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯E
+          </span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tech/2015/12/31/understand-js-inheritance/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">对JS类和继承的一些理解</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看 《JavaScript高级程序设计》 ）。 
+ 直到ES5，JS也还是一个没有类的语言，虽然ES6中可以使用class关键
+          </span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tech/2015/12/28/travis-github-hexo/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">利用travis自动部署hexo搭建在github的博客</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             这篇应该属于不务正业系列… 自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。 
+  Travis 是一套持续集成的服务器解决方案，也就是等于把j
+          </span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tech/2015/12/24/how-to-merge-commits-with-git-rebase/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">git merge commits 如何合并多个提交为一个</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。 
+ 关于合并多个提交，主要是要搞清楚 rebase 的用法。 
+   查
+          </span>
+        </a>
+      </li>
+      
+    </ul>
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Recent Post</h4>
-    </div>
+</div>
+
+<div class="column post-graph">
+  <div class="boxed-group">
+    <h3>Post Frequency</h3>
+    test
   </div>
-
-
-  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
-
-    <div class="col-sm-12">
-      <h4>Categories</h4> 123
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Tags</h4>
-    </div>
-  </div>
-
-
-    </div>
-  </div>
-  <footer>
-theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a href="http://github.com/sabrinaluo">sabrinaluo</a> | powered by Hexo
-</footer>
+</div>
 
 </main>
-</body>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    <li><a href="undefined">Github</a></li>
+    <li><a href="undefined">Weibo</li>
+    <li><a href="undefined">Linkedin</a></li>
+  </ul>
+  <div class="theme-info">Theme <a
+          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
+          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+  </div>
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
+</footer>
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -905,4 +224,5 @@ theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by 
 
 
 
+</body>
 </html>

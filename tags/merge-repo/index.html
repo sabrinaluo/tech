@@ -1,216 +1,107 @@
 <!DOCTYPE>
 <html lang="zh-CN">
+
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>小白妹妹写代码 | 一个废话很多的程序媛</title>
+  <title>
+    小白妹妹写代码
+  </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="author" content="Sabrina">
 
+  <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
+
 <body>
-<nav class="navbar navbar-default">
+<nav>
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2">This website</span>
-            <input type="text" class="form-control" placeholder="search">
-          </div>
-        </div>
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form>
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input type="text" placeholder="Search">
+        </label>
       </form>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/tech/">Home</a></li>
-        <li><a href="#">Archieve</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">
-            <i class="fa fa-rss"></i>
-          </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
-            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
-            <li role="separator" class="divider"></li>
-            <li>
-              <a href="#">
-                <i class="fa fa-qq"></i>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">I have nothing to say</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
-    <!-- /.navbar-collapse -->
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+    </ul>
   </div>
-  <!-- /.container-fluid -->
 </nav>
+
 <main class="container">
-  <header>
-  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
-    <div class="col-sm-6 ">
-      <h2 style="margin-bottom:0">
-        <i class="fa fa-book text-muted"></i>
-        <a href="/tech/">小白妹妹写代码</a>
-      </h2>
-      <p class="text-muted">
-        我这么可爱一定是男孩子
-      </p>
-
+  
+<header>
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
+      <a href="/" class="btn btn-group-right"> 17 </a>
     </div>
-    <div class="col-sm-6 hidden-xs" style="padding-right:0">
-      <div class="pull-right" style="line-height:73px;">
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
-          <button type="button" class="btn btn-default">
-            17
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
-          <button type="button" class="btn btn-default">
-            56
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
-          <button type="button" class="btn btn-default">
-            0
-          </button>
-        </div>
-        <!--end btn-group-->
 
-      </div>
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
+      <a href="/" class="btn btn-group-right"> 56 </a>
+    </div>
+
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-list-ul"></i> Categories </a>
+      <a href="/"
+         class="btn btn-group-right"> 0 </a>
     </div>
   </div>
 </header>
-  <div class="row">
-    <div class="col-sm-9">
-      
-<h2><a href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/">git merge repo 如何合并两个仓库</a></h2>
-<article>
-  <p>为什么我每天都会有一些奇奇怪怪的需求…</p>
-<p>我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推<code>push -f</code>，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！</p>
-<h3 id="u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93"><a href="#u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：</p>
-<pre><code class="bash"><span class="built_in">cd</span> repo1
-git remote add other ../repo2
-git fetch other
-git checkout -b repo2 other/master
-git checkout master
-git merge repo2
-</code></pre>
-<p>解释：</p>
-<ol>
-<li>进入repo1文件夹</li>
-<li>添加repo2作为repo1的远程仓库，并命名为other</li>
-<li>将repo2的内容获取到repo1<blockquote>
-<p>注意，使用fetch而不是pull，关于fetch和pull的区别<a href="https://stackoverflow.com/questions/292357/what-are-the-differences-between-git-pull-and-git-fetch" target="_blank" rel="external">请戳这里</a></p>
-</blockquote>
-</li>
-<li>在repo1中创建名为repo2的新分支，同时切换到该分支，并且使用上一步获取的内容中的master分支的内容</li>
-<li>切换到repo1的master分支</li>
-<li>将repo2分支的内容合并到master分支</li>
-</ol>
-<h3 id="u4E00_u53E5_u8BDD_u603B_u7ED3"><a href="#u4E00_u53E5_u8BDD_u603B_u7ED3" class="headerlink" title="一句话总结"></a>一句话总结</h3><p>将一个仓库的内容checkout到另一个仓库的一个分支，将该分支与master分支合并</p>
-<p>参考：<br>[1] <a href="http://blog.csdn.net/gouboft/article/details/8450696" target="_blank" rel="external">http://blog.csdn.net/gouboft/article/details/8450696</a></p>
 
-</article>
 
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="git merge repo 如何合并两个仓库"
-       data-url="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
+<div class="archive">
+<h2><a href="/tech/2015/12/24/how-to-merge-repos-with-git/">git merge repo 如何合并两个仓库</a></h2>
+<p class="read-more">
+   为什么我每天都会有一些奇奇怪怪的需求… 
+ 我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推 push -f ，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次
+</p>
 </div>
 
 
-
-
-    </div>
-    <div class="col-sm-3">
-      
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>About Me</h4>
-      <p>
-        123
-      </p>
-    </div>
+</main>
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    <li><a href="undefined">Github</a></li>
+    <li><a href="undefined">Weibo</li>
+    <li><a href="undefined">Linkedin</a></li>
+  </ul>
+  <div class="theme-info">Theme <a
+          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
+          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Recent Post</h4>
-    </div>
-  </div>
-
-
-  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
-
-    <div class="col-sm-12">
-      <h4>Categories</h4> 123
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Tags</h4>
-    </div>
-  </div>
-
-
-    </div>
-  </div>
-  <footer>
-theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a href="http://github.com/sabrinaluo">sabrinaluo</a> | powered by Hexo
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>
 
-</main>
-</body>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -232,4 +123,5 @@ theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by 
 
 
 
+</body>
 </html>

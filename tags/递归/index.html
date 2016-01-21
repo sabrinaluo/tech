@@ -1,214 +1,108 @@
 <!DOCTYPE>
 <html lang="zh-CN">
+
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>小白妹妹写代码 | 一个废话很多的程序媛</title>
+  <title>
+    小白妹妹写代码
+  </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="author" content="Sabrina">
 
+  <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
+
 <body>
-<nav class="navbar navbar-default">
+<nav>
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2">This website</span>
-            <input type="text" class="form-control" placeholder="search">
-          </div>
-        </div>
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form>
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input type="text" placeholder="Search">
+        </label>
       </form>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/tech/">Home</a></li>
-        <li><a href="#">Archieve</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">
-            <i class="fa fa-rss"></i>
-          </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
-            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
-            <li role="separator" class="divider"></li>
-            <li>
-              <a href="#">
-                <i class="fa fa-qq"></i>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">I have nothing to say</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
-    <!-- /.navbar-collapse -->
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+    </ul>
   </div>
-  <!-- /.container-fluid -->
 </nav>
+
 <main class="container">
-  <header>
-  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
-    <div class="col-sm-6 ">
-      <h2 style="margin-bottom:0">
-        <i class="fa fa-book text-muted"></i>
-        <a href="/tech/">小白妹妹写代码</a>
-      </h2>
-      <p class="text-muted">
-        我这么可爱一定是男孩子
-      </p>
-
+  
+<header>
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
+      <a href="/" class="btn btn-group-right"> 17 </a>
     </div>
-    <div class="col-sm-6 hidden-xs" style="padding-right:0">
-      <div class="pull-right" style="line-height:73px;">
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
-          <button type="button" class="btn btn-default">
-            17
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
-          <button type="button" class="btn btn-default">
-            56
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
-          <button type="button" class="btn btn-default">
-            0
-          </button>
-        </div>
-        <!--end btn-group-->
 
-      </div>
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
+      <a href="/" class="btn btn-group-right"> 56 </a>
+    </div>
+
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-list-ul"></i> Categories </a>
+      <a href="/"
+         class="btn btn-group-right"> 0 </a>
     </div>
   </div>
 </header>
-  <div class="row">
-    <div class="col-sm-9">
-      
-<h2><a href="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/">递归实现按顺序执行Promise</a></h2>
-<article>
-  <p>之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？</p>
-<p>网上搜到的大多数教程都是建一个数组<code>array</code>，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用<code>Promise.all(array)</code>。然而这只适用于数组中的<strong>promise对象不互相依赖</strong>的情况。</p>
-<h3 id="u95EE_u9898"><a href="#u95EE_u9898" class="headerlink" title="问题"></a>问题</h3><p>我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ <a href="https://developers.facebook.com/docs/graph-api/using-graph-api#paging" target="_blank" rel="external">Cursor-based Pagination</a>），API的Response如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">data</span>": <span class="value">[</span><br><span class="line">     ... Endpoint data is here</span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">paging</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">cursors</span>": <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">after</span>": <span class="value"><span class="string">"MTAxNTExOTQ1MjAwNzI5NDE="</span></span>,</span><br><span class="line">      "<span class="attribute">before</span>": <span class="value"><span class="string">"NDMyNzQyODI3OTQw"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">previous</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;before=NDMyNzQyODI3OTQw"</span></span>,</span><br><span class="line">    "<span class="attribute">next</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE="</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
-<p>简单的一个例子是，当我想要获取一个人的完整好友列表（Friend List），但是这个人好友太多了，分成了很多页。显然这些结果是互相依赖的。我必须先拿到第一页的<code>paging.next</code>，才能进行下一次请求。（别跟我说改query string <code>limit</code>后面的值，limit是有最大限制的=，=）</p>
-<h3 id="u89E3_u51B3_u65B9_u6848"><a href="#u89E3_u51B3_u65B9_u6848" class="headerlink" title="解决方案"></a>解决方案</h3><h5 id="u5F53_u77E5_u9053_u603B_u5171_u6709_u591A_u5C11_u9875_u7684_u65F6_u5019"><a href="#u5F53_u77E5_u9053_u603B_u5171_u6709_u591A_u5C11_u9875_u7684_u65F6_u5019" class="headerlink" title="当知道总共有多少页的时候"></a>当知道总共有多少页的时候</h5><p>(假设request是一个返回promise对象的函数,resolve的是上面的json)</p>
-<ul>
-<li>普通程序员这么做<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var url = <span class="string">'http://xxx'</span>; //first page</span><br><span class="line">request(url)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request(data.<span class="built_in">next</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .<span class="keyword">then</span>(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> request(data.<span class="built_in">next</span>);</span><br><span class="line">  &#125;) //....<span class="keyword">then</span> <span class="keyword">then</span> <span class="keyword">then</span>...</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>其实这么一直then下去也是可以的…</p>
-<ul>
-<li>二逼程序员这么做<br>回调函数层层嵌套…Callback Hell。</li>
-</ul>
-<h5 id="u5F53_u4E0D_u77E5_u9053_u603B_u5171_u591A_u5C11_u9875_u7684_u65F6_u5019"><a href="#u5F53_u4E0D_u77E5_u9053_u603B_u5171_u591A_u5C11_u9875_u7684_u65F6_u5019" class="headerlink" title="当不知道总共多少页的时候"></a>当不知道总共多少页的时候</h5><p>不停then的方法就不行了，于是有了文艺的程序员</p>
-<ul>
-<li>文艺程序员这么做<br>首先要知道的一点是，当没有下一页的时候，返回的<code>next=null</code>，于是我们就有了递归的终止条件。<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">(url)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">while</span> (url) &#123;</span><br><span class="line">    request(url).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span><br><span class="line">      run(data.paging.next);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://xxx'</span>; <span class="comment">// first page</span></span><br><span class="line">run(url);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="u778E_u626F"><a href="#u778E_u626F" class="headerlink" title="瞎扯"></a>瞎扯</h3><p>嵌套的Promise其实<strong>可能</strong>是反模式（anti-pattern）<a href="http://taoofcode.net/promise-anti-patterns/" target="_blank" rel="external">^1</a>，但是本文中的情况，如果不递归用嵌套的promise，我实在想不出别的办法来了（ (๑•́ ₃ •̀)宝宝心里苦，但宝宝不说）</p>
-<p>为什么说可能是呢，因为谷歌一搜“promise anti pattern nesting”，总能搜出一大堆关于嵌套promise是反模式的文章。然而bluebird的wiki<a href="https://github.com/petkaantonov/bluebird/wiki/Promise-anti-patterns" target="_blank" rel="external">^2</a>中，并没有提到嵌套的promise是反模式。</p>
-<p>所以到底是不是反模式，我也不知道=，=大概的想法是，在能不嵌套的时候就不要嵌套，否则还不如用callback。</p>
-<p>能不嵌套的情况是说，then的都是完全不同的promise，如果都是then类似的promise，那么，懒人还是递归吧…</p>
 
-</article>
 
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="递归实现按顺序执行Promise"
-       data-url="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
+<div class="archive">
+<h2><a href="/tech/2016/01/18/sequentialize-promise-by-recursion/">递归实现按顺序执行Promise</a></h2>
+<p class="read-more">
+   之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？ 
+ 网上搜到的大多数教程都是建一个数组 array ，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用 Promise.all(array) 。然而这只适用于数组中的 promise对象不互相依赖 的情况。 
+   问题  我之前提到过一个典型的例子是Facebook的Graph API 中的
+</p>
 </div>
 
 
-
-
-    </div>
-    <div class="col-sm-3">
-      
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>About Me</h4>
-      <p>
-        123
-      </p>
-    </div>
+</main>
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    <li><a href="undefined">Github</a></li>
+    <li><a href="undefined">Weibo</li>
+    <li><a href="undefined">Linkedin</a></li>
+  </ul>
+  <div class="theme-info">Theme <a
+          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
+          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Recent Post</h4>
-    </div>
-  </div>
-
-
-  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
-
-    <div class="col-sm-12">
-      <h4>Categories</h4> 123
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Tags</h4>
-    </div>
-  </div>
-
-
-    </div>
-  </div>
-  <footer>
-theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a href="http://github.com/sabrinaluo">sabrinaluo</a> | powered by Hexo
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>
 
-</main>
-</body>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -230,4 +124,5 @@ theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by 
 
 
 
+</body>
 </html>

@@ -1,239 +1,108 @@
 <!DOCTYPE>
 <html lang="zh-CN">
+
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <title>小白妹妹写代码 | 一个废话很多的程序媛</title>
+  <title>
+    小白妹妹写代码
+  </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="author" content="Sabrina">
 
+  <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
-  <link rel="shortcut icon" type="image/ico" href="/favicon.ico">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
+
 <body>
-<nav class="navbar navbar-default">
+<nav>
   <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu_mobile_collapse" aria-expanded="false">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#"><i class="fa fa-github" style="font-size:30px;"></i></a>
-    </div>
-
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="menu_mobile_collapse">
-      <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <div class="input-group">
-            <span class="input-group-addon" id="sizing-addon2">This website</span>
-            <input type="text" class="form-control" placeholder="search">
-          </div>
-        </div>
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form>
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input type="text" placeholder="Search">
+        </label>
       </form>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/tech/">Home</a></li>
-        <li><a href="#">Archieve</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li>
-          <a href="#">
-            <i class="fa fa-rss"></i>
-          </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="github.com/sabrinaluo"><i class="fa fa-github"></i></a></li>
-            <li><a href="weibo.com/206663121"><i class="fa fa-weibo"></i></a></li>
-            <li role="separator" class="divider"></li>
-            <li>
-              <a href="#">
-                <i class="fa fa-qq"></i>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">I have nothing to say</a></li>
-          </ul>
-        </li>
-      </ul>
     </div>
-    <!-- /.navbar-collapse -->
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+    </ul>
   </div>
-  <!-- /.container-fluid -->
 </nav>
+
 <main class="container">
-  <header>
-  <div class="row" style="border-bottom: 1px solid #f5f5f5;">
-    <div class="col-sm-6 ">
-      <h2 style="margin-bottom:0">
-        <i class="fa fa-book text-muted"></i>
-        <a href="/tech/">小白妹妹写代码</a>
-      </h2>
-      <p class="text-muted">
-        我这么可爱一定是男孩子
-      </p>
-
+  
+<header>
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
+      <a href="/" class="btn btn-group-right"> 17 </a>
     </div>
-    <div class="col-sm-6 hidden-xs" style="padding-right:0">
-      <div class="pull-right" style="line-height:73px;">
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-file-text"></i> Post</button>
-          <button type="button" class="btn btn-default">
-            17
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-tags"></i> Tag</button>
-          <button type="button" class="btn btn-default">
-            56
-          </button>
-        </div>
-        <div class="btn-group btn-group-xs" role="group">
-          <button type="button" class="btn info"><i class="fa fa-list-ul"></i> Category</button>
-          <button type="button" class="btn btn-default">
-            0
-          </button>
-        </div>
-        <!--end btn-group-->
 
-      </div>
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
+      <a href="/" class="btn btn-group-right"> 56 </a>
+    </div>
+
+    <div class="btn-group">
+      <a class="btn btn-group-left"><i class="fa fa-list-ul"></i> Categories </a>
+      <a href="/"
+         class="btn btn-group-right"> 0 </a>
     </div>
   </div>
 </header>
-  <div class="row">
-    <div class="col-sm-9">
-      
-<h2><a href="http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/">GitHub Page如何绑定域名</a></h2>
-<article>
-  <p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" target="_blank" rel="external">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
-<hr>
-<p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
-<ol>
-<li>首先…你要有一个<del>男盆友</del>域名…没有的话就去godaddy买一个；</li>
-<li>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。<pre><code class="bash">C:\&gt;ping yourname.github.io
-正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:
-来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=8ms TTL=58
-来自 103.245.222.133 的回复: 字节=32 时间=12ms TTL=58
-103.245.222.133 的 Ping 统计信息:
-数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，
-往返行程的估计时间(以毫秒为单位):
-最短 = 5ms，最长 = 12ms，平均 = 7ms
-</code></pre>
-</li>
-<li><p>登录你的godday账号，设置一下DNS的A记录：</p>
-<ul>
-<li>找到你的domain，点manage DNS</li>
-<li>进入DNS设置页面后点Add Record，在弹出的对话框选A(Host)<blockquote>
-<p>RECORD TYPE: A(Host)<br>HOST: 这里填你在godday买的域名，例如abc.com<br>POINTS TO: 这里填第三步获取到的IP地址<br>TTL: 生效的时间，不知道最短是多久，我反正是选custom之后填了600，也就是10分钟 </p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><p>然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了</p>
-</li>
-<li>最后，在你的yourname.github.io这个repo创建一个名为<code>CNAME</code>的文件，没有后缀名。文件内容如下：<pre><code>abc.com
-</code></pre>是的，你没看错，就是辣么简单！</li>
-</ol>
-<p><strong>二级域名的设置</strong><br>假如你有两个github page，一个是blog，一个是news，那你的两个二级域名分别就是：</p>
-<ul>
-<li>blog.abc.com</li>
-<li>news.abc.com</li>
-</ul>
-<ol>
-<li>到godday设置两条<strong>A记录</strong>，分别设置blog及news指向github page的IP</li>
-<li>到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是<pre><code>blog.abc.com
-</code></pre></li>
-</ol>
-<p>整个过程其实做的事情大概可以理解为：</p>
-<ul>
-<li>告诉godday，当别人访问我的域名abc.com的时候，请带他们去github</li>
-<li>告诉你的github page，当别人是被abc.com带来github的时候，没错他们都是我派来的，请接收他们的访问</li>
-<li>告诉你的github page，当别人直接访问github page，也就是yourname.github.io的时候，请穿上花了一百多大洋买的马甲abc.com…（这其实是说，当你添加了cname记录之后，访问yourname.github.io，你在浏览器里看到的域名会自动变成abc.com）</li>
-</ul>
 
-</article>
 
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="GitHub Page如何绑定域名"
-       data-url="http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
+<div class="archive">
+<h2><a href="/tech/2015/12/13/set-a-custom-domain-for-github-page/">GitHub Page如何绑定域名</a></h2>
+<p class="read-more">
+   本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！ 我本来的github page是 sabrinaluo.github.io ，花了一百多大洋把这个域名变成 sabrinaluo.com ，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ 
+ 
+  只讨论一级域名的绑
+</p>
 </div>
 
 
-
-
-    </div>
-    <div class="col-sm-3">
-      
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>About Me</h4>
-      <p>
-        123
-      </p>
-    </div>
+</main>
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    <li><a href="undefined">Github</a></li>
+    <li><a href="undefined">Weibo</li>
+    <li><a href="undefined">Linkedin</a></li>
+  </ul>
+  <div class="theme-info">Theme <a
+          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
+          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Recent Post</h4>
-    </div>
-  </div>
-
-
-  <div class="row" style="border:1px solid #f5f5f5;border-radius:3px;">
-
-    <div class="col-sm-12">
-      <h4>Categories</h4> 123
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-      <h4>Tags</h4>
-    </div>
-  </div>
-
-
-    </div>
-  </div>
-  <footer>
-theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a href="http://github.com/sabrinaluo">sabrinaluo</a> | powered by Hexo
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>
 
-</main>
-</body>
-<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -255,4 +124,5 @@ theme <a href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by 
 
 
 
+</body>
 </html>
