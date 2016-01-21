@@ -34,10 +34,10 @@ tags: [git, version control, 版本控制]
 * `git checkout HEAD` 使用git仓库中的文件覆盖当前的整个working copy，可以在修改了某些文件但想舍弃这些修改的时候使用这个命令
 > 需要注意`reset`是针对本地的git仓库，也就是你每次commit后，文件就会保存到的仓库。
 而`checkout`是针对本地的工作副本，也就是你直接编辑的那些文件，会被overwrite
-* `git branch` 查看分支信息，使用`-r`参数查看远程分支信息
+* `git branch` 查看分支信息，使用`-r`参数查看远程分支信息，使用-`a`参数查看所有分支信息
 * `git branch <branch name>` 添加新的分支
 * `git branch -d <branch name>` 删除分支
-* `git checkout <branch name>` 切换分支，可以使用`-b`参数，创建新分支并切换到新分支
+* `git checkout <branch name> <remote branch>` 切换分支，可以使用`-b`参数，创建新分支并切换到新分支；省略`<remote branch>`，则从当前分支创建新分支
 * `git fetch` 获取远程origin/master分支最新版本，需要手动与本地文件merge
 * `git pull` 获取远程的最新版本并与本地merge
 > 需要注意 `git fetch` 与 `git pull` 的不同，通常如果本地文件有改动，则应该先fetch在 `git merge origin/master` 
@@ -45,7 +45,7 @@ tags: [git, version control, 版本控制]
 * `git pop` 将存起来的工作副本放出来…
 > `git stash` 和 `git pop` 通常在`git pull`或`git merge`的时候如果有冲突(conflict)的时候使用，`pop`之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括<<< ===>>>这些行也要删除，让代码看起来和正常的代码一样。
 ``` javascript
-//git pop之后的冲突文件看起来长这样：
+// git pop之后的冲突文件看起来长这样：
  <<<<<<< their code
  var a = 123;
  =======
@@ -53,7 +53,7 @@ tags: [git, version control, 版本控制]
  >>>>>>> my code
 ``` 
 ``` javascript
-//冲突解决后，看起来应该长这样：
+// 冲突解决后，看起来应该长这样：
  var a = 123;
 ``` 
 * `git merge <branch name>` 合并分支，将指定分支与当前分支合并

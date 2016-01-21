@@ -50,8 +50,9 @@ request(url)
 首先要知道的一点是，当没有下一页的时候，返回的`next=null`，于是我们就有了递归的终止条件。
 ```
 function run(url) {
+  if (!url) return;
   while (url) {
-    request(url).then(function(data) {
+    return request(url).then(function(data) {
       run(data.paging.next);
     })
   }
