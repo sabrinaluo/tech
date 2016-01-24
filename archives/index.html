@@ -60,12 +60,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 18 </a>
+      <a href="/" class="btn btn-group-right"> 19 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 61 </a>
+      <a href="/" class="btn btn-group-right"> 65 </a>
     </div>
 
     <div class="btn-group">
@@ -78,6 +78,14 @@
 
 
 <div class="archive">
+<h2><a href="/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/">Promise的顺序执行和并行执行</a></h2>
+<p class="read-more">
+   并行和顺序执行的前提当然是，有一堆promise等着你去执行…… 通常我们把这“一堆”promise对象放到一个数组里， [promise1, promise2, promise3, ...]  
+ 我们都知道想要让promise按顺序执行，那就是一个接一个的then。然而手写很多then太累了，而嵌套的promise又是反模式，我之前蠢蠢的 用递归解决了顺序执行的问题 ，后来终于在udacit
+</p>
+</div>
+
+<div class="archive">
 <h2><a href="/tech/2016/01/22/understanding-of-CORS/">对浏览器跨域问题的一些理解</a></h2>
 <p class="read-more">
      问题宝宝    1 移动应用开发  之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。 开发的时候用浏览器进行调试，然后console里不停的出现下面的提示( Access-Control-Allow-Origin )：       1       XMLHttpRequest cannot   load   http ://samlino. l
@@ -87,9 +95,9 @@
 <div class="archive">
 <h2><a href="/tech/2016/01/18/sequentialize-promise-by-recursion/">递归实现按顺序执行Promise</a></h2>
 <p class="read-more">
-   之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？ 
- 网上搜到的大多数教程都是建一个数组 array ，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用 Promise.all(array) 。然而这只适用于数组中的 promise对象不互相依赖 的情况。 
-   问题  我之前提到过一个典型的例子是Facebook的Graph API 中的
+    2016-01-24更新  我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里： (Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise) 
+  以下为原文：  
+ 之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序
 </p>
 </div>
 

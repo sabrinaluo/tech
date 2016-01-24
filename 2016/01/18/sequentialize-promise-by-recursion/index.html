@@ -63,12 +63,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 18 </a>
+      <a href="/" class="btn btn-group-right"> 19 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 61 </a>
+      <a href="/" class="btn btn-group-right"> 65 </a>
     </div>
 
     <div class="btn-group">
@@ -87,13 +87,15 @@
     <span>
       <i class="fa fa-pencil"></i> Published: 2016-01-18 17:23:18
       
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-01-22 18:30:48
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-01-24 23:10:54
       
     </span>
   </h3>
   <article>
     <h1>递归实现按顺序执行Promise</h1>
-    <p>之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？</p>
+    <p><strong>2016-01-24更新</strong><br>我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里：<br>(Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise)</p>
+<p><strong>以下为原文：</strong></p>
+<p>之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？</p>
 <p>网上搜到的大多数教程都是建一个数组<code>array</code>，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用<code>Promise.all(array)</code>。然而这只适用于数组中的<strong>promise对象不互相依赖</strong>的情况。</p>
 <h3 id="u95EE_u9898"><a href="#u95EE_u9898" class="headerlink" title="问题"></a>问题</h3><p>我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ <a href="https://developers.facebook.com/docs/graph-api/using-graph-api#paging" target="_blank" rel="external">Cursor-based Pagination</a>），API的Response如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">data</span>": <span class="value">[</span><br><span class="line">     ... Endpoint data is here</span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">paging</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">cursors</span>": <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">after</span>": <span class="value"><span class="string">"MTAxNTExOTQ1MjAwNzI5NDE="</span></span>,</span><br><span class="line">      "<span class="attribute">before</span>": <span class="value"><span class="string">"NDMyNzQyODI3OTQw"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">previous</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;before=NDMyNzQyODI3OTQw"</span></span>,</span><br><span class="line">    "<span class="attribute">next</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE="</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
 <p>简单的一个例子是，当我想要获取一个人的完整好友列表（Friend List），但是这个人好友太多了，分成了很多页。显然这些结果是互相依赖的。我必须先拿到第一页的<code>paging.next</code>，才能进行下一次请求。（别跟我说改query string <code>limit</code>后面的值，limit是有最大限制的=，=）</p>

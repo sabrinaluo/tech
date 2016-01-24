@@ -60,12 +60,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 18 </a>
+      <a href="/" class="btn btn-group-right"> 19 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 61 </a>
+      <a href="/" class="btn btn-group-right"> 65 </a>
     </div>
 
     <div class="btn-group">
@@ -80,9 +80,9 @@
 <div class="archive">
 <h2><a href="/tech/2016/01/18/sequentialize-promise-by-recursion/">递归实现按顺序执行Promise</a></h2>
 <p class="read-more">
-   之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？ 
- 网上搜到的大多数教程都是建一个数组 array ，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用 Promise.all(array) 。然而这只适用于数组中的 promise对象不互相依赖 的情况。 
-   问题  我之前提到过一个典型的例子是Facebook的Graph API 中的
+    2016-01-24更新  我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里： (Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise) 
+  以下为原文：  
+ 之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序
 </p>
 </div>
 

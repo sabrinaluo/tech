@@ -71,20 +71,20 @@
     <li>
       <i class="fa fa-link"></i><a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
     </li>
-    <li><i class="fa fa-clock-o"></i>Started from 12th Jan 2016
+    <li><i class="fa fa-clock-o"></i>Started from 23rd Jan 2016
     </li>
   </ul>
 
   <ul class="stat">
     <li>
       <a href="/tech/archives">
-        <div class="stat-count">18</div>
+        <div class="stat-count">19</div>
         <div class="stat-name">Posts</div>
       </a>
     </li>
     <li>
       <a href="/tech/tags">
-        <div class="stat-count">61</div>
+        <div class="stat-count">65</div>
         <div class="stat-name">Tags</div>
       </a>
     </li>
@@ -117,6 +117,18 @@
     <ul>
       
       <li>
+        <a href="/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">Promise的顺序执行和并行执行</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             并行和顺序执行的前提当然是，有一堆promise等着你去执行…… 通常我们把这“一堆”promise对象放到一个数组里， [promise1, promise2, promise3, ...]  
+
+          </span>
+        </a>
+      </li>
+      
+      <li>
         <a href="/tech/2016/01/22/understanding-of-CORS/">
           <span class="icon-left"><i class="fa fa-book"></i></span>
           <span class="post-title read-more">对浏览器跨域问题的一些理解</span>
@@ -133,8 +145,7 @@
           <span class="post-title read-more">递归实现按顺序执行Promise</span>
           <span class="icon-right"><i class="fa fa-star"></i></span>
           <span class="subtext read-more">
-             之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？ 
- 网上搜到的大多数教程都是建一个数组 array ，把promise对象放到数组里，然后数组中的promise全部执行完
+              2016-01-24更新  我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里： (Promise的顺序执行和并行执行](tech/2016/
           </span>
         </a>
       </li>
@@ -158,18 +169,6 @@
           <span class="subtext read-more">
              本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看 《JavaScript高级程序设计》 ）。 
  直到ES5，JS也还是一个没有类的语言，虽然ES6中可以使用class关键
-          </span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/tech/2015/12/28/travis-github-hexo/">
-          <span class="icon-left"><i class="fa fa-book"></i></span>
-          <span class="post-title read-more">利用travis自动部署hexo搭建在github的博客</span>
-          <span class="icon-right"><i class="fa fa-star"></i></span>
-          <span class="subtext read-more">
-             这篇应该属于不务正业系列… 自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。 
-  Travis 是一套持续集成的服务器解决方案，也就是等于把j
           </span>
         </a>
       </li>
