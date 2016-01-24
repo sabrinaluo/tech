@@ -2,6 +2,12 @@ title: 递归实现按顺序执行Promise
 date: 2016-01-18 17:23:18
 tags: [promise, 递归]
 ---
+**2016-01-24更新**
+我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里：
+(Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise)
+
+**以下为原文：**
+
 之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？
 
 网上搜到的大多数教程都是建一个数组`array`，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用`Promise.all(array)`。然而这只适用于数组中的**promise对象不互相依赖**的情况。
