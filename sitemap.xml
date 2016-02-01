@@ -2,108 +2,113 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
     <loc>http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/01/promise/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/21/hoisting/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/04/git-basic/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tags/index.html</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/categories/index.html</loc>
-    <lastmod>2016-01-24T15:10:54.280Z</lastmod>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/01/promise/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tags/index.html</loc>
+    <lastmod>2016-02-01T08:17:20.281Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/21/hoisting/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/04/git-basic/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</loc>
+    <lastmod>2016-02-01T08:17:20.277Z</lastmod>
   </url>
   
 </urlset>

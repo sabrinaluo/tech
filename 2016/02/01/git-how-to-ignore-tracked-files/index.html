@@ -8,12 +8,12 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>
-    AWS DynamoDB的本地安装及环境配置 | 小白妹妹写代码
+    git如何ignore已经track的文件 | 小白妹妹写代码
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  AWS,DynamoDB,云服务,亚马逊,本地安装,环境配置
+  git,gitignore,update index
   ">
   
   <meta name="author" content="Sabrina">
@@ -85,42 +85,32 @@
     <i class="fa fa-user"></i>
      <a>Sabrina</a>
     <span>
-      <i class="fa fa-pencil"></i> Published: 2015-12-14 14:39:35
+      <i class="fa fa-pencil"></i> Published: 2016-02-01 14:01:03
       
       <i class="fa fa-clock-o"></i> Last Updated: 2016-02-01 16:17:20
       
     </span>
   </h3>
   <article>
-    <h1>AWS DynamoDB的本地安装及环境配置</h1>
-    <p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚马逊AWS云服务提供的一个NoSQL的数据库…</p>
-<p>在这里我必须安利一下Amazon家的服务真是业界良心：前不久，可能是因为我自己蠢，英文不好没看懂免费用一年的各种限制，也不知道写了什么奇怪的东东用自己的账号测试dynamoDB被扣了几刀，写邮件去投诉说你们不是免费吗为啥扣费，然后就得到回复解释了一下为啥扣钱，说我用超过限制了，然后表示个人账号里扣了的钱会<strong>退退退</strong>！（我说明了之后会用公司账号测试，请帮我关了我的个人账户）</p>
-<hr>
-<p>本文是Linux环境下的安装和配置，windows下我还不会…</p>
-<ol>
-<li><p>安装JAVA SDK</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="instruction"> add-apt-repository </span>ppa:webupd8team/java</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install oracle-java8-installer</span><br><span class="line">$ sudo apt-get install oracle-java8-set-default</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装dynamodb-local</p>
+    <h1>git如何ignore已经track的文件</h1>
+    <p>我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_</p>
+<h3 id="u57FA_u672C_u77E5_u8BC6"><a href="#u57FA_u672C_u77E5_u8BC6" class="headerlink" title="基本知识"></a>基本知识</h3><p>在git中文件有两类，共三种状态：</p>
 <ul>
-<li>下载daynamodb-local：<a href="http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz" target="_blank" rel="external">点这里下载</a></li>
-<li>解压文件</li>
-<li>进入文件目录执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-</code></pre></li>
+<li>untracked</li>
+<li>tracked<ul>
+<li>changes not staged for commit</li>
+<li>changes to be committed<br>我们都知道，在<code>.gitignore</code>文件里添加相应的文件夹或文件就能忽略掉不想被track的文件。<br>但是，<code>.gitignore</code>文件只能忽略<strong>Untracked files</strong>。</li>
 </ul>
 </li>
-<li>安装awscli，执行以下命令：<pre><code>pip install awscli
-</code></pre></li>
-<li>配置环境变量，执行以下命令：<pre><code>aws configure
-</code></pre><ul>
-<li>这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要<strong>成功注册AWS服务</strong>之后在AWS的网站上会看到</li>
-<li>AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为<code>us-east-1</code></li>
 </ul>
-</li>
-<li>启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-</code></pre></li>
-</ol>
-<p>参考：<br>[1] <a href="http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/" target="_blank" rel="external">http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/</a><br>[2] <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html#Tools.DynamoDBLocal.DownloadingAndRunning" target="_blank" rel="external">DynamoDBLocal Downloading And Running</a><br>[3] <a href="http://aws.amazon.com/cli/" target="_blank" rel="external">http://aws.amazon.com/cli/</a><br>[4] <a href="http://boto3.readthedocs.org/en/latest/guide/configuration.html" target="_blank" rel="external">http://boto3.readthedocs.org/en/latest/guide/configuration.html</a></p>
+<h3 id="u9002_u7528_u573A_u666F"><a href="#u9002_u7528_u573A_u666F" class="headerlink" title="适用场景"></a>适用场景</h3><p>参考这样一个例子：<br>一个项目因为一些莫名其妙的原因对<code>node_modules</code>文件夹进行了track，然后每次check out出来<code>npm install</code>的时候，很可能这些依赖包就更新了，然后又因为一些莫名其妙的原因，始终没有人把这个文件夹移出git的index，于是你也不好意思删除这个文件夹做一次commit。然而，每次都有几十上百条<code>modified: node_modules/xxx</code>，根本找不到自己真正修改和添加的文件…</p>
+<p>于是问题来了，怎么样才能把<code>node_module</code> ignore，但又不commit这些change呢？</p>
+<h3 id="u89E3_u51B3_u65B9_u6CD5"><a href="#u89E3_u51B3_u65B9_u6CD5" class="headerlink" title="解决方法"></a>解决方法</h3><p>正常情况，跑以下的命令就能忽略掉已经track的<strong>文件夹</strong>：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">ls</span>-<span class="keyword">files</span> -<span class="keyword">z</span> node_modules/ | xargs -<span class="number">0</span> git <span class="keyword">update</span>-<span class="built_in">index</span> --assume-unchanged</span><br></pre></td></tr></table></figure></p>
+<p>如果只需要忽略<strong>单个文件</strong>，则以下命令就能搞定。<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-<span class="built_in">index</span> --assume-unchanged &lt;<span class="keyword">file</span> <span class="keyword">name</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>因为update-index不支持递归<code>-r</code>，所以只能通过上面提到的方法来实现忽略文件夹<br>（憋问我为什么不支持…我也不知道）</p>
+<h3 id="u53E6_u4E00_u79CD_u60C5_u51B5_uFF1A_u5C06tracked_u6587_u4EF6_u79FB_u51FAindex_uFF0C_u4F46_u4ECD_u7136_u4FDD_u7559_u5728_u672C_u5730"><a href="#u53E6_u4E00_u79CD_u60C5_u51B5_uFF1A_u5C06tracked_u6587_u4EF6_u79FB_u51FAindex_uFF0C_u4F46_u4ECD_u7136_u4FDD_u7559_u5728_u672C_u5730" class="headerlink" title="另一种情况：将tracked文件移出index，但仍然保留在本地"></a>另一种情况：将tracked文件移出index，但仍然保留在本地</h3><p>终于有一天，大家想通了，决定将<code>node_modules</code>文件夹移出git index，但是如果删除了整个文件夹commit之后，项目要跑起来，又要重新<code>npm install</code>，懒癌患者倒地不起…</p>
+<p>下面这个命令可以解决上述问题：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm <span class="comment">--cached -r node_modules</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="u5410_u69FD"><a href="#u5410_u69FD" class="headerlink" title="吐槽"></a>吐槽</h3><p>我反正是无法理解把诸如npm包，bower包，composer包等等等的第三方依赖放到git里去track，那么还要package.json干啥=，=</p>
 
   </article>
 </div>
@@ -128,8 +118,8 @@
 
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="AWS DynamoDB的本地安装及环境配置"
-       data-url="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"></div>
+  <div class="ds-thread" data-thread-key="" data-title="git如何ignore已经track的文件"
+       data-url="http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
