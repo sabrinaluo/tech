@@ -10,7 +10,7 @@ tags: [Promise, parallel, sequential, 顺序执行，并行执行]
 ### 场景
 假如我们要去拿github按关键字搜索google, amazon, facebook，每个关键字搜出的第一个用户的第一个repo的名字。
 单独拿一个，比如google，过程是这样的：
-1. 请求https://api.github.com/search/users?q=google，得到用户列表，读取第一个用户的repos_url
+1. 请求https://api.github.com/search/users?q=google ，得到用户列表，读取第一个用户的repos_url
 2. 请求上一步读取的repous_url，获得repo列表，读取第一个repo的名字
 显然，第二步是依赖于第一步的执行结果的。
 
@@ -21,36 +21,36 @@ tags: [Promise, parallel, sequential, 顺序执行，并行执行]
 google第一步          |------------------|
 amazon第一步        google第二步
 facebook第一步      amazon第二步 
-                       facebook第二步
+                   facebook第二步
 ```
 2. 对第一步的顺序有要求，必须严格按照google, amazon, facebook的顺序执行（顺序执行）
 ```
-|--------|
-google1  |--------|
-            google2  |--------|
-                     amazon1  |--------|
-                              amazon2    |--------|
-                                         facebook1    |--------|
-                                                      facebook2
+|---------|
+google1   |---------|
+            google2 |---------|
+                     amazon1  |---------|
+                              amazon2   |---------|
+                                        facebook1 |--------|
+                                                  facebook2
 ```
 3. google1执行完就执行google1，amazon1执行完就执行amazon2，但对google, amazon, facebook的顺序没有要求
 ```
 |------------------|
 google1            |-------------|
-                      google2
+                   google2
 |---------|
 amazon1   |-----------|
-             amazon2
+          amazon2
 |------------|
 facebook1    |-------------|  
-                facebook2        
+             facebook2        
 ```
 
 ### Promise并行执行
 对于场景1，主要就是用到`Promise.all`，因为是数组，所以在处理的过程中通常会用到`.map`或`.forEach`
 {% jsfiddle HiiTea/zfjvr4pz/1 %}
 ![promise例1网络请求时间线](http://7xow88.com1.z0.glb.clouddn.com/tech-promise1.png)
-可以看到3个user请求是同时进行（并行），3个repos请求也是同事进行（并行），由于使用了`Promise.all`，所以repos请求等待users请求全部完成才开始。
+可以看到3个user请求是同时进行（并行），3个repos请求也是同时进行（并行），由于使用了`Promise.all`，所以repos请求等待users请求全部完成才开始。
 
 ### promise顺序执行的正确打开方式
 对于场景2，有一个小技巧，我第一次看到的时候感受是…惊为天人
