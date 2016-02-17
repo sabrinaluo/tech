@@ -63,12 +63,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 21 </a>
+      <a href="/" class="btn btn-group-right"> 22 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 71 </a>
+      <a href="/" class="btn btn-group-right"> 73 </a>
     </div>
 
     <div class="btn-group">
@@ -87,7 +87,7 @@
     <span>
       <i class="fa fa-pencil"></i> Published: 2015-12-19 19:22:27
       
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-03 18:52:35
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
       
     </span>
   </h3>
@@ -114,7 +114,7 @@
 <li>这个有名字的函数返回一个匿名函数，通常都需要传入参数或者定义一些变量。</li>
 <li>这个匿名函数返回的值通常跟上面两点中的入参或者变量有关。</li>
 </ol>
-<h3 id="u5982_u4F55_u4F7F_u7528_u95ED_u5305_uFF1F"><a href="#u5982_u4F55_u4F7F_u7528_u95ED_u5305_uFF1F" class="headerlink" title="如何使用闭包？"></a>如何使用闭包？</h3><p>这个问题其实也就是说，当你调用闭包的时候你其实是在调用什么？<br>我觉得搞清楚这个问题对于简单粗暴的理解闭包非常有用。</p>
+<h3 id="如何使用闭包？"><a href="#如何使用闭包？" class="headerlink" title="如何使用闭包？"></a>如何使用闭包？</h3><p>这个问题其实也就是说，当你调用闭包的时候你其实是在调用什么？<br>我觉得搞清楚这个问题对于简单粗暴的理解闭包非常有用。</p>
 <p>用上面的闭包作为例子，通常闭包是这么用的：</p>
 <pre><code>//例1，分两次传入参数
 var hello = bibao(&apos;你好&apos;)；
@@ -130,7 +130,7 @@ var text = bibao(&apos;你好&apos;)(&apos;小白妹妹&apos;)
 }
 </code></pre><p>所以当你给<code>hello()</code>传入参数<code>b</code>的时候，<code>var text = hello(&#39;小白妹妹&#39;)</code>，返回的是“你好小白妹妹”。也就等于说，当你在调用<code>hello()</code>这个函数的时候，其实访问到了bibao()这个函数中的变量<code>a</code>，值为’你好’。</p>
 <p>闭包中<code>a</code>是定义在匿名函数外部的，这就是传说中的：<strong>内部函数可以访问外部函数的变量</strong>。</p>
-<h3 id="u4E3A_u4EC0_u4E48_u8981_u4F7F_u7528_u95ED_u5305_uFF1F_u4F7F_u7528_u95ED_u5305_u6709_u4EC0_u4E48_u597D_u5904_uFF1F"><a href="#u4E3A_u4EC0_u4E48_u8981_u4F7F_u7528_u95ED_u5305_uFF1F_u4F7F_u7528_u95ED_u5305_u6709_u4EC0_u4E48_u597D_u5904_uFF1F" class="headerlink" title="为什么要使用闭包？使用闭包有什么好处？"></a>为什么要使用闭包？使用闭包有什么好处？</h3><p>我有一个强烈的感觉闭包是一个懒人发明的…（当然我是瞎说的_(:з」∠)_）<br>假如我的老板认识了一大堆妹子，要我写个程序跟她们每个人说早安、午安、晚安，并告诉他们昨天是几号，最后还要问候他的老婆，“吃饭了吗？亲爱的”<br>通常我会这么实现：</p>
+<h3 id="为什么要使用闭包？使用闭包有什么好处？"><a href="#为什么要使用闭包？使用闭包有什么好处？" class="headerlink" title="为什么要使用闭包？使用闭包有什么好处？"></a>为什么要使用闭包？使用闭包有什么好处？</h3><p>我有一个强烈的感觉闭包是一个懒人发明的…（当然我是瞎说的_(:з」∠)_）<br>假如我的老板认识了一大堆妹子，要我写个程序跟她们每个人说早安、午安、晚安，并告诉他们昨天是几号，最后还要问候他的老婆，“吃饭了吗？亲爱的”<br>通常我会这么实现：</p>
 <pre><code>function yesterday(){
  return new Date().getDate() -1;
 }
@@ -177,7 +177,7 @@ list.forEach(function(item){
 var eating = bibao(&apos;吃饭了吗？&apos;);
 console.log(eating(&apos;亲爱的&apos;));
 </code></pre><p>可以看到，使用了闭包就不用重复定义<strong>行为类似</strong>的函数，<code>+ name +&#39;昨天是&#39; + yesterday() + &#39;号&#39;;</code>这个也只用写一遍就可以了，免去了很多重复劳动，看起来简洁了很多，最重要是…显得逼格高…</p>
-<h3 id="u4EC0_u4E48_u65F6_u5019_u7528_u95ED_u5305_uFF1F"><a href="#u4EC0_u4E48_u65F6_u5019_u7528_u95ED_u5305_uFF1F" class="headerlink" title="什么时候用闭包？"></a>什么时候用闭包？</h3><p>我自己的感觉是，当你需要定义很多行为类似的函数的，重复写很多基本类似的内容的时候，就可以考虑用闭包来让整个代码的结构更加简洁。（总觉得使用闭包，可读性就不那么强了，毕竟我这种小白还是不太一眼就看得出来一个闭包到底输入啥返回啥的…）</p>
+<h3 id="什么时候用闭包？"><a href="#什么时候用闭包？" class="headerlink" title="什么时候用闭包？"></a>什么时候用闭包？</h3><p>我自己的感觉是，当你需要定义很多行为类似的函数的，重复写很多基本类似的内容的时候，就可以考虑用闭包来让整个代码的结构更加简洁。（总觉得使用闭包，可读性就不那么强了，毕竟我这种小白还是不太一眼就看得出来一个闭包到底输入啥返回啥的…）</p>
 <p>另外就也不太清楚具体的使用场景了，反正我平时很少用到…少用到的可能有这么几个：</p>
 <ul>
 <li>对闭包的理解不够深入，其实还是不太知道这个东东到底干啥用的</li>

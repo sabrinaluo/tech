@@ -63,12 +63,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 21 </a>
+      <a href="/" class="btn btn-group-right"> 22 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 71 </a>
+      <a href="/" class="btn btn-group-right"> 73 </a>
     </div>
 
     <div class="btn-group">
@@ -87,14 +87,14 @@
     <span>
       <i class="fa fa-pencil"></i> Published: 2016-02-01 14:01:03
       
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-03 18:52:35
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
       
     </span>
   </h3>
   <article>
     <h1>git如何ignore已经track的文件</h1>
     <p>我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_</p>
-<h3 id="u57FA_u672C_u77E5_u8BC6"><a href="#u57FA_u672C_u77E5_u8BC6" class="headerlink" title="基本知识"></a>基本知识</h3><p>在git中文件有两类，共三种状态：</p>
+<h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><p>在git中文件有两类，共三种状态：</p>
 <ul>
 <li>untracked</li>
 <li>tracked<ul>
@@ -103,14 +103,14 @@
 </ul>
 </li>
 </ul>
-<h3 id="u9002_u7528_u573A_u666F"><a href="#u9002_u7528_u573A_u666F" class="headerlink" title="适用场景"></a>适用场景</h3><p>参考这样一个例子：<br>一个项目因为一些莫名其妙的原因对<code>node_modules</code>文件夹进行了track，然后每次check out出来<code>npm install</code>的时候，很可能这些依赖包就更新了，然后又因为一些莫名其妙的原因，始终没有人把这个文件夹移出git的index，于是你也不好意思删除这个文件夹做一次commit。然而，每次都有几十上百条<code>modified: node_modules/xxx</code>，根本找不到自己真正修改和添加的文件…</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>参考这样一个例子：<br>一个项目因为一些莫名其妙的原因对<code>node_modules</code>文件夹进行了track，然后每次check out出来<code>npm install</code>的时候，很可能这些依赖包就更新了，然后又因为一些莫名其妙的原因，始终没有人把这个文件夹移出git的index，于是你也不好意思删除这个文件夹做一次commit。然而，每次都有几十上百条<code>modified: node_modules/xxx</code>，根本找不到自己真正修改和添加的文件…</p>
 <p>于是问题来了，怎么样才能把<code>node_module</code> ignore，但又不commit这些change呢？</p>
-<h3 id="u89E3_u51B3_u65B9_u6CD5"><a href="#u89E3_u51B3_u65B9_u6CD5" class="headerlink" title="解决方法"></a>解决方法</h3><p>正常情况，跑以下的命令就能忽略掉已经track的<strong>文件夹</strong>：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">ls</span>-<span class="keyword">files</span> -<span class="keyword">z</span> node_modules/ | xargs -<span class="number">0</span> git <span class="keyword">update</span>-<span class="built_in">index</span> --assume-unchanged</span><br></pre></td></tr></table></figure></p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>正常情况，跑以下的命令就能忽略掉已经track的<strong>文件夹</strong>：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">ls</span>-<span class="keyword">files</span> -<span class="keyword">z</span> node_modules/ | xargs -<span class="number">0</span> git <span class="keyword">update</span>-<span class="built_in">index</span> --assume-unchanged</span><br></pre></td></tr></table></figure></p>
 <p>如果只需要忽略<strong>单个文件</strong>，则以下命令就能搞定。<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-<span class="built_in">index</span> --assume-unchanged &lt;<span class="keyword">file</span> <span class="keyword">name</span>&gt;</span><br></pre></td></tr></table></figure></p>
 <p>因为update-index不支持递归<code>-r</code>，所以只能通过上面提到的方法来实现忽略文件夹<br>（憋问我为什么不支持…我也不知道）</p>
-<h3 id="u53E6_u4E00_u79CD_u60C5_u51B5_uFF1A_u5C06tracked_u6587_u4EF6_u79FB_u51FAindex_uFF0C_u4F46_u4ECD_u7136_u4FDD_u7559_u5728_u672C_u5730"><a href="#u53E6_u4E00_u79CD_u60C5_u51B5_uFF1A_u5C06tracked_u6587_u4EF6_u79FB_u51FAindex_uFF0C_u4F46_u4ECD_u7136_u4FDD_u7559_u5728_u672C_u5730" class="headerlink" title="另一种情况：将tracked文件移出index，但仍然保留在本地"></a>另一种情况：将tracked文件移出index，但仍然保留在本地</h3><p>终于有一天，大家想通了，决定将<code>node_modules</code>文件夹移出git index，但是如果删除了整个文件夹commit之后，项目要跑起来，又要重新<code>npm install</code>，懒癌患者倒地不起…</p>
+<h3 id="另一种情况：将tracked文件移出index，但仍然保留在本地"><a href="#另一种情况：将tracked文件移出index，但仍然保留在本地" class="headerlink" title="另一种情况：将tracked文件移出index，但仍然保留在本地"></a>另一种情况：将tracked文件移出index，但仍然保留在本地</h3><p>终于有一天，大家想通了，决定将<code>node_modules</code>文件夹移出git index，但是如果删除了整个文件夹commit之后，项目要跑起来，又要重新<code>npm install</code>，懒癌患者倒地不起…</p>
 <p>下面这个命令可以解决上述问题：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm <span class="comment">--cached -r node_modules</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="u5410_u69FD"><a href="#u5410_u69FD" class="headerlink" title="吐槽"></a>吐槽</h3><p>我反正是无法理解把诸如npm包，bower包，composer包等等等的第三方依赖放到git里去track，那么还要package.json干啥=，=</p>
+<h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>我反正是无法理解把诸如npm包，bower包，composer包等等等的第三方依赖放到git里去track，那么还要package.json干啥=，=</p>
 
   </article>
 </div>

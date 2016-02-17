@@ -63,12 +63,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 21 </a>
+      <a href="/" class="btn btn-group-right"> 22 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 71 </a>
+      <a href="/" class="btn btn-group-right"> 73 </a>
     </div>
 
     <div class="btn-group">
@@ -87,7 +87,7 @@
     <span>
       <i class="fa fa-pencil"></i> Published: 2015-12-16 11:00:27
       
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-03 18:52:35
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
       
     </span>
   </h3>
@@ -128,7 +128,7 @@ exports.name = <span class="string">'小白妹妹'</span>;
 var exports = module.exports;
 </code></pre><p><strong>这也就是为什么你并没有定义<code>exports</code>这个变量，却能console.log出来而不会报错的原因</strong>。</p>
 <h1 id="require"><a href="#require" class="headerlink" title="require"></a>require</h1><p>当你从外部调用某个模块，require其实是在require什么？<a href="https://nodejs.org/dist/latest-v4.x/docs/api/modules.html#modules_module_require_id" target="_blank" rel="external">^2</a><br>require的时候NodeJS会<del>到处</del>去找有没有这个模块，如果有，return的就是module.exports里的东东。</p>
-<h1 id="DOs__26amp_3B_DONTs"><a href="#DOs__26amp_3B_DONTs" class="headerlink" title="DOs &amp; DONTs"></a>DOs &amp; DONTs</h1><ul>
+<h1 id="DOs-amp-DONTs"><a href="#DOs-amp-DONTs" class="headerlink" title="DOs &amp; DONTs"></a>DOs &amp; DONTs</h1><ul>
 <li>√你可以这样：<pre><code>module.exports.name = &apos;小白妹妹&apos;;
 exports.age = 10;
 module.exports.print = function(){console.log(12345)};
@@ -151,7 +151,7 @@ module.exports = {
 name = &apos;小白妹妹&apos;;
 };
 console.log(module); //你会看到Module的exports中还是只有name属性！！！
-</code></pre><h1 id="u603B_u7ED3"><a href="#u603B_u7ED3" class="headerlink" title="总结"></a>总结</h1>还是那一句话，<code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别<blockquote>
+</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>还是那一句话，<code>module.exports</code>和<code>exports</code>的区别就是<code>var a={}; var b=a;</code>，a和b的区别<blockquote>
 <ul>
 <li>改变<code>exports</code>的指向后所添加的<code>exports.xxx</code>都是无效的。因为require返回的只会是<code>module.exports</code></li>
 </ul>

@@ -8,12 +8,12 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>
-    AWS DynamoDB的本地安装及环境配置 | 小白妹妹写代码
+    jQuery中利用JSONP进行跨域GET请求 | 小白妹妹写代码
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  AWS,DynamoDB,云服务,亚马逊,本地安装,环境配置
+  CORS,JSONP,jQuery,跨域
   ">
   
   <meta name="author" content="Sabrina">
@@ -85,42 +85,21 @@
     <i class="fa fa-user"></i>
      <a>Sabrina</a>
     <span>
-      <i class="fa fa-pencil"></i> Published: 2015-12-14 14:39:35
+      <i class="fa fa-pencil"></i> Published: 2016-02-17 12:31:55
       
       <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
       
     </span>
   </h3>
   <article>
-    <h1>AWS DynamoDB的本地安装及环境配置</h1>
-    <p><a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="external">DynamoDB</a>是亚马逊AWS云服务提供的一个NoSQL的数据库…</p>
-<p>在这里我必须安利一下Amazon家的服务真是业界良心：前不久，可能是因为我自己蠢，英文不好没看懂免费用一年的各种限制，也不知道写了什么奇怪的东东用自己的账号测试dynamoDB被扣了几刀，写邮件去投诉说你们不是免费吗为啥扣费，然后就得到回复解释了一下为啥扣钱，说我用超过限制了，然后表示个人账号里扣了的钱会<strong>退退退</strong>！（我说明了之后会用公司账号测试，请帮我关了我的个人账户）</p>
-<hr>
-<p>本文是Linux环境下的安装和配置，windows下我还不会…</p>
-<ol>
-<li><p>安装JAVA SDK</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="instruction"> add-apt-repository </span>ppa:webupd8team/java</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install oracle-java8-installer</span><br><span class="line">$ sudo apt-get install oracle-java8-set-default</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>安装dynamodb-local</p>
-<ul>
-<li>下载daynamodb-local：<a href="http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz" target="_blank" rel="external">点这里下载</a></li>
-<li>解压文件</li>
-<li>进入文件目录执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-</code></pre></li>
-</ul>
-</li>
-<li>安装awscli，执行以下命令：<pre><code>pip install awscli
-</code></pre></li>
-<li>配置环境变量，执行以下命令：<pre><code>aws configure
-</code></pre><ul>
-<li>这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要<strong>成功注册AWS服务</strong>之后在AWS的网站上会看到</li>
-<li>AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为<code>us-east-1</code></li>
-</ul>
-</li>
-<li>启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-</code></pre></li>
-</ol>
-<p>参考：<br>[1] <a href="http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/" target="_blank" rel="external">http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/</a><br>[2] <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html#Tools.DynamoDBLocal.DownloadingAndRunning" target="_blank" rel="external">DynamoDBLocal Downloading And Running</a><br>[3] <a href="http://aws.amazon.com/cli/" target="_blank" rel="external">http://aws.amazon.com/cli/</a><br>[4] <a href="http://boto3.readthedocs.org/en/latest/guide/configuration.html" target="_blank" rel="external">http://boto3.readthedocs.org/en/latest/guide/configuration.html</a></p>
+    <h1>jQuery中利用JSONP进行跨域GET请求</h1>
+    <p>每次遇到跨域的问题真是！@#￥%</p>
+<p>我对<code>JSONP</code>的一些浅显的理解就是，有时候会看到类似<code>http://xxx.xx.com/?callback=xxx</code>这样的请求（<code>callback=</code>也可能是<code>jsonp=</code>也可能是<code>jsonpcallback=</code>，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。</p>
+<p>由于这个回调函数已经发给了服务器，返回的结果其实是一个函数，函数的入参是获取的数据。</p>
+<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">  url: 'http://xx.xx.com/xxx',</span><br><span class="line">  <span class="keyword">method</span>: '<span class="type">GET</span>',</span><br><span class="line">  dataType: 'jsonp',</span><br><span class="line">  //jsonp: 'callback',</span><br><span class="line">  success: function(data)&#123;</span><br><span class="line">    //<span class="keyword">do</span> something here;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$.ajax(options);</span><br></pre></td></tr></table></figure></p>
+<p>其中需要注意的是，一定要声明<strong><code>dataType</code></strong>，然后把回调函数写在success后面就可以了。<br>另外一开始提到，服务器端对jsonp的实现可能不同，所以在<code>options</code>中，有时候需要声明<code>jsonp</code>对应的字符串，默认是<code>&quot;callback&quot;</code>。例如：如果服务器实现jsonp是通过<code>http://xxx.xx.com/?jsonpcallback=xxx</code>，那么就需要在<code>options</code>中声明<code>jsonp:&#39;jsonpcallback&#39;</code></p>
+<p>原理据说和<code>&lt;script src=&quot;...&quot;&gt;</code>差不多，我现在还不是很明白=，=</p>
+<p>参考<br><a href="http://www.runoob.com/json/json-jsonp.html" target="_blank" rel="external">http://www.runoob.com/json/json-jsonp.html</a></p>
 
   </article>
 </div>
@@ -128,8 +107,8 @@
 
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="AWS DynamoDB的本地安装及环境配置"
-       data-url="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"></div>
+  <div class="ds-thread" data-thread-key="" data-title="jQuery中利用JSONP进行跨域GET请求"
+       data-url="http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

@@ -63,12 +63,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 21 </a>
+      <a href="/" class="btn btn-group-right"> 22 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 71 </a>
+      <a href="/" class="btn btn-group-right"> 73 </a>
     </div>
 
     <div class="btn-group">
@@ -87,7 +87,7 @@
     <span>
       <i class="fa fa-pencil"></i> Published: 2015-12-28 12:00:56
       
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-03 18:52:35
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
       
     </span>
   </h3>
@@ -112,7 +112,7 @@
     │   ├── id_rsa.enc
     │   └── ssh_config
     └── .travis.yml
-</code></pre><h3 id="u6CE8_u610F_u4E8B_u9879"><a href="#u6CE8_u610F_u4E8B_u9879" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>before_install:
+</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>before_install:
 - openssl aes-256-cbc -K $encrypted_e011a6d7eebf_key -iv $encrypted_e011a6d7eebf_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
 </code></pre><ul>
 <li><strong>$encrypted_e011a6d7eebf_key</strong>这一串加密的key每个人都不同，请不要直接复制。请使用<br><code>$ travis encrypt-file ssh_key --add</code> 这条命令将相应的key写入<code>.travis.yml</code>中。</li>
@@ -121,7 +121,7 @@
 <li>如果你最后deploy的不是master分支，请在<code>packag.json</code>中使用下面的依赖<pre><code>&quot;hexo-deployer-git&quot;: &quot;hexojs/hexo-deployer-git#495fc6d&quot;
 </code></pre>hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。</li>
 </ul>
-<h3 id="travis-yml_u6587_u4EF6_u89E3_u91CA"><a href="#travis-yml_u6587_u4EF6_u89E3_u91CA" class="headerlink" title=".travis.yml文件解释"></a><code>.travis.yml</code>文件解释</h3><p>整个配置其实是告诉travis：</p>
+<h3 id="travis-yml文件解释"><a href="#travis-yml文件解释" class="headerlink" title=".travis.yml文件解释"></a><code>.travis.yml</code>文件解释</h3><p>整个配置其实是告诉travis：</p>
 <ol>
 <li>使用node 4.0版本来build我的程序</li>
 <li>只有当master分支有commit的时候才自动部署</li>

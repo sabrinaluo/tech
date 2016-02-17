@@ -63,12 +63,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 21 </a>
+      <a href="/" class="btn btn-group-right"> 22 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 71 </a>
+      <a href="/" class="btn btn-group-right"> 73 </a>
     </div>
 
     <div class="btn-group">
@@ -87,7 +87,7 @@
     <span>
       <i class="fa fa-pencil"></i> Published: 2015-12-24 14:58:32
       
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-03 18:52:35
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
       
     </span>
   </h3>
@@ -95,7 +95,7 @@
     <h1>git merge repo 如何合并两个仓库</h1>
     <p>为什么我每天都会有一些奇奇怪怪的需求…</p>
 <p>我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推<code>push -f</code>，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！</p>
-<h3 id="u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93"><a href="#u5982_u4F55_u5408_u5E76_u4E24_u4E2A_u4ED3_u5E93" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：</p>
+<h3 id="如何合并两个仓库"><a href="#如何合并两个仓库" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：</p>
 <pre><code class="bash"><span class="built_in">cd</span> repo1
 git remote add other ../repo2
 git fetch other
@@ -115,7 +115,7 @@ git merge repo2
 <li>切换到repo1的master分支</li>
 <li>将repo2分支的内容合并到master分支</li>
 </ol>
-<h3 id="u4E00_u53E5_u8BDD_u603B_u7ED3"><a href="#u4E00_u53E5_u8BDD_u603B_u7ED3" class="headerlink" title="一句话总结"></a>一句话总结</h3><p>将一个仓库的内容checkout到另一个仓库的一个分支，将该分支与master分支合并</p>
+<h3 id="一句话总结"><a href="#一句话总结" class="headerlink" title="一句话总结"></a>一句话总结</h3><p>将一个仓库的内容checkout到另一个仓库的一个分支，将该分支与master分支合并</p>
 <p>参考：<br>[1] <a href="http://blog.csdn.net/gouboft/article/details/8450696" target="_blank" rel="external">http://blog.csdn.net/gouboft/article/details/8450696</a></p>
 
   </article>

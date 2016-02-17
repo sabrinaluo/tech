@@ -63,12 +63,12 @@
   <div class="header-btn">
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 21 </a>
+      <a href="/" class="btn btn-group-right"> 22 </a>
     </div>
 
     <div class="btn-group">
       <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 71 </a>
+      <a href="/" class="btn btn-group-right"> 73 </a>
     </div>
 
     <div class="btn-group">
@@ -87,7 +87,7 @@
     <span>
       <i class="fa fa-pencil"></i> Published: 2015-12-01 18:46:26
       
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-03 18:52:35
+      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
       
     </span>
   </h3>
@@ -116,7 +116,7 @@ setTimeout(<span class="function"><span class="keyword">function</span> (<span c
 
 greeting(name); <span class="comment">//以为得到name之后就可以开心的去打招呼啦，然而…</span>
 </code></pre>
-<h3 id="u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01"><a href="#u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01_u8FD9_u662F_u9519_u7684_uFF01" class="headerlink" title="这是错的！这是错的！这是错的！"></a>这是错的！这是错的！这是错的！</h3><p>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
+<h3 id="这是错的！这是错的！这是错的！"><a href="#这是错的！这是错的！这是错的！" class="headerlink" title="这是错的！这是错的！这是错的！"></a>这是错的！这是错的！这是错的！</h3><p>可能很多新手都犯过这个错误，错的时候还不知道为啥错了…深究原因的话跟JS的机制有关，长篇大论的就不在这里多说了（其实是我说不清楚…）</p>
 <p>再有点经验，就会知道，应该把 <code>greeting(name)</code> 写在回调函数里，这样就能保证在得到数据之后才运行 <code>greeting()</code> 函数，于是…当你有多个请求并且之间是有这种依赖关系的时候，可怕的回调地狱就出现了！<br>而解决回调地狱其中一个很优雅的方法，就是使用传说中的promise！</p>
 <p>关于promise这个概念我前前后后看了有一年了，周围也没有认识的人可以给我讲，只能自己看看网上的文章，然而…<del>并没有什么卵用</del>…网上的文章都是众说纷纭，有一上来就defer的<a href="https://github.com/alsotang/node-lessons/tree/master/lesson17" target="_blank" rel="external">^1</a>，也有一上来就说如果你还在用defer你就理解错了Promise的<a href="http://web.jobbole.com/82601/" target="_blank" rel="external">^2</a>，就所以我到现在也不知道究竟什么样的理解才是对的…</p>
 <p>关于<a href="http://segmentfault.com/a/1190000002452115" target="_blank" rel="external">Promise以及A+规范</a>就不在此详述了，那些概念的东东，我也还没完全理解。我想做的是让跟我一样的小白都能明白Promise最基本的用法。</p>
