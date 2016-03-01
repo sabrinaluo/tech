@@ -46,6 +46,7 @@
       
       <li><a href="/tech/tags">Tags</a></li>
       
+      <li><a href="/tech/atom.xml">RSS</a></li>
     </ul>
   </div>
 </nav>
@@ -63,28 +64,31 @@
     </span>
   </h1>
   <ul class="details">
-    <li><i class="fa fa-map-marker"></i>null</li>
+    
+    <li><i class="fa fa-map-marker"></i>Hong Kong, China</li>
+    
     <li>
       <i class="fa fa-envelope-o"></i><a
-              href="mailto:null">null</a>
+              href="mailto:luohaojing@gmail.com">luohaojing@gmail.com</a>
     </li>
+    
     <li>
       <i class="fa fa-link"></i><a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
     </li>
-    <li><i class="fa fa-clock-o"></i>Started from 23rd Jan 2016
+    <li><i class="fa fa-clock-o"></i>Started from 11th Dec 2015
     </li>
   </ul>
 
   <ul class="stat">
     <li>
       <a href="/tech/archives">
-        <div class="stat-count">22</div>
+        <div class="stat-count">23</div>
         <div class="stat-name">Posts</div>
       </a>
     </li>
     <li>
       <a href="/tech/tags">
-        <div class="stat-count">73</div>
+        <div class="stat-count">74</div>
         <div class="stat-name">Tags</div>
       </a>
     </li>
@@ -97,15 +101,15 @@
   </ul>
 
   <ul class="social-network">
+    
     <li>
-      <a href="null"><i class="fa fa-github"></i></a>
+      <a href="https://github.com/sabrinaluo"><i class="fa fa-github"></i></a>
     </li>
+    
     <li>
       <a href="null"><i class="fa fa-weibo"></i></a>
     </li>
-    <li>
-      <a href="null"> <i class="fa fa-linkedin"></i></a>
-    </li>
+    
   </ul>
 </div>
 
@@ -115,6 +119,17 @@
       Recent Post
     </h3>
     <ul>
+      
+      <li>
+        <a href="/tech/2016/02/29/set-cookie-from-server-side-and-client-side/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">Cookie在前端和后端的设置</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬 汉 妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…
+          </span>
+        </a>
+      </li>
       
       <li>
         <a href="/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/">
@@ -179,29 +194,73 @@
         </a>
       </li>
       
+      <li>
+        <a href="/tech/2016/01/18/sequentialize-promise-by-recursion/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">递归实现按顺序执行Promise</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+              2016-01-24更新  我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里： (Promise的顺序执行和并行执行](tech/2016/
+          </span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tech/2016/01/12/ES6-generator-yield/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">对generator和yield的一些理解</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯E
+          </span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tech/2015/12/31/understand-js-inheritance/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">对JS类和继承的一些理解</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看 《JavaScript高级程序设计》 ）。 
+ 直到ES5，JS也还是一个没有类的语言，虽然ES6中可以使用class关键
+          </span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="/tech/2015/12/28/travis-github-hexo/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">利用travis自动部署hexo搭建在github的博客</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             这篇应该属于不务正业系列… 自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。 
+  Travis 是一套持续集成的服务器解决方案，也就是等于把j
+          </span>
+        </a>
+      </li>
+      
     </ul>
   </div>
 </div>
 
-<div class="column post-graph">
-  <div class="boxed-group">
-    <h3>Post Frequency</h3>
-    test
-  </div>
-</div>
-
 </main>
+
 <footer class="container clearfix">
   <ul class="social-link">
     <li>© 2016 Sabrina</li>
+
     <li><a href="http://sabrinaluo.com/tech">Home</a></li>
-    <li><a href="undefined">Github</a></li>
-    <li><a href="undefined">Weibo</li>
-    <li><a href="undefined">Linkedin</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</li>
+    
   </ul>
   <div class="theme-info">Theme <a
-          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
-          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
   <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>

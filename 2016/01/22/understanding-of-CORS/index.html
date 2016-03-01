@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  CORS,corss domain,同源策略,浏览器,跨域
+  CORS,corss domain,同源策略,跨域,浏览器
   ">
   
   <meta name="author" content="Sabrina">
@@ -50,6 +50,7 @@
       
       <li><a href="/tech/tags">Tags</a></li>
       
+      <li><a href="/tech/atom.xml">RSS</a></li>
     </ul>
   </div>
 </nav>
@@ -59,21 +60,28 @@
   <h2>
     <i class="fa fa-book text-muted"></i>
     <a href="/tech/">小白妹妹写代码</a>
+    
+    
   </h2>
   <div class="header-btn">
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 22 </a>
+      <a href="/tech/archives" class="btn btn-group-left"><i
+                class="fa fa-file-text"></i> Posts </a>
+      <a href="/tech/archives"
+         class="btn btn-group-right"> 23 </a>
     </div>
 
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 73 </a>
+      <a href="/tech/tags" class="btn btn-group-left"><i
+                class="fa fa-tags"></i> Tags </a>
+      <a href="/tech/tags"
+         class="btn btn-group-right"> 74 </a>
     </div>
 
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-list-ul"></i> Categories </a>
-      <a href="/"
+      <a href="/tech/categories" class="btn btn-group-left"><i
+                class="fa fa-list-ul"></i> Categories </a>
+      <a href="/tech/categories"
          class="btn btn-group-right"> 0 </a>
     </div>
   </div>
@@ -86,14 +94,11 @@
      <a>Sabrina</a>
     <span>
       <i class="fa fa-pencil"></i> Published: 2016-01-22 15:08:33
-      
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
-      
     </span>
   </h3>
   <article>
     <h1>对浏览器跨域问题的一些理解</h1>
-    <h3 id="问题宝宝"><a href="#问题宝宝" class="headerlink" title="问题宝宝"></a>问题宝宝</h3><h4 id="1-移动应用开发"><a href="#1-移动应用开发" class="headerlink" title="1 移动应用开发"></a>1 移动应用开发</h4><p>之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。<br>开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(<strong>Access-Control-Allow-Origin</strong>)：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest cannot <span class="operator"><span class="keyword">load</span> <span class="keyword">http</span>://samlino.<span class="keyword">local</span>/cag/get_leads. <span class="keyword">No</span> <span class="string">'Access-Control-Allow-Origin'</span> header <span class="keyword">is</span> <span class="keyword">present</span> <span class="keyword">on</span> the requested <span class="keyword">resource</span>. Origin <span class="string">'http://localhost:63342'</span> <span class="keyword">is</span> therefore <span class="keyword">not</span> allowed <span class="keyword">access</span>.</span></span><br></pre></td></tr></table></figure></p>
+    <h3 id="问题宝宝"><a href="#问题宝宝" class="headerlink" title="问题宝宝"></a>问题宝宝</h3><h4 id="1-移动应用开发"><a href="#1-移动应用开发" class="headerlink" title="1 移动应用开发"></a>1 移动应用开发</h4><p>之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。<br>开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(<strong>Access-Control-Allow-Origin</strong>)：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest cannot <span class="keyword">load</span> <span class="keyword">http</span>://samlino.<span class="keyword">local</span>/cag/get_leads. <span class="keyword">No</span> <span class="string">'Access-Control-Allow-Origin'</span> header <span class="keyword">is</span> <span class="keyword">present</span> <span class="keyword">on</span> the requested <span class="keyword">resource</span>. Origin <span class="string">'http://localhost:63342'</span> <span class="keyword">is</span> therefore <span class="keyword">not</span> allowed <span class="keyword">access</span>.</span><br></pre></td></tr></table></figure></p>
 <p>而我当时的解决方法是，在chrome装了一个叫<a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="external">Allow-Control-Allow-Origin</a>的扩展，启用之后就不报错了。</p>
 <p>也不知道什么什么原理，反正就这么一直用着。（不思进取）</p>
 <h4 id="2-网络应用开发"><a href="#2-网络应用开发" class="headerlink" title="2 网络应用开发"></a>2 网络应用开发</h4><p>后来写单页应用（SPA），静态文件的js里调用各大公司的API， github、facebook什么的，反正从来没有报过上面的错…<br>另外还写过用NodeJS做中间层，从NodeJS去API拿数据然后渲染再发到前端，也从来没报过错…</p>
@@ -111,8 +116,8 @@
 </ul>
 <h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>之前脑子里大概有个<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">CORS</a>的概念，然后一直以为是服务器拒绝从浏览器跨域访问…因为要解决自己call自己不同域名下的API问题，就是去服务器设置一下header…但其实是都是浏览器在作怪…</p>
 <p>在浏览器中，允许跨域访问的资源的一些例子<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#Cross-origin_network_access" target="_blank" rel="external">^2</a>：<br><code>&lt;script src=&quot;...&quot;&gt;&lt;/script&gt;</code><br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;...&quot;&gt;</code><br><code>&lt;img&gt;</code> <code>&lt;video&gt;</code> <code>&lt;audio&gt;</code><br><code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code><br><code>@font-face</code><br><code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code></p>
-<h3 id="Response-Headers"><a href="#Response-Headers" class="headerlink" title="Response Headers"></a>Response Headers</h3><p>先看看可以在浏览器中跨域请求的别人家(github)的API返回的header：<br><figure class="highlight tp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Credentials:true</span><br><span class="line">Access-Control-Allow-Origin:*</span><br><span class="line">Access-Control-Expose-Headers:ETag, Link, <span class="keyword">X</span>-GitHub-OTP, <span class="keyword">X</span>-RateLimit-Limit, <span class="keyword">X</span>-RateLimit-Remaining, <span class="keyword">X</span>-RateLimit-Reset, <span class="keyword">X</span>-OAuth-Scopes, <span class="keyword">X</span>-Accepted-OAuth-Scopes, <span class="keyword">X</span>-Poll-Interval</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
-<p>看看自家API返回的header<br><figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="constant">Connection</span><span class="symbol">:keep-alive</span></span><br><span class="line"><span class="constant">Content</span>-<span class="constant">Encoding</span><span class="symbol">:gzip</span></span><br><span class="line"><span class="constant">Content</span>-<span class="constant">Type</span><span class="symbol">:text/html</span></span><br><span class="line"><span class="constant">Date</span><span class="symbol">:Fri</span>, <span class="number">22</span> <span class="constant">Jan</span> <span class="number">2016</span> <span class="number">07</span><span class="symbol">:</span><span class="number">07</span><span class="symbol">:</span><span class="number">01</span> <span class="constant">GMT</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h3 id="Response-Headers"><a href="#Response-Headers" class="headerlink" title="Response Headers"></a>Response Headers</h3><p>先看看可以在浏览器中跨域请求的别人家(github)的API返回的header：<br><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Credentials:true</span><br><span class="line">Access-Control-Allow-Origin:*</span><br><span class="line">Access-Control-Expose-Headers:ETag, Link, <span class="keyword">X</span>-GitHub-OTP, <span class="keyword">X</span>-RateLimit-Limit, <span class="keyword">X</span>-RateLimit-Remaining, <span class="keyword">X</span>-RateLimit-Reset, <span class="keyword">X</span>-OAuth-Scopes, <span class="keyword">X</span>-Accepted-OAuth-Scopes, <span class="keyword">X</span>-Poll-Interval</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>看看自家API返回的header<br><figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">Connection</span>:<span class="attribute">keep-alive</span><br><span class="line">Content-Encoding</span>:<span class="attribute">gzip</span><br><span class="line">Content-Type</span>:<span class="attribute">text/html</span><br><span class="line">Date</span>:<span class="attribute">Fri, 22 Jan 2016 07</span>:<span class="number">07</span>:<span class="number">01</span> GMT</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 <p>差别就在于别人家的API返回了<strong>Access-Control-Allow-Origin:*</strong><br>浏览器读到这个头部之后，才会加载请求的结果。</p>
 <h3 id="跨域的时候服务器收到请求了吗？"><a href="#跨域的时候服务器收到请求了吗？" class="headerlink" title="跨域的时候服务器收到请求了吗？"></a>跨域的时候服务器收到请求了吗？</h3><p>服务器当然收到请求了，不然怎么能返回头部…而且我上面举的诡异的例子中，请求trigger的job都完成了。</p>
 <p>所以也就是说，服务器其实收到了你的请求，并且给你返回了全部的数据，但是浏览器看到头部就把body藏起来了，然后抛出错误提示…</p>
@@ -128,8 +133,8 @@
 
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="对浏览器跨域问题的一些理解"
-       data-url="http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/"></div>
+  <div class="ds-thread" data-thread-key="1453446513" data-title="对浏览器跨域问题的一些理解"
+       data-url="http://sabrinaluo.com/tech/tech/2016/01/22/understanding-of-CORS/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -150,17 +155,22 @@
 
 
 </main>
+
 <footer class="container clearfix">
   <ul class="social-link">
     <li>© 2016 Sabrina</li>
+
     <li><a href="http://sabrinaluo.com/tech">Home</a></li>
-    <li><a href="undefined">Github</a></li>
-    <li><a href="undefined">Weibo</li>
-    <li><a href="undefined">Linkedin</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</li>
+    
   </ul>
   <div class="theme-info">Theme <a
-          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
-          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
   <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>

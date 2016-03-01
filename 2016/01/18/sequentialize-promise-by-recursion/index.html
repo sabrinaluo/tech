@@ -50,6 +50,7 @@
       
       <li><a href="/tech/tags">Tags</a></li>
       
+      <li><a href="/tech/atom.xml">RSS</a></li>
     </ul>
   </div>
 </nav>
@@ -59,21 +60,28 @@
   <h2>
     <i class="fa fa-book text-muted"></i>
     <a href="/tech/">小白妹妹写代码</a>
+    
+    
   </h2>
   <div class="header-btn">
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 22 </a>
+      <a href="/tech/archives" class="btn btn-group-left"><i
+                class="fa fa-file-text"></i> Posts </a>
+      <a href="/tech/archives"
+         class="btn btn-group-right"> 23 </a>
     </div>
 
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 73 </a>
+      <a href="/tech/tags" class="btn btn-group-left"><i
+                class="fa fa-tags"></i> Tags </a>
+      <a href="/tech/tags"
+         class="btn btn-group-right"> 74 </a>
     </div>
 
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-list-ul"></i> Categories </a>
-      <a href="/"
+      <a href="/tech/categories" class="btn btn-group-left"><i
+                class="fa fa-list-ul"></i> Categories </a>
+      <a href="/tech/categories"
          class="btn btn-group-right"> 0 </a>
     </div>
   </div>
@@ -86,9 +94,6 @@
      <a>Sabrina</a>
     <span>
       <i class="fa fa-pencil"></i> Published: 2016-01-18 17:23:18
-      
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
-      
     </span>
   </h3>
   <article>
@@ -97,7 +102,7 @@
 <p><strong>以下为原文：</strong></p>
 <p>之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？</p>
 <p>网上搜到的大多数教程都是建一个数组<code>array</code>，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用<code>Promise.all(array)</code>。然而这只适用于数组中的<strong>promise对象不互相依赖</strong>的情况。</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ <a href="https://developers.facebook.com/docs/graph-api/using-graph-api#paging" target="_blank" rel="external">Cursor-based Pagination</a>），API的Response如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">data</span>": <span class="value">[</span><br><span class="line">     ... Endpoint data is here</span><br><span class="line">  ]</span>,</span><br><span class="line">  "<span class="attribute">paging</span>": <span class="value">&#123;</span><br><span class="line">    "<span class="attribute">cursors</span>": <span class="value">&#123;</span><br><span class="line">      "<span class="attribute">after</span>": <span class="value"><span class="string">"MTAxNTExOTQ1MjAwNzI5NDE="</span></span>,</span><br><span class="line">      "<span class="attribute">before</span>": <span class="value"><span class="string">"NDMyNzQyODI3OTQw"</span></span><br><span class="line">    </span>&#125;</span>,</span><br><span class="line">    "<span class="attribute">previous</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;before=NDMyNzQyODI3OTQw"</span></span>,</span><br><span class="line">    "<span class="attribute">next</span>": <span class="value"><span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE="</span></span><br><span class="line">  </span>&#125;</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ <a href="https://developers.facebook.com/docs/graph-api/using-graph-api#paging" target="_blank" rel="external">Cursor-based Pagination</a>），API的Response如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"data"</span>: [</span><br><span class="line">     ... Endpoint data is here</span><br><span class="line">  ],</span><br><span class="line">  <span class="attr">"paging"</span>: &#123;</span><br><span class="line">    <span class="attr">"cursors"</span>: &#123;</span><br><span class="line">      <span class="attr">"after"</span>: <span class="string">"MTAxNTExOTQ1MjAwNzI5NDE="</span>,</span><br><span class="line">      <span class="attr">"before"</span>: <span class="string">"NDMyNzQyODI3OTQw"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"previous"</span>: <span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;before=NDMyNzQyODI3OTQw"</span>,</span><br><span class="line">    <span class="attr">"next"</span>: <span class="string">"https://graph.facebook.com/me/albums?limit=25&amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE="</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>简单的一个例子是，当我想要获取一个人的完整好友列表（Friend List），但是这个人好友太多了，分成了很多页。显然这些结果是互相依赖的。我必须先拿到第一页的<code>paging.next</code>，才能进行下一次请求。（别跟我说改query string <code>limit</code>后面的值，limit是有最大限制的=，=）</p>
 <h3 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h3><h5 id="当知道总共有多少页的时候"><a href="#当知道总共有多少页的时候" class="headerlink" title="当知道总共有多少页的时候"></a>当知道总共有多少页的时候</h5><p>(假设request是一个返回promise对象的函数,resolve的是上面的json)</p>
 <ul>
@@ -110,7 +115,7 @@
 </ul>
 <h5 id="当不知道总共多少页的时候"><a href="#当不知道总共多少页的时候" class="headerlink" title="当不知道总共多少页的时候"></a>当不知道总共多少页的时候</h5><p>不停then的方法就不行了，于是有了文艺的程序员</p>
 <ul>
-<li>文艺程序员这么做<br>首先要知道的一点是，当没有下一页的时候，返回的<code>next=null</code>，于是我们就有了递归的终止条件。<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span><span class="params">(url)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!url) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">while</span> (url) &#123;</span><br><span class="line">    <span class="keyword">return</span> request(url).then(<span class="function"><span class="keyword">function</span><span class="params">(data)</span> </span>&#123;</span><br><span class="line">      run(data.paging.next);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> url = <span class="string">'http://xxx'</span>; <span class="comment">// first page</span></span><br><span class="line">run(url);</span><br></pre></td></tr></table></figure>
+<li>文艺程序员这么做<br>首先要知道的一点是，当没有下一页的时候，返回的<code>next=null</code>，于是我们就有了递归的终止条件。<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">url</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">url</span>) <span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">url</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> request(<span class="built_in">url</span>).then(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">      run(data.paging.next);</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">var</span> <span class="built_in">url</span> = <span class="string">'http://xxx'</span>; <span class="comment">// first page</span></span><br><span class="line">run(<span class="built_in">url</span>);</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="瞎扯"><a href="#瞎扯" class="headerlink" title="瞎扯"></a>瞎扯</h3><p>嵌套的Promise其实<strong>可能</strong>是反模式（anti-pattern）<a href="http://taoofcode.net/promise-anti-patterns/" target="_blank" rel="external">^1</a>，但是本文中的情况，如果不递归用嵌套的promise，我实在想不出别的办法来了（ (๑•́ ₃ •̀)宝宝心里苦，但宝宝不说）</p>
@@ -124,8 +129,8 @@
 
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="递归实现按顺序执行Promise"
-       data-url="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"></div>
+  <div class="ds-thread" data-thread-key="1453108998" data-title="递归实现按顺序执行Promise"
+       data-url="http://sabrinaluo.com/tech/tech/2016/01/18/sequentialize-promise-by-recursion/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -146,17 +151,22 @@
 
 
 </main>
+
 <footer class="container clearfix">
   <ul class="social-link">
     <li>© 2016 Sabrina</li>
+
     <li><a href="http://sabrinaluo.com/tech">Home</a></li>
-    <li><a href="undefined">Github</a></li>
-    <li><a href="undefined">Weibo</li>
-    <li><a href="undefined">Linkedin</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</li>
+    
   </ul>
   <div class="theme-info">Theme <a
-          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
-          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
   <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>

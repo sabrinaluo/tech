@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  Google Map,Google Map API,谷歌地图,谷歌地图API
+  Google Map,Google Map API,谷歌地图API,谷歌地图
   ">
   
   <meta name="author" content="Sabrina">
@@ -50,6 +50,7 @@
       
       <li><a href="/tech/tags">Tags</a></li>
       
+      <li><a href="/tech/atom.xml">RSS</a></li>
     </ul>
   </div>
 </nav>
@@ -59,21 +60,28 @@
   <h2>
     <i class="fa fa-book text-muted"></i>
     <a href="/tech/">小白妹妹写代码</a>
+    
+    
   </h2>
   <div class="header-btn">
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-file-text"></i> Posts </a>
-      <a href="/" class="btn btn-group-right"> 22 </a>
+      <a href="/tech/archives" class="btn btn-group-left"><i
+                class="fa fa-file-text"></i> Posts </a>
+      <a href="/tech/archives"
+         class="btn btn-group-right"> 23 </a>
     </div>
 
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-tags"></i> Tags </a>
-      <a href="/" class="btn btn-group-right"> 73 </a>
+      <a href="/tech/tags" class="btn btn-group-left"><i
+                class="fa fa-tags"></i> Tags </a>
+      <a href="/tech/tags"
+         class="btn btn-group-right"> 74 </a>
     </div>
 
     <div class="btn-group">
-      <a class="btn btn-group-left"><i class="fa fa-list-ul"></i> Categories </a>
-      <a href="/"
+      <a href="/tech/categories" class="btn btn-group-left"><i
+                class="fa fa-list-ul"></i> Categories </a>
+      <a href="/tech/categories"
          class="btn btn-group-right"> 0 </a>
     </div>
   </div>
@@ -86,9 +94,6 @@
      <a>Sabrina</a>
     <span>
       <i class="fa fa-pencil"></i> Published: 2016-02-03 18:32:51
-      
-      <i class="fa fa-clock-o"></i> Last Updated: 2016-02-17 15:55:27
-      
     </span>
   </h3>
   <article>
@@ -111,7 +116,7 @@
 <h3 id="遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数"><a href="#遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数" class="headerlink" title="遍历添加 event listener 同时又需要传参数给 google.maps.event.addListener() 的回调函数"></a>遍历添加 event listener 同时又需要传参数给 <code>google.maps.event.addListener()</code> 的回调函数</h3><p>不太理解event.addListener的工作原理，但根据我踩的坑推测这是一个异步的方法（否则为什么有回调函数？！）</p>
 <p>这个时候就要用到高大上的<strong>闭包</strong>。下面这个例子中，如果不把<code>addListener</code>包起来，每次cityHandler收到的city都是遍历的最后一个city。因为遍历速度太快，而回调还没有执行，等回调执行的时候city已经遍历到最后一个了…</p>
 <p>不用闭包的话，用promise应该也能解决这个问题，但是感觉promise需要写的code会比较多一些。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cityList=[&#123;marker:googleMapMarker,city:<span class="string">'Beijing'</span>&#125;,...];</span><br><span class="line">cityList.<span class="keyword">forEach</span>(<span class="function"><span class="keyword">function</span><span class="params">(item)</span></span>&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> <span class="params">(marker, city)</span> </span>&#123;</span><br><span class="line">    google.maps.event.addListener(marker, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>&#123;</span><br><span class="line">      cityHandler(city);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)(item.marker, item.city)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight qml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> cityList=[&#123;<span class="attribute">marker</span>:<span class="attribute">googleMapMarker,city</span>:<span class="string">'Beijing'</span>&#125;,...];</span><br><span class="line">cityList.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> (<span class="params">marker, city</span>) </span>&#123;</span><br><span class="line">    google.maps.event.addListener(marker, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">      cityHandler(city);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)(item.marker, item.city)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <h3 id="原生marker图标"><a href="#原生marker图标" class="headerlink" title="原生marker图标"></a>原生marker图标</h3><p><a href="http://mabp.kiev.ua/2010/01/12/google-map-markers/" target="_blank" rel="external">http://mabp.kiev.ua/2010/01/12/google-map-markers/</a></p>
 <h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://developers.google.com/maps/documentation/javascript/reference" target="_blank" rel="external">https://developers.google.com/maps/documentation/javascript/reference</a></p>
 
@@ -121,8 +126,8 @@
 
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="" data-title="谷歌地图 Google Map API 初体验"
-       data-url="http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"></div>
+  <div class="ds-thread" data-thread-key="1454495571" data-title="谷歌地图 Google Map API 初体验"
+       data-url="http://sabrinaluo.com/tech/tech/2016/02/03/experiencing-google-map-js-api/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
@@ -143,17 +148,22 @@
 
 
 </main>
+
 <footer class="container clearfix">
   <ul class="social-link">
     <li>© 2016 Sabrina</li>
+
     <li><a href="http://sabrinaluo.com/tech">Home</a></li>
-    <li><a href="undefined">Github</a></li>
-    <li><a href="undefined">Weibo</li>
-    <li><a href="undefined">Linkedin</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</li>
+    
   </ul>
   <div class="theme-info">Theme <a
-          href="https://github.com/sabrinaluo/hexo-theme-replica">Replica</a> by <a
-          href="http://github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
   </div>
   <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>

@@ -8,13 +8,9 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>
-    JS变量提升(Hoisting) | 小白妹妹写代码
+    小白妹妹写代码
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
-  
-  <meta name="keywords" content="
-  hoisting,变量提升
-  ">
   
   <meta name="author" content="Sabrina">
 
@@ -56,7 +52,8 @@
 </nav>
 
 <main class="container">
-  <header>
+  
+<header>
   <h2>
     <i class="fa fa-book text-muted"></i>
     <a href="/tech/">小白妹妹写代码</a>
@@ -88,71 +85,14 @@
 </header>
 
 
-<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
-  <h3>
-    <i class="fa fa-user"></i>
-     <a>Sabrina</a>
-    <span>
-      <i class="fa fa-pencil"></i> Published: 2015-12-21 10:24:02
-    </span>
-  </h3>
-  <article>
-    <h1>JS变量提升(Hoisting)</h1>
-    <p>写了无数JS也依旧没听过变量提升…</p>
-<p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
-<p>我写了这么久JS，从来也不会先用变量后定义的呀，而且别的语言好像根本没有这个概念，难怪我从来没有遇到相关问题，难怪我没听过这个概念。难怪写强类型语言的各大神都是JS一生黑…</p>
-<p>后来大概问了问各种前辈，纷纷表示，这个概念在面试的时候和检查别人Bug的时候才会用到… (︶︿︶)</p>
-<p>解释器是什么东东我还没搞明白…但是变量提升其实可以转换成另一个问题：<br>当你在定义一个变量的时候，解释器是怎么解析的？</p>
-<p>先看一个例子：</p>
-<pre><code>function test(){
-  console.log(a);
-  var a = 123;
-}
-test(); //调用这个函数，你会看到console中输出的是undefined
-</code></pre><pre><code>function test(){
-  var a = 123;
-}
-</code></pre><p>上面的代码，解释器是这么理解的：</p>
-<pre><code>function test(){
-  var a; 
-  a = 123;
-}
-</code></pre><p>而最开始的例子中，解释器是这么理解的：</p>
-<pre><code>function test(){
-  var a;
-  console.log(a);
-  a = 123;
-}
-</code></pre><p>一句话总结：变量提升就是JS解释器在解析JS的时候会把所有变量的<strong>声明</strong>提升到该变量作用域的最顶端。</p>
-<blockquote>
-<p>请注意：<strong>只提升声明，不提升赋值</strong>！</p>
-</blockquote>
-
-  </article>
+<div class="archive">
+<h2><a href="/tech/2016/02/29/set-cookie-from-server-side-and-client-side/">Cookie在前端和后端的设置</a></h2>
+<p class="read-more">
+   http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬 汉 妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了… 
+ 在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…） 
+ 为
+</p>
 </div>
-
-
-<div class="duoshuo">
-  <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="1450664642" data-title="JS变量提升(Hoisting)"
-       data-url="http://sabrinaluo.com/tech/tech/2015/12/21/hoisting/"></div>
-  <!-- 多说评论框 end -->
-  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name: "sabrinaluo"};
-    (function () {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';
-      ds.async = true;
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-  <!-- 多说公共JS代码 end -->
-</div>
-
 
 
 </main>

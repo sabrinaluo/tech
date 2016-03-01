@@ -5,7 +5,7 @@
   <link href="/tech/atom.xml" rel="self"/>
   
   <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2016-02-17T07:55:27.154Z</updated>
+  <updated>2016-03-01T10:46:52.439Z</updated>
   <id>http://sabrinaluo.com/tech/</id>
   
   <author>
@@ -16,16 +16,61 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Cookie在前端和后端的设置</title>
+    <link href="http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"/>
+    <id>http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/</id>
+    <published>2016-02-29T06:04:57.000Z</published>
+    <updated>2016-03-01T10:46:52.439Z</updated>
+    
+    <content type="html">&lt;p&gt;http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬&lt;del&gt;汉&lt;/del&gt;妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…&lt;/p&gt;
+&lt;p&gt;在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…）&lt;/p&gt;
+&lt;p&gt;为什么要了解设置cookie的原理呢？了解了才能在某些时候用最原始的方法来设置cookie，比如没有框架可用的时候，以及框架提供的方法不适用于某些场景的时候。&lt;br&gt;我是在使用laravel设置cookie的时候踩了坑，现在的项目里因为要配合使用GTM（google tag manager），所以cookie是不加密的raw data，但通过laravel设置的cookie都是加密了的。于是只能学习PHP原生的添加cookie方法。&lt;code&gt;setcookie(NAME, VALUE, EXPIRES)&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;另外就是因为用AWS API Gateway时候的一些需求，想要通过gateway直接设置cookie，这个时候就不得不了解http cookie的运作方式。&lt;/p&gt;
+&lt;h3 id=&quot;从服务器端返回新cookie&quot;&gt;&lt;a href=&quot;#从服务器端返回新cookie&quot; class=&quot;headerlink&quot; title=&quot;从服务器端返回新cookie&quot;&gt;&lt;/a&gt;从服务器端返回新cookie&lt;/h3&gt;&lt;p&gt;设置cookie是通过在响应的头部加入&lt;code&gt;Set-Cookie&lt;/code&gt;来设置的，&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;一个请求通常包含header和body&lt;/li&gt;
+&lt;li&gt;与请求有关的cookie分为request cookie和response cookie&lt;ul&gt;
+&lt;li&gt;request cookie是浏览器已储存的cookie&lt;/li&gt;
+&lt;li&gt;response cookie是服务器端返回的新的cookie，也就是将会储存在浏览器端的新cookie&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&quot;一个完整的cookie-header&quot;&gt;&lt;a href=&quot;#一个完整的cookie-header&quot; class=&quot;headerlink&quot; title=&quot;一个完整的cookie header&quot;&gt;&lt;/a&gt;一个完整的cookie header&lt;/h4&gt;&lt;p&gt;一个完整的cookie头长这样&lt;br&gt;&lt;figure class=&quot;highlight dos&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;Set&lt;/span&gt;-Cookie: NAME=VALUE; expires=&lt;span class=&quot;built_in&quot;&gt;DATE&lt;/span&gt;; &lt;span class=&quot;built_in&quot;&gt;path&lt;/span&gt;=&lt;span class=&quot;built_in&quot;&gt;PATH&lt;/span&gt;; domain=DOMAIN&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;NAME VALUE是一对键值&lt;br&gt;expires是过期日期，通常用当前时间的毫秒数加上一段时间：&lt;code&gt;new Date().getTime()+30*24*60*60*1000)&lt;/code&gt;&lt;br&gt;如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失&lt;br&gt;path和domain这个…感觉不太用得到，具体可以看&lt;a href=&quot;http://blog.sina.com.cn/s/blog_70c4d9410100z3il.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;这篇文章&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;如果要同时设置多个cookie，同时返回多个&lt;code&gt;Set-Cookie&lt;/code&gt;头即可&lt;/p&gt;
+&lt;h4 id=&quot;maxAge&quot;&gt;&lt;a href=&quot;#maxAge&quot; class=&quot;headerlink&quot; title=&quot;maxAge&quot;&gt;&lt;/a&gt;maxAge&lt;/h4&gt;&lt;p&gt;有一些服务器端的框架会提供maxAge属性来设置cookie的过期时间，但是原始的Set-Cookie头是不支持maxAge的，所以在通过头部来设置cookie还是乖乖用回expires吧&lt;/p&gt;
+&lt;h3 id=&quot;浏览器端读取cookie&quot;&gt;&lt;a href=&quot;#浏览器端读取cookie&quot; class=&quot;headerlink&quot; title=&quot;浏览器端读取cookie&quot;&gt;&lt;/a&gt;浏览器端读取cookie&lt;/h3&gt;&lt;p&gt;JS原生方法：&lt;br&gt;&lt;figure class=&quot;highlight dart&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; cookies = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.cookie;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;读取的cookie是一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; cookieA = &lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.cookie.replace(&lt;span class=&quot;regexp&quot;&gt;/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/&lt;/span&gt;, &lt;span class=&quot;string&quot;&gt;&quot;$1&quot;&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;浏览器端设置cookie&quot;&gt;&lt;a href=&quot;#浏览器端设置cookie&quot; class=&quot;headerlink&quot; title=&quot;浏览器端设置cookie&quot;&gt;&lt;/a&gt;浏览器端设置cookie&lt;/h3&gt;&lt;figure class=&quot;highlight coffeescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;document&lt;/span&gt;.cookie = &lt;span class=&quot;string&quot;&gt;&#39;cookie_example=123&#39;&lt;/span&gt;+&lt;span class=&quot;string&quot;&gt;&#39;;expires=&#39;&lt;/span&gt;+expire;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;如果要设置多个cookie，多次调用&lt;code&gt;document.cookie&lt;/code&gt;即可&lt;/p&gt;
+&lt;h4 id=&quot;document-cookie&quot;&gt;&lt;a href=&quot;#document-cookie&quot; class=&quot;headerlink&quot; title=&quot;document.cookie&quot;&gt;&lt;/a&gt;document.cookie&lt;/h4&gt;&lt;p&gt;这个docuement的behavior有点奇怪，明明返回的是个字符串，本来以为每次设置cookie得用新的字符串连接旧的字符串，但其实直接等于新的值也并不会覆盖旧的值，不知道实现这个属性&amp;amp;方法混用的原理是什么0,0&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬&lt;del&gt;汉&lt;/del&gt;妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…&lt;/p&gt;
+&lt;p&gt;在服务器端，各种框架都已经包装好了方便设置
+    
+    </summary>
+    
+    
+      <category term="cookie" scheme="http://sabrinaluo.com/tech/tags/cookie/"/>
+    
+  </entry>
+  
+  <entry>
     <title>jQuery中利用JSONP进行跨域GET请求</title>
     <link href="http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"/>
     <id>http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/</id>
     <published>2016-02-17T04:31:55.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;每次遇到跨域的问题真是！@#￥%&lt;/p&gt;
 &lt;p&gt;我对&lt;code&gt;JSONP&lt;/code&gt;的一些浅显的理解就是，有时候会看到类似&lt;code&gt;http://xxx.xx.com/?callback=xxx&lt;/code&gt;这样的请求（&lt;code&gt;callback=&lt;/code&gt;也可能是&lt;code&gt;jsonp=&lt;/code&gt;也可能是&lt;code&gt;jsonpcallback=&lt;/code&gt;，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。&lt;/p&gt;
 &lt;p&gt;由于这个回调函数已经发给了服务器，返回的结果其实是一个函数，函数的入参是获取的数据。&lt;/p&gt;
-&lt;p&gt;jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：&lt;br&gt;&lt;figure class=&quot;highlight nimrod&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; options = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  url: &#39;http://xx.xx.com/xxx&#39;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;method&lt;/span&gt;: &#39;&lt;span class=&quot;type&quot;&gt;GET&lt;/span&gt;&#39;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  dataType: &#39;jsonp&#39;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  //jsonp: &#39;callback&#39;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  success: function(data)&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    //&lt;span class=&quot;keyword&quot;&gt;do&lt;/span&gt; something here;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$.ajax(options);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：&lt;br&gt;&lt;figure class=&quot;highlight qml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; options = &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;url&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;http://xx.xx.com/xxx&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;method&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;GET&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;dataType&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;jsonp&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;comment&quot;&gt;//jsonp: &#39;callback&#39;,&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;success&lt;/span&gt;: &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;data&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//do something here;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$.ajax(options);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;其中需要注意的是，一定要声明&lt;strong&gt;&lt;code&gt;dataType&lt;/code&gt;&lt;/strong&gt;，然后把回调函数写在success后面就可以了。&lt;br&gt;另外一开始提到，服务器端对jsonp的实现可能不同，所以在&lt;code&gt;options&lt;/code&gt;中，有时候需要声明&lt;code&gt;jsonp&lt;/code&gt;对应的字符串，默认是&lt;code&gt;&amp;quot;callback&amp;quot;&lt;/code&gt;。例如：如果服务器实现jsonp是通过&lt;code&gt;http://xxx.xx.com/?jsonpcallback=xxx&lt;/code&gt;，那么就需要在&lt;code&gt;options&lt;/code&gt;中声明&lt;code&gt;jsonp:&amp;#39;jsonpcallback&amp;#39;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;原理据说和&lt;code&gt;&amp;lt;script src=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt;差不多，我现在还不是很明白=，=&lt;/p&gt;
 &lt;p&gt;参考&lt;br&gt;&lt;a href=&quot;http://www.runoob.com/json/json-jsonp.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://www.runoob.com/json/json-jsonp.html&lt;/a&gt;&lt;/p&gt;
@@ -41,11 +86,11 @@
     
       <category term="CORS" scheme="http://sabrinaluo.com/tech/tags/CORS/"/>
     
-      <category term="JSONP" scheme="http://sabrinaluo.com/tech/tags/JSONP/"/>
+      <category term="跨域" scheme="http://sabrinaluo.com/tech/tags/%E8%B7%A8%E5%9F%9F/"/>
     
       <category term="jQuery" scheme="http://sabrinaluo.com/tech/tags/jQuery/"/>
     
-      <category term="跨域" scheme="http://sabrinaluo.com/tech/tags/%E8%B7%A8%E5%9F%9F/"/>
+      <category term="JSONP" scheme="http://sabrinaluo.com/tech/tags/JSONP/"/>
     
   </entry>
   
@@ -54,7 +99,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"/>
     <id>http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/</id>
     <published>2016-02-03T10:32:51.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;一直都想把自己去过的地方做个地图标记，然而现在能找到的各种现成的地图产品都不太喜欢，所以就用谷歌地图自己写了一个。&lt;br&gt;总结以下常见的问题和坑：&lt;/p&gt;
 &lt;h3 id=&quot;自动缩放-auto-zoom&quot;&gt;&lt;a href=&quot;#自动缩放-auto-zoom&quot; class=&quot;headerlink&quot; title=&quot;自动缩放(auto zoom)&quot;&gt;&lt;/a&gt;自动缩放(auto zoom)&lt;/h3&gt;&lt;p&gt;使用场景大多数时候是有很多marker，想要全部显示这些marker，同时zoom当然越大越清晰。&lt;/p&gt;
@@ -74,7 +119,7 @@
 &lt;h3 id=&quot;遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数&quot;&gt;&lt;a href=&quot;#遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数&quot; class=&quot;headerlink&quot; title=&quot;遍历添加 event listener 同时又需要传参数给 google.maps.event.addListener() 的回调函数&quot;&gt;&lt;/a&gt;遍历添加 event listener 同时又需要传参数给 &lt;code&gt;google.maps.event.addListener()&lt;/code&gt; 的回调函数&lt;/h3&gt;&lt;p&gt;不太理解event.addListener的工作原理，但根据我踩的坑推测这是一个异步的方法（否则为什么有回调函数？！）&lt;/p&gt;
 &lt;p&gt;这个时候就要用到高大上的&lt;strong&gt;闭包&lt;/strong&gt;。下面这个例子中，如果不把&lt;code&gt;addListener&lt;/code&gt;包起来，每次cityHandler收到的city都是遍历的最后一个city。因为遍历速度太快，而回调还没有执行，等回调执行的时候city已经遍历到最后一个了…&lt;/p&gt;
 &lt;p&gt;不用闭包的话，用promise应该也能解决这个问题，但是感觉promise需要写的code会比较多一些。&lt;/p&gt;
-&lt;figure class=&quot;highlight php&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; cityList=[&amp;#123;marker:googleMapMarker,city:&lt;span class=&quot;string&quot;&gt;&#39;Beijing&#39;&lt;/span&gt;&amp;#125;,...];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cityList.&lt;span class=&quot;keyword&quot;&gt;forEach&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(item)&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(marker, city)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    google.maps.event.addListener(marker, &lt;span class=&quot;string&quot;&gt;&#39;click&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;params&quot;&gt;(e)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cityHandler(city);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)(item.marker, item.city)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight qml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; cityList=[&amp;#123;&lt;span class=&quot;attribute&quot;&gt;marker&lt;/span&gt;:&lt;span class=&quot;attribute&quot;&gt;googleMapMarker,city&lt;/span&gt;:&lt;span class=&quot;string&quot;&gt;&#39;Beijing&#39;&lt;/span&gt;&amp;#125;,...];&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cityList.forEach(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;item&lt;/span&gt;)&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  (&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;marker, city&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    google.maps.event.addListener(marker, &lt;span class=&quot;string&quot;&gt;&#39;click&#39;&lt;/span&gt;, &lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; (&lt;span class=&quot;params&quot;&gt;e&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      cityHandler(city);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;)(item.marker, item.city)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;h3 id=&quot;原生marker图标&quot;&gt;&lt;a href=&quot;#原生marker图标&quot; class=&quot;headerlink&quot; title=&quot;原生marker图标&quot;&gt;&lt;/a&gt;原生marker图标&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;http://mabp.kiev.ua/2010/01/12/google-map-markers/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://mabp.kiev.ua/2010/01/12/google-map-markers/&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&quot;参考：&quot;&gt;&lt;a href=&quot;#参考：&quot; class=&quot;headerlink&quot; title=&quot;参考：&quot;&gt;&lt;/a&gt;参考：&lt;/h3&gt;&lt;p&gt;&lt;a href=&quot;https://developers.google.com/maps/documentation/javascript/reference&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://developers.google.com/maps/documentation/javascript/reference&lt;/a&gt;&lt;/p&gt;
 </content>
@@ -91,9 +136,9 @@
     
       <category term="Google Map API" scheme="http://sabrinaluo.com/tech/tags/Google-Map-API/"/>
     
-      <category term="谷歌地图" scheme="http://sabrinaluo.com/tech/tags/%E8%B0%B7%E6%AD%8C%E5%9C%B0%E5%9B%BE/"/>
-    
       <category term="谷歌地图API" scheme="http://sabrinaluo.com/tech/tags/%E8%B0%B7%E6%AD%8C%E5%9C%B0%E5%9B%BEAPI/"/>
+    
+      <category term="谷歌地图" scheme="http://sabrinaluo.com/tech/tags/%E8%B0%B7%E6%AD%8C%E5%9C%B0%E5%9B%BE/"/>
     
   </entry>
   
@@ -102,7 +147,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"/>
     <id>http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/</id>
     <published>2016-02-01T06:01:03.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_&lt;/p&gt;
 &lt;h3 id=&quot;基本知识&quot;&gt;&lt;a href=&quot;#基本知识&quot; class=&quot;headerlink&quot; title=&quot;基本知识&quot;&gt;&lt;/a&gt;基本知识&lt;/h3&gt;&lt;p&gt;在git中文件有两类，共三种状态：&lt;/p&gt;
@@ -146,7 +191,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"/>
     <id>http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</id>
     <published>2016-01-23T14:52:26.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;并行和顺序执行的前提当然是，有一堆promise等着你去执行……&lt;br&gt;通常我们把这“一堆”promise对象放到一个数组里，&lt;code&gt;[promise1, promise2, promise3, ...]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;我们都知道想要让promise按顺序执行，那就是一个接一个的then。然而手写很多then太累了，而嵌套的promise又是反模式，我之前蠢蠢的&lt;a href=&quot;tech/2016/01/18/sequentialize-promise-by-recursion/&quot;&gt;用递归解决了顺序执行的问题&lt;/a&gt;，后来终于在udacity习得了顺序promise的正确打开方式！&lt;/p&gt;
@@ -167,7 +212,7 @@
 &lt;figure class=&quot;highlight gherkin&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;|&lt;span class=&quot;string&quot;&gt;------------------&lt;/span&gt;|&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;google1            |&lt;span class=&quot;string&quot;&gt;-------------&lt;/span&gt;|&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;                   google2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|&lt;span class=&quot;string&quot;&gt;---------&lt;/span&gt;|&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;amazon1   |&lt;span class=&quot;string&quot;&gt;-----------&lt;/span&gt;|&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;          amazon2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;|&lt;span class=&quot;string&quot;&gt;------------&lt;/span&gt;|&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;facebook1    |&lt;span class=&quot;string&quot;&gt;-------------&lt;/span&gt;|&lt;span class=&quot;string&quot;&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;             facebook2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
-&lt;h3 id=&quot;Promise并行执行&quot;&gt;&lt;a href=&quot;#Promise并行执行&quot; class=&quot;headerlink&quot; title=&quot;Promise并行执行&quot;&gt;&lt;/a&gt;Promise并行执行&lt;/h3&gt;&lt;p&gt;对于场景1，主要就是用到&lt;code&gt;Promise.all&lt;/code&gt;，因为是数组，所以在处理的过程中通常会用到&lt;code&gt;.map&lt;/code&gt;或&lt;code&gt;.forEach&lt;/code&gt;&lt;br&gt;&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;http://jsfiddle.net/HiiTea/zfjvr4pz/1/embedded/js,resources,html,css,result/light&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;br&gt;&lt;img src=&quot;http://7xow88.com1.z0.glb.clouddn.com/tech-promise1.png&quot; alt=&quot;promise例1网络请求时间线&quot;&gt;&lt;br&gt;可以看到3个user请求是同时进行（并行），3个repos请求也是同时进行（并行），由于使用了&lt;code&gt;Promise.all&lt;/code&gt;，所以repos请求等待users请求全部完成才开始。&lt;/p&gt;
+&lt;h3 id=&quot;Promise并行执行&quot;&gt;&lt;a href=&quot;#Promise并行执行&quot; class=&quot;headerlink&quot; title=&quot;Promise并行执行&quot;&gt;&lt;/a&gt;Promise并行执行&lt;/h3&gt;&lt;p&gt;对于场景1，主要就是用到&lt;code&gt;Promise.all&lt;/code&gt;，因为是数组，所以在处理的过程中通常会用到&lt;code&gt;.map&lt;/code&gt;或&lt;code&gt;.forEach&lt;/code&gt;&lt;br&gt;&lt;iframe scrolling=&quot;no&quot; width=&quot;100%&quot; height=&quot;300&quot; src=&quot;http://jsfiddle.net/HiiTea/zfjvr4pz/1/embedded/js,resources,html,css,result/light&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;br&gt;&lt;img src=&quot;http://7xow88.com1.z0.glb.clouddn.com/tech-promise1.png&quot; alt=&quot;promise例1网络请求时间线&quot;&gt;&lt;br&gt;可以看到3个user请求是同时进行（并行），3个repos请求也是同时进行（并行），由于使用了&lt;code&gt;Promise.all&lt;/code&gt;，所以repos请求等待users请求全部完成才开始。&lt;/p&gt;
 &lt;h3 id=&quot;promise顺序执行的正确打开方式&quot;&gt;&lt;a href=&quot;#promise顺序执行的正确打开方式&quot; class=&quot;headerlink&quot; title=&quot;promise顺序执行的正确打开方式&quot;&gt;&lt;/a&gt;promise顺序执行的正确打开方式&lt;/h3&gt;&lt;p&gt;对于场景2，有一个小技巧，我第一次看到的时候感受是…惊为天人&lt;br&gt;按照顺序执行，容易想到的有以下几种方法：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;then.then.then，从头then到尾…&lt;/li&gt;
@@ -176,8 +221,8 @@
 &lt;p&gt;promise链的本质其实就是从头then到尾，但是第一种方法怎么用程序来实现，也就是上面提到的小技巧，就是值得学习的地方了。（反正我觉得太巧妙了！！！我自己就想不到…）&lt;/p&gt;
 &lt;p&gt;大概跟在做求和运算时候的思想一样：&lt;br&gt;&lt;figure class=&quot;highlight fortran&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;//求和的时候通常这么做，先定义一个&lt;span class=&quot;built_in&quot;&gt;sum&lt;/span&gt;，然后依次往里做加法&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var &lt;span class=&quot;built_in&quot;&gt;sum&lt;/span&gt; = &lt;span class=&quot;number&quot;&gt;0&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array.forEach(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(item)&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;built_in&quot;&gt;sum&lt;/span&gt; = &lt;span class=&quot;built_in&quot;&gt;sum&lt;/span&gt; + item;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;figure class=&quot;highlight fortran&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;//要得到一个&lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;的promise链，先定义一个已经resolve了的promise，然后依次往后&lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;…&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var &lt;span class=&quot;keyword&quot;&gt;sequence&lt;/span&gt; = Promise.resolve();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;array.forEach(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(item)&lt;/span&gt;&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;sequence&lt;/span&gt; = &lt;span class=&quot;keyword&quot;&gt;sequence&lt;/span&gt;.&lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;(...)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;下面给出场景2的代码：&lt;br&gt;&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;http://jsfiddle.net/HiiTea/sq2aga08/embedded/js,resources,html,css,result/light&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;br&gt;&lt;img src=&quot;http://7xow88.com1.z0.glb.clouddn.com/tech-promise2.png&quot; alt=&quot;promise例2网络请求时间线&quot;&gt;&lt;br&gt;可以看到请求是按顺序依次发出&lt;/p&gt;
-&lt;h3 id=&quot;并行执行和顺序执行混用&quot;&gt;&lt;a href=&quot;#并行执行和顺序执行混用&quot; class=&quot;headerlink&quot; title=&quot;并行执行和顺序执行混用&quot;&gt;&lt;/a&gt;并行执行和顺序执行混用&lt;/h3&gt;&lt;p&gt;场景3:&lt;br&gt;&lt;iframe width=&quot;100%&quot; height=&quot;300&quot; src=&quot;http://jsfiddle.net/HiiTea/z09xjowq/1/embedded/js,resources,html,css,result/light&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;br&gt;&lt;img src=&quot;http://7xow88.com1.z0.glb.clouddn.com/tech-promise3.png&quot; alt=&quot;promise例3网络请求时间线&quot;&gt;&lt;br&gt;可以看到users请求是并行发出，但完成时间不一样，而repos请求是在&lt;strong&gt;对应的&lt;/strong&gt;users请求完成后就立即执行&lt;/p&gt;
+&lt;p&gt;下面给出场景2的代码：&lt;br&gt;&lt;iframe scrolling=&quot;no&quot; width=&quot;100%&quot; height=&quot;300&quot; src=&quot;http://jsfiddle.net/HiiTea/sq2aga08/embedded/js,resources,html,css,result/light&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;br&gt;&lt;img src=&quot;http://7xow88.com1.z0.glb.clouddn.com/tech-promise2.png&quot; alt=&quot;promise例2网络请求时间线&quot;&gt;&lt;br&gt;可以看到请求是按顺序依次发出&lt;/p&gt;
+&lt;h3 id=&quot;并行执行和顺序执行混用&quot;&gt;&lt;a href=&quot;#并行执行和顺序执行混用&quot; class=&quot;headerlink&quot; title=&quot;并行执行和顺序执行混用&quot;&gt;&lt;/a&gt;并行执行和顺序执行混用&lt;/h3&gt;&lt;p&gt;场景3:&lt;br&gt;&lt;iframe scrolling=&quot;no&quot; width=&quot;100%&quot; height=&quot;300&quot; src=&quot;http://jsfiddle.net/HiiTea/z09xjowq/1/embedded/js,resources,html,css,result/light&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;&lt;br&gt;&lt;img src=&quot;http://7xow88.com1.z0.glb.clouddn.com/tech-promise3.png&quot; alt=&quot;promise例3网络请求时间线&quot;&gt;&lt;br&gt;可以看到users请求是并行发出，但完成时间不一样，而repos请求是在&lt;strong&gt;对应的&lt;/strong&gt;users请求完成后就立即执行&lt;/p&gt;
 &lt;h3 id=&quot;混用的另一种情况&quot;&gt;&lt;a href=&quot;#混用的另一种情况&quot; class=&quot;headerlink&quot; title=&quot;混用的另一种情况&quot;&gt;&lt;/a&gt;混用的另一种情况&lt;/h3&gt;&lt;p&gt;有了以上的知识，很容易写出最后一种混用的情况，users按顺序执行，等users全部执行完之后并发执行repos。我比较懒…这个我就不写了…&lt;/p&gt;
 &lt;h3 id=&quot;补充知识：&quot;&gt;&lt;a href=&quot;#补充知识：&quot; class=&quot;headerlink&quot; title=&quot;补充知识：&quot;&gt;&lt;/a&gt;补充知识：&lt;/h3&gt;&lt;h4 id=&quot;浏览器的fetch-API&quot;&gt;&lt;a href=&quot;#浏览器的fetch-API&quot; class=&quot;headerlink&quot; title=&quot;浏览器的fetch API&quot;&gt;&lt;/a&gt;浏览器的fetch API&lt;/h4&gt;&lt;p&gt;本文跟fetch不是充分必要关系，只是我太懒了不想写太多的代码来举例。你可以把它理解为是用Promise包住的&lt;code&gt;$.ajax&lt;/code&gt;，也就是fetch返回一个promise对象。关于fetch的详细用法请参考&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;MDN Fetch_ API&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&quot;如何查看请求的发送是并行还是顺序&quot;&gt;&lt;a href=&quot;#如何查看请求的发送是并行还是顺序&quot; class=&quot;headerlink&quot; title=&quot;如何查看请求的发送是并行还是顺序&quot;&gt;&lt;/a&gt;如何查看请求的发送是并行还是顺序&lt;/h4&gt;&lt;p&gt;打开chrome，按F12，选中Network选项卡，在No throttling这个下拉列表选GPRS，再运行代码，然后就能清楚的看到各个请求的时间线了。&lt;/p&gt;
@@ -208,9 +253,9 @@
     <link href="http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/"/>
     <id>http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/</id>
     <published>2016-01-22T07:08:33.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
-    <content type="html">&lt;h3 id=&quot;问题宝宝&quot;&gt;&lt;a href=&quot;#问题宝宝&quot; class=&quot;headerlink&quot; title=&quot;问题宝宝&quot;&gt;&lt;/a&gt;问题宝宝&lt;/h3&gt;&lt;h4 id=&quot;1-移动应用开发&quot;&gt;&lt;a href=&quot;#1-移动应用开发&quot; class=&quot;headerlink&quot; title=&quot;1 移动应用开发&quot;&gt;&lt;/a&gt;1 移动应用开发&lt;/h4&gt;&lt;p&gt;之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。&lt;br&gt;开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(&lt;strong&gt;Access-Control-Allow-Origin&lt;/strong&gt;)：&lt;br&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;XMLHttpRequest cannot &lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;http&lt;/span&gt;://samlino.&lt;span class=&quot;keyword&quot;&gt;local&lt;/span&gt;/cag/get_leads. &lt;span class=&quot;keyword&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Access-Control-Allow-Origin&#39;&lt;/span&gt; header &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;present&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;on&lt;/span&gt; the requested &lt;span class=&quot;keyword&quot;&gt;resource&lt;/span&gt;. Origin &lt;span class=&quot;string&quot;&gt;&#39;http://localhost:63342&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; therefore &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; allowed &lt;span class=&quot;keyword&quot;&gt;access&lt;/span&gt;.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;问题宝宝&quot;&gt;&lt;a href=&quot;#问题宝宝&quot; class=&quot;headerlink&quot; title=&quot;问题宝宝&quot;&gt;&lt;/a&gt;问题宝宝&lt;/h3&gt;&lt;h4 id=&quot;1-移动应用开发&quot;&gt;&lt;a href=&quot;#1-移动应用开发&quot; class=&quot;headerlink&quot; title=&quot;1 移动应用开发&quot;&gt;&lt;/a&gt;1 移动应用开发&lt;/h4&gt;&lt;p&gt;之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。&lt;br&gt;开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(&lt;strong&gt;Access-Control-Allow-Origin&lt;/strong&gt;)：&lt;br&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;XMLHttpRequest cannot &lt;span class=&quot;keyword&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;http&lt;/span&gt;://samlino.&lt;span class=&quot;keyword&quot;&gt;local&lt;/span&gt;/cag/get_leads. &lt;span class=&quot;keyword&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Access-Control-Allow-Origin&#39;&lt;/span&gt; header &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;present&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;on&lt;/span&gt; the requested &lt;span class=&quot;keyword&quot;&gt;resource&lt;/span&gt;. Origin &lt;span class=&quot;string&quot;&gt;&#39;http://localhost:63342&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; therefore &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; allowed &lt;span class=&quot;keyword&quot;&gt;access&lt;/span&gt;.&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;而我当时的解决方法是，在chrome装了一个叫&lt;a href=&quot;https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Allow-Control-Allow-Origin&lt;/a&gt;的扩展，启用之后就不报错了。&lt;/p&gt;
 &lt;p&gt;也不知道什么什么原理，反正就这么一直用着。（不思进取）&lt;/p&gt;
 &lt;h4 id=&quot;2-网络应用开发&quot;&gt;&lt;a href=&quot;#2-网络应用开发&quot; class=&quot;headerlink&quot; title=&quot;2 网络应用开发&quot;&gt;&lt;/a&gt;2 网络应用开发&lt;/h4&gt;&lt;p&gt;后来写单页应用（SPA），静态文件的js里调用各大公司的API， github、facebook什么的，反正从来没有报过上面的错…&lt;br&gt;另外还写过用NodeJS做中间层，从NodeJS去API拿数据然后渲染再发到前端，也从来没报过错…&lt;/p&gt;
@@ -228,8 +273,8 @@
 &lt;/ul&gt;
 &lt;h3 id=&quot;CORS&quot;&gt;&lt;a href=&quot;#CORS&quot; class=&quot;headerlink&quot; title=&quot;CORS&quot;&gt;&lt;/a&gt;CORS&lt;/h3&gt;&lt;p&gt;之前脑子里大概有个&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;CORS&lt;/a&gt;的概念，然后一直以为是服务器拒绝从浏览器跨域访问…因为要解决自己call自己不同域名下的API问题，就是去服务器设置一下header…但其实是都是浏览器在作怪…&lt;/p&gt;
 &lt;p&gt;在浏览器中，允许跨域访问的资源的一些例子&lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#Cross-origin_network_access&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^2&lt;/a&gt;：&lt;br&gt;&lt;code&gt;&amp;lt;script src=&amp;quot;...&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;code&gt;&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; href=&amp;quot;...&amp;quot;&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;lt;video&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;lt;audio&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;code&gt;&amp;lt;object&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;lt;embed&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;lt;applet&amp;gt;&lt;/code&gt;&lt;br&gt;&lt;code&gt;@font-face&lt;/code&gt;&lt;br&gt;&lt;code&gt;&amp;lt;frame&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;lt;iframe&amp;gt;&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id=&quot;Response-Headers&quot;&gt;&lt;a href=&quot;#Response-Headers&quot; class=&quot;headerlink&quot; title=&quot;Response Headers&quot;&gt;&lt;/a&gt;Response Headers&lt;/h3&gt;&lt;p&gt;先看看可以在浏览器中跨域请求的别人家(github)的API返回的header：&lt;br&gt;&lt;figure class=&quot;highlight tp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Access-Control-Allow-Credentials:true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Access-Control-Allow-Origin:*&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Access-Control-Expose-Headers:ETag, Link, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-GitHub-OTP, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-RateLimit-Limit, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-RateLimit-Remaining, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-RateLimit-Reset, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-OAuth-Scopes, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-Accepted-OAuth-Scopes, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-Poll-Interval&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;看看自家API返回的header&lt;br&gt;&lt;figure class=&quot;highlight ruby&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;Connection&lt;/span&gt;&lt;span class=&quot;symbol&quot;&gt;:keep-alive&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;Content&lt;/span&gt;-&lt;span class=&quot;constant&quot;&gt;Encoding&lt;/span&gt;&lt;span class=&quot;symbol&quot;&gt;:gzip&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;Content&lt;/span&gt;-&lt;span class=&quot;constant&quot;&gt;Type&lt;/span&gt;&lt;span class=&quot;symbol&quot;&gt;:text/html&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;constant&quot;&gt;Date&lt;/span&gt;&lt;span class=&quot;symbol&quot;&gt;:Fri&lt;/span&gt;, &lt;span class=&quot;number&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;constant&quot;&gt;Jan&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;2016&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;symbol&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;07&lt;/span&gt;&lt;span class=&quot;symbol&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;01&lt;/span&gt; &lt;span class=&quot;constant&quot;&gt;GMT&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;Response-Headers&quot;&gt;&lt;a href=&quot;#Response-Headers&quot; class=&quot;headerlink&quot; title=&quot;Response Headers&quot;&gt;&lt;/a&gt;Response Headers&lt;/h3&gt;&lt;p&gt;先看看可以在浏览器中跨域请求的别人家(github)的API返回的header：&lt;br&gt;&lt;figure class=&quot;highlight cos&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;Access-Control-Allow-Credentials:true&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Access-Control-Allow-Origin:*&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Access-Control-Expose-Headers:ETag, Link, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-GitHub-OTP, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-RateLimit-Limit, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-RateLimit-Remaining, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-RateLimit-Reset, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-OAuth-Scopes, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-Accepted-OAuth-Scopes, &lt;span class=&quot;keyword&quot;&gt;X&lt;/span&gt;-Poll-Interval&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;看看自家API返回的header&lt;br&gt;&lt;figure class=&quot;highlight qml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;Connection&lt;/span&gt;:&lt;span class=&quot;attribute&quot;&gt;keep-alive&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Content-Encoding&lt;/span&gt;:&lt;span class=&quot;attribute&quot;&gt;gzip&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Content-Type&lt;/span&gt;:&lt;span class=&quot;attribute&quot;&gt;text/html&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Date&lt;/span&gt;:&lt;span class=&quot;attribute&quot;&gt;Fri, 22 Jan 2016 07&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;07&lt;/span&gt;:&lt;span class=&quot;number&quot;&gt;01&lt;/span&gt; GMT&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;...&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;差别就在于别人家的API返回了&lt;strong&gt;Access-Control-Allow-Origin:*&lt;/strong&gt;&lt;br&gt;浏览器读到这个头部之后，才会加载请求的结果。&lt;/p&gt;
 &lt;h3 id=&quot;跨域的时候服务器收到请求了吗？&quot;&gt;&lt;a href=&quot;#跨域的时候服务器收到请求了吗？&quot; class=&quot;headerlink&quot; title=&quot;跨域的时候服务器收到请求了吗？&quot;&gt;&lt;/a&gt;跨域的时候服务器收到请求了吗？&lt;/h3&gt;&lt;p&gt;服务器当然收到请求了，不然怎么能返回头部…而且我上面举的诡异的例子中，请求trigger的job都完成了。&lt;/p&gt;
 &lt;p&gt;所以也就是说，服务器其实收到了你的请求，并且给你返回了全部的数据，但是浏览器看到头部就把body藏起来了，然后抛出错误提示…&lt;/p&gt;
@@ -253,9 +298,9 @@
     
       <category term="同源策略" scheme="http://sabrinaluo.com/tech/tags/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/"/>
     
-      <category term="浏览器" scheme="http://sabrinaluo.com/tech/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
-    
       <category term="跨域" scheme="http://sabrinaluo.com/tech/tags/%E8%B7%A8%E5%9F%9F/"/>
+    
+      <category term="浏览器" scheme="http://sabrinaluo.com/tech/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
   </entry>
   
@@ -264,13 +309,13 @@
     <link href="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"/>
     <id>http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/</id>
     <published>2016-01-18T09:23:18.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;&lt;strong&gt;2016-01-24更新&lt;/strong&gt;&lt;br&gt;我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里：&lt;br&gt;(Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;以下为原文：&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;之前我一直有个疑问，当我有一堆promise的时候，怎么按顺序执行它们呢？&lt;/p&gt;
 &lt;p&gt;网上搜到的大多数教程都是建一个数组&lt;code&gt;array&lt;/code&gt;，把promise对象放到数组里，然后数组中的promise全部执行完毕时调用&lt;code&gt;Promise.all(array)&lt;/code&gt;。然而这只适用于数组中的&lt;strong&gt;promise对象不互相依赖&lt;/strong&gt;的情况。&lt;/p&gt;
-&lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ &lt;a href=&quot;https://developers.facebook.com/docs/graph-api/using-graph-api#paging&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cursor-based Pagination&lt;/a&gt;），API的Response如下：&lt;br&gt;&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &quot;&lt;span class=&quot;attribute&quot;&gt;data&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;[&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     ... Endpoint data is here&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ]&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &quot;&lt;span class=&quot;attribute&quot;&gt;paging&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;cursors&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &quot;&lt;span class=&quot;attribute&quot;&gt;after&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;MTAxNTExOTQ1MjAwNzI5NDE=&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &quot;&lt;span class=&quot;attribute&quot;&gt;before&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;NDMyNzQyODI3OTQw&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;/span&gt;&amp;#125;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;previous&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;https://graph.facebook.com/me/albums?limit=25&amp;amp;amp;before=NDMyNzQyODI3OTQw&quot;&lt;/span&gt;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &quot;&lt;span class=&quot;attribute&quot;&gt;next&lt;/span&gt;&quot;: &lt;span class=&quot;value&quot;&gt;&lt;span class=&quot;string&quot;&gt;&quot;https://graph.facebook.com/me/albums?limit=25&amp;amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE=&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;问题&quot;&gt;&lt;a href=&quot;#问题&quot; class=&quot;headerlink&quot; title=&quot;问题&quot;&gt;&lt;/a&gt;问题&lt;/h3&gt;&lt;p&gt;我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ &lt;a href=&quot;https://developers.facebook.com/docs/graph-api/using-graph-api#paging&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Cursor-based Pagination&lt;/a&gt;），API的Response如下：&lt;br&gt;&lt;figure class=&quot;highlight json&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;&quot;data&quot;&lt;/span&gt;: [&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;     ... Endpoint data is here&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  ],&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;&quot;paging&quot;&lt;/span&gt;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;cursors&quot;&lt;/span&gt;: &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attr&quot;&gt;&quot;after&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;MTAxNTExOTQ1MjAwNzI5NDE=&quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attr&quot;&gt;&quot;before&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;NDMyNzQyODI3OTQw&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;previous&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;https://graph.facebook.com/me/albums?limit=25&amp;amp;amp;before=NDMyNzQyODI3OTQw&quot;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;&quot;next&quot;&lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&quot;https://graph.facebook.com/me/albums?limit=25&amp;amp;amp;after=MTAxNTExOTQ1MjAwNzI5NDE=&quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;简单的一个例子是，当我想要获取一个人的完整好友列表（Friend List），但是这个人好友太多了，分成了很多页。显然这些结果是互相依赖的。我必须先拿到第一页的&lt;code&gt;paging.next&lt;/code&gt;，才能进行下一次请求。（别跟我说改query string &lt;code&gt;limit&lt;/code&gt;后面的值，limit是有最大限制的=，=）&lt;/p&gt;
 &lt;h3 id=&quot;解决方案&quot;&gt;&lt;a href=&quot;#解决方案&quot; class=&quot;headerlink&quot; title=&quot;解决方案&quot;&gt;&lt;/a&gt;解决方案&lt;/h3&gt;&lt;h5 id=&quot;当知道总共有多少页的时候&quot;&gt;&lt;a href=&quot;#当知道总共有多少页的时候&quot; class=&quot;headerlink&quot; title=&quot;当知道总共有多少页的时候&quot;&gt;&lt;/a&gt;当知道总共有多少页的时候&lt;/h5&gt;&lt;p&gt;(假设request是一个返回promise对象的函数,resolve的是上面的json)&lt;/p&gt;
 &lt;ul&gt;
@@ -283,7 +328,7 @@
 &lt;/ul&gt;
 &lt;h5 id=&quot;当不知道总共多少页的时候&quot;&gt;&lt;a href=&quot;#当不知道总共多少页的时候&quot; class=&quot;headerlink&quot; title=&quot;当不知道总共多少页的时候&quot;&gt;&lt;/a&gt;当不知道总共多少页的时候&lt;/h5&gt;&lt;p&gt;不停then的方法就不行了，于是有了文艺的程序员&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;文艺程序员这么做&lt;br&gt;首先要知道的一点是，当没有下一页的时候，返回的&lt;code&gt;next=null&lt;/code&gt;，于是我们就有了递归的终止条件。&lt;figure class=&quot;highlight actionscript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(url)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!url) &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (url) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; request(url).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;(data)&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      run(data.paging.next);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;var&lt;/span&gt; url = &lt;span class=&quot;string&quot;&gt;&#39;http://xxx&#39;&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;// first page&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;run(url);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;li&gt;文艺程序员这么做&lt;br&gt;首先要知道的一点是，当没有下一页的时候，返回的&lt;code&gt;next=null&lt;/code&gt;，于是我们就有了递归的终止条件。&lt;figure class=&quot;highlight qml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;run&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;url&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;if&lt;/span&gt; (!&lt;span class=&quot;built_in&quot;&gt;url&lt;/span&gt;) &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;while&lt;/span&gt; (&lt;span class=&quot;built_in&quot;&gt;url&lt;/span&gt;) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; request(&lt;span class=&quot;built_in&quot;&gt;url&lt;/span&gt;).then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;(&lt;span class=&quot;params&quot;&gt;data&lt;/span&gt;) &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      run(data.paging.next);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &amp;#125;)&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;built_in&quot;&gt;url&lt;/span&gt; = &lt;span class=&quot;string&quot;&gt;&#39;http://xxx&#39;&lt;/span&gt;; &lt;span class=&quot;comment&quot;&gt;// first page&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;run(&lt;span class=&quot;built_in&quot;&gt;url&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;瞎扯&quot;&gt;&lt;a href=&quot;#瞎扯&quot; class=&quot;headerlink&quot; title=&quot;瞎扯&quot;&gt;&lt;/a&gt;瞎扯&lt;/h3&gt;&lt;p&gt;嵌套的Promise其实&lt;strong&gt;可能&lt;/strong&gt;是反模式（anti-pattern）&lt;a href=&quot;http://taoofcode.net/promise-anti-patterns/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^1&lt;/a&gt;，但是本文中的情况，如果不递归用嵌套的promise，我实在想不出别的办法来了（ (๑•́ ₃ •̀)宝宝心里苦，但宝宝不说）&lt;/p&gt;
@@ -310,18 +355,18 @@
     <link href="http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/"/>
     <id>http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/</id>
     <published>2016-01-12T09:11:28.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯ES6的小白假装会写ES6…&lt;/p&gt;
 &lt;p&gt;简单的看了一下相关的概念，觉得还不太理解…就好像最开始看&lt;em&gt;原型链&lt;/em&gt;一样，花了一年多才慢慢理解继承啊什么的，但&lt;code&gt;constructor&lt;/code&gt;和&lt;code&gt;__proto__&lt;/code&gt;之类的东东我也还（4声）没整明白…真是资质愚钝QAQ&lt;/p&gt;
-&lt;h3 id=&quot;generator-function&quot;&gt;&lt;a href=&quot;#generator-function&quot; class=&quot;headerlink&quot; title=&quot;generator function&quot;&gt;&lt;/a&gt;generator function&lt;/h3&gt;&lt;p&gt;一个generator函数大概长这样：&lt;br&gt;&lt;figure class=&quot;highlight cpp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;function&quot;&gt;function* &lt;span class=&quot;title&quot;&gt;foo&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;111&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  yield &lt;span class=&quot;number&quot;&gt;123&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;222&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  yield &lt;span class=&quot;number&quot;&gt;456&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.&lt;span class=&quot;built_in&quot;&gt;log&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;333&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var a = foo(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//此时函数不会执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.next(); &lt;span class=&quot;comment&quot;&gt;//此时函数执行到第一句含有yield的语句时就暂停了，也就是只打印了 111&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.next(); &lt;span class=&quot;comment&quot;&gt;//此时函数执行到第二句含有yield的语句时暂停，打印了 222&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.next(); &lt;span class=&quot;comment&quot;&gt;//已经没有yield语句了，将会打印333，函数执行完毕&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.next(); &lt;span class=&quot;comment&quot;&gt;//已经没有yiedl语句了，什么也不会打印&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;h3 id=&quot;generator-function&quot;&gt;&lt;a href=&quot;#generator-function&quot; class=&quot;headerlink&quot; title=&quot;generator function&quot;&gt;&lt;/a&gt;generator function&lt;/h3&gt;&lt;p&gt;一个generator函数大概长这样：&lt;br&gt;&lt;figure class=&quot;highlight hsp&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;function* foo() &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.log(&lt;span class=&quot;number&quot;&gt;111&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;123&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.log(&lt;span class=&quot;number&quot;&gt;222&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; &lt;span class=&quot;number&quot;&gt;456&lt;/span&gt;&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  console.log(&lt;span class=&quot;number&quot;&gt;333&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var a = foo(&lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;)&lt;span class=&quot;comment&quot;&gt;; //此时函数不会执行&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;; //此时函数执行到第一句含有yield的语句时就暂停了，也就是只打印了 111&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;; //此时函数执行到第二句含有yield的语句时暂停，打印了 222&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;; //已经没有yield语句了，将会打印333，函数执行完毕&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;()&lt;span class=&quot;comment&quot;&gt;; //已经没有yiedl语句了，什么也不会打印&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;定义的时候多加一个星星号&lt;strong&gt;function*&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;generator函数中通常都会有yield，如果没有yield那就定义一个普通函数就好了&lt;/li&gt;
 &lt;li&gt;函数不会立即执行，使用&lt;code&gt;.next()&lt;/code&gt;方法时，函数才会执行；&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&quot;yield&quot;&gt;&lt;a href=&quot;#yield&quot; class=&quot;headerlink&quot; title=&quot;yield&quot;&gt;&lt;/a&gt;yield&lt;/h3&gt;&lt;p&gt;yield到底是一个什么东东呢？操作符？对象？还是别的什么，这个我还没搞明白。&lt;/p&gt;
-&lt;p&gt;看看阮一峰老师的这个例子，有助于理解参数的一些问题：&lt;br&gt;&lt;figure class=&quot;highlight crystal&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;function* foo(x) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var y = &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; * (&lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; (x + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var z = &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; (y / &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (x + y + z);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var a = foo(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;constant&quot;&gt;Object&lt;/span&gt;&amp;#123;&lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;constant&quot;&gt;Object&lt;/span&gt;&amp;#123;&lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;constant&quot;&gt;NaN&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &lt;span class=&quot;constant&quot;&gt;Object&lt;/span&gt;&amp;#123;&lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;constant&quot;&gt;NaN&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var b = foo(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &amp;#123; &lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt; &amp;#125; ，此时x=&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;，var y还没执行&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;12&lt;/span&gt;); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &amp;#123; &lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt; &amp;#125;，此时x=&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;，y=&lt;span class=&quot;number&quot;&gt;24&lt;/span&gt;，var z还没执行&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;13&lt;/span&gt;); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &amp;#123; &lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;42&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt; &amp;#125;，此时x=&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;，y=&lt;span class=&quot;number&quot;&gt;24&lt;/span&gt;，&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;看看阮一峰老师的这个例子，有助于理解参数的一些问题：&lt;br&gt;&lt;figure class=&quot;highlight crystal&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;function* foo(x) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var y = &lt;span class=&quot;number&quot;&gt;2&lt;/span&gt; * (&lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; (x + &lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;));&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  var z = &lt;span class=&quot;keyword&quot;&gt;yield&lt;/span&gt; (y / &lt;span class=&quot;number&quot;&gt;3&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; (x + y + z);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var a = foo(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; Object&amp;#123;&lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; Object&amp;#123;&lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;NaN, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;a.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; Object&amp;#123;&lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;NaN, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;var b = foo(&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &amp;#123; &lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;6&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt; &amp;#125; ，此时x=&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;，var y还没执行&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;12&lt;/span&gt;); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &amp;#123; &lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;8&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;false&lt;/span&gt; &amp;#125;，此时x=&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;，y=&lt;span class=&quot;number&quot;&gt;24&lt;/span&gt;，var z还没执行&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;b.&lt;span class=&quot;keyword&quot;&gt;next&lt;/span&gt;(&lt;span class=&quot;number&quot;&gt;13&lt;/span&gt;); &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt; &amp;#123; &lt;span class=&quot;symbol&quot;&gt;value:&lt;/span&gt;&lt;span class=&quot;number&quot;&gt;42&lt;/span&gt;, &lt;span class=&quot;symbol&quot;&gt;done:&lt;/span&gt;&lt;span class=&quot;literal&quot;&gt;true&lt;/span&gt; &amp;#125;，此时x=&lt;span class=&quot;number&quot;&gt;5&lt;/span&gt;，y=&lt;span class=&quot;number&quot;&gt;24&lt;/span&gt;，&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;当上面的函数运行&lt;code&gt;b.next(12)&lt;/code&gt;这一句时，x=5，y=24，var z还没执行，返回对象为{ value:8, done:false }&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Q: 为什么y=24？&lt;br&gt;A: 因为第二个next方法的参数传给&lt;em&gt;上一个yield&lt;/em&gt;，也就是第一个yield，所以var y = 2 * 12&lt;/p&gt;
@@ -380,7 +425,7 @@
     <link href="http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/"/>
     <id>http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/</id>
     <published>2015-12-31T03:36:54.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看&lt;a href=&quot;http://book.douban.com/subject/10546125/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《JavaScript高级程序设计》&lt;/a&gt;）。&lt;/p&gt;
 &lt;p&gt;直到ES5，JS也还是一个没有类的语言，虽然ES6中可以使用class关键字，但据说也只是语法糖。(不知道好不好吃ԅ(¯﹃¯ԅ))&lt;/p&gt;
@@ -409,9 +454,9 @@
     
       <category term="prototype" scheme="http://sabrinaluo.com/tech/tags/prototype/"/>
     
-      <category term="原型" scheme="http://sabrinaluo.com/tech/tags/%E5%8E%9F%E5%9E%8B/"/>
-    
       <category term="继承" scheme="http://sabrinaluo.com/tech/tags/%E7%BB%A7%E6%89%BF/"/>
+    
+      <category term="原型" scheme="http://sabrinaluo.com/tech/tags/%E5%8E%9F%E5%9E%8B/"/>
     
   </entry>
   
@@ -420,7 +465,7 @@
     <link href="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"/>
     <id>http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/</id>
     <published>2015-12-28T04:00:56.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;这篇应该属于不务正业系列…&lt;br&gt;自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://travis-ci.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Travis&lt;/a&gt;是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～&lt;/p&gt;
@@ -481,15 +526,15 @@
     
       <category term="github" scheme="http://sabrinaluo.com/tech/tags/github/"/>
     
-      <category term="hexo" scheme="http://sabrinaluo.com/tech/tags/hexo/"/>
-    
       <category term="travis" scheme="http://sabrinaluo.com/tech/tags/travis/"/>
+    
+      <category term="hexo" scheme="http://sabrinaluo.com/tech/tags/hexo/"/>
     
       <category term="博客" scheme="http://sabrinaluo.com/tech/tags/%E5%8D%9A%E5%AE%A2/"/>
     
-      <category term="持续集成" scheme="http://sabrinaluo.com/tech/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
-    
       <category term="自动部署" scheme="http://sabrinaluo.com/tech/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/"/>
+    
+      <category term="持续集成" scheme="http://sabrinaluo.com/tech/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
     
   </entry>
   
@@ -498,7 +543,7 @@
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</id>
     <published>2015-12-24T07:08:49.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。&lt;/p&gt;
 &lt;p&gt;关于合并多个提交，主要是要搞清楚&lt;code&gt;rebase&lt;/code&gt;的用法。&lt;/p&gt;
@@ -553,7 +598,7 @@ s ddbd8fd
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</id>
     <published>2015-12-24T06:58:32.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;为什么我每天都会有一些奇奇怪怪的需求…&lt;/p&gt;
 &lt;p&gt;我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推&lt;code&gt;push -f&lt;/code&gt;，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！&lt;/p&gt;
@@ -602,7 +647,7 @@ git merge repo2
     <link href="http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"/>
     <id>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</id>
     <published>2015-12-22T03:36:07.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;对promise这个概念之前已经有了一些浅显的理解，&lt;a href=&quot;http://sabrinaluo.com/tech/2015/12/01/promise/&quot;&gt;相关文章-&amp;gt;戳这里&lt;/a&gt;，最近又有了一些新的理解。&lt;/p&gt;
 &lt;h3 id=&quot;then-的时候到底是在then什么…&quot;&gt;&lt;a href=&quot;#then-的时候到底是在then什么…&quot; class=&quot;headerlink&quot; title=&quot;.then()的时候到底是在then什么…&quot;&gt;&lt;/a&gt;.then()的时候到底是在then什么…&lt;/h3&gt;&lt;ul&gt;
@@ -692,7 +737,7 @@ p1.then(function() {
     <link href="http://sabrinaluo.com/tech/2015/12/21/hoisting/"/>
     <id>http://sabrinaluo.com/tech/2015/12/21/hoisting/</id>
     <published>2015-12-21T02:24:02.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;写了无数JS也依旧没听过变量提升…&lt;/p&gt;
 &lt;p&gt;变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的&lt;a href=&quot;https://github.com/airbnb/javascript&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Airbnb JS 代码风格&lt;/a&gt;中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？&lt;/p&gt;
@@ -744,7 +789,7 @@ test(); //调用这个函数，你会看到console中输出的是undefined
     <link href="http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/"/>
     <id>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</id>
     <published>2015-12-19T11:22:27.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;function isType(type) {
@@ -863,7 +908,7 @@ console.log(eating(&amp;apos;亲爱的&amp;apos;));
     <link href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"/>
     <id>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</id>
     <published>2015-12-16T03:00:27.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;module.exports&lt;/code&gt;和&lt;code&gt;exports&lt;/code&gt;的区别就是&lt;code&gt;var a={}; var b=a;&lt;/code&gt;，a和b的区别&lt;/strong&gt;&lt;/p&gt;
@@ -872,7 +917,7 @@ console.log(eating(&amp;apos;亲爱的&amp;apos;));
 &lt;p&gt;当然啦，如果要彻底理解这两个导出的区别，最好肯定是去看源码，看看都是怎么封装的，功力深厚的童鞋应该一看就懂了。不过，源码我也是看不懂的…(ಥ_ಥ)&lt;/p&gt;
 &lt;p&gt;但是最近感觉杂七杂八看了好多文章做了好多实验之后，像是打开了任督二脉，机智的我好像有点上道了…&lt;/p&gt;
 &lt;h1 id=&quot;module&quot;&gt;&lt;a href=&quot;#module&quot; class=&quot;headerlink&quot; title=&quot;module&quot;&gt;&lt;/a&gt;module&lt;/h1&gt;&lt;p&gt;首先要明确的一点，module是一个&lt;strong&gt;对象&lt;/strong&gt; &lt;code&gt;{Object}&lt;/code&gt;。&lt;br&gt;当你新建一个文件，比如mo.js，文件内容如下：&lt;br&gt;&lt;figure class=&quot;highlight coffeescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;);&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;p&gt;然后在CMD里执行这个文件&lt;code&gt;node mo.js&lt;/code&gt;，就能看到module其实是一个Module实例，你可以这么理解，NodeJS中定义了一个Module类，这个类中有很多属性和方法，exports是其中的一个属性：&lt;br&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;tag&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;tag&quot;&gt;Module&lt;/span&gt; &lt;span class=&quot;rules&quot;&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;rule&quot;&gt;&lt;span class=&quot;attribute&quot;&gt;id &lt;/span&gt;:&lt;span class=&quot;value&quot;&gt; &lt;span class=&quot;string&quot;&gt;&#39;blabla&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  exports : &amp;#123;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;tag&quot;&gt;blabla&lt;/span&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后在CMD里执行这个文件&lt;code&gt;node mo.js&lt;/code&gt;，就能看到module其实是一个Module实例，你可以这么理解，NodeJS中定义了一个Module类，这个类中有很多属性和方法，exports是其中的一个属性：&lt;br&gt;&lt;figure class=&quot;highlight css&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;selector-tag&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;selector-tag&quot;&gt;Module&lt;/span&gt; &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attribute&quot;&gt;id &lt;/span&gt;: &lt;span class=&quot;string&quot;&gt;&#39;blabla&#39;&lt;/span&gt;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  exports : &amp;#123;&amp;#125;,&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;selector-tag&quot;&gt;blabla&lt;/span&gt;...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;当每个js文件在执行或被require的时候，NodeJS其实创建了一个新的实例&lt;code&gt;var module = new Module()&lt;/code&gt;，这个实例名叫&lt;code&gt;module&lt;/code&gt;。&lt;br&gt;&lt;strong&gt;这也就是为什么你并没有定义&lt;code&gt;module&lt;/code&gt;这个变量，却能console.log出来而不会报错的原因&lt;/strong&gt;。&lt;/p&gt;
 &lt;h1 id=&quot;module-exports&quot;&gt;&lt;a href=&quot;#module-exports&quot; class=&quot;headerlink&quot; title=&quot;module.exports&quot;&gt;&lt;/a&gt;module.exports&lt;/h1&gt;&lt;p&gt;假设我有一个JS文件内容如下：&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&quot;javascript&quot;&gt;&lt;span class=&quot;built_in&quot;&gt;console&lt;/span&gt;.log(&lt;span class=&quot;built_in&quot;&gt;module&lt;/span&gt;); &lt;span class=&quot;comment&quot;&gt;//你会看到Module中的exports为空对象{}&lt;/span&gt;
@@ -942,9 +987,9 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     </summary>
     
     
-      <category term="Module.exports" scheme="http://sabrinaluo.com/tech/tags/Module-exports/"/>
-    
       <category term="NodeJS" scheme="http://sabrinaluo.com/tech/tags/NodeJS/"/>
+    
+      <category term="Module.exports" scheme="http://sabrinaluo.com/tech/tags/Module-exports/"/>
     
       <category term="exports" scheme="http://sabrinaluo.com/tech/tags/exports/"/>
     
@@ -957,7 +1002,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"/>
     <id>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</id>
     <published>2015-12-15T02:55:13.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;本文&lt;strong&gt;不是&lt;/strong&gt;介绍 &lt;a href=&quot;https://aws.amazon.com/api-gateway/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AWS API Gateway&lt;/a&gt; 和 &lt;a href=&quot;https://aws.amazon.com/lambda/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AWS Lambda&lt;/a&gt;的基本用法的…=(:з」∠)_&lt;/p&gt;
 &lt;p&gt;简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（&lt;em&gt;最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！&lt;/em&gt;），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！&lt;/p&gt;
@@ -1029,9 +1074,9 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     </summary>
     
     
-      <category term="API Gateway" scheme="http://sabrinaluo.com/tech/tags/API-Gateway/"/>
-    
       <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
+    
+      <category term="API Gateway" scheme="http://sabrinaluo.com/tech/tags/API-Gateway/"/>
     
       <category term="AWS Lambda" scheme="http://sabrinaluo.com/tech/tags/AWS-Lambda/"/>
     
@@ -1041,9 +1086,9 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     
       <category term="测试环境" scheme="http://sabrinaluo.com/tech/tags/%E6%B5%8B%E8%AF%95%E7%8E%AF%E5%A2%83/"/>
     
-      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
-    
       <category term="生产环境" scheme="http://sabrinaluo.com/tech/tags/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/"/>
+    
+      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
@@ -1052,7 +1097,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"/>
     <id>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</id>
     <published>2015-12-14T06:39:35.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;&lt;a href=&quot;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DynamoDB&lt;/a&gt;是亚马逊AWS云服务提供的一个NoSQL的数据库…&lt;/p&gt;
 &lt;p&gt;在这里我必须安利一下Amazon家的服务真是业界良心：前不久，可能是因为我自己蠢，英文不好没看懂免费用一年的各种限制，也不知道写了什么奇怪的东东用自己的账号测试dynamoDB被扣了几刀，写邮件去投诉说你们不是免费吗为啥扣费，然后就得到回复解释了一下为啥扣钱，说我用超过限制了，然后表示个人账号里扣了的钱会&lt;strong&gt;退退退&lt;/strong&gt;！（我说明了之后会用公司账号测试，请帮我关了我的个人账户）&lt;/p&gt;
@@ -1060,7 +1105,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
 &lt;p&gt;本文是Linux环境下的安装和配置，windows下我还不会…&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;安装JAVA SDK&lt;/p&gt;
-&lt;figure class=&quot;highlight smali&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo&lt;span class=&quot;instruction&quot;&gt; add-apt-repository &lt;/span&gt;ppa:webupd8team/java&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install oracle-java8-installer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install oracle-java8-set-default&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&quot;highlight smali&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo&lt;span class=&quot;built_in&quot;&gt; add-apt-repository &lt;/span&gt;ppa:webupd8team/java&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install oracle-java8-installer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install oracle-java8-set-default&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;p&gt;安装dynamodb-local&lt;/p&gt;
 &lt;ul&gt;
@@ -1093,15 +1138,15 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     
       <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
     
+      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    
       <category term="DynamoDB" scheme="http://sabrinaluo.com/tech/tags/DynamoDB/"/>
-    
-      <category term="云服务" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
-    
-      <category term="亚马逊" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%9A%E9%A9%AC%E9%80%8A/"/>
     
       <category term="本地安装" scheme="http://sabrinaluo.com/tech/tags/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85/"/>
     
-      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+      <category term="亚马逊" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%9A%E9%A9%AC%E9%80%8A/"/>
+    
+      <category term="云服务" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
     
   </entry>
   
@@ -1110,7 +1155,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/"/>
     <id>http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/</id>
     <published>2015-12-14T06:15:06.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;前几天看了一个帖子&lt;a href=&quot;http://www.jianshu.com/p/fdae559d1ed5&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;我招不到想要的程序员&lt;/a&gt;，里面有一点是说&lt;strong&gt;非极端情况下，一本以下的不要&lt;/strong&gt;。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…&lt;br&gt;我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……&lt;br&gt;有一天我看代码的时候发现很多规范的JS都会有这样的注释：&lt;br&gt;&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/*!&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; * EJS&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; * Copyright(c) 2012 TJ Holowaychuk &amp;lt;tj@vision-media.ca&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; * MIT Licensed&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;/**&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; * Module dependencies.&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt; */&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;以上来自我的男神&lt;a href=&quot;https://github.com/tj/ejs/blob/master/ejs.js&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;TJ写的EJS模板引擎&lt;/a&gt;&lt;/p&gt;
@@ -1143,9 +1188,9 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     
       <category term="js" scheme="http://sabrinaluo.com/tech/tags/js/"/>
     
-      <category term="感叹号" scheme="http://sabrinaluo.com/tech/tags/%E6%84%9F%E5%8F%B9%E5%8F%B7/"/>
-    
       <category term="重要注释" scheme="http://sabrinaluo.com/tech/tags/%E9%87%8D%E8%A6%81%E6%B3%A8%E9%87%8A/"/>
+    
+      <category term="感叹号" scheme="http://sabrinaluo.com/tech/tags/%E6%84%9F%E5%8F%B9%E5%8F%B7/"/>
     
   </entry>
   
@@ -1154,7 +1199,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/"/>
     <id>http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/</id>
     <published>2015-12-12T16:34:42.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
+    <updated>2016-03-01T10:46:52.439Z</updated>
     
     <content type="html">&lt;p&gt;本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！&lt;br&gt;我本来的github page是&lt;a href=&quot;http://sabrinaluo.github.io&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;sabrinaluo.github.io&lt;/a&gt;，花了一百多大洋把这个域名变成&lt;a href=&quot;http://sabrinaluo.com&quot;&gt;sabrinaluo.com&lt;/a&gt;，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ&lt;/p&gt;
 &lt;hr&gt;
@@ -1212,56 +1257,17 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     </summary>
     
     
-      <category term="custom domain" scheme="http://sabrinaluo.com/tech/tags/custom-domain/"/>
-    
       <category term="github" scheme="http://sabrinaluo.com/tech/tags/github/"/>
     
       <category term="github page" scheme="http://sabrinaluo.com/tech/tags/github-page/"/>
     
-      <category term="二级域名" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D/"/>
+      <category term="custom domain" scheme="http://sabrinaluo.com/tech/tags/custom-domain/"/>
     
       <category term="域名绑定" scheme="http://sabrinaluo.com/tech/tags/%E5%9F%9F%E5%90%8D%E7%BB%91%E5%AE%9A/"/>
     
+      <category term="二级域名" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%8C%E7%BA%A7%E5%9F%9F%E5%90%8D/"/>
+    
       <category term="域名解析" scheme="http://sabrinaluo.com/tech/tags/%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>X-WSSE验证中关于SHA1编码方式的一些坑</title>
-    <link href="http://sabrinaluo.com/tech/2015/12/11/x-wsse/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/11/x-wsse/</id>
-    <published>2015-12-11T09:08:38.000Z</published>
-    <updated>2016-02-17T07:55:27.154Z</updated>
-    
-    <content type="html">&lt;p&gt;不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年&lt;a href=&quot;http://www.xml.com/pub/a/2003/12/17/dive.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^1&lt;/a&gt;，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？&lt;/p&gt;
-&lt;p&gt;关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与&lt;a href=&quot;https://github.com/bouzuya/node-wsse&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;node-wsse&lt;/a&gt;的作者大战了好几个回合…&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;此文章不讨论验证的原理，只讨论X-WSSE UsernameToken的生成方式，其中主要是生成&lt;strong&gt;passwordDigest&lt;/strong&gt;。&lt;br&gt;验证嘛，用户名username，密码password肯定是少不了的，此外还需要nonce，timeStamp，有了这几样再按照下面的步骤一步步就可以生成符合WSSE标准的token了。&lt;/p&gt;
-&lt;p&gt;UsernameToken的生成一共需要&lt;strong&gt;5个步骤&lt;/strong&gt;：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;生成一个随机字符串nonce。不同公司的API对这个nonce的要求可能会不同，有一些要求采用&lt;code&gt;base64&lt;/code&gt;编码方式，比如&lt;a href=&quot;http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html#the-authentication-provider&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;symfony给出的例子&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;时间戳（timeStamp）。对于时间戳，统一采用&lt;a href=&quot;http://baike.baidu.com/view/931641.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;ISO-8601&lt;/a&gt;格式的字符串，但是不同公司的API对时区（timezone）的要求可能会不同，比如Emarsys要求UTC，Adobe要求GMT；&lt;/li&gt;
-&lt;li&gt;把nonce，timeStamp，password这三个字符串按顺序连接起来形成一个新的字符串，并将这个字符串按照&lt;a href=&quot;http://baike.baidu.com/view/1228622.htm&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;SHA1&lt;/a&gt;方法加密。&lt;br&gt;&lt;strong&gt;坑来啦，坑来啦，坑来啦！！！&lt;/strong&gt;&lt;br&gt;一个字符串通常加密之后密码摘要默认是binary的，比如Adobe&lt;a href=&quot;https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^2&lt;/a&gt;，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys&lt;a href=&quot;http://documentation.emarsys.com/resource/developers/api/getting-started/authentication/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^3&lt;/a&gt;…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证&lt;a href=&quot;http://book.soundonair.ru/web/web2apps-CHP-11-SECT-1.html#web2apps-CHP-11-SECT-1.8&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^4&lt;/a&gt;；&lt;/li&gt;
-&lt;li&gt;把上一步得到的密码摘要按照&lt;code&gt;base64&lt;/code&gt;进行编码，就能得到passwordDigest；&lt;/li&gt;
-&lt;li&gt;按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：&lt;pre&gt;&lt;code&gt;UsernameToken Username=&amp;quot;username&amp;quot;, PasswordDigest=&amp;quot;passwordDigest&amp;quot;, Nonce=&amp;quot;nonce&amp;quot;, Created=&amp;quot;timeStamp&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年&lt;a href=&quot;http://www.xml.com/pub/a/2003/12/17/dive.html&quot; target=&quot;_blank&quot; rel=&quot;
-    
-    </summary>
-    
-    
-      <category term="SHA1" scheme="http://sabrinaluo.com/tech/tags/SHA1/"/>
-    
-      <category term="WSSE" scheme="http://sabrinaluo.com/tech/tags/WSSE/"/>
-    
-      <category term="X-WSSE" scheme="http://sabrinaluo.com/tech/tags/X-WSSE/"/>
-    
-      <category term="auth" scheme="http://sabrinaluo.com/tech/tags/auth/"/>
     
   </entry>
   

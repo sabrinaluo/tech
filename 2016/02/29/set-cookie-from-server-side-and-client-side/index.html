@@ -1,0 +1,196 @@
+<!DOCTYPE>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    Cookie在前端和后端的设置 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  cookie
+  ">
+  
+  <meta name="author" content="Sabrina">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<nav>
+  <div class="container">
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form>
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input type="text" placeholder="Search">
+        </label>
+      </form>
+    </div>
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+      <li><a href="/tech/atom.xml">RSS</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <header>
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+    
+    
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a href="/tech/archives" class="btn btn-group-left"><i
+                class="fa fa-file-text"></i> Posts </a>
+      <a href="/tech/archives"
+         class="btn btn-group-right"> 23 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/tags" class="btn btn-group-left"><i
+                class="fa fa-tags"></i> Tags </a>
+      <a href="/tech/tags"
+         class="btn btn-group-right"> 74 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/categories" class="btn btn-group-left"><i
+                class="fa fa-list-ul"></i> Categories </a>
+      <a href="/tech/categories"
+         class="btn btn-group-right"> 0 </a>
+    </div>
+  </div>
+</header>
+
+
+<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
+  <h3>
+    <i class="fa fa-user"></i>
+     <a>Sabrina</a>
+    <span>
+      <i class="fa fa-pencil"></i> Published: 2016-02-29 14:04:57
+    </span>
+  </h3>
+  <article>
+    <h1>Cookie在前端和后端的设置</h1>
+    <p>http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬<del>汉</del>妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…</p>
+<p>在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…）</p>
+<p>为什么要了解设置cookie的原理呢？了解了才能在某些时候用最原始的方法来设置cookie，比如没有框架可用的时候，以及框架提供的方法不适用于某些场景的时候。<br>我是在使用laravel设置cookie的时候踩了坑，现在的项目里因为要配合使用GTM（google tag manager），所以cookie是不加密的raw data，但通过laravel设置的cookie都是加密了的。于是只能学习PHP原生的添加cookie方法。<code>setcookie(NAME, VALUE, EXPIRES)</code></p>
+<p>另外就是因为用AWS API Gateway时候的一些需求，想要通过gateway直接设置cookie，这个时候就不得不了解http cookie的运作方式。</p>
+<h3 id="从服务器端返回新cookie"><a href="#从服务器端返回新cookie" class="headerlink" title="从服务器端返回新cookie"></a>从服务器端返回新cookie</h3><p>设置cookie是通过在响应的头部加入<code>Set-Cookie</code>来设置的，</p>
+<blockquote>
+<ul>
+<li>一个请求通常包含header和body</li>
+<li>与请求有关的cookie分为request cookie和response cookie<ul>
+<li>request cookie是浏览器已储存的cookie</li>
+<li>response cookie是服务器端返回的新的cookie，也就是将会储存在浏览器端的新cookie</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set</span>-Cookie: NAME=VALUE; expires=<span class="built_in">DATE</span>; <span class="built_in">path</span>=<span class="built_in">PATH</span>; domain=DOMAIN</span><br></pre></td></tr></table></figure></p>
+<p>NAME VALUE是一对键值<br>expires是过期日期，通常用当前时间的毫秒数加上一段时间：<code>new Date().getTime()+30*24*60*60*1000)</code><br>如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失<br>path和domain这个…感觉不太用得到，具体可以看<a href="http://blog.sina.com.cn/s/blog_70c4d9410100z3il.html" target="_blank" rel="external">这篇文章</a></p>
+<p>如果要同时设置多个cookie，同时返回多个<code>Set-Cookie</code>头即可</p>
+<h4 id="maxAge"><a href="#maxAge" class="headerlink" title="maxAge"></a>maxAge</h4><p>有一些服务器端的框架会提供maxAge属性来设置cookie的过期时间，但是原始的Set-Cookie头是不支持maxAge的，所以在通过头部来设置cookie还是乖乖用回expires吧</p>
+<h3 id="浏览器端读取cookie"><a href="#浏览器端读取cookie" class="headerlink" title="浏览器端读取cookie"></a>浏览器端读取cookie</h3><p>JS原生方法：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie;</span><br></pre></td></tr></table></figure></p>
+<p>读取的cookie是一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookieA = <span class="built_in">document</span>.cookie.replace(<span class="regexp">/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/</span>, <span class="string">"$1"</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="浏览器端设置cookie"><a href="#浏览器端设置cookie" class="headerlink" title="浏览器端设置cookie"></a>浏览器端设置cookie</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'cookie_example=123'</span>+<span class="string">';expires='</span>+expire;</span><br></pre></td></tr></table></figure>
+<p>如果要设置多个cookie，多次调用<code>document.cookie</code>即可</p>
+<h4 id="document-cookie"><a href="#document-cookie" class="headerlink" title="document.cookie"></a>document.cookie</h4><p>这个docuement的behavior有点奇怪，明明返回的是个字符串，本来以为每次设置cookie得用新的字符串连接旧的字符串，但其实直接等于新的值也并不会覆盖旧的值，不知道实现这个属性&amp;方法混用的原理是什么0,0</p>
+
+  </article>
+</div>
+
+
+<div class="duoshuo">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="1456725897" data-title="Cookie在前端和后端的设置"
+       data-url="http://sabrinaluo.com/tech/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name: "sabrinaluo"};
+    (function () {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';
+      ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</main>
+
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</li>
+    
+  </ul>
+  <div class="theme-info">Theme <a
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+  </div>
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
+</footer>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+
+</body>
+</html>
