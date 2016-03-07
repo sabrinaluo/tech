@@ -68,14 +68,14 @@
       <a href="/tech/archives" class="btn btn-group-left"><i
                 class="fa fa-file-text"></i> Posts </a>
       <a href="/tech/archives"
-         class="btn btn-group-right"> 23 </a>
+         class="btn btn-group-right"> 24 </a>
     </div>
 
     <div class="btn-group">
       <a href="/tech/tags" class="btn btn-group-left"><i
                 class="fa fa-tags"></i> Tags </a>
       <a href="/tech/tags"
-         class="btn btn-group-right"> 74 </a>
+         class="btn btn-group-right"> 77 </a>
     </div>
 
     <div class="btn-group">
@@ -102,7 +102,7 @@
 <p>在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…）</p>
 <p>为什么要了解设置cookie的原理呢？了解了才能在某些时候用最原始的方法来设置cookie，比如没有框架可用的时候，以及框架提供的方法不适用于某些场景的时候。<br>我是在使用laravel设置cookie的时候踩了坑，现在的项目里因为要配合使用GTM（google tag manager），所以cookie是不加密的raw data，但通过laravel设置的cookie都是加密了的。于是只能学习PHP原生的添加cookie方法。<code>setcookie(NAME, VALUE, EXPIRES)</code></p>
 <p>另外就是因为用AWS API Gateway时候的一些需求，想要通过gateway直接设置cookie，这个时候就不得不了解http cookie的运作方式。</p>
-<h3 id="从服务器端返回新cookie"><a href="#从服务器端返回新cookie" class="headerlink" title="从服务器端返回新cookie"></a>从服务器端返回新cookie</h3><p>设置cookie是通过在响应的头部加入<code>Set-Cookie</code>来设置的，</p>
+<h3 id="response-cookie-从服务器端返回新cookie"><a href="#response-cookie-从服务器端返回新cookie" class="headerlink" title="response cookie 从服务器端返回新cookie"></a>response cookie 从服务器端返回新cookie</h3><p>设置cookie是通过在响应的头部加入<code>Set-Cookie</code>来设置的，</p>
 <blockquote>
 <ul>
 <li>一个请求通常包含header和body</li>
@@ -114,14 +114,20 @@
 </ul>
 </blockquote>
 <h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Set</span>-Cookie: NAME=VALUE; expires=<span class="built_in">DATE</span>; <span class="built_in">path</span>=<span class="built_in">PATH</span>; domain=DOMAIN</span><br></pre></td></tr></table></figure></p>
-<p>NAME VALUE是一对键值<br>expires是过期日期，通常用当前时间的毫秒数加上一段时间：<code>new Date().getTime()+30*24*60*60*1000)</code><br>如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失<br>path和domain这个…感觉不太用得到，具体可以看<a href="http://blog.sina.com.cn/s/blog_70c4d9410100z3il.html" target="_blank" rel="external">这篇文章</a></p>
+<p>NAME VALUE是一对键值<br>expires是过期日期，通常用当前时间的毫秒数加上一段时间：<code>new Date().getTime()+30*24*60*60*1000)</code>，然后<strong>需要调用<code>toUTCString()</code>方法</strong><br>如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失<br>path和domain这个…感觉不太用得到，具体可以看<a href="http://blog.sina.com.cn/s/blog_70c4d9410100z3il.html" target="_blank" rel="external">这篇文章</a></p>
 <p>如果要同时设置多个cookie，同时返回多个<code>Set-Cookie</code>头即可</p>
 <h4 id="maxAge"><a href="#maxAge" class="headerlink" title="maxAge"></a>maxAge</h4><p>有一些服务器端的框架会提供maxAge属性来设置cookie的过期时间，但是原始的Set-Cookie头是不支持maxAge的，所以在通过头部来设置cookie还是乖乖用回expires吧</p>
 <h3 id="浏览器端读取cookie"><a href="#浏览器端读取cookie" class="headerlink" title="浏览器端读取cookie"></a>浏览器端读取cookie</h3><p>JS原生方法：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie;</span><br></pre></td></tr></table></figure></p>
 <p>读取的cookie是一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cookieA = <span class="built_in">document</span>.cookie.replace(<span class="regexp">/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/</span>, <span class="string">"$1"</span>);</span><br></pre></td></tr></table></figure></p>
-<h3 id="浏览器端设置cookie"><a href="#浏览器端设置cookie" class="headerlink" title="浏览器端设置cookie"></a>浏览器端设置cookie</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'cookie_example=123'</span>+<span class="string">';expires='</span>+expire;</span><br></pre></td></tr></table></figure>
+<h3 id="request-cookie-浏览器端设置cookie"><a href="#request-cookie-浏览器端设置cookie" class="headerlink" title="request cookie 浏览器端设置cookie"></a>request cookie 浏览器端设置cookie</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.cookie = <span class="string">'cookie_example=123'</span>+<span class="string">';expires='</span>+expire+<span class="string">';path=/'</span>;</span><br></pre></td></tr></table></figure>
 <p>如果要设置多个cookie，多次调用<code>document.cookie</code>即可</p>
-<h4 id="document-cookie"><a href="#document-cookie" class="headerlink" title="document.cookie"></a>document.cookie</h4><p>这个docuement的behavior有点奇怪，明明返回的是个字符串，本来以为每次设置cookie得用新的字符串连接旧的字符串，但其实直接等于新的值也并不会覆盖旧的值，不知道实现这个属性&amp;方法混用的原理是什么0,0</p>
+<h4 id="document-cookie"><a href="#document-cookie" class="headerlink" title="document.cookie"></a>document.cookie</h4><p>这个document的behavior有点奇怪，明明返回的是个字符串，本来以为每次设置cookie得用新的字符串连接旧的字符串，但其实直接等于新的值也并不会覆盖旧的值，不知道实现这个属性&amp;方法混用的原理是什么0,0</p>
+<p>####NOTE<br>通常设置cookie的时候都会把path设置为<code>/</code>，这样同一个域名下，所有路径都共用一个cookie<br>如果没有设置path，某些框架可能默认会使用创建cookie时的路径作为path，这样就可能存在多个path不同的同名cookie。</p>
+<p>####工具</p>
+<ul>
+<li>在浏览器端，可以使用chrome的扩展<em>EditThisCookie</em>来查看和编辑cookie</li>
+<li>如果是从服务器端写入的cookie，可以在F12 network 选项卡中选中请求，有cookie的时候会有一个cookie选项，能看到request cookie和response cookie</li>
+</ul>
 
   </article>
 </div>

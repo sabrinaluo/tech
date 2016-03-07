@@ -1,0 +1,203 @@
+<!DOCTYPE>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    AWS API Gateway Mapping Template 获取IP, header等 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  AWS,API Gateway,lambda,mapping templates,header
+  ">
+  
+  <meta name="author" content="Sabrina">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+
+<body>
+<nav>
+  <div class="container">
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form>
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input type="text" placeholder="Search">
+        </label>
+      </form>
+    </div>
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+      <li><a href="/tech/atom.xml">RSS</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <header>
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+    
+    
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a href="/tech/archives" class="btn btn-group-left"><i
+                class="fa fa-file-text"></i> Posts </a>
+      <a href="/tech/archives"
+         class="btn btn-group-right"> 24 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/tags" class="btn btn-group-left"><i
+                class="fa fa-tags"></i> Tags </a>
+      <a href="/tech/tags"
+         class="btn btn-group-right"> 77 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/categories" class="btn btn-group-left"><i
+                class="fa fa-list-ul"></i> Categories </a>
+      <a href="/tech/categories"
+         class="btn btn-group-right"> 0 </a>
+    </div>
+  </div>
+</header>
+
+
+<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
+  <h3>
+    <i class="fa fa-user"></i>
+     <a>Sabrina</a>
+    <span>
+      <i class="fa fa-pencil"></i> Published: 2016-03-07 14:33:03
+    </span>
+  </h3>
+  <article>
+    <h1>AWS API Gateway Mapping Template 获取IP, header等</h1>
+    <p>API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。</p>
+<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，lambda获取到的payload并<strong>不包含 request header</strong>的内容，而只有<strong>request body</strong>的内容。</p>
+<p>header中的部分内容可以通过API Gateway提供的变量从mapping template中获取。可以获取的内容包括IP, http方法，路由参数，query等，具体可以看文档<a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html" target="_blank" rel="external">^1</a></p>
+<h3 id="设置方法"><a href="#设置方法" class="headerlink" title="设置方法"></a>设置方法</h3><p>按照理论来说，AWS设置可以通过界面设置的都可以通过脚本来设置。下面只介绍在界面中的设置：</p>
+<ol>
+<li>在API Gateway界面中选中具体的api方法，点击右侧的<strong>Intergration Request</strong></li>
+<li>在底部点击<strong>Mapping Templates</strong></li>
+<li>点击<strong>Add Mapping Template</strong>，输入<code>application/json</code>，点击√进行确认</li>
+<li>在右侧新出现的区域，点击编辑按钮（铅笔图标），输入需要的变量即可，例如要获取ip：<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"body"</span>: $input.json(<span class="string">'$'</span>),</span><br><span class="line">  <span class="string">"source_ip"</span> : <span class="string">"$context.identity.sourceIp"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中<code>$input.json(&#39;$&#39;)</code>是请求时客户端发来的body</p>
+<h3 id="response-header和cookie"><a href="#response-header和cookie" class="headerlink" title="response header和cookie"></a>response header和cookie</h3><p>在配合使用lambda和API gateway的时候，header和cookie是非常令人头疼的问题…<br>lambda返回的内容，只是response body，因此设置header要在api gateway中进行，并且也是有一些限制的：</p>
+<ol>
+<li>在API Gateway界面中选中具体的api方法，点击右侧的<strong>Method Response</strong></li>
+<li>展开HTTP Status，点击<strong>Add Header</strong>，添加一个header。<blockquote>
+<p><strong>注意</strong>：可以添加多个Header，但这些header不能同名，这也就意味着，只能有一个<code>Set-Cookie</code>，只能添加一个cookie </p>
+</blockquote>
+</li>
+<li>完成以上步骤后，返回第一步所在的页面，点击<strong>Integration Response</strong>，点击三角展开，会看到<strong>Header Mappings</strong></li>
+<li>在对应的位置编辑<strong>mapping value</strong><ul>
+<li>如果想使用lambda返回的数据，设置为<code>integration.response.body.KEY</code></li>
+<li>如果不是使用lambda（即把gateway用作代理），而是使用实际服务器返回的header，设置为<code>integration.response.header.KEY</code></li>
+</ul>
+</li>
+</ol>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li><a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/how-to-method-settings-execution-console.html" target="_blank" rel="external">http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/how-to-method-settings-execution-console.html</a></li>
+<li><a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/request-response-data-mappings.html" target="_blank" rel="external">http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/request-response-data-mappings.html</a></li>
+</ul>
+
+  </article>
+</div>
+
+
+<div class="duoshuo">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="1457332383" data-title="AWS API Gateway Mapping Template 获取IP, header等"
+       data-url="http://sabrinaluo.com/tech/tech/2016/03/07/aws-api-gateway-mapping-templates/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name: "sabrinaluo"};
+    (function () {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';
+      ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</main>
+
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</a></li>
+    
+  </ul>
+  <div class="theme-info">
+    Theme <a
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+  </div>
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
+</footer>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+
+</body>
+</html>
