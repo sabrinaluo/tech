@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script src="//cdn.jsdelivr.net/vue/latest/vue.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 </head>
 
 <body>
@@ -29,10 +31,11 @@
   <div class="container">
     <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
     <div class="site-search">
-      <form>
+      <form onsubmit="return search()">
         <label class="form-control">
           <span class="scope-badge">This website</span>
-          <input type="text" placeholder="Search">
+          <input id="query" type="text" placeholder="Search" value="">
+          <span class="scope-badge clear-search"> x </span>
         </label>
       </form>
     </div>
@@ -75,7 +78,7 @@
     <li>
       <i class="fa fa-link"></i><a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
     </li>
-    <li><i class="fa fa-clock-o"></i>Started from 11th Dec 2015
+    <li><i class="fa fa-clock-o"></i>Started from Dec 11, 2015
     </li>
   </ul>
 
@@ -191,14 +194,16 @@
   <div class="boxed-group">
     <h3>
       Contributions
+      <span><i class="fa fa-lock"></i></span>
     </h3>
     <div class="calendar-graph">
-      <svg width="721" height="110">
+      <svg width="721" height="110" @mouseout="mouseoverDate=null">
         <g transform="translate(20, 20)">
           <g v-for="week in calendar" :transform="week.transform">
             <rect v-for="day in week.days"
                   :y="day.y" :fill="day.fill"
                   @click="selectedDate=day.date"
+                  @mouseover="mouseoverDate=day.date"
                   :class="{active:selectedDate===day.date}"
                   data-count="{{day.posts.length}}"
                   data-date="{{day.date}}"
@@ -234,8 +239,15 @@
           </text>
         </g>
       </svg>
+      <div class="svg-tip svg-tip-one-line"
+           v-bind:style="{ top: svgtip.top, left: svgtip.left, display: svgtip.display}">
+        <strong>{{svgtip.text}}</strong> on
+        {{moment(mouseoverDate).format('MMM DD, YYYY')}}
+      </div>
     </div>
     <div class="calendar-footer">
+      <span class="text-muted">Summary of posts in last year. <a href="/">Learn
+          how we count contributions.</a></span>
       <div class="calendar-legend">
         <span>Less</span>
         <ul class="legend">
@@ -275,10 +287,10 @@
         Current streak
       </div>
       <div class="calendar-col-count">
-        {{currentStreak.count}}
+        {{currentStreak.count}} days
       </div>
       <div class="calendar-col-date">
-        Last contributed on {{currentStreak.relativeTime}}
+        Last contributed {{currentStreak.relativeTime}}
       </div>
     </div>
   </div>
@@ -287,7 +299,7 @@
   <div class="contribution-list">
     <ul>
       <li v-for="post in posts | filterBy selectedDate in 'date'">
-        <a>{{post.title}}
+        <a href="{{post.url}}">{{post.title}}
         </a>
         <span>{{post.date}}</span>
       </li>
@@ -295,53 +307,76 @@
   </div>
 </div>
 
-<script src="//cdn.jsdelivr.net/vue/latest/vue.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
-
 
 <script>
-  var posts = [{"id":"cilhsw5sr000abngu3ljk5xea","date":"2016-03-07","title":"AWS API Gateway Mapping Template 获取IP, header等"},{"id":"cilhsw5sj0009bngu5d9ikaji","date":"2016-02-29","title":"Cookie在前端和后端的设置"},{"id":"cilhsw5se0008bngupl95h2in","date":"2016-02-17","title":"jQuery中利用JSONP进行跨域GET请求"},{"id":"cilhsw5sa0006bngu717frxr5","date":"2016-02-03","title":"谷歌地图 Google Map API 初体验"},{"id":"cilhsw5s50005bngu527dp0oc","date":"2016-02-01","title":"git如何ignore已经track的文件"},{"id":"cilhsw5rs0002bngu76hn22i4","date":"2016-01-23","title":"Promise的顺序执行和并行执行"},{"id":"cilhsw5rc0000bngukwlibjae","date":"2016-01-22","title":"对浏览器跨域问题的一些理解"},{"id":"cilhsw5tx000ubngurqhvxdhf","date":"2016-01-18","title":"递归实现按顺序执行Promise"},{"id":"cilhsw5sv000cbnguraq5ol4u","date":"2016-01-12","title":"对generator和yield的一些理解"},{"id":"cilhsw5uc0011bnguzf9hks3w","date":"2015-12-31","title":"对JS类和继承的一些理解"},{"id":"cilhsw5u4000ybngu3all4md9","date":"2015-12-28","title":"利用travis自动部署hexo搭建在github的博客"},{"id":"cilhsw5tm000nbngu71rliyql","date":"2015-12-24","title":"git merge repo 如何合并两个仓库"},{"id":"cilhsw5ti000lbngubl283ii9","date":"2015-12-24","title":"git merge commits 如何合并多个提交为一个"},{"id":"cilhsw5ug0013bngu2lfcslhd","date":"2015-12-22","title":"对Promise中的resolve，reject，catch的理解"},{"id":"cilhsw5te000jbngu9pyqp3ig","date":"2015-12-21","title":"JS变量提升(Hoisting)"},{"id":"cilhsw5u70010bngu3x59mr7w","date":"2015-12-19","title":"对JS闭包(Closure)的一些理解"},{"id":"cilhsw5t4000gbnguecre6t7x","date":"2015-12-16","title":"对module.exports和exports的一些理解"},{"id":"cilhsw5t2000fbngugdt0hipl","date":"2015-12-15","title":"AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置"},{"id":"cilhsw5sz000dbngu4gxet196","date":"2015-12-14","title":"JS注释中的感叹号是干什么用的/*! */"},{"id":"cilhsw5tr000pbnguo6z16ekg","date":"2015-12-14","title":"AWS DynamoDB的本地安装及环境配置"},{"id":"cilhsw5u1000xbngu8rjlxqxd","date":"2015-12-12","title":"GitHub Page如何绑定域名"},{"id":"cilhsw5uj0015bngul4dwjcz0","date":"2015-12-11","title":"X-WSSE验证中关于SHA1编码方式的一些坑"},{"id":"cilhsw5t8000ibngutps8w24h","date":"2015-12-04","title":"版本控制及git常用基本命令"},{"id":"cilhsw5tu000sbngukcgp883g","date":"2015-12-01","title":"我所理解的Promise"}];
-  var longestStreak = {"count":3,"start":"Dec 14","end":"Dec 16"};
+  var posts = [{"date":"2016-03-07","title":"AWS API Gateway Mapping Template 获取IP, header等","url":"http://sabrinaluo.com/tech/tech/2016/03/07/aws-api-gateway-mapping-templates/"},{"date":"2016-02-29","title":"Cookie在前端和后端的设置","url":"http://sabrinaluo.com/tech/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"},{"date":"2016-02-17","title":"jQuery中利用JSONP进行跨域GET请求","url":"http://sabrinaluo.com/tech/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"},{"date":"2016-02-03","title":"谷歌地图 Google Map API 初体验","url":"http://sabrinaluo.com/tech/tech/2016/02/03/experiencing-google-map-js-api/"},{"date":"2016-02-01","title":"git如何ignore已经track的文件","url":"http://sabrinaluo.com/tech/tech/2016/02/01/git-how-to-ignore-tracked-files/"},{"date":"2016-01-23","title":"Promise的顺序执行和并行执行","url":"http://sabrinaluo.com/tech/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"},{"date":"2016-01-22","title":"对浏览器跨域问题的一些理解","url":"http://sabrinaluo.com/tech/tech/2016/01/22/understanding-of-CORS/"},{"date":"2016-01-18","title":"递归实现按顺序执行Promise","url":"http://sabrinaluo.com/tech/tech/2016/01/18/sequentialize-promise-by-recursion/"},{"date":"2016-01-12","title":"对generator和yield的一些理解","url":"http://sabrinaluo.com/tech/tech/2016/01/12/ES6-generator-yield/"},{"date":"2015-12-31","title":"对JS类和继承的一些理解","url":"http://sabrinaluo.com/tech/tech/2015/12/31/understand-js-inheritance/"},{"date":"2015-12-28","title":"利用travis自动部署hexo搭建在github的博客","url":"http://sabrinaluo.com/tech/tech/2015/12/28/travis-github-hexo/"},{"date":"2015-12-24","title":"git merge repo 如何合并两个仓库","url":"http://sabrinaluo.com/tech/tech/2015/12/24/how-to-merge-repos-with-git/"},{"date":"2015-12-24","title":"git merge commits 如何合并多个提交为一个","url":"http://sabrinaluo.com/tech/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"},{"date":"2015-12-22","title":"对Promise中的resolve，reject，catch的理解","url":"http://sabrinaluo.com/tech/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"},{"date":"2015-12-21","title":"JS变量提升(Hoisting)","url":"http://sabrinaluo.com/tech/tech/2015/12/21/hoisting/"},{"date":"2015-12-19","title":"对JS闭包(Closure)的一些理解","url":"http://sabrinaluo.com/tech/tech/2015/12/19/understand-js-closure/"},{"date":"2015-12-16","title":"对module.exports和exports的一些理解","url":"http://sabrinaluo.com/tech/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"},{"date":"2015-12-15","title":"AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置","url":"http://sabrinaluo.com/tech/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"},{"date":"2015-12-14","title":"JS注释中的感叹号是干什么用的/*! */","url":"http://sabrinaluo.com/tech/tech/2015/12/14/JS-important-comment/"},{"date":"2015-12-14","title":"AWS DynamoDB的本地安装及环境配置","url":"http://sabrinaluo.com/tech/tech/2015/12/14/how-to-setup-dynamodb-at-local/"},{"date":"2015-12-13","title":"GitHub Page如何绑定域名","url":"http://sabrinaluo.com/tech/tech/2015/12/13/set-a-custom-domain-for-github-page/"},{"date":"2015-12-11","title":"X-WSSE验证中关于SHA1编码方式的一些坑","url":"http://sabrinaluo.com/tech/tech/2015/12/11/x-wsse/"},{"date":"2015-12-04","title":"版本控制及git常用基本命令","url":"http://sabrinaluo.com/tech/tech/2015/12/04/git-basic/"},{"date":"2015-12-01","title":"我所理解的Promise","url":"http://sabrinaluo.com/tech/tech/2015/12/01/promise/"}];
+  var longestStreak = {"count":4,"start":"December 13","end":"December 16"};
   var latestStreak = {"count":1,"start":"2016-03-07","end":"2016-03-07"};
   var currentStreak = getCurrentStreak(latestStreak);
   currentStreak.relativeTime = moment(currentStreak.date).fromNow();
 
-  var oneYearAgo = new Date();
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+  var today = moment().format('YYYY-MM-DD');
+  var oneYearAgo = moment(today).subtract(1, 'years');
   posts = posts.filter(function(post) {
     return new Date(post.date) > oneYearAgo;
   });
   var calendar = getCalendar(posts);
 
   var dateRange = {
-    start: moment(oneYearAgo).format('MMM DD, YYYY'),
-    end: moment().format('MMM DD, YYYY')
+    start: moment(oneYearAgo).format('MMM D, YYYY'),
+    end: moment().format('MMM D, YYYY')
   }
 
   var app = new Vue({
     el: '#calendar',
     data: {
       posts: posts,
-      selectedDate: 'none',
+      selectedDate: null,
       calendar: calendar,
       longestStreak: longestStreak,
       currentStreak: currentStreak,
-      dateRange: dateRange
+      dateRange: dateRange,
+      mouseoverDate: null,
+      moment: moment
+    },
+    created: function() {
+      var isToday = moment().diff(currentStreak.date, 'days') === 0;
+      this.selectedDate = isToday ? currentStreak.date : 'none';
     },
     methods: {},
-    computed: {}
+    computed: {
+      svgtip: function() {
+        var date = this.mouseoverDate;
+        var display = date ? 'block' : 'none';
+        if (date) {
+          var coordinator = getIndexByDate(date);
+          var x = coordinator[0];
+          var y = coordinator[1];
+          var len = this.calendar[x].days[y].posts.length;
+          var text = len ? len + ' Posts' : 'No Contribution';
+          var left = coordinator[0] * 13 - 69 + 'px';
+          coordinator[1] = coordinator[0] ? coordinator[1] : coordinator[1] + oneYearAgo.day();
+          var top = coordinator[1] * 13 + 12 + 'px';
+        }
+        return {
+          text: text,
+          left: left,
+          top: top,
+          display: display
+        }
+      }
+    }
   });
 
   function getCurrentStreak(latestStreak) {
-    var today = new Date().toISOString().slice(0, 10);
-    var count = latestStreak.end === today ? latestStreak.count : 0;
+    var isToday = moment().diff(latestStreak.end, 'days') === 0;
+    var count = isToday ? latestStreak.count : 0;
 
     return {
       count: count,
       date: latestStreak.end
     }
   }
-
 
   function getCalendar(posts) {
     // raw calendar
@@ -396,18 +431,19 @@
   }
 
   function getIndexByDate(date) {
-    date = new Date(date);
-    var firstColumnLen = 7 - oneYearAgo.getDay();
-    var days = (date.getTime() - oneYearAgo.getTime()) / (1000 * 60 * 60 * 24);
-    var x = days > firstColumnLen ? Math.ceil((days - firstColumnLen) / 7) : 0;
-    var y = date.getDay();
-    return [x, y]
+    date = moment(date);
+    var firstColumnLen = 7 - oneYearAgo.day();
+    var days = date.diff(oneYearAgo, 'days');
+
+    var x = days > firstColumnLen - 1 ? Math.ceil((days - firstColumnLen + 1) / 7) : 0;
+    var y = days > firstColumnLen - 1 ? date.day() : date.day() - oneYearAgo.day();
+    return [x, y];
   }
 
   function getColorByLength(len, max) {
     var colors = ['#eee', '#d6e685', '#8cc665', '#44a340', '#1e6823'];
-    var colorsLen = colors.length;
-    var color = len ? colors[0] : colors[1]
+    var colorsLen = colors.length - 1;
+    var color = len ? colors[0] : colors[1];
     var interval = max / colorsLen;
     if (max < colorsLen) {
       color = colors[len];
@@ -443,6 +479,21 @@
   <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
 </footer>
 
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -463,6 +514,7 @@
 </script>
 
 
+<script src="/tech/js/main.js"></script>
 
 </body>
 </html>
