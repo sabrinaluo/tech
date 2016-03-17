@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '4.0'
+- '5.4.0'
 branches:
   only:
   - master
@@ -11,7 +11,6 @@ before_install:
 - eval $(ssh-agent)
 - ssh-add ~/.ssh/id_rsa
 - cp .travis/ssh_config ~/.ssh/config
-- npm install -g hexo
 before_script:
 - git config --global user.name 'Sabrina Luo'
 - git config --global user.email 'luohaojing@gmail.com'
@@ -19,6 +18,6 @@ before_script:
 ##clone gh-pages branch only, into .deploy_git folder, so that commit history can be kept
 - git clone git@github.com:sabrinaluo/tech.git -b gh-pages --single-branch .deploy_git
 script:
-- hexo generate
+- npm run build
 after_success:
-- hexo d
+- npm run deploy
