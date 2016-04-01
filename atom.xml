@@ -5,7 +5,7 @@
   <link href="/tech/atom.xml" rel="self"/>
   
   <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2016-03-17T09:19:47.270Z</updated>
+  <updated>2016-04-01T10:31:23.412Z</updated>
   <id>http://sabrinaluo.com/tech/</id>
   
   <author>
@@ -16,11 +16,63 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>箭头函数的作用域和this</title>
+    <link href="http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"/>
+    <id>http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/</id>
+    <published>2016-04-01T08:38:12.000Z</published>
+    <updated>2016-04-01T10:31:23.412Z</updated>
+    
+    <content type="html">&lt;p&gt;JS里的作用域和this一直是一件令人头疼的事情，以前接触的不太多，毕竟面向过程编程的我基本上都不会使用“类”这个概念。&lt;/p&gt;
+&lt;p&gt;自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Function)&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^1&lt;/a&gt;就是给懒人用的&lt;strong&gt;简写的匿名函数&lt;/strong&gt;而已。后来看到有人挑战阮一峰老师&lt;a href=&quot;http://es6.ruanyifeng.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《ECMAScript 6入门》&lt;/a&gt;中关于箭头函数this的一些问题&lt;a href=&quot;https://github.com/ruanyf/es6tutorial/issues/150&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^2&lt;/a&gt;，才对箭头函数有了一丁点的理解。&lt;/p&gt;
+&lt;p&gt;我平时的工作基本上都是各种第三方的API整合，于是各种异步请求，promise都是家常便饭。由于SalesForce没有直接的nodejs sdk，所以自己写一个自定义的类就不可避免了。在写的过程中，关于this踩到坑里了，所以就有了这篇文章。&lt;/p&gt;
+&lt;h3 id=&quot;场景&quot;&gt;&lt;a href=&quot;#场景&quot; class=&quot;headerlink&quot; title=&quot;场景&quot;&gt;&lt;/a&gt;场景&lt;/h3&gt;&lt;p&gt;其中一个简单的功能是，查找用户是否存在，若存在则发送欢迎邮件（整个流程对应&lt;code&gt;onBoardFlow&lt;/code&gt;）。实际场景比这个要复杂，可能需要连续发送好几个请求，为了避免&lt;em&gt;回调地狱&lt;/em&gt;，所有的请求我都用promise包了起来。&lt;/p&gt;
+&lt;figure class=&quot;highlight javascript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;pi&quot;&gt;&#39;use strict&#39;&lt;/span&gt;;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;class&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;title&quot;&gt;SalesForce&lt;/span&gt; &lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  constructor(email, username) &amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.email = email;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.username = username;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  checkUser()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; getUserByName(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.username); &lt;span class=&quot;comment&quot;&gt;//发送一个请求到salesforce，返回一个promise&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  sendEmail()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; send(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.email); &lt;span class=&quot;comment&quot;&gt;//发送一个请求通知salesforce发送邮件，返回一个promise&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  onBoardFlow()&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;comment&quot;&gt;//....&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &amp;#125;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;方案&quot;&gt;&lt;a href=&quot;#方案&quot; class=&quot;headerlink&quot; title=&quot;方案&quot;&gt;&lt;/a&gt;方案&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;在&lt;code&gt;onBoardFlow&lt;/code&gt;中，搞不清this和作用域的我首先这么写：&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight coffeescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;例&lt;span class=&quot;number&quot;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.checkuser().&lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.sendEmail);  &lt;span class=&quot;regexp&quot;&gt;//&lt;/span&gt;Cannot read property &lt;span class=&quot;string&quot;&gt;&#39;email&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;of&lt;/span&gt; &lt;span class=&quot;literal&quot;&gt;undefined&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;然后想到了在promise链中，this指向的是global；&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Q: &lt;strong&gt;为什么能找到&lt;code&gt;this.sendEmail()&lt;/code&gt;方法，却找不到&lt;code&gt;this.email&lt;/code&gt;属性呢？&lt;/strong&gt;&lt;br&gt;A: 我的理解是：因为&lt;code&gt;this.sendEmail&lt;/code&gt;是作为参数传入，传入的this是then外部的this，也就是&lt;code&gt;SalesForce&lt;/code&gt;对象；&lt;br&gt;而this.sendEmail函数的作用域中产生了&lt;strong&gt;新的this&lt;/strong&gt;，而这个this指向global（浏览器中为window对象）；在严格模式下this为undefined；&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;然后容易想到的就是各种_this self，然后bind(this) call(_this)之类的&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight ceylon&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//例2&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.checkuser().&lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.sendEmail.bind(&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;));  &lt;span class=&quot;comment&quot;&gt;//it works !&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;这样是可以正常工作的，但感觉怪怪的，每个then都要&lt;code&gt;bind(this)&lt;/code&gt;真是一点也不优雅。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;匿名函数和箭头函数原来不一样啊&lt;/strong&gt;&lt;br&gt;&lt;figure class=&quot;highlight actionscript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;comment&quot;&gt;//例3&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.checkuser().then(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;&lt;/span&gt;&amp;#123;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.sendEmail();&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&amp;#125;);  &lt;span class=&quot;comment&quot;&gt;//Cannot read property &#39;updateFunnelData&#39; of undefined&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;p&gt;此时&lt;code&gt;this.sendEmail&lt;/code&gt;的this是then中的匿名函数新产生的promise作用域下的this，非严格模式下指向global&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在箭头函数出现之前，每个新定义的函数都将新产生自己作用域下的this, arguments等对象&lt;a href=&quot;https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;^1&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;figure class=&quot;highlight coffeescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;例&lt;span class=&quot;number&quot;&gt;4&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.checkuser().&lt;span class=&quot;keyword&quot;&gt;then&lt;/span&gt;(&lt;span class=&quot;function&quot;&gt;&lt;span class=&quot;params&quot;&gt;()&lt;/span&gt;=&amp;gt;&lt;/span&gt;&lt;span class=&quot;keyword&quot;&gt;this&lt;/span&gt;.sendEmail());  &lt;span class=&quot;regexp&quot;&gt;//i&lt;/span&gt;t works!&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h3 id=&quot;词法作用域&quot;&gt;&lt;a href=&quot;#词法作用域&quot; class=&quot;headerlink&quot; title=&quot;词法作用域&quot;&gt;&lt;/a&gt;词法作用域&lt;/h3&gt;&lt;p&gt;作用域内可以嵌套作用域，从而形成作用域链，在最外层的也就是全局作用域，当在内部查找一个对象时，会顺着作用域链最内层，层层向外寻找，直到找到为止。&lt;/p&gt;
+&lt;p&gt;在例3中，匿名函数的作用域中产生了新的&lt;code&gt;this&lt;/code&gt;，该&lt;code&gt;this&lt;/code&gt;指向global&lt;br&gt;在例4中，箭头函数的作用域中没有产生新的this，所以顺着作用域链层层往外寻找&lt;code&gt;this&lt;/code&gt;，找到&lt;code&gt;onBoardFlow()&lt;/code&gt;的作用域时，找到了&lt;code&gt;this&lt;/code&gt;，而此时&lt;code&gt;this&lt;/code&gt;就是&lt;code&gt;SalesForce&lt;/code&gt;对象&lt;/p&gt;
+&lt;h3 id=&quot;为什么promise中的this指向global&quot;&gt;&lt;a href=&quot;#为什么promise中的this指向global&quot; class=&quot;headerlink&quot; title=&quot;为什么promise中的this指向global&quot;&gt;&lt;/a&gt;为什么promise中的this指向global&lt;/h3&gt;&lt;p&gt;这个，我还没学会…&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;JS里的作用域和this一直是一件令人头疼的事情，以前接触的不太多，毕竟面向过程编程的我基本上都不会使用“类”这个概念。&lt;/p&gt;
+&lt;p&gt;自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Function)&lt;a href=&quot;https://developer.moz
+    
+    </summary>
+    
+      <category term="ES6" scheme="http://sabrinaluo.com/tech/categories/ES6/"/>
+    
+    
+      <category term="es6" scheme="http://sabrinaluo.com/tech/tags/es6/"/>
+    
+      <category term="this" scheme="http://sabrinaluo.com/tech/tags/this/"/>
+    
+      <category term="作用域" scheme="http://sabrinaluo.com/tech/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    
+      <category term="箭头函数" scheme="http://sabrinaluo.com/tech/tags/%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0/"/>
+    
+      <category term="词法作用域" scheme="http://sabrinaluo.com/tech/tags/%E8%AF%8D%E6%B3%95%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
+    
+  </entry>
+  
+  <entry>
     <title>AWS EC2 SSH访问 &amp; mongodb 安装</title>
     <link href="http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/"/>
     <id>http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/</id>
     <published>2016-03-14T10:33:31.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;环境：Ubuntu&lt;/p&gt;
 &lt;h3 id=&quot;SSH连接-EC2&quot;&gt;&lt;a href=&quot;#SSH连接-EC2&quot; class=&quot;headerlink&quot; title=&quot;SSH连接 EC2&quot;&gt;&lt;/a&gt;SSH连接 EC2&lt;/h3&gt;&lt;p&gt;windows下通常用putty&lt;br&gt;ubuntu下先打个命令&lt;code&gt;ssh&lt;/code&gt;看看能否识别命令，如果能就方便很多&lt;/p&gt;
@@ -79,7 +131,7 @@
     <link href="http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"/>
     <id>http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/</id>
     <published>2016-03-07T06:33:03.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。&lt;/p&gt;
 &lt;h3 id=&quot;适用场景&quot;&gt;&lt;a href=&quot;#适用场景&quot; class=&quot;headerlink&quot; title=&quot;适用场景&quot;&gt;&lt;/a&gt;适用场景&lt;/h3&gt;&lt;p&gt;在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，lambda获取到的payload并&lt;strong&gt;不包含 request header&lt;/strong&gt;的内容，而只有&lt;strong&gt;request body&lt;/strong&gt;的内容。&lt;/p&gt;
@@ -138,7 +190,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"/>
     <id>http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/</id>
     <published>2016-02-29T06:04:57.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬&lt;del&gt;汉&lt;/del&gt;妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…&lt;/p&gt;
 &lt;p&gt;在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…）&lt;/p&gt;
@@ -189,7 +241,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"/>
     <id>http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/</id>
     <published>2016-02-17T04:31:55.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;每次遇到跨域的问题真是！@#￥%&lt;/p&gt;
 &lt;p&gt;我对&lt;code&gt;JSONP&lt;/code&gt;的一些浅显的理解就是，有时候会看到类似&lt;code&gt;http://xxx.xx.com/?callback=xxx&lt;/code&gt;这样的请求（&lt;code&gt;callback=&lt;/code&gt;也可能是&lt;code&gt;jsonp=&lt;/code&gt;也可能是&lt;code&gt;jsonpcallback=&lt;/code&gt;，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。&lt;/p&gt;
@@ -223,7 +275,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"/>
     <id>http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/</id>
     <published>2016-02-03T10:32:51.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;一直都想把自己去过的地方做个地图标记，然而现在能找到的各种现成的地图产品都不太喜欢，所以就用谷歌地图自己写了一个。&lt;br&gt;总结以下常见的问题和坑：&lt;/p&gt;
 &lt;h3 id=&quot;自动缩放-auto-zoom&quot;&gt;&lt;a href=&quot;#自动缩放-auto-zoom&quot; class=&quot;headerlink&quot; title=&quot;自动缩放(auto zoom)&quot;&gt;&lt;/a&gt;自动缩放(auto zoom)&lt;/h3&gt;&lt;p&gt;使用场景大多数时候是有很多marker，想要全部显示这些marker，同时zoom当然越大越清晰。&lt;/p&gt;
@@ -271,7 +323,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"/>
     <id>http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/</id>
     <published>2016-02-01T06:01:03.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_&lt;/p&gt;
 &lt;h3 id=&quot;基本知识&quot;&gt;&lt;a href=&quot;#基本知识&quot; class=&quot;headerlink&quot; title=&quot;基本知识&quot;&gt;&lt;/a&gt;基本知识&lt;/h3&gt;&lt;p&gt;在git中文件有两类，共三种状态：&lt;/p&gt;
@@ -315,7 +367,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"/>
     <id>http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</id>
     <published>2016-01-23T14:52:26.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;并行和顺序执行的前提当然是，有一堆promise等着你去执行……&lt;br&gt;通常我们把这“一堆”promise对象放到一个数组里，&lt;code&gt;[promise1, promise2, promise3, ...]&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;我们都知道想要让promise按顺序执行，那就是一个接一个的then。然而手写很多then太累了，而嵌套的promise又是反模式，我之前蠢蠢的&lt;a href=&quot;tech/2016/01/18/sequentialize-promise-by-recursion/&quot;&gt;用递归解决了顺序执行的问题&lt;/a&gt;，后来终于在udacity习得了顺序promise的正确打开方式！&lt;/p&gt;
@@ -377,7 +429,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/"/>
     <id>http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/</id>
     <published>2016-01-22T07:08:33.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;h3 id=&quot;问题宝宝&quot;&gt;&lt;a href=&quot;#问题宝宝&quot; class=&quot;headerlink&quot; title=&quot;问题宝宝&quot;&gt;&lt;/a&gt;问题宝宝&lt;/h3&gt;&lt;h4 id=&quot;1-移动应用开发&quot;&gt;&lt;a href=&quot;#1-移动应用开发&quot; class=&quot;headerlink&quot; title=&quot;1 移动应用开发&quot;&gt;&lt;/a&gt;1 移动应用开发&lt;/h4&gt;&lt;p&gt;之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。&lt;br&gt;开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(&lt;strong&gt;Access-Control-Allow-Origin&lt;/strong&gt;)：&lt;br&gt;&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;XMLHttpRequest cannot &lt;span class=&quot;operator&quot;&gt;&lt;span class=&quot;keyword&quot;&gt;load&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;http&lt;/span&gt;://samlino.&lt;span class=&quot;keyword&quot;&gt;local&lt;/span&gt;/cag/get_leads. &lt;span class=&quot;keyword&quot;&gt;No&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&#39;Access-Control-Allow-Origin&#39;&lt;/span&gt; header &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;present&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;on&lt;/span&gt; the requested &lt;span class=&quot;keyword&quot;&gt;resource&lt;/span&gt;. Origin &lt;span class=&quot;string&quot;&gt;&#39;http://localhost:63342&#39;&lt;/span&gt; &lt;span class=&quot;keyword&quot;&gt;is&lt;/span&gt; therefore &lt;span class=&quot;keyword&quot;&gt;not&lt;/span&gt; allowed &lt;span class=&quot;keyword&quot;&gt;access&lt;/span&gt;.&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;而我当时的解决方法是，在chrome装了一个叫&lt;a href=&quot;https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Allow-Control-Allow-Origin&lt;/a&gt;的扩展，启用之后就不报错了。&lt;/p&gt;
@@ -433,7 +485,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"/>
     <id>http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/</id>
     <published>2016-01-18T09:23:18.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;&lt;strong&gt;2016-01-24更新&lt;/strong&gt;&lt;br&gt;我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里：&lt;br&gt;(Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise)&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;以下为原文：&lt;/strong&gt;&lt;/p&gt;
@@ -479,7 +531,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/"/>
     <id>http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/</id>
     <published>2016-01-12T09:11:28.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯ES6的小白假装会写ES6…&lt;/p&gt;
 &lt;p&gt;简单的看了一下相关的概念，觉得还不太理解…就好像最开始看&lt;em&gt;原型链&lt;/em&gt;一样，花了一年多才慢慢理解继承啊什么的，但&lt;code&gt;constructor&lt;/code&gt;和&lt;code&gt;__proto__&lt;/code&gt;之类的东东我也还（4声）没整明白…真是资质愚钝QAQ&lt;/p&gt;
@@ -549,7 +601,7 @@
     <link href="http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/"/>
     <id>http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/</id>
     <published>2015-12-31T03:36:54.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看&lt;a href=&quot;http://book.douban.com/subject/10546125/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;《JavaScript高级程序设计》&lt;/a&gt;）。&lt;/p&gt;
 &lt;p&gt;直到ES5，JS也还是一个没有类的语言，虽然ES6中可以使用class关键字，但据说也只是语法糖。(不知道好不好吃ԅ(¯﹃¯ԅ))&lt;/p&gt;
@@ -589,7 +641,7 @@
     <link href="http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"/>
     <id>http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/</id>
     <published>2015-12-28T04:00:56.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;这篇应该属于不务正业系列…&lt;br&gt;自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://travis-ci.org&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Travis&lt;/a&gt;是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～&lt;/p&gt;
@@ -667,7 +719,7 @@
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</id>
     <published>2015-12-24T07:08:49.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。&lt;/p&gt;
 &lt;p&gt;关于合并多个提交，主要是要搞清楚&lt;code&gt;rebase&lt;/code&gt;的用法。&lt;/p&gt;
@@ -722,7 +774,7 @@ s ddbd8fd
     <link href="http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"/>
     <id>http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/</id>
     <published>2015-12-24T06:58:32.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;为什么我每天都会有一些奇奇怪怪的需求…&lt;/p&gt;
 &lt;p&gt;我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推&lt;code&gt;push -f&lt;/code&gt;，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！&lt;/p&gt;
@@ -771,7 +823,7 @@ git merge repo2
     <link href="http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"/>
     <id>http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</id>
     <published>2015-12-22T03:36:07.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;对promise这个概念之前已经有了一些浅显的理解，&lt;a href=&quot;http://sabrinaluo.com/tech/2015/12/01/promise/&quot;&gt;相关文章-&amp;gt;戳这里&lt;/a&gt;，最近又有了一些新的理解。&lt;/p&gt;
 &lt;h3 id=&quot;then-的时候到底是在then什么…&quot;&gt;&lt;a href=&quot;#then-的时候到底是在then什么…&quot; class=&quot;headerlink&quot; title=&quot;.then()的时候到底是在then什么…&quot;&gt;&lt;/a&gt;.then()的时候到底是在then什么…&lt;/h3&gt;&lt;ul&gt;
@@ -861,7 +913,7 @@ p1.then(function() {
     <link href="http://sabrinaluo.com/tech/2015/12/21/hoisting/"/>
     <id>http://sabrinaluo.com/tech/2015/12/21/hoisting/</id>
     <published>2015-12-21T02:24:02.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;写了无数JS也依旧没听过变量提升…&lt;/p&gt;
 &lt;p&gt;变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的&lt;a href=&quot;https://github.com/airbnb/javascript&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Airbnb JS 代码风格&lt;/a&gt;中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？&lt;/p&gt;
@@ -913,7 +965,7 @@ test(); //调用这个函数，你会看到console中输出的是undefined
     <link href="http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/"/>
     <id>http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/</id>
     <published>2015-12-19T11:22:27.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;function isType(type) {
@@ -1032,7 +1084,7 @@ console.log(eating(&amp;apos;亲爱的&amp;apos;));
     <link href="http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"/>
     <id>http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</id>
     <published>2015-12-16T03:00:27.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;&lt;code&gt;module.exports&lt;/code&gt;和&lt;code&gt;exports&lt;/code&gt;的区别就是&lt;code&gt;var a={}; var b=a;&lt;/code&gt;，a和b的区别&lt;/strong&gt;&lt;/p&gt;
@@ -1126,7 +1178,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
     <link href="http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"/>
     <id>http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</id>
     <published>2015-12-15T02:55:13.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
+    <updated>2016-04-01T10:31:23.412Z</updated>
     
     <content type="html">&lt;p&gt;本文&lt;strong&gt;不是&lt;/strong&gt;介绍 &lt;a href=&quot;https://aws.amazon.com/api-gateway/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AWS API Gateway&lt;/a&gt; 和 &lt;a href=&quot;https://aws.amazon.com/lambda/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;AWS Lambda&lt;/a&gt;的基本用法的…=(:з」∠)_&lt;/p&gt;
 &lt;p&gt;简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（&lt;em&gt;最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！&lt;/em&gt;），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！&lt;/p&gt;
@@ -1213,64 +1265,6 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
       <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
       <category term="生产环境" scheme="http://sabrinaluo.com/tech/tags/%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>AWS DynamoDB的本地安装及环境配置</title>
-    <link href="http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"/>
-    <id>http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/</id>
-    <published>2015-12-14T06:39:35.000Z</published>
-    <updated>2016-03-17T09:19:47.270Z</updated>
-    
-    <content type="html">&lt;p&gt;&lt;a href=&quot;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DynamoDB&lt;/a&gt;是亚马逊AWS云服务提供的一个NoSQL的数据库…&lt;/p&gt;
-&lt;p&gt;在这里我必须安利一下Amazon家的服务真是业界良心：前不久，可能是因为我自己蠢，英文不好没看懂免费用一年的各种限制，也不知道写了什么奇怪的东东用自己的账号测试dynamoDB被扣了几刀，写邮件去投诉说你们不是免费吗为啥扣费，然后就得到回复解释了一下为啥扣钱，说我用超过限制了，然后表示个人账号里扣了的钱会&lt;strong&gt;退退退&lt;/strong&gt;！（我说明了之后会用公司账号测试，请帮我关了我的个人账户）&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;本文是Linux环境下的安装和配置，windows下我还不会…&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;安装JAVA SDK&lt;/p&gt;
-&lt;figure class=&quot;highlight smali&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;$ sudo&lt;span class=&quot;instruction&quot;&gt; add-apt-repository &lt;/span&gt;ppa:webupd8team/java&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install oracle-java8-installer&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;$ sudo apt-get install oracle-java8-set-default&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;安装dynamodb-local&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;下载daynamodb-local：&lt;a href=&quot;http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;点这里下载&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;解压文件&lt;/li&gt;
-&lt;li&gt;进入文件目录执行以下命令：&lt;pre&gt;&lt;code&gt;java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;安装awscli，执行以下命令：&lt;pre&gt;&lt;code&gt;pip install awscli
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;li&gt;配置环境变量，执行以下命令：&lt;pre&gt;&lt;code&gt;aws configure
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
-&lt;li&gt;这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要&lt;strong&gt;成功注册AWS服务&lt;/strong&gt;之后在AWS的网站上会看到&lt;/li&gt;
-&lt;li&gt;AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为&lt;code&gt;us-east-1&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：&lt;pre&gt;&lt;code&gt;java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;参考：&lt;br&gt;[1] &lt;a href=&quot;http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/&lt;/a&gt;&lt;br&gt;[2] &lt;a href=&quot;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html#Tools.DynamoDBLocal.DownloadingAndRunning&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DynamoDBLocal Downloading And Running&lt;/a&gt;&lt;br&gt;[3] &lt;a href=&quot;http://aws.amazon.com/cli/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://aws.amazon.com/cli/&lt;/a&gt;&lt;br&gt;[4] &lt;a href=&quot;http://boto3.readthedocs.org/en/latest/guide/configuration.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;http://boto3.readthedocs.org/en/latest/guide/configuration.html&lt;/a&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;&lt;a href=&quot;http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;DynamoDB&lt;/a&gt;是亚
-    
-    </summary>
-    
-    
-      <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
-    
-      <category term="DynamoDB" scheme="http://sabrinaluo.com/tech/tags/DynamoDB/"/>
-    
-      <category term="云服务" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/"/>
-    
-      <category term="亚马逊" scheme="http://sabrinaluo.com/tech/tags/%E4%BA%9A%E9%A9%AC%E9%80%8A/"/>
-    
-      <category term="本地安装" scheme="http://sabrinaluo.com/tech/tags/%E6%9C%AC%E5%9C%B0%E5%AE%89%E8%A3%85/"/>
-    
-      <category term="环境配置" scheme="http://sabrinaluo.com/tech/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     
   </entry>
   
