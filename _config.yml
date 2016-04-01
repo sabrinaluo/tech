@@ -86,8 +86,7 @@ marked:
   smartypants: true
 
 duoshuo: sabrinaluo
-disqus: ## Your disqus_shortname, e.g. haomwei
-google_search: true ## Use Google search, true/false
+gcs: 015579750388200492852:dnpv83myu4a
 baidutongji: d8749b933af749e1e5ec931bb403628f
 
 location: Hong Kong, China
