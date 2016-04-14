@@ -91,43 +91,10 @@
 
 
 <div class="archive">
-<h2><a href="/tech/2016/02/29/set-cookie-from-server-side-and-client-side/">Cookie在前端和后端的设置</a></h2>
+<h2><a href="/tech/2016/04/14/push-to-deploy-through-git-hook/">如何通过Git钩子自动部署(Push to Deploy)</a></h2>
 <p class="read-more">
-   http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬 汉 妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了… 
- 在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…） 
- 为
-</p>
-</div>
-
-<div class="archive">
-<h2><a href="/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/">jQuery中利用JSONP进行跨域GET请求</a></h2>
-<p class="read-more">
-   每次遇到跨域的问题真是！@#￥% 
- 我对 JSONP 的一些浅显的理解就是，有时候会看到类似 http://xxx.xx.com/?callback=xxx 这样的请求（ callback= 也可能是 jsonp= 也可能是 jsonpcallback= ，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。 
- 由于这个回调函数已经发
-</p>
-</div>
-
-<div class="archive">
-<h2><a href="/tech/2016/02/03/experiencing-google-map-js-api/">谷歌地图 Google Map API 初体验</a></h2>
-<p class="read-more">
-   一直都想把自己去过的地方做个地图标记，然而现在能找到的各种现成的地图产品都不太喜欢，所以就用谷歌地图自己写了一个。 总结以下常见的问题和坑： 
-   自动缩放(auto zoom)  使用场景大多数时候是有很多marker，想要全部显示这些marker，同时zoom当然越大越清晰。 
- 
- 首先需要一个marker的位置列表  markerList ，单个元素长这样 {lat:xxx,lng:x
-</p>
-</div>
-
-<div class="archive">
-<h2><a href="/tech/2016/02/01/git-how-to-ignore-tracked-files/">git如何ignore已经track的文件</a></h2>
-<p class="read-more">
-   我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_ 
-   基本知识  在git中文件有两类，共三种状态： 
- 
- untracked 
- tracked 
- changes not staged for commit 
- changes to be committed 我们都知道，在 .gitignore 文件里添加相应的文件夹或文件就能忽略掉不想被track的文件。 但是， .
+   看了好多讲通过git钩子自动部署的，大多讲的绕来绕去乱七八糟思路一点也不清晰… 做了一晚上实验之后大概明白了是怎么工作的。 
+   裸仓库（bare）  裸仓库跟我们平时 git clone 得到的仓库太一样，裸仓库其实相当于通过克隆来的仓库里的 .git 文件夹，整个裸仓库中只有git索引（index）， 并没有任何代码相关的东西 。要实现Push to Deploy，首先我们需要一个裸仓库。
 </p>
 </div>
 
