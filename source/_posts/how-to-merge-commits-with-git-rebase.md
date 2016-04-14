@@ -16,6 +16,7 @@ commit 2aad0182a613b2e73b44ebbf0d5536126f714cb9
 历史记录是按照时间排序的，时间近的排在前面。
 ### git rebase
 想要合并1-3条，有两个方法
+
 1. 从HEAD版本开始往过去数3个版本
 ``` 
 git rebase -i HEAD~3

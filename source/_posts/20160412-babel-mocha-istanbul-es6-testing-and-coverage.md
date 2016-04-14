@@ -7,7 +7,7 @@ tags: [ES6, mocha, istanbul, babel, 测试, 代码覆盖率]
 
 在还没有babel的时候，一切都很简单，基础的问题就先不讨论了，这里主要记录一下Babel转码和Istanbul测覆盖率的一些坑。
 
-###基本设置
+### 基本设置
 通常我们会有好几个文件夹，例如
 - `src`用来存放源文件，也就是包含es6,7的代码；
 - `lib`用来存放编译后的代码
@@ -25,16 +25,16 @@ tags: [ES6, mocha, istanbul, babel, 测试, 代码覆盖率]
 istanbul cover _mocha --  --opts ./test/mocha.opts
 ```
 
-###编译
+### 编译
 ```
 babel src/ -d lib/ --presets es2015 --source-map both
 ```
 使用`--source-map both`参数将会生成source map，有了source map，istanbul就能够追踪到`src`下的源代码的覆盖率
 
-###正确的require
+### 正确的require
 在mocha中，一定要require `src`文件夹下的文件，而不是`lib`文件夹下的文件。虽然两个文件夹下的文件mocha都能测，但是覆盖率会有一些问题。
 
-###可能的问题
+### 可能的问题
 - 出现以下错误提示时，很可能因为istanbul的版本过低，使用`1.0.0-alpha.2`版本可以正常运行
 ```
 No coverage information was collected, exit without writing coverage information
@@ -42,14 +42,14 @@ No coverage information was collected, exit without writing coverage information
 - istanbul生成的覆盖率文件里代码几乎都是**红色**的，这是因为编译时没有 `--source-map both` 参数，追踪的是`lib`文件夹下的覆盖率
 - istanbul生成的覆盖率文件总是显示100%，就算有些地方没测，也显示100%，这是因为在Mocha里require的是`lib`而非`src`
 
-###其他
+### 其他
 我最喜欢mocha的报告形式是`-R nyan`，一只可爱的喵星人，没有错的时候是这样的^_^，有错的时候是这样的O_O，反正就是萌萌萌。
 
 然而最实用的报告形式可能是`-R mochawesome`，需要`npm i mochawesome`安装插件，生成直观的html测试报告[^2]
 
 平时遇到的问题十有八九一搜都能找到阮一峰老师的教程…这覆盖率也太高了？！
 
-###参考
+### 参考
 [1] http://www.ruanyifeng.com/blog/2015/06/istanbul.html
 [2] http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
 [^1]: http://www.ruanyifeng.com/blog/2015/06/istanbul.html
