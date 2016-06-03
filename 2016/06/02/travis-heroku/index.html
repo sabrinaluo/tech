@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    利用travis进行heroku部署 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  heroku,travis,持续集成,自动部署
+  ">
+  
+  <meta name="author" content="Sabrina">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script src="//cdn.jsdelivr.net/vue/latest/vue.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body>
+<nav>
+  <div class="container">
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form onsubmit="return search()">
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input id="query" type="text" placeholder="Search" value="">
+          <span class="scope-badge clear-search"> x </span>
+        </label>
+      </form>
+    </div>
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+      
+      <li><a href="/tech/atom.xml">RSS</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <header>
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+    
+    
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a href="/tech/archives" class="btn btn-group-left"><i
+                class="fa fa-file-text"></i> Posts </a>
+      <a href="/tech/archives"
+         class="btn btn-group-right"> 30 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/tags" class="btn btn-group-left"><i
+                class="fa fa-tags"></i> Tags </a>
+      <a href="/tech/tags"
+         class="btn btn-group-right"> 93 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/categories" class="btn btn-group-left"><i
+                class="fa fa-list-ul"></i> Categories </a>
+      <a href="/tech/categories"
+         class="btn btn-group-right"> 1 </a>
+    </div>
+  </div>
+</header>
+
+
+<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
+  <h3>
+    <i class="fa fa-user"></i>
+     <a>Sabrina</a>
+    <span>
+      <i class="fa fa-pencil"></i> Published: 2016-06-02 15:27:46
+    </span>
+  </h3>
+  <article>
+    <h1>利用travis进行heroku部署</h1>
+    <p>好久么有写东西了，总感觉一直忙的跟狗一样，身心俱疲，但是又不知道到底在忙什么。</p>
+<p>最近实践了一下利用travis部署到heroku的流程，又莫名其妙的尝试了新的编辑器atom，安装了markdown-preview-plus插件，当然要来写点东西试一试， 也不知道英文的linux下到底是什么问题，webstorm和sublime居然不能打中文，所以之前每次写东西都要去简书边预览边写。</p>
+<p>atom还是很好用的，可能因为我（后）天生就对JS写的东西有好感，记不住快捷键的我，不能徒手写html的我还是需要IDE的帮助，atom就用来写点简单的东西吧。</p>
+<p>travis和heroku都有自己的命令行工具（CLI），尤其travis cli用起来总比徒手写.travis.yml方便许多</p>
+<h3 id="安装travis-cli"><a href="#安装travis-cli" class="headerlink" title="安装travis-cli"></a>安装travis-cli</h3><p>travis-cli是ruby写的，所以安装之前需要安装ruby</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get <span class="operator"><span class="keyword">install</span> ruby-<span class="keyword">full</span></span></span><br></pre></td></tr></table></figure>
+<p>详细的安装教程可以看官方的这个<a href="https://github.com/travis-ci/travis.rb#installation" target="_blank" rel="external">https://github.com/travis-ci/travis.rb#installation</a></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gem</span> install travis -v <span class="number">1</span>.<span class="number">8</span>.<span class="number">2</span> --<span class="built_in">no</span>-rdoc --<span class="built_in">no</span>-ri</span><br></pre></td></tr></table></figure>
+<h3 id="安装heroku-cli"><a href="#安装heroku-cli" class="headerlink" title="安装heroku-cli"></a>安装heroku-cli</h3><p>heroku-cli也是ruby写的……有点不懂为啥都喜欢用ruby写cli？js不是挺好的吗，有啥cli是<code>npm install -g</code> 解决不了的吗？…<br>具体的安装教程看</p>
+<ul>
+<li><a href="https://toolbelt.heroku.com" target="_blank" rel="external">https://toolbelt.heroku.com</a></li>
+<li><a href="https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli" target="_blank" rel="external">https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli</a></li>
+</ul>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O- http<span class="variable">s:</span>//toolbelt.heroku.<span class="keyword">com</span>/install-ubuntu.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
+<h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">travis</span> login</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">heroku</span> login</span><br></pre></td></tr></table></figure>
+<h3 id="travis-yml"><a href="#travis-yml" class="headerlink" title=".travis.yml"></a>.travis.yml</h3><p>在项目的根目录下执行以下命令，将会生成<code>.travis.yml</code>文件<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">travis</span> init</span><br><span class="line">travis setup heroku</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：一定要通过命令行登陆heroku，否则travis会卡住，也不报错啥的反正就一直没反应</p>
+</blockquote>
+<p>打开<code>.travis.yml</code>文件可以看到除了基本的信息之外，还有<code>deploy</code>相关的信息，其中比较让人疑惑的是<code>api_key</code>，这个<code>api_key</code>其实是你的heroku账户的token加密之后的一个字符串。heroku的token看起来是一个类似uuid5的字符串，可以通过以下命令查看<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">heroku</span> <span class="tag">auth</span><span class="pseudo">:token</span></span><br></pre></td></tr></table></figure></p>
+<p>有一个问题我不太明白的是，之前用travis加密文件<code>travis encrypt-file path/of/file --add</code>的时候，可以在travis网站对应repo的setting里看到多出的环境变量，用来加密的key value，然后需要用<code>openssl</code>命令来解密。</p>
+<p>但加密heroku的token后，并没有生成任何新的环境变量，而且也无需在<code>.travis.yml</code>中执行解密的相关操作。</p>
+<p>那么用来加密的key value到底存在哪里了呢？！</p>
+<h3 id="为什么要在travis做部署，而不直接利用heroku提供的github自动部署？"><a href="#为什么要在travis做部署，而不直接利用heroku提供的github自动部署？" class="headerlink" title="为什么要在travis做部署，而不直接利用heroku提供的github自动部署？"></a>为什么要在travis做部署，而不直接利用heroku提供的github自动部署？</h3><p>首先，heroku似乎不能跑测试…</p>
+<p>其实，大多数简单的项目其实都可以用github的方式，如果需要编译和生成的，都在<code>package.json</code>里添加<code>prepublish</code>脚本即可</p>
+<p>我这次又是搞了一个奇怪的事情，做了一个前后端分离项目，后端提供RESTful API,前端是SPA，但是又想把SPA和API放在同一个服务器，而且分了两个repo来放前端和后端。</p>
+<p>所以我的需求是，当前端或后端push之后，trigger travis去把前后端都克隆下来，并且编译和Build前端代码，放到指定文件夹，然后部署。</p>
+
+  </article>
+</div>
+
+
+<div class="duoshuo">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="1464852466" data-title="利用travis进行heroku部署"
+       data-url="http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name: "sabrinaluo"};
+    (function () {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';
+      ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</div>
+
+
+
+</main>
+
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</a></li>
+    
+  </ul>
+  <div class="theme-info">
+    Theme <a
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+  </div>
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
+</footer>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>
