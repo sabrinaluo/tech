@@ -8,9 +8,13 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>
-    小白妹妹写代码
+    微博开放平台的Basic Auth和OAuth2.0认证 | 小白妹妹写代码
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  OAuth2.0
+  ">
   
   <meta name="author" content="Sabrina">
 
@@ -57,8 +61,7 @@
 </nav>
 
 <main class="container">
-  
-<header>
+  <header>
   <h2>
     <i class="fa fa-book text-muted"></i>
     <a href="/tech/">小白妹妹写代码</a>
@@ -90,14 +93,59 @@
 </header>
 
 
-<div class="archive">
-<h2><a href="/tech/2015/12/04/git-basic/">版本控制及git常用基本命令</a></h2>
-<p class="read-more">
-   （此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。 时间充裕的童鞋可以到 codecademy 跟着教程一步步走） 
-  Git 是一个分布式的版本管理( Version Control )工具。 
- 版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同
-</p>
+<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
+  <h3>
+    <i class="fa fa-user"></i>
+     <a>Sabrina</a>
+    <span>
+      <i class="fa fa-pencil"></i> Published: 2016-06-20 17:59:09
+    </span>
+  </h3>
+  <article>
+    <h1>微博开放平台的Basic Auth和OAuth2.0认证</h1>
+    <p>这篇文章不是讲各种认证方式是怎么实现的，只是简单的介绍如何与微博进行整合。</p>
+<p>微博开放平台允许使用api来开发一些与微博相关的应用，微博提供<strong>Basic Auth</strong>和<strong>OAuth2.0</strong>两种认证方式，其中Basic Auth只能用于测试环境。</p>
+<h3 id="Basic-Auth"><a href="#Basic-Auth" class="headerlink" title="Basic Auth"></a>Basic Auth</h3><p>跟名字一样，就是很基本很简单。其本质是使用<code>username:password</code>进行<code>base64</code>加密之后得到一个token，然后发送的请求中添加一个header <code>Authorization: Basic token</code>。</p>
+<h3 id="OAuth-2-0"><a href="#OAuth-2-0" class="headerlink" title="OAuth 2.0"></a>OAuth 2.0</h3><p>生产环境中，微博只允许使用这种认证方式，这个比起直接用用户名和密码就要复杂一些。</p>
+<p>简单的来说OAuth2.0认证的流程大概是这样：</p>
+<ol>
+<li>首先发一个请求去微博，告诉它，我要登陆啦</li>
+<li>然后微博返回一个登录页面，等待用户用微博账号登陆</li>
+<li>用户登陆之后，页面会跳转到<strong>授权回调页</strong>，这个页面的url会有一个query是<code>code=</code>，后面跟着的一串code</li>
+<li>当进行其他api调用时，在api后加上query<code>code=xxx</code>以及其他要求的参数，比如<code>client_id</code>，<code>client_key</code>等等即可进行调用</li>
+</ol>
+<ul>
+<li>开放平台&gt;我的应用&gt;应用信息&gt;基本信息，这里能看到app key和 app token</li>
+<li>开放平台&gt;我的应用&gt;应用信息&gt;高级信息，这里需要填写授权回调页和取消授权回调页</li>
+</ul>
+<p>需要注意的是，在第2步和第3步中，授权回调页的链接一定要和在申请app时填写的<strong>一！模！一！样！</strong>，否则会报错。</p>
+<p>比如在app填写的是<code>http://example.com/auth/</code>，而api请求时参数写为<code>http://example.com/auth</code>，少了个斜杠都是错的…</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3>
+  </article>
 </div>
+
+
+<div class="duoshuo">
+  <!-- 多说评论框 start -->
+  <div class="ds-thread" data-thread-key="1466416749" data-title="微博开放平台的Basic Auth和OAuth2.0认证"
+       data-url="http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/"></div>
+  <!-- 多说评论框 end -->
+  <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name: "sabrinaluo"};
+    (function () {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';
+      ds.async = true;
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+  <!-- 多说公共JS代码 end -->
+</div>
+
 
 
 </main>

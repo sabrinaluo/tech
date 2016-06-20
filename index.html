@@ -87,13 +87,13 @@
   <ul class="stat">
     <li>
       <a href="/tech/archives">
-        <div class="stat-count">30</div>
+        <div class="stat-count">31</div>
         <div class="stat-name">Posts</div>
       </a>
     </li>
     <li>
       <a href="/tech/tags">
-        <div class="stat-count">93</div>
+        <div class="stat-count">94</div>
         <div class="stat-name">Tags</div>
       </a>
     </li>
@@ -124,6 +124,18 @@
       Recent Post
     </h3>
     <ul>
+      
+      <li>
+        <a href="/tech/2016/06/20/intro-of-oauth2-0/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">微博开放平台的Basic Auth和OAuth2.0认证</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             这篇文章不是讲各种认证方式是怎么实现的，只是简单的介绍如何与微博进行整合。 
+ 微博开放平台允许使用api来开发一些与微博相关的应用，微博提供 Basic Auth 和 OAuth2.0 两种认证方
+          </span>
+        </a>
+      </li>
       
       <li>
         <a href="/tech/2016/06/02/travis-heroku/">
@@ -169,18 +181,6 @@
           <span class="subtext read-more">
              题外话： 一直以为mocha读作“抹茶”并且一直这么读了很久，直到最近看了一个mocha的教学视频，才知道这是摩卡咖啡的摩卡…而抹茶的抹茶应该是matcha… 
  在还没有babel的时候，一切都很
-          </span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/tech/2016/04/01/scope-and-this-of-arrow-function/">
-          <span class="icon-left"><i class="fa fa-book"></i></span>
-          <span class="post-title read-more">箭头函数的作用域和this</span>
-          <span class="icon-right"><i class="fa fa-star"></i></span>
-          <span class="subtext read-more">
-             JS里的作用域和this一直是一件令人头疼的事情，以前接触的不太多，毕竟面向过程编程的我基本上都不会使用“类”这个概念。 
- 自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Functi
           </span>
         </a>
       </li>
@@ -308,9 +308,9 @@
 
 
 <script>
-  var posts = [{"date":"2016-06-02","title":"利用travis进行heroku部署","url":"http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"},{"date":"2016-04-21","title":"微信撤回信息昵称显示原理分析","url":"http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/"},{"date":"2016-04-14","title":"如何通过Git钩子自动部署(Push to Deploy)","url":"http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/"},{"date":"2016-04-12","title":"结合使用Babel Mocha Istanbul进行ES6代码测试和覆盖率测试","url":"http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/"},{"date":"2016-04-01","title":"箭头函数的作用域和this","url":"http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"},{"date":"2016-03-14","title":"AWS EC2 SSH访问 & mongodb 安装","url":"http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/"},{"date":"2016-03-07","title":"AWS API Gateway Mapping Template 获取IP, header等","url":"http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"},{"date":"2016-02-29","title":"Cookie在前端和后端的设置","url":"http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"},{"date":"2016-02-17","title":"jQuery中利用JSONP进行跨域GET请求","url":"http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"},{"date":"2016-02-03","title":"谷歌地图 Google Map API 初体验","url":"http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"},{"date":"2016-02-01","title":"git如何ignore已经track的文件","url":"http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"},{"date":"2016-01-23","title":"Promise的顺序执行和并行执行","url":"http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"},{"date":"2016-01-22","title":"对浏览器跨域问题的一些理解","url":"http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/"},{"date":"2016-01-18","title":"递归实现按顺序执行Promise","url":"http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"},{"date":"2016-01-12","title":"对generator和yield的一些理解","url":"http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/"},{"date":"2015-12-31","title":"对JS类和继承的一些理解","url":"http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/"},{"date":"2015-12-28","title":"利用travis自动部署hexo搭建在github的博客","url":"http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"},{"date":"2015-12-24","title":"git merge commits 如何合并多个提交为一个","url":"http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"},{"date":"2015-12-24","title":"git merge repo 如何合并两个仓库","url":"http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"},{"date":"2015-12-22","title":"对Promise中的resolve，reject，catch的理解","url":"http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"},{"date":"2015-12-21","title":"JS变量提升(Hoisting)","url":"http://sabrinaluo.com/tech/2015/12/21/hoisting/"},{"date":"2015-12-19","title":"对JS闭包(Closure)的一些理解","url":"http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/"},{"date":"2015-12-16","title":"对module.exports和exports的一些理解","url":"http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"},{"date":"2015-12-15","title":"AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置","url":"http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"},{"date":"2015-12-14","title":"JS注释中的感叹号是干什么用的/*! */","url":"http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/"},{"date":"2015-12-14","title":"AWS DynamoDB的本地安装及环境配置","url":"http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"},{"date":"2015-12-13","title":"GitHub Page如何绑定域名","url":"http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/"},{"date":"2015-12-11","title":"X-WSSE验证中关于SHA1编码方式的一些坑","url":"http://sabrinaluo.com/tech/2015/12/11/x-wsse/"},{"date":"2015-12-04","title":"版本控制及git常用基本命令","url":"http://sabrinaluo.com/tech/2015/12/04/git-basic/"},{"date":"2015-12-01","title":"我所理解的Promise","url":"http://sabrinaluo.com/tech/2015/12/01/promise/"}];
+  var posts = [{"date":"2016-06-20","title":"微博开放平台的Basic Auth和OAuth2.0认证","url":"http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/"},{"date":"2016-06-02","title":"利用travis进行heroku部署","url":"http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"},{"date":"2016-04-21","title":"微信撤回信息昵称显示原理分析","url":"http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/"},{"date":"2016-04-14","title":"如何通过Git钩子自动部署(Push to Deploy)","url":"http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/"},{"date":"2016-04-12","title":"结合使用Babel Mocha Istanbul进行ES6代码测试和覆盖率测试","url":"http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/"},{"date":"2016-04-01","title":"箭头函数的作用域和this","url":"http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"},{"date":"2016-03-14","title":"AWS EC2 SSH访问 & mongodb 安装","url":"http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/"},{"date":"2016-03-07","title":"AWS API Gateway Mapping Template 获取IP, header等","url":"http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"},{"date":"2016-02-29","title":"Cookie在前端和后端的设置","url":"http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"},{"date":"2016-02-17","title":"jQuery中利用JSONP进行跨域GET请求","url":"http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"},{"date":"2016-02-03","title":"谷歌地图 Google Map API 初体验","url":"http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"},{"date":"2016-02-01","title":"git如何ignore已经track的文件","url":"http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"},{"date":"2016-01-23","title":"Promise的顺序执行和并行执行","url":"http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"},{"date":"2016-01-22","title":"对浏览器跨域问题的一些理解","url":"http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/"},{"date":"2016-01-18","title":"递归实现按顺序执行Promise","url":"http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"},{"date":"2016-01-12","title":"对generator和yield的一些理解","url":"http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/"},{"date":"2015-12-31","title":"对JS类和继承的一些理解","url":"http://sabrinaluo.com/tech/2015/12/31/understand-js-inheritance/"},{"date":"2015-12-28","title":"利用travis自动部署hexo搭建在github的博客","url":"http://sabrinaluo.com/tech/2015/12/28/travis-github-hexo/"},{"date":"2015-12-24","title":"git merge commits 如何合并多个提交为一个","url":"http://sabrinaluo.com/tech/2015/12/24/how-to-merge-commits-with-git-rebase/"},{"date":"2015-12-24","title":"git merge repo 如何合并两个仓库","url":"http://sabrinaluo.com/tech/2015/12/24/how-to-merge-repos-with-git/"},{"date":"2015-12-22","title":"对Promise中的resolve，reject，catch的理解","url":"http://sabrinaluo.com/tech/2015/12/22/understand-resolve-reject-catch-of-promise/"},{"date":"2015-12-21","title":"JS变量提升(Hoisting)","url":"http://sabrinaluo.com/tech/2015/12/21/hoisting/"},{"date":"2015-12-19","title":"对JS闭包(Closure)的一些理解","url":"http://sabrinaluo.com/tech/2015/12/19/understand-js-closure/"},{"date":"2015-12-16","title":"对module.exports和exports的一些理解","url":"http://sabrinaluo.com/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/"},{"date":"2015-12-15","title":"AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置","url":"http://sabrinaluo.com/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/"},{"date":"2015-12-14","title":"JS注释中的感叹号是干什么用的/*! */","url":"http://sabrinaluo.com/tech/2015/12/14/JS-important-comment/"},{"date":"2015-12-14","title":"AWS DynamoDB的本地安装及环境配置","url":"http://sabrinaluo.com/tech/2015/12/14/how-to-setup-dynamodb-at-local/"},{"date":"2015-12-13","title":"GitHub Page如何绑定域名","url":"http://sabrinaluo.com/tech/2015/12/13/set-a-custom-domain-for-github-page/"},{"date":"2015-12-11","title":"X-WSSE验证中关于SHA1编码方式的一些坑","url":"http://sabrinaluo.com/tech/2015/12/11/x-wsse/"},{"date":"2015-12-04","title":"版本控制及git常用基本命令","url":"http://sabrinaluo.com/tech/2015/12/04/git-basic/"},{"date":"2015-12-01","title":"我所理解的Promise","url":"http://sabrinaluo.com/tech/2015/12/01/promise/"}];
   var longestStreak = {"count":4,"start":"December 13","end":"December 16"};
-  var latestStreak = {"count":1,"start":"2016-06-02","end":"2016-06-02"};
+  var latestStreak = {"count":1,"start":"2016-06-20","end":"2016-06-20"};
   var currentStreak = getCurrentStreak(latestStreak);
   currentStreak.relativeTime = moment(currentStreak.date).fromNow();
 
