@@ -26,4 +26,4 @@ tags: [OAuth2.0]
 比如在app填写的是`http://example.com/auth/`，而api请求时参数写为`http://example.com/auth`，少了个斜杠都是错的…
 
 ### 参考
-[1]: http://open.weibo.com/wiki/Oauth2/authorize
+[1] http://open.weibo.com/wiki/Oauth2/authorize
