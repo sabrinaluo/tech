@@ -8,12 +8,12 @@
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>
-    X-WSSE验证中关于SHA1编码方式的一些坑 | 小白妹妹写代码
+    jenkins github pull request builder | 小白妹妹写代码
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  SHA1,WSSE,X-WSSE,auth
+  
   ">
   
   <meta name="author" content="Sabrina">
@@ -98,33 +98,20 @@
     <i class="fa fa-user"></i>
      <a>Sabrina</a>
     <span>
-      <i class="fa fa-pencil"></i> Published: 2015-12-11 17:08:38
+      <i class="fa fa-pencil"></i> Published: 2016-07-14 14:41:02
     </span>
   </h3>
   <article>
-    <h1>X-WSSE验证中关于SHA1编码方式的一些坑</h1>
-    <p>不知道为什么，关于X-WSSE验证的中文资料很少，英文资料也不是很多，能搜到的资料年代都非常久远，最早可追溯到2003年<a href="http://www.xml.com/pub/a/2003/12/17/dive.html" target="_blank" rel="external">^1</a>，可能这种验证方式太古老而且存在什么弊端，所以在随后的很多年里人们发现、发明了其他更常用的验证方式？</p>
-<p>关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与<a href="https://github.com/bouzuya/node-wsse" target="_blank" rel="external">node-wsse</a>的作者大战了好几个回合…</p>
-<hr>
-<p>此文章不讨论验证的原理，只讨论X-WSSE UsernameToken的生成方式，其中主要是生成<strong>passwordDigest</strong>。<br>验证嘛，用户名username，密码password肯定是少不了的，此外还需要nonce，timeStamp，有了这几样再按照下面的步骤一步步就可以生成符合WSSE标准的token了。</p>
-<p>UsernameToken的生成一共需要<strong>5个步骤</strong>：</p>
-<ol>
-<li>生成一个随机字符串nonce。不同公司的API对这个nonce的要求可能会不同，有一些要求采用<code>base64</code>编码方式，比如<a href="http://symfony.com/doc/current/cookbook/security/custom_authentication_provider.html#the-authentication-provider" target="_blank" rel="external">symfony给出的例子</a>；</li>
-<li>时间戳（timeStamp）。对于时间戳，统一采用<a href="http://baike.baidu.com/view/931641.htm" target="_blank" rel="external">ISO-8601</a>格式的字符串，但是不同公司的API对时区（timezone）的要求可能会不同，比如Emarsys要求UTC，Adobe要求GMT；</li>
-<li>把nonce，timeStamp，password这三个字符串按顺序连接起来形成一个新的字符串，并将这个字符串按照<a href="http://baike.baidu.com/view/1228622.htm" target="_blank" rel="external">SHA1</a>方法加密。<br><strong>坑来啦，坑来啦，坑来啦！！！</strong><br>一个字符串通常加密之后密码摘要默认是binary的，比如Adobe<a href="https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2" target="_blank" rel="external">^2</a>，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys<a href="http://documentation.emarsys.com/resource/developers/api/getting-started/authentication/" target="_blank" rel="external">^3</a>…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证<a href="http://book.soundonair.ru/web/web2apps-CHP-11-SECT-1.html#web2apps-CHP-11-SECT-1.8" target="_blank" rel="external">^4</a>；</li>
-<li>把上一步得到的密码摘要按照<code>base64</code>进行编码，就能得到passwordDigest；</li>
-<li>按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：<pre><code>UsernameToken Username=&quot;username&quot;, PasswordDigest=&quot;passwordDigest&quot;, Nonce=&quot;nonce&quot;, Created=&quot;timeStamp&quot;
-</code></pre></li>
-</ol>
-
+    <h1>jenkins github pull request builder</h1>
+    
   </article>
 </div>
 
 
 <div class="duoshuo">
   <!-- 多说评论框 start -->
-  <div class="ds-thread" data-thread-key="1449824918" data-title="X-WSSE验证中关于SHA1编码方式的一些坑"
-       data-url="http://sabrinaluo.com/tech/2015/12/11/x-wsse/"></div>
+  <div class="ds-thread" data-thread-key="1468478462" data-title="jenkins github pull request builder"
+       data-url="http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
