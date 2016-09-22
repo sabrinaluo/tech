@@ -115,7 +115,7 @@
 <h1 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h1><p>假设我有一个JS文件内容如下：</p>
 <pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
 <span class="built_in">module</span>.exports = {
-  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
+  <span class="attr">print</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
 }
 <span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象已经有了print()方法</span>
 </code></pre>
@@ -127,7 +127,7 @@
 <pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
 <span class="built_in">console</span>.log(exports); <span class="comment">//你会看到Module中的exports为空对象{}</span>
 <span class="built_in">module</span>.exports = {
-  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
+  <span class="attr">print</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
 }
 <span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象有了print()方法</span>
 exports.name = <span class="string">'小白妹妹'</span>;
