@@ -1,4 +1,4 @@
-title: some js tricks
+title: 一些js小技巧
 date: 2016-10-19 15:08:33
 tags: [js, tricks, js小技巧]
 ---
@@ -26,14 +26,16 @@ console.log(b); //56789
 
 ### !! 强制转换为布林类型
 利用`!!`将变量类型强制转换为`boolean`类型
+
 ``` 
 var a=123;
 typeof a; //nmuber
 typeof !!a; //boolean
-``` 
+```
 
 ### 避免`can not read property ‘xxx’ of null`的小技巧
 经常会遇到的一个情况是下面的代码会报错`can not read property 'c' of null`
+
 ```
 if(a.b.c === 1){
     //do something
@@ -41,12 +43,15 @@ if(a.b.c === 1){
 ```
 
 以前自己的写法以及经常见到的写法是这样
+
 ```
 if(a && a.b && a.b.c === 1){
     //do something
 }
 ```
+
 前几天看到一个逼格很高的写法，不过我觉得括号太多了，容易写错，而且也没有上面的那种写法简单。不过还是要记录一下，以免以后见到不知道是什么意思。
+
 ```
 if(((a||{}).b||{}).c === 1){
     //do something
@@ -54,6 +59,7 @@ if(((a||{}).b||{}).c === 1){
 ```
 
 ### || 设置默认值
+
 ```
 function abc(a, b){
     a = a || 1; 
@@ -65,6 +71,7 @@ function abc(a, b){
 abc(); //3
 abc(5); //7
 ```
+
 有一些情况下函数中需要设置默认值，经常看到有人的写法是`typeof`先判断这个参数是不是`undefined`然后再赋值，这种写法实在是太麻烦了……上面的是懒人写法
 
 感觉善用`||`和`&&`还是能搞出很多黑科技的。
