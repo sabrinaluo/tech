@@ -73,14 +73,14 @@
       <a href="/tech/archives" class="btn btn-group-left"><i
                 class="fa fa-file-text"></i> Posts </a>
       <a href="/tech/archives"
-         class="btn btn-group-right"> 35 </a>
+         class="btn btn-group-right"> 36 </a>
     </div>
 
     <div class="btn-group">
       <a href="/tech/tags" class="btn btn-group-left"><i
                 class="fa fa-tags"></i> Tags </a>
       <a href="/tech/tags"
-         class="btn btn-group-right"> 102 </a>
+         class="btn btn-group-right"> 104 </a>
     </div>
 
     <div class="btn-group">
@@ -153,11 +153,11 @@
 <li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
 <p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
 <pre><code class="javascript"><span class="comment">// git pop之后的冲突文件看起来长这样：</span>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; their code
-var a = 123;
+&lt;&lt;<span class="xml"><span class="tag">&lt;&lt;&lt;&lt;&lt; <span class="attr">their</span> <span class="attr">code</span>
+<span class="attr">var</span> <span class="attr">a</span> = <span class="string">123;</span>
 =======
-var a = 456;
-&gt;&gt;&gt;&gt;&gt;&gt; my code
+<span class="string">var</span> <span class="attr">a</span> = <span class="string">456;</span>
+&gt;</span>&gt;&gt;&gt;&gt;&gt; my code</span>
 </code></pre>
 <pre><code class="javascript"><span class="comment">// 冲突解决后，看起来应该长这样：</span>
 <span class="keyword">var</span> a = <span class="number">123</span>;
@@ -178,7 +178,7 @@ var a = 456;
 <div class="duoshuo">
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="1449200404" data-title="版本控制及git常用基本命令"
-       data-url="http://sabrinaluo.com/tech/2015/12/04/git-basic/"></div>
+       data-url="http://sabrinaluo.com/tech/tech/2015/12/04/git-basic/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

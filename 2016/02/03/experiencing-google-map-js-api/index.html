@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  Google Map,Google Map API,谷歌地图,谷歌地图API
+  Google Map,Google Map API,谷歌地图API,谷歌地图
   ">
   
   <meta name="author" content="Sabrina">
@@ -73,14 +73,14 @@
       <a href="/tech/archives" class="btn btn-group-left"><i
                 class="fa fa-file-text"></i> Posts </a>
       <a href="/tech/archives"
-         class="btn btn-group-right"> 35 </a>
+         class="btn btn-group-right"> 36 </a>
     </div>
 
     <div class="btn-group">
       <a href="/tech/tags" class="btn btn-group-left"><i
                 class="fa fa-tags"></i> Tags </a>
       <a href="/tech/tags"
-         class="btn btn-group-right"> 102 </a>
+         class="btn btn-group-right"> 104 </a>
     </div>
 
     <div class="btn-group">
@@ -107,7 +107,7 @@
 <h3 id="自动缩放-auto-zoom"><a href="#自动缩放-auto-zoom" class="headerlink" title="自动缩放(auto zoom)"></a>自动缩放(auto zoom)</h3><p>使用场景大多数时候是有很多marker，想要全部显示这些marker，同时zoom当然越大越清晰。</p>
 <ul>
 <li>首先需要一个marker的位置列表 <code>markerList</code>，单个元素长这样<code>{lat:xxx,lng:xxx}</code></li>
-<li>遍历列表，把元素传入<code>google.maps.LatLngBounds</code>实例的<code>extend</code>方法<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> latlngbounds = <span class="keyword">new</span> google.maps.LatLngBounds();</span><br><span class="line">markerList.<span class="keyword">forEach</span>(<span class="function"><span class="keyword">function</span> <span class="params">(item)</span> </span>&#123;</span><br><span class="line">  latlngbounds.extend(item);</span><br><span class="line">&#125;);</span><br><span class="line">map.fitBounds(latlngbounds);</span><br></pre></td></tr></table></figure>
+<li>遍历列表，把元素传入<code>google.maps.LatLngBounds</code>实例的<code>extend</code>方法<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> latlngbounds = <span class="keyword">new</span> google.maps.LatLngBounds();</div><div class="line">markerList.<span class="keyword">forEach</span>(<span class="function"><span class="keyword">function</span> <span class="params">(item)</span> </span>&#123;</div><div class="line">  latlngbounds.extend(item);</div><div class="line">&#125;);</div><div class="line">map.fitBounds(latlngbounds);</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>然而这有一个很多人提到的问题，就是缩放效果不平滑。(smooth这个词，我还是百度了smooth scroll才写的出字面意思来，我现在中文是有多差…)<br>这个暂时没什么解决方法，API本身就是这样的。据说谷歌本身的地图是h5的canvas绘制的，但通过API生成的地图不是同样的原理…谷歌居然自己都不用自己的API …</p>
@@ -117,11 +117,11 @@
 <p>比如这样一个例子：有两组marker，<strong>有交集</strong>。想要让第一组先BOUNCE，之后停止第一组，让第二组BOUNCE。很容易想到的方法是，通过遍历，把第一组的动画全部设置为NULL，再把第二组动画全部设置为BOUNCE。然而交集的这一部分只会BOUNCE一次然后就停了…因为计算速度很快，从NULL到BOUNCE不到700ms，动画其实还处于NULL状态。</p>
 <p>可以参考官方的这个例子，<a href="https://developers.google.com/maps/documentation/javascript/examples/marker-animations" target="_blank" rel="external">https://developers.google.com/maps/documentation/javascript/examples/marker-animations</a> ，当你双击marker的时候，其实就是模拟了快速切换状态，但动画效果并不如预期…</p>
 <p>解决方案：求差集，也就是把交集的部分去掉，在设置动画为NULL</p>
-<h3 id="自定义地图样式"><a href="#自定义地图样式" class="headerlink" title="自定义地图样式"></a>自定义地图样式</h3><p><a href="https://snazzymaps.com/" target="_blank" rel="external">https://snazzymaps.com/</a> 这个网站有很多已经设计好的样式，选喜欢的直接复制代码放到<code>StyledMapType()</code>方法中即可，然后给这个样式取个名字，下例中我使用了<a href="https://snazzymaps.com/style/134/light-dream" target="_blank" rel="external">light dream</a> 这个样式<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mapStyle = <span class="built_in">new</span> google.maps.StyledMapType([....])</span><br><span class="line"><span class="keyword">map</span>.mapTypes.set(<span class="string">'lightDream'</span>, mapStyle);</span><br><span class="line"><span class="keyword">map</span>.setMapTypeId(<span class="string">'lightDream'</span>);</span><br></pre></td></tr></table></figure></p>
+<h3 id="自定义地图样式"><a href="#自定义地图样式" class="headerlink" title="自定义地图样式"></a>自定义地图样式</h3><p><a href="https://snazzymaps.com/" target="_blank" rel="external">https://snazzymaps.com/</a> 这个网站有很多已经设计好的样式，选喜欢的直接复制代码放到<code>StyledMapType()</code>方法中即可，然后给这个样式取个名字，下例中我使用了<a href="https://snazzymaps.com/style/134/light-dream" target="_blank" rel="external">light dream</a> 这个样式<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mapStyle = <span class="built_in">new</span> google.maps.StyledMapType([....])</div><div class="line"><span class="keyword">map</span>.mapTypes.set(<span class="string">'lightDream'</span>, mapStyle);</div><div class="line"><span class="keyword">map</span>.setMapTypeId(<span class="string">'lightDream'</span>);</div></pre></td></tr></table></figure></p>
 <h3 id="遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数"><a href="#遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数" class="headerlink" title="遍历添加 event listener 同时又需要传参数给 google.maps.event.addListener() 的回调函数"></a>遍历添加 event listener 同时又需要传参数给 <code>google.maps.event.addListener()</code> 的回调函数</h3><p>不太理解event.addListener的工作原理，但根据我踩的坑推测这是一个异步的方法（否则为什么有回调函数？！）</p>
 <p>这个时候就要用到高大上的<strong>闭包</strong>。下面这个例子中，如果不把<code>addListener</code>包起来，每次cityHandler收到的city都是遍历的最后一个city。因为遍历速度太快，而回调还没有执行，等回调执行的时候city已经遍历到最后一个了…</p>
 <p>不用闭包的话，用promise应该也能解决这个问题，但是感觉promise需要写的code会比较多一些。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cityList=[&#123;marker:googleMapMarker,city:<span class="string">'Beijing'</span>&#125;,...];</span><br><span class="line">cityList.<span class="keyword">forEach</span>(<span class="function"><span class="keyword">function</span><span class="params">(item)</span></span>&#123;</span><br><span class="line">  (<span class="function"><span class="keyword">function</span> <span class="params">(marker, city)</span> </span>&#123;</span><br><span class="line">    google.maps.event.addListener(marker, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>&#123;</span><br><span class="line">      cityHandler(city);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;)(item.marker, item.city)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cityList=[&#123;marker:googleMapMarker,city:<span class="string">'Beijing'</span>&#125;,...];</div><div class="line">cityList.<span class="keyword">forEach</span>(<span class="function"><span class="keyword">function</span><span class="params">(item)</span></span>&#123;</div><div class="line">  (<span class="function"><span class="keyword">function</span> <span class="params">(marker, city)</span> </span>&#123;</div><div class="line">    google.maps.event.addListener(marker, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>&#123;</div><div class="line">      cityHandler(city);</div><div class="line">    &#125;);</div><div class="line">  &#125;)(item.marker, item.city)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h3 id="原生marker图标"><a href="#原生marker图标" class="headerlink" title="原生marker图标"></a>原生marker图标</h3><p><a href="http://mabp.kiev.ua/2010/01/12/google-map-markers/" target="_blank" rel="external">http://mabp.kiev.ua/2010/01/12/google-map-markers/</a></p>
 <h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://developers.google.com/maps/documentation/javascript/reference" target="_blank" rel="external">https://developers.google.com/maps/documentation/javascript/reference</a></p>
 
@@ -132,7 +132,7 @@
 <div class="duoshuo">
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="1454495571" data-title="谷歌地图 Google Map API 初体验"
-       data-url="http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"></div>
+       data-url="http://sabrinaluo.com/tech/tech/2016/02/03/experiencing-google-map-js-api/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

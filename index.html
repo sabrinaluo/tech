@@ -87,13 +87,13 @@
   <ul class="stat">
     <li>
       <a href="/tech/archives">
-        <div class="stat-count">35</div>
+        <div class="stat-count">36</div>
         <div class="stat-name">Posts</div>
       </a>
     </li>
     <li>
       <a href="/tech/tags">
-        <div class="stat-count">102</div>
+        <div class="stat-count">104</div>
         <div class="stat-name">Tags</div>
       </a>
     </li>
@@ -124,6 +124,18 @@
       Recent Post
     </h3>
     <ul>
+      
+      <li>
+        <a href="/tech/2017/05/11/thoughts/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">一点感悟</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             不知道为什么，我是比较喜欢JS这种脑残语言的，并且也不想将其他语言用在工作中，比如PHP、PYTHON、JAVA之类的。 
+ 其实到最后肯定所有语言都是相通的，比如每种语言都会有自己的 lodash
+          </span>
+        </a>
+      </li>
       
       <li>
         <a href="/tech/2017/01/03/vpn/">
@@ -170,18 +182,6 @@
           <span class="icon-right"><i class="fa fa-star"></i></span>
           <span class="subtext read-more">
              前不久给bootstrap提了个 issue ，然后被他们的高科技自动回复机器人吓萌比了。 有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了
-          </span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/tech/2016/06/20/intro-of-oauth2-0/">
-          <span class="icon-left"><i class="fa fa-book"></i></span>
-          <span class="post-title read-more">微博开放平台的Basic Auth和OAuth2.0认证</span>
-          <span class="icon-right"><i class="fa fa-star"></i></span>
-          <span class="subtext read-more">
-             这篇文章不是讲各种认证方式是怎么实现的，只是简单的介绍如何与微博进行整合。 
- 微博开放平台允许使用api来开发一些与微博相关的应用，微博提供 Basic Auth 和 OAuth2.0 两种认证方
           </span>
         </a>
       </li>
@@ -309,9 +309,9 @@
 
 
 <script>
-  var posts = [{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/2017/01/03/vpn/"},{"date":"2016-10-19","title":"一些js小技巧","url":"http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/"},{"date":"2016-09-20","title":"CSS的几个小技巧：pointer-events, transform垂直居中,nth-child","url":"http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/"},{"date":"2016-07-14","title":"Jenkins集成github pull request插件","url":"http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/"},{"date":"2016-06-20","title":"微博开放平台的Basic Auth和OAuth2.0认证","url":"http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/"},{"date":"2016-06-02","title":"利用travis进行heroku部署","url":"http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"},{"date":"2016-04-21","title":"微信撤回信息昵称显示原理分析","url":"http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/"},{"date":"2016-04-14","title":"如何通过Git钩子自动部署(Push to Deploy)","url":"http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/"},{"date":"2016-04-12","title":"结合使用Babel Mocha Istanbul进行ES6代码测试和覆盖率测试","url":"http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/"},{"date":"2016-04-01","title":"箭头函数的作用域和this","url":"http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"},{"date":"2016-03-14","title":"AWS EC2 SSH访问 & mongodb 安装","url":"http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/"},{"date":"2016-03-07","title":"AWS API Gateway Mapping Template 获取IP, header等","url":"http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"},{"date":"2016-02-29","title":"Cookie在前端和后端的设置","url":"http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"},{"date":"2016-02-17","title":"jQuery中利用JSONP进行跨域GET请求","url":"http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"},{"date":"2016-02-03","title":"谷歌地图 Google Map API 初体验","url":"http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"},{"date":"2016-02-01","title":"git如何ignore已经track的文件","url":"http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"},{"date":"2016-01-23","title":"Promise的顺序执行和并行执行","url":"http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"},{"date":"2016-01-22","title":"对浏览器跨域问题的一些理解","url":"http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/"},{"date":"2016-01-18","title":"递归实现按顺序执行Promise","url":"http://sabrinaluo.com/tech/2016/01/18/sequentialize-promise-by-recursion/"},{"date":"2016-01-12","title":"对generator和yield的一些理解","url":"http://sabrinaluo.com/tech/2016/01/12/ES6-generator-yield/"}];
-  var longestStreak = {"count":2,"start":"January 22","end":"January 23"};
-  var latestStreak = {"count":1,"start":"2017-01-03","end":"2017-01-03"};
+  var posts = [{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/tech/2017/05/11/thoughts/"},{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/tech/2017/01/03/vpn/"},{"date":"2016-10-19","title":"一些js小技巧","url":"http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/"},{"date":"2016-09-20","title":"CSS的几个小技巧：pointer-events, transform垂直居中,nth-child","url":"http://sabrinaluo.com/tech/tech/2016/09/20/some-css-tricks/"},{"date":"2016-07-14","title":"Jenkins集成github pull request插件","url":"http://sabrinaluo.com/tech/tech/2016/07/14/jenkins-github-pull-request-builder/"},{"date":"2016-06-20","title":"微博开放平台的Basic Auth和OAuth2.0认证","url":"http://sabrinaluo.com/tech/tech/2016/06/20/intro-of-oauth2-0/"},{"date":"2016-06-02","title":"利用travis进行heroku部署","url":"http://sabrinaluo.com/tech/tech/2016/06/02/travis-heroku/"}];
+  var longestStreak = {"count":1,"start":"June 2","end":"June 2"};
+  var latestStreak = {"count":1,"start":"2017-05-11","end":"2017-05-11"};
   var currentStreak = getCurrentStreak(latestStreak);
   currentStreak.relativeTime = moment(currentStreak.date).fromNow();
 

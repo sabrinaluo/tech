@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  es6,this,作用域,箭头函数,词法作用域
+  es6,箭头函数,this,作用域,词法作用域
   ">
   
   <meta name="author" content="Sabrina">
@@ -73,14 +73,14 @@
       <a href="/tech/archives" class="btn btn-group-left"><i
                 class="fa fa-file-text"></i> Posts </a>
       <a href="/tech/archives"
-         class="btn btn-group-right"> 35 </a>
+         class="btn btn-group-right"> 36 </a>
     </div>
 
     <div class="btn-group">
       <a href="/tech/tags" class="btn btn-group-left"><i
                 class="fa fa-tags"></i> Tags </a>
       <a href="/tech/tags"
-         class="btn btn-group-right"> 102 </a>
+         class="btn btn-group-right"> 104 </a>
     </div>
 
     <div class="btn-group">
@@ -107,20 +107,20 @@
 <p>自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Function)<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">^1</a>就是给懒人用的<strong>简写的匿名函数</strong>而已。后来看到有人挑战阮一峰老师<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">《ECMAScript 6入门》</a>中关于箭头函数this的一些问题<a href="https://github.com/ruanyf/es6tutorial/issues/150" target="_blank" rel="external">^2</a>，才对箭头函数有了一丁点的理解。</p>
 <p>我平时的工作基本上都是各种第三方的API整合，于是各种异步请求，promise都是家常便饭。由于SalesForce没有直接的nodejs sdk，所以自己写一个自定义的类就不可避免了。在写的过程中，关于this踩到坑里了，所以就有了这篇文章。</p>
 <h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>其中一个简单的功能是，查找用户是否存在，若存在则发送欢迎邮件（整个流程对应<code>onBoardFlow</code>）。实际场景比这个要复杂，可能需要连续发送好几个请求，为了避免<em>回调地狱</em>，所有的请求我都用promise包了起来。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">'use strict'</span>;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SalesForce</span> </span>&#123;</span><br><span class="line">  constructor(email, username) &#123;</span><br><span class="line">    <span class="keyword">this</span>.email = email;</span><br><span class="line">    <span class="keyword">this</span>.username = username;</span><br><span class="line">  &#125;</span><br><span class="line">  checkUser()&#123;</span><br><span class="line">    <span class="keyword">return</span> getUserByName(<span class="keyword">this</span>.username); <span class="comment">//发送一个请求到salesforce，返回一个promise</span></span><br><span class="line">  &#125;</span><br><span class="line">  sendEmail()&#123;</span><br><span class="line">    <span class="keyword">return</span> send(<span class="keyword">this</span>.email); <span class="comment">//发送一个请求通知salesforce发送邮件，返回一个promise</span></span><br><span class="line">  &#125;</span><br><span class="line">  onBoardFlow()&#123;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p><strong>在<code>onBoardFlow</code>中，搞不清this和作用域的我首先这么写：</strong><br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>例<span class="number">1</span></span><br><span class="line"><span class="keyword">this</span>.checkuser().<span class="keyword">then</span>(<span class="keyword">this</span>.sendEmail);  <span class="regexp">//</span>Cannot read property <span class="string">'email'</span> <span class="keyword">of</span> <span class="literal">undefined</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SalesForce</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(email, username) &#123;</div><div class="line">    <span class="keyword">this</span>.email = email;</div><div class="line">    <span class="keyword">this</span>.username = username;</div><div class="line">  &#125;</div><div class="line">  checkUser()&#123;</div><div class="line">    <span class="keyword">return</span> getUserByName(<span class="keyword">this</span>.username); <span class="comment">//发送一个请求到salesforce，返回一个promise</span></div><div class="line">  &#125;</div><div class="line">  sendEmail()&#123;</div><div class="line">    <span class="keyword">return</span> send(<span class="keyword">this</span>.email); <span class="comment">//发送一个请求通知salesforce发送邮件，返回一个promise</span></div><div class="line">  &#125;</div><div class="line">  onBoardFlow()&#123;</div><div class="line">    <span class="comment">//....</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p><strong>在<code>onBoardFlow</code>中，搞不清this和作用域的我首先这么写：</strong><br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span>例<span class="number">1</span></div><div class="line"><span class="keyword">this</span>.checkuser().<span class="keyword">then</span>(<span class="keyword">this</span>.sendEmail);  <span class="regexp">//</span>Cannot read property <span class="string">'email'</span> <span class="keyword">of</span> <span class="literal">undefined</span></div></pre></td></tr></table></figure></p>
 <p>然后想到了在promise链中，this指向的是global；</p>
 <blockquote>
 <p>Q: <strong>为什么能找到<code>this.sendEmail()</code>方法，却找不到<code>this.email</code>属性呢？</strong><br>A: 我的理解是：因为<code>this.sendEmail</code>是作为参数传入，传入的this是then外部的this，也就是<code>SalesForce</code>对象；<br>而this.sendEmail函数的作用域中产生了<strong>新的this</strong>，而这个this指向global（浏览器中为window对象）；在严格模式下this为undefined；</p>
 </blockquote>
-<p><strong>然后容易想到的就是各种_this self，然后bind(this) call(_this)之类的</strong><br><figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例2</span></span><br><span class="line"><span class="keyword">this</span>.checkuser().<span class="keyword">then</span>(<span class="keyword">this</span>.sendEmail.bind(<span class="keyword">this</span>));  <span class="comment">//it works !</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>然后容易想到的就是各种_this self，然后bind(this) call(_this)之类的</strong><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//例2</span></div><div class="line"><span class="keyword">this</span>.checkuser().then(<span class="keyword">this</span>.sendEmail.bind(<span class="keyword">this</span>));  <span class="comment">//it works !</span></div></pre></td></tr></table></figure></p>
 <p>这样是可以正常工作的，但感觉怪怪的，每个then都要<code>bind(this)</code>真是一点也不优雅。</p>
-<p><strong>匿名函数和箭头函数原来不一样啊</strong><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//例3</span></span><br><span class="line"><span class="keyword">this</span>.checkuser().then(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.sendEmail();</span><br><span class="line">&#125;);  <span class="comment">//Cannot read property 'updateFunnelData' of undefined</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>匿名函数和箭头函数原来不一样啊</strong><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//例3</span></div><div class="line"><span class="keyword">this</span>.checkuser().then(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.sendEmail();</div><div class="line">&#125;);  <span class="comment">//Cannot read property 'updateFunnelData' of undefined</span></div></pre></td></tr></table></figure></p>
 <p>此时<code>this.sendEmail</code>的this是then中的匿名函数新产生的promise作用域下的this，非严格模式下指向global</p>
 <blockquote>
 <p>在箭头函数出现之前，每个新定义的函数都将新产生自己作用域下的this, arguments等对象<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">^1</a></p>
 </blockquote>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例<span class="number">4</span></span><br><span class="line"><span class="keyword">this</span>.checkuser().<span class="keyword">then</span>(<span class="function"><span class="params">()</span>=&gt;</span><span class="keyword">this</span>.sendEmail());  <span class="regexp">//i</span>t works!</span><br></pre></td></tr></table></figure>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">例<span class="number">4</span></div><div class="line"><span class="keyword">this</span>.checkuser().<span class="keyword">then</span>(<span class="function"><span class="params">()</span>=&gt;</span><span class="keyword">this</span>.sendEmail());  <span class="regexp">//i</span>t works!</div></pre></td></tr></table></figure>
 <h3 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h3><p>作用域内可以嵌套作用域，从而形成作用域链，在最外层的也就是全局作用域，当在内部查找一个对象时，会顺着作用域链最内层，层层向外寻找，直到找到为止。</p>
 <p>在例3中，匿名函数的作用域中产生了新的<code>this</code>，该<code>this</code>指向global<br>在例4中，箭头函数的作用域中没有产生新的this，所以顺着作用域链层层往外寻找<code>this</code>，找到<code>onBoardFlow()</code>的作用域时，找到了<code>this</code>，而此时<code>this</code>就是<code>SalesForce</code>对象</p>
 <h3 id="为什么promise中的this指向global"><a href="#为什么promise中的this指向global" class="headerlink" title="为什么promise中的this指向global"></a>为什么promise中的this指向global</h3><p>这个，我还没学会…</p>
@@ -132,7 +132,7 @@
 <div class="duoshuo">
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="1459499892" data-title="箭头函数的作用域和this"
-       data-url="http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"></div>
+       data-url="http://sabrinaluo.com/tech/tech/2016/04/01/scope-and-this-of-arrow-function/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

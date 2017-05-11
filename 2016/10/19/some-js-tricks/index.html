@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  js,js小技巧,tricks
+  tricks,js,js小技巧
   ">
   
   <meta name="author" content="Sabrina">
@@ -73,14 +73,14 @@
       <a href="/tech/archives" class="btn btn-group-left"><i
                 class="fa fa-file-text"></i> Posts </a>
       <a href="/tech/archives"
-         class="btn btn-group-right"> 35 </a>
+         class="btn btn-group-right"> 36 </a>
     </div>
 
     <div class="btn-group">
       <a href="/tech/tags" class="btn btn-group-left"><i
                 class="fa fa-tags"></i> Tags </a>
       <a href="/tech/tags"
-         class="btn btn-group-right"> 102 </a>
+         class="btn btn-group-right"> 104 </a>
     </div>
 
     <div class="btn-group">
@@ -104,11 +104,11 @@
   <article>
     <h1>一些js小技巧</h1>
     <p>一直以为这篇已经发过了，结果前两天搜的时候发现搜不到。一直扔在草稿里，今天整理一下之前和最近学到的一些JS小技巧</p>
-<h3 id="利用位运算取整"><a href="#利用位运算取整" class="headerlink" title="利用位运算取整"></a>利用位运算取整</h3><p>利用位运算，与、或、异或、左右移位，<code>&amp;</code> <code>|</code> <code>^</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>&lt;&lt;</code> ，舍去小数点后的数字<a href="http://www.cnblogs.com/kkun/archive/2012/01/30/2332309.html" target="_blank" rel="external">^1</a>，<a href="http://jsperf.com/coercion-vs-casting/3" target="_blank" rel="external">jsPerf</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var a = <span class="number">6.54321</span>;</span><br><span class="line">console.<span class="built_in">log</span>(a | <span class="number">0</span>); <span class="comment">//6</span></span><br><span class="line">console.<span class="built_in">log</span>(a &amp; <span class="number">0</span>); <span class="comment">//6</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="利用位运算取整"><a href="#利用位运算取整" class="headerlink" title="利用位运算取整"></a>利用位运算取整</h3><p>利用位运算，与、或、异或、左右移位，<code>&amp;</code> <code>|</code> <code>^</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>&lt;&lt;</code> ，舍去小数点后的数字<a href="http://www.cnblogs.com/kkun/archive/2012/01/30/2332309.html" target="_blank" rel="external">^1</a>，<a href="http://jsperf.com/coercion-vs-casting/3" target="_blank" rel="external">jsPerf</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">6.54321</span>;</div><div class="line"><span class="built_in">console</span>.log(a | <span class="number">0</span>); <span class="comment">//6</span></div><div class="line"><span class="built_in">console</span>.log(a &amp; <span class="number">0</span>); <span class="comment">//6</span></div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>按位<strong>非非</strong>运算也是可以的，所以你也可以用<strong>呻吟号</strong>把代码写成这样<code>~~a</code></p>
 </blockquote>
-<h3 id="字符串转换为数字"><a href="#字符串转换为数字" class="headerlink" title="+ 字符串转换为数字"></a>+ 字符串转换为数字</h3><p>利用加号 <code>+</code> 将数字字符串转换为数字类型<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"56789"</span>;</span><br><span class="line"><span class="keyword">var</span> b = +a;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b); <span class="comment">//number</span></span><br><span class="line"><span class="built_in">console</span>.log(b); <span class="comment">//56789</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="字符串转换为数字"><a href="#字符串转换为数字" class="headerlink" title="+ 字符串转换为数字"></a>+ 字符串转换为数字</h3><p>利用加号 <code>+</code> 将数字字符串转换为数字类型<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">"56789"</span>;</div><div class="line"><span class="keyword">var</span> b = +a;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b); <span class="comment">//number</span></div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">//56789</span></div></pre></td></tr></table></figure></p>
 <blockquote>
 <ul>
 <li>只能是十进制</li>
@@ -116,14 +116,14 @@
 </ul>
 </blockquote>
 <h3 id="强制转换为布林类型"><a href="#强制转换为布林类型" class="headerlink" title="!! 强制转换为布林类型"></a>!! 强制转换为布林类型</h3><p>利用<code>!!</code>将变量类型强制转换为<code>boolean</code>类型</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a=<span class="number">123</span>;</span><br><span class="line"><span class="keyword">typeof</span> a; <span class="comment">//nmuber</span></span><br><span class="line"><span class="keyword">typeof</span> !!a; <span class="comment">//boolean</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="number">123</span>;</div><div class="line"><span class="keyword">typeof</span> a; <span class="comment">//nmuber</span></div><div class="line"><span class="keyword">typeof</span> !!a; <span class="comment">//boolean</span></div></pre></td></tr></table></figure>
 <h3 id="避免can-not-read-property-‘xxx’-of-null的小技巧"><a href="#避免can-not-read-property-‘xxx’-of-null的小技巧" class="headerlink" title="避免can not read property ‘xxx’ of null的小技巧"></a>避免<code>can not read property ‘xxx’ of null</code>的小技巧</h3><p>经常会遇到的一个情况是下面的代码会报错<code>can not read property &#39;c&#39; of null</code></p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span><span class="comment">(a.b.c === 1)</span>&#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(a.b.c === 1)</span>&#123;</div><div class="line">    <span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以前自己的写法以及经常见到的写法是这样</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span><span class="comment">(a &amp;&amp; a.b &amp;&amp; a.b.c === 1)</span>&#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(a &amp;&amp; a.b &amp;&amp; a.b.c === 1)</span>&#123;</div><div class="line">    <span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>前几天看到一个逼格很高的写法，不过我觉得括号太多了，容易写错，而且也没有上面的那种写法简单。不过还是要记录一下，以免以后见到不知道是什么意思。</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span><span class="comment">(((a||&#123;&#125;)</span>.b||&#123;&#125;).c === <span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//do something</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">(a, b)</span><span class="comment">&#123;</span><br><span class="line">    a = a || 1; </span><br><span class="line">    b = b || 2;</span><br><span class="line"></span><br><span class="line">    return a + b;</span><br><span class="line">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="title">abc</span><span class="params">()</span>;</span> <span class="comment">//3</span></span><br><span class="line">abc(<span class="number">5</span>); <span class="comment">//7</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(((a|<span class="type">|&#123;&#125;).b</span>|<span class="type">|&#123;&#125;).c</span> === <span class="number">1</span>)&#123;</div><div class="line">    //<span class="built_in">do</span> something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">(a, b)</span><span class="comment">&#123;</span></span></div><div class="line">    a = a || 1; </div><div class="line">    b = b || 2;</div><div class="line"></div><div class="line">    return a + b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="title">abc</span><span class="params">()</span>; <span class="comment">//3</span></div><div class="line">abc(<span class="number">5</span>); <span class="comment">//7</span></div></pre></td></tr></table></figure>
 <p>有一些情况下函数中需要设置默认值，经常看到有人的写法是<code>typeof</code>先判断这个参数是不是<code>undefined</code>然后再赋值，这种写法实在是太麻烦了……上面的是懒人写法</p>
 <p>感觉善用<code>||</code>和<code>&amp;&amp;</code>还是能搞出很多黑科技的。</p>
 <p>以上，是为打酱油博客一篇。</p>
@@ -135,7 +135,7 @@
 <div class="duoshuo">
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="1476860913" data-title="一些js小技巧"
-       data-url="http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/"></div>
+       data-url="http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

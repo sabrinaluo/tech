@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  heroku,travis,持续集成,自动部署
+  自动部署,travis,heroku,持续集成
   ">
   
   <meta name="author" content="Sabrina">
@@ -73,14 +73,14 @@
       <a href="/tech/archives" class="btn btn-group-left"><i
                 class="fa fa-file-text"></i> Posts </a>
       <a href="/tech/archives"
-         class="btn btn-group-right"> 35 </a>
+         class="btn btn-group-right"> 36 </a>
     </div>
 
     <div class="btn-group">
       <a href="/tech/tags" class="btn btn-group-left"><i
                 class="fa fa-tags"></i> Tags </a>
       <a href="/tech/tags"
-         class="btn btn-group-right"> 102 </a>
+         class="btn btn-group-right"> 104 </a>
     </div>
 
     <div class="btn-group">
@@ -108,22 +108,22 @@
 <p>atom还是很好用的，可能因为我（后）天生就对JS写的东西有好感，记不住快捷键的我，不能徒手写html的我还是需要IDE的帮助，atom就用来写点简单的东西吧。</p>
 <p>travis和heroku都有自己的命令行工具（CLI），尤其travis cli用起来总比徒手写.travis.yml方便许多</p>
 <h3 id="安装travis-cli"><a href="#安装travis-cli" class="headerlink" title="安装travis-cli"></a>安装travis-cli</h3><p>travis-cli是ruby写的，所以安装之前需要安装ruby</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get <span class="operator"><span class="keyword">install</span> ruby-<span class="keyword">full</span></span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get <span class="keyword">install</span> ruby-<span class="keyword">full</span></div></pre></td></tr></table></figure>
 <p>详细的安装教程可以看官方的这个<a href="https://github.com/travis-ci/travis.rb#installation" target="_blank" rel="external">https://github.com/travis-ci/travis.rb#installation</a></p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">gem</span> install travis -v <span class="number">1</span>.<span class="number">8</span>.<span class="number">2</span> --<span class="built_in">no</span>-rdoc --<span class="built_in">no</span>-ri</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">gem</span> install travis -v <span class="number">1</span>.<span class="number">8</span>.<span class="number">2</span> --<span class="literal">no</span>-rdoc --<span class="literal">no</span>-ri</div></pre></td></tr></table></figure>
 <h3 id="安装heroku-cli"><a href="#安装heroku-cli" class="headerlink" title="安装heroku-cli"></a>安装heroku-cli</h3><p>heroku-cli也是ruby写的……有点不懂为啥都喜欢用ruby写cli？js不是挺好的吗，有啥cli是<code>npm install -g</code> 解决不了的吗？…<br>具体的安装教程看</p>
 <ul>
 <li><a href="https://toolbelt.heroku.com" target="_blank" rel="external">https://toolbelt.heroku.com</a></li>
 <li><a href="https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli" target="_blank" rel="external">https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli</a></li>
 </ul>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -O- http<span class="variable">s:</span>//toolbelt.heroku.<span class="keyword">com</span>/install-ubuntu.<span class="keyword">sh</span> | <span class="keyword">sh</span></span><br></pre></td></tr></table></figure>
-<h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">travis</span> login</span><br></pre></td></tr></table></figure>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">heroku</span> login</span><br></pre></td></tr></table></figure>
-<h3 id="travis-yml"><a href="#travis-yml" class="headerlink" title=".travis.yml"></a>.travis.yml</h3><p>在项目的根目录下执行以下命令，将会生成<code>.travis.yml</code>文件<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">travis</span> init</span><br><span class="line">travis setup heroku</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O- http<span class="variable">s:</span>//toolbelt.heroku.<span class="keyword">com</span>/install-ubuntu.<span class="keyword">sh</span> | <span class="keyword">sh</span></div></pre></td></tr></table></figure>
+<h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">travis login</span></div></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">heroku login</span></div></pre></td></tr></table></figure>
+<h3 id="travis-yml"><a href="#travis-yml" class="headerlink" title=".travis.yml"></a>.travis.yml</h3><p>在项目的根目录下执行以下命令，将会生成<code>.travis.yml</code>文件<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">travis init</div><div class="line">travis <span class="built_in">setup</span> heroku</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>注意：一定要通过命令行登陆heroku，否则travis会卡住，也不报错啥的反正就一直没反应</p>
 </blockquote>
-<p>打开<code>.travis.yml</code>文件可以看到除了基本的信息之外，还有<code>deploy</code>相关的信息，其中比较让人疑惑的是<code>api_key</code>，这个<code>api_key</code>其实是你的heroku账户的token加密之后的一个字符串。heroku的token看起来是一个类似uuid5的字符串，可以通过以下命令查看<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">heroku</span> <span class="tag">auth</span><span class="pseudo">:token</span></span><br></pre></td></tr></table></figure></p>
+<p>打开<code>.travis.yml</code>文件可以看到除了基本的信息之外，还有<code>deploy</code>相关的信息，其中比较让人疑惑的是<code>api_key</code>，这个<code>api_key</code>其实是你的heroku账户的token加密之后的一个字符串。heroku的token看起来是一个类似uuid5的字符串，可以通过以下命令查看<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">heroku</span> <span class="selector-tag">auth</span><span class="selector-pseudo">:token</span></div></pre></td></tr></table></figure></p>
 <p>有一个问题我不太明白的是，之前用travis加密文件<code>travis encrypt-file path/of/file --add</code>的时候，可以在travis网站对应repo的setting里看到多出的环境变量，用来加密的key value，然后需要用<code>openssl</code>命令来解密。</p>
 <p>但加密heroku的token后，并没有生成任何新的环境变量，而且也无需在<code>.travis.yml</code>中执行解密的相关操作。</p>
 <p>那么用来加密的key value到底存在哪里了呢？！</p>
@@ -139,7 +139,7 @@
 <div class="duoshuo">
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="1464852466" data-title="利用travis进行heroku部署"
-       data-url="http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"></div>
+       data-url="http://sabrinaluo.com/tech/tech/2016/06/02/travis-heroku/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">

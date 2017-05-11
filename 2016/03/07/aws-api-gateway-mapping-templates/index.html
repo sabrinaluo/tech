@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  API Gateway,AWS,header,lambda,mapping templates
+  AWS,API Gateway,lambda,mapping templates,header
   ">
   
   <meta name="author" content="Sabrina">
@@ -73,14 +73,14 @@
       <a href="/tech/archives" class="btn btn-group-left"><i
                 class="fa fa-file-text"></i> Posts </a>
       <a href="/tech/archives"
-         class="btn btn-group-right"> 35 </a>
+         class="btn btn-group-right"> 36 </a>
     </div>
 
     <div class="btn-group">
       <a href="/tech/tags" class="btn btn-group-left"><i
                 class="fa fa-tags"></i> Tags </a>
       <a href="/tech/tags"
-         class="btn btn-group-right"> 102 </a>
+         class="btn btn-group-right"> 104 </a>
     </div>
 
     <div class="btn-group">
@@ -111,7 +111,7 @@
 <li>在API Gateway界面中选中具体的api方法，点击右侧的<strong>Intergration Request</strong></li>
 <li>在底部点击<strong>Mapping Templates</strong></li>
 <li>点击<strong>Add Mapping Template</strong>，输入<code>application/json</code>，点击√进行确认</li>
-<li>在右侧新出现的区域，点击编辑按钮（铅笔图标），输入需要的变量即可，例如要获取ip：<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">"body"</span>: <span class="variable">$input</span>.json(<span class="string">'$'</span>),</span><br><span class="line">  <span class="string">"source_ip"</span> : <span class="string">"$context.identity.sourceIp"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>在右侧新出现的区域，点击编辑按钮（铅笔图标），输入需要的变量即可，例如要获取ip：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"body"</span>: <span class="variable">$input</span>.json(<span class="string">'$'</span>),</div><div class="line">  <span class="string">"source_ip"</span> : <span class="string">"<span class="variable">$context</span>.identity.sourceIp"</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>其中<code>$input.json(&#39;$&#39;)</code>是请求时客户端发来的body</p>
@@ -141,7 +141,7 @@
 <div class="duoshuo">
   <!-- 多说评论框 start -->
   <div class="ds-thread" data-thread-key="1457332383" data-title="AWS API Gateway Mapping Template 获取IP, header等"
-       data-url="http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"></div>
+       data-url="http://sabrinaluo.com/tech/tech/2016/03/07/aws-api-gateway-mapping-templates/"></div>
   <!-- 多说评论框 end -->
   <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
   <script type="text/javascript">
