@@ -87,13 +87,13 @@
   <ul class="stat">
     <li>
       <a href="/tech/archives">
-        <div class="stat-count">36</div>
+        <div class="stat-count">37</div>
         <div class="stat-name">Posts</div>
       </a>
     </li>
     <li>
       <a href="/tech/tags">
-        <div class="stat-count">104</div>
+        <div class="stat-count">111</div>
         <div class="stat-name">Tags</div>
       </a>
     </li>
@@ -124,6 +124,18 @@
       Recent Post
     </h3>
     <ul>
+      
+      <li>
+        <a href="/tech/2017/05/26/interpolation-and-pluralization/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">关于本地化的一些技巧</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。 
+  
+          </span>
+        </a>
+      </li>
       
       <li>
         <a href="/tech/2017/05/11/thoughts/">
@@ -171,17 +183,6 @@
  千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！:( 
  
  好久没有写什么东西了，可能是因为最近一直做的事情都是在重复搬砖，没有什么
-          </span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/tech/2016/07/14/jenkins-github-pull-request-builder/">
-          <span class="icon-left"><i class="fa fa-book"></i></span>
-          <span class="post-title read-more">Jenkins集成github pull request插件</span>
-          <span class="icon-right"><i class="fa fa-star"></i></span>
-          <span class="subtext read-more">
-             前不久给bootstrap提了个 issue ，然后被他们的高科技自动回复机器人吓萌比了。 有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了
           </span>
         </a>
       </li>
@@ -309,9 +310,9 @@
 
 
 <script>
-  var posts = [{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/tech/2017/05/11/thoughts/"},{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/tech/2017/01/03/vpn/"},{"date":"2016-10-19","title":"一些js小技巧","url":"http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/"},{"date":"2016-09-20","title":"CSS的几个小技巧：pointer-events, transform垂直居中,nth-child","url":"http://sabrinaluo.com/tech/tech/2016/09/20/some-css-tricks/"},{"date":"2016-07-14","title":"Jenkins集成github pull request插件","url":"http://sabrinaluo.com/tech/tech/2016/07/14/jenkins-github-pull-request-builder/"},{"date":"2016-06-20","title":"微博开放平台的Basic Auth和OAuth2.0认证","url":"http://sabrinaluo.com/tech/tech/2016/06/20/intro-of-oauth2-0/"},{"date":"2016-06-02","title":"利用travis进行heroku部署","url":"http://sabrinaluo.com/tech/tech/2016/06/02/travis-heroku/"}];
+  var posts = [{"date":"2017-05-26","title":"关于本地化的一些技巧","url":"http://sabrinaluo.com/tech/tech/2017/05/26/interpolation-and-pluralization/"},{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/tech/2017/05/11/thoughts/"},{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/tech/2017/01/03/vpn/"},{"date":"2016-10-19","title":"一些js小技巧","url":"http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/"},{"date":"2016-09-20","title":"CSS的几个小技巧：pointer-events, transform垂直居中,nth-child","url":"http://sabrinaluo.com/tech/tech/2016/09/20/some-css-tricks/"},{"date":"2016-07-14","title":"Jenkins集成github pull request插件","url":"http://sabrinaluo.com/tech/tech/2016/07/14/jenkins-github-pull-request-builder/"},{"date":"2016-06-20","title":"微博开放平台的Basic Auth和OAuth2.0认证","url":"http://sabrinaluo.com/tech/tech/2016/06/20/intro-of-oauth2-0/"},{"date":"2016-06-02","title":"利用travis进行heroku部署","url":"http://sabrinaluo.com/tech/tech/2016/06/02/travis-heroku/"}];
   var longestStreak = {"count":1,"start":"June 2","end":"June 2"};
-  var latestStreak = {"count":1,"start":"2017-05-11","end":"2017-05-11"};
+  var latestStreak = {"count":1,"start":"2017-05-26","end":"2017-05-26"};
   var currentStreak = getCurrentStreak(latestStreak);
   currentStreak.relativeTime = moment(currentStreak.date).fromNow();
 

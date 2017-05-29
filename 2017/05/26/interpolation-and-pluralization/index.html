@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    关于本地化的一些技巧 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  interpolation,pluralization,localization,翻译,本地化,单复数,ng-pluralize
+  ">
+  
+  <meta name="author" content="Sabrina">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="shortcut icon" type="image/ico"
+        href="/tech/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body>
+<nav>
+  <div class="container">
+    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
+    <div class="site-search">
+      <form onsubmit="return search()">
+        <label class="form-control">
+          <span class="scope-badge">This website</span>
+          <input id="query" type="text" placeholder="Search" value="">
+          <span class="scope-badge clear-search"> x </span>
+        </label>
+      </form>
+    </div>
+    <ul>
+      
+      <li><a href="/tech/archives">Archives</a></li>
+      
+      
+      <li><a href="/tech/categories">Categories</a></li>
+      
+      
+      <li><a href="/tech/tags">Tags</a></li>
+      
+      
+      <li><a href="/tech/atom.xml">RSS</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+<main class="container">
+  <header>
+  <h2>
+    <i class="fa fa-book text-muted"></i>
+    <a href="/tech/">小白妹妹写代码</a>
+    
+    
+  </h2>
+  <div class="header-btn">
+    <div class="btn-group">
+      <a href="/tech/archives" class="btn btn-group-left"><i
+                class="fa fa-file-text"></i> Posts </a>
+      <a href="/tech/archives"
+         class="btn btn-group-right"> 37 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/tags" class="btn btn-group-left"><i
+                class="fa fa-tags"></i> Tags </a>
+      <a href="/tech/tags"
+         class="btn btn-group-right"> 111 </a>
+    </div>
+
+    <div class="btn-group">
+      <a href="/tech/categories" class="btn btn-group-left"><i
+                class="fa fa-list-ul"></i> Categories </a>
+      <a href="/tech/categories"
+         class="btn btn-group-right"> 1 </a>
+    </div>
+  </div>
+</header>
+
+
+<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
+  <h3>
+    <i class="fa fa-user"></i>
+     <a>Sabrina</a>
+    <span>
+      <i class="fa fa-pencil"></i> Published: 2017-05-26 17:59:03
+    </span>
+  </h3>
+  <article>
+    <h1>关于本地化的一些技巧</h1>
+    <p>在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。</p>
+<h3 id="i18n-amp-i10n"><a href="#i18n-amp-i10n" class="headerlink" title="i18n &amp; i10n"></a>i18n &amp; i10n</h3><p>一直以来我都混淆使用这两个term，其中i18n是国际化，主要用于世界通用内容的翻译，<strong>使产品无需做大的改变就能够适应不同的语言和地区的需要</strong>，包括时间、日期、货币等；而i10n是本地化，也就是把网站里其他内容进行翻译。</p>
+<h3 id="content-key"><a href="#content-key" class="headerlink" title="content key"></a>content key</h3><p>将需要翻译的位置用<strong>Content Key</strong>占位，在单独的文件里来处理对应的翻译已经成为了本地化的最基本策略。这样做的好处是，1. 保持代码的整洁，无需因为翻译问题不断提交commit，避免污染git history；2. 方便不懂代码的运营人员随时调整翻译内容，而无需增加开发负担。</p>
+<h3 id="单复数-pluralization"><a href="#单复数-pluralization" class="headerlink" title="单复数 pluralization"></a>单复数 pluralization</h3><p>举个栗子，如果需要翻译“x个苹果”，对应的英文会有单复数形式，遇到这种情况的时候，如果缺乏经验，通常是写<code>if</code> <code>else</code>， 然后用两个不同的key：</p>
+<table>
+<thead>
+<tr>
+<th>key</th>
+<th>zh</th>
+<th>en</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>webstie.key.apple</td>
+<td>个苹果</td>
+<td>apple</td>
+</tr>
+<tr>
+<td>webstie.key.apples</td>
+<td>个苹果</td>
+<td>apples</td>
+</tr>
+</tbody>
+</table>
+<p>但是template里写太多的if else 容易使得逻辑混乱，也不利于维护，机智的我今天忽然发现angular其实有一个专门的指令来做这个事:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ng-pluralize <span class="built_in">count</span>=<span class="string">"personCount"</span></div><div class="line">                 when=<span class="comment">"&#123;'0': 'Nobody is viewing.',</span></div><div class="line">                     <span class="string">'one'</span>: <span class="string">'1 person is viewing.'</span>,</div><div class="line">                     <span class="string">'other'</span>: <span class="string">'&#123;&#125; people are viewing.'</span>&#125;<span class="comment">"&gt;</span></div><div class="line">&lt;/ng-pluralize&gt;</div></pre></td></tr></table></figure>
+<p>这个指令的本质其实跟if else类似，使用了一个hash map来储存对应的翻译，而我们可以利用这个指令，把when的值写到controller里，这样会比较美观 XD</p>
+<h3 id="插值-interpolation"><a href="#插值-interpolation" class="headerlink" title="插值 interpolation"></a>插值 interpolation</h3><p>有时候我们不得不把一整句话打断成多个部分，比如“step 1 of 5 ”，而对应的中文如果要求翻译成“第1步（共5步）”。这种情况下，如果使用断句的方法来翻译，中文需要有3个key，分别对应</p>
+<table>
+<thead>
+<tr>
+<th>lang</th>
+<th>part1</th>
+<th>part2</th>
+<th>part3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>en</td>
+<td>step</td>
+<td>of</td>
+<td></td>
+</tr>
+<tr>
+<td>zh</td>
+<td>第</td>
+<td>步（共</td>
+<td>步）</td>
+</tr>
+</tbody>
+</table>
+<p>这样做，不仅不美观，写起来<code>string + string + string</code>也非常麻烦，同时代码及翻译文件都增加了维护的难度。</p>
+<p>大家应该都有经验，在<code>console.log</code>中，可以使用<code>%s</code>作为占位符，如果能够使用占位符来进行翻译，以上情况就会简单很多。</p>
+<p>Angular原生的<code>$interpolate</code>服务，用于编译含有特定标记的字符串，<code>Hello, {{name}}</code></p>
+<blockquote>
+<p>Compiles a string with markup into an interpolation function</p>
+</blockquote>
+<p>翻译时，大多时候时候都是用<code>angular-translate</code>，这个第三方的服务能很好的处理插值，使用的标记是两个花括号<code>{{}}</code></p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//基本用法</div><div class="line">$translate(translationId[, interpolateParams], interpolationId, defaultTranslationText, forceLanguage);</div><div class="line"></div><div class="line">//例子</div><div class="line">$scope.stepInfoText = $filter(<span class="string">'translate'</span>)(<span class="string">'widget-progress-bar.step.text'</span>, &#123;currentStep:<span class="number">1</span>, totalStep: <span class="number">5</span>&#125;);</div><div class="line"></div><div class="line">//翻译文件 *.properties</div><div class="line">widget-progress-bar.step.text=step &#123;&#123;currentStep&#125;&#125; <span class="keyword">of</span> &#123;&#123;totalStep&#125;&#125;</div><div class="line">//output: step <span class="number">1</span> <span class="keyword">of</span> <span class="number">5</span></div></pre></td></tr></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1: <a href="https://docs.angularjs.org/guide/i18n" target="_blank" rel="external">https://docs.angularjs.org/guide/i18n</a><br>2: <a href="https://docs.angularjs.org/api/ng/directive/ngPluralize" target="_blank" rel="external">https://docs.angularjs.org/api/ng/directive/ngPluralize</a><br>3: <a href="https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize" target="_blank" rel="external">https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize</a><br>4: <a href="https://docs.angularjs.org/api/ng/service/$interpolate" target="_blank" rel="external">https://docs.angularjs.org/api/ng/service/$interpolate</a><br>5: <a href="https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate" target="_blank" rel="external">https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate</a></p>
+
+  </article>
+</div>
+
+
+
+
+</main>
+
+<footer class="container clearfix">
+  <ul class="social-link">
+    <li>© 2016 Sabrina</li>
+
+    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+    
+    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    
+    <li><a href="http://weibo.com/206663121">Weibo</a></li>
+    
+  </ul>
+  <div class="theme-info">
+    Theme <a
+            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+    by <a
+            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+  </div>
+  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
+</footer>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+            '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+<gcse:search></gcse:search>
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>

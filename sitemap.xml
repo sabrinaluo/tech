@@ -2,268 +2,275 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/19/understand-js-closure/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2017/05/26/interpolation-and-pluralization/</loc>
     
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/tags/index.html</loc>
     
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/14/how-to-setup-dynamodb-at-local/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/01/promise/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/13/set-a-custom-domain-for-github-page/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/28/travis-github-hexo/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/24/how-to-merge-repos-with-git/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/11/x-wsse/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/01/18/sequentialize-promise-by-recursion/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/31/understand-js-inheritance/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/categories/index.html</loc>
     
-    <lastmod>2017-05-11T04:28:51.882Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/06/20/intro-of-oauth2-0/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/11/x-wsse/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/09/20/some-css-tricks/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/22/understand-resolve-reject-catch-of-promise/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2017/01/03/vpn/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/31/understand-js-inheritance/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2017/05/11/thoughts/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/01/12/ES6-generator-yield/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/19/understand-js-closure/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/28/travis-github-hexo/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/04/git-basic/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/13/set-a-custom-domain-for-github-page/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/01/promise/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/01/18/sequentialize-promise-by-recursion/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/14/how-to-setup-dynamodb-at-local/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/24/how-to-merge-repos-with-git/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/tech/2015/12/24/how-to-merge-commits-with-git-rebase/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/01/22/understanding-of-CORS/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/04/git-basic/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/tech/2015/12/21/hoisting/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/02/01/git-how-to-ignore-tracked-files/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/16/difference-between-Module-exports-with-exports-in-NodeJS/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/02/03/experiencing-google-map-js-api/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2015/12/15/Setup-DEV-QA-PROD-Environments-forAWS-Api-Gateway-AWS-Lambda/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/04/01/scope-and-this-of-arrow-function/</loc>
+    <loc>http://sabrinaluo.com/tech/tech/2016/01/12/ES6-generator-yield/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/07/14/jenkins-github-pull-request-builder/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/03/07/aws-api-gateway-mapping-templates/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/04/14/push-to-deploy-through-git-hook/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/06/02/travis-heroku/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://sabrinaluo.com/tech/tech/2016/02/29/set-cookie-from-server-side-and-client-side/</loc>
-    
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://sabrinaluo.com/tech/tech/2015/12/14/JS-important-comment/</loc>
     
-    <lastmod>2017-05-11T04:28:51.878Z</lastmod>
+    <lastmod>2017-05-29T05:45:57.774Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/02/01/git-how-to-ignore-tracked-files/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2017/01/03/vpn/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/09/20/some-css-tricks/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/06/20/intro-of-oauth2-0/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/07/14/jenkins-github-pull-request-builder/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/06/02/travis-heroku/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2017/05/11/thoughts/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/04/14/push-to-deploy-through-git-hook/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/04/01/scope-and-this-of-arrow-function/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/03/07/aws-api-gateway-mapping-templates/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/02/29/set-cookie-from-server-side-and-client-side/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/02/03/experiencing-google-map-js-api/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://sabrinaluo.com/tech/tech/2016/01/22/understanding-of-CORS/</loc>
+    
+    <lastmod>2017-05-29T05:45:57.770Z</lastmod>
     
   </url>
   
