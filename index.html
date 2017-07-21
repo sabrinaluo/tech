@@ -87,13 +87,13 @@
   <ul class="stat">
     <li>
       <a href="/tech/archives">
-        <div class="stat-count">37</div>
+        <div class="stat-count">38</div>
         <div class="stat-name">Posts</div>
       </a>
     </li>
     <li>
       <a href="/tech/tags">
-        <div class="stat-count">111</div>
+        <div class="stat-count">114</div>
         <div class="stat-name">Tags</div>
       </a>
     </li>
@@ -124,6 +124,17 @@
       Recent Post
     </h3>
     <ul>
+      
+      <li>
+        <a href="/tech/2017/07/12/trailing-comma/">
+          <span class="icon-left"><i class="fa fa-book"></i></span>
+          <span class="post-title read-more">尾逗号(Trailing Comma)的意义</span>
+          <span class="icon-right"><i class="fa fa-star"></i></span>
+          <span class="subtext read-more">
+             以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：       1  2  3  4  5      var foo = [       1,        2,    
+          </span>
+        </a>
+      </li>
       
       <li>
         <a href="/tech/2017/05/26/interpolation-and-pluralization/">
@@ -169,20 +180,6 @@
           <span class="subtext read-more">
              一直以为这篇已经发过了，结果前两天搜的时候发现搜不到。一直扔在草稿里，今天整理一下之前和最近学到的一些JS小技巧 
    利用位运算取整  利用位运算，与、或、异或、左右移位， &amp;amp;   | 
-          </span>
-        </a>
-      </li>
-      
-      <li>
-        <a href="/tech/2016/09/20/some-css-tricks/">
-          <span class="icon-left"><i class="fa fa-book"></i></span>
-          <span class="post-title read-more">CSS的几个小技巧：pointer-events, transform垂直居中,nth-child</span>
-          <span class="icon-right"><i class="fa fa-star"></i></span>
-          <span class="subtext read-more">
-             
- 千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！:( 
- 
- 好久没有写什么东西了，可能是因为最近一直做的事情都是在重复搬砖，没有什么
           </span>
         </a>
       </li>
@@ -310,9 +307,9 @@
 
 
 <script>
-  var posts = [{"date":"2017-05-26","title":"关于本地化的一些技巧","url":"http://sabrinaluo.com/tech/tech/2017/05/26/interpolation-and-pluralization/"},{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/tech/2017/05/11/thoughts/"},{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/tech/2017/01/03/vpn/"},{"date":"2016-10-19","title":"一些js小技巧","url":"http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/"},{"date":"2016-09-20","title":"CSS的几个小技巧：pointer-events, transform垂直居中,nth-child","url":"http://sabrinaluo.com/tech/tech/2016/09/20/some-css-tricks/"},{"date":"2016-07-14","title":"Jenkins集成github pull request插件","url":"http://sabrinaluo.com/tech/tech/2016/07/14/jenkins-github-pull-request-builder/"},{"date":"2016-06-20","title":"微博开放平台的Basic Auth和OAuth2.0认证","url":"http://sabrinaluo.com/tech/tech/2016/06/20/intro-of-oauth2-0/"},{"date":"2016-06-02","title":"利用travis进行heroku部署","url":"http://sabrinaluo.com/tech/tech/2016/06/02/travis-heroku/"}];
-  var longestStreak = {"count":1,"start":"June 2","end":"June 2"};
-  var latestStreak = {"count":1,"start":"2017-05-26","end":"2017-05-26"};
+  var posts = [{"date":"2017-07-12","title":"尾逗号(Trailing Comma)的意义","url":"http://sabrinaluo.com/tech/tech/2017/07/12/trailing-comma/"},{"date":"2017-05-26","title":"关于本地化的一些技巧","url":"http://sabrinaluo.com/tech/tech/2017/05/26/interpolation-and-pluralization/"},{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/tech/2017/05/11/thoughts/"},{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/tech/2017/01/03/vpn/"},{"date":"2016-10-19","title":"一些js小技巧","url":"http://sabrinaluo.com/tech/tech/2016/10/19/some-js-tricks/"},{"date":"2016-09-20","title":"CSS的几个小技巧：pointer-events, transform垂直居中,nth-child","url":"http://sabrinaluo.com/tech/tech/2016/09/20/some-css-tricks/"}];
+  var longestStreak = {"count":1,"start":"September 20","end":"September 20"};
+  var latestStreak = {"count":1,"start":"2017-07-12","end":"2017-07-12"};
   var currentStreak = getCurrentStreak(latestStreak);
   currentStreak.relativeTime = moment(currentStreak.date).fromNow();
 

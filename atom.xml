@@ -5,7 +5,7 @@
   <link href="/tech/atom.xml" rel="self"/>
   
   <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2017-05-29T05:45:57.774Z</updated>
+  <updated>2017-07-21T05:46:05.775Z</updated>
   <id>http://sabrinaluo.com/tech/</id>
   
   <author>
@@ -16,11 +16,46 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>尾逗号(Trailing Comma)的意义</title>
+    <link href="http://sabrinaluo.com/tech/2017/07/12/trailing-comma/"/>
+    <id>http://sabrinaluo.com/tech/2017/07/12/trailing-comma/</id>
+    <published>2017-07-12T03:01:13.000Z</published>
+    <updated>2017-07-21T05:46:05.775Z</updated>
+    
+    <content type="html"><![CDATA[<p>以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line"><span class="built_in">    1,</span></div><div class="line"><span class="built_in">    2,</span></div><div class="line"><span class="built_in">    3,</span></div><div class="line">]<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+<p>作为一个懒癌晚期患者，觉得要多加一个逗号，真是好麻烦！那是naive的我，当然还不知道有版本控制diff这种高级工具，还停留在复制粘贴文件夹的人工版本控制低级阶段…</p>
+<p>后来看到几家大厂的代码规范<a href="https://github.com/airbnb/javascript#functions--signature-invocation-indentation" target="_blank" rel="external">^1</a>, <a href="https://google.github.io/styleguide/jsguide.html#features-arrays-trailing-comma" target="_blank" rel="external">^2</a>中都有相应的规范。Airbnb的JS代码规范是非常火的，然而最开始的时候我个人比较喜欢的是Google的JS代码规范，就因为A家有我不喜欢的trailing comma。没想到，过了一段时间之后，G家也采用了这一条…而恰好也是这段时间，我一直在思考为什么有的人要把代码写的那么不clean？多年的经验告诉我，所有规则一定都是有原因的！</p>
+<p>传图好麻烦…我就文字描述一下吧。凡是用过git的人应该都知道有diff view这种东西，用来比较两个版本的代码有什么区别。没有尾逗号的时候，当你需要添加一个元素，就需要在最后一个元素的<strong>1. 末尾加上一个逗号，2.换行添加新内容</strong>，如下面的例子所示。</p>
+<p>Before<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">var foo</span> = [</div><div class="line">    1,</div><div class="line">    2</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>After<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    <span class="number">1</span>,</div><div class="line">    <span class="number">2</span>,</div><div class="line">    <span class="number">3</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>这样一来，diff view中就会显示修改了<strong>两行</strong>代码。如果使用尾逗号，则添加一个元素只需要<strong>1.换行添加新内容</strong>即可，diff view中显示只修改（添加）了一行代码。</p>
+<h3 id="一点人生感悟"><a href="#一点人生感悟" class="headerlink" title="一点人生感悟"></a>一点人生感悟</h3><p>这个世界上，凡事都是trade off，算法复杂度里要么时间换空间要么空间换时间。<br>尾逗号也一样，想要diff view clean，代码就不那么clean；想要代码clean，diff view就不那么clean。<br>所以搞清楚自己想要什么，又有什么可以去trade off，就很重要了。</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[1] <a href="https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8" target="_blank" rel="external">https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8</a><br>[2] <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：&lt;br&gt;&lt;figure class=&quot;highlight autohotkey&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/d
+    
+    </summary>
+    
+    
+      <category term="trailing comma" scheme="http://sabrinaluo.com/tech/tags/trailing-comma/"/>
+    
+      <category term="comma-dangle" scheme="http://sabrinaluo.com/tech/tags/comma-dangle/"/>
+    
+      <category term="尾逗号" scheme="http://sabrinaluo.com/tech/tags/%E5%B0%BE%E9%80%97%E5%8F%B7/"/>
+    
+      <category term="版本控制" scheme="http://sabrinaluo.com/tech/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
     <title>关于本地化的一些技巧</title>
     <link href="http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/"/>
     <id>http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/</id>
     <published>2017-05-26T09:59:03.000Z</published>
-    <updated>2017-05-29T05:45:57.774Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。</p>
 <h3 id="i18n-amp-i10n"><a href="#i18n-amp-i10n" class="headerlink" title="i18n &amp; i10n"></a>i18n &amp; i10n</h3><p>一直以来我都混淆使用这两个term，其中i18n是国际化，主要用于世界通用内容的翻译，<strong>使产品无需做大的改变就能够适应不同的语言和地区的需要</strong>，包括时间、日期、货币等；而i10n是本地化，也就是把网站里其他内容进行翻译。</p>
@@ -115,7 +150,7 @@
     <link href="http://sabrinaluo.com/tech/2017/05/11/thoughts/"/>
     <id>http://sabrinaluo.com/tech/2017/05/11/thoughts/</id>
     <published>2017-05-11T03:21:54.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>不知道为什么，我是比较喜欢JS这种脑残语言的，并且也不想将其他语言用在工作中，比如PHP、PYTHON、JAVA之类的。</p>
 <p>其实到最后肯定所有语言都是相通的，比如每种语言都会有自己的<code>lodash</code>、<code>npm</code>、<code>package.json</code>，所以当精通一种语言之后是能对其他语言的人指点江山的。我之前的一个同事新手写python，库也不会用也不知道去哪里下载，我对Python的认识只限于这是一个用缩进来控制块的语言，但搜了一下果然有<code>pip</code>，<code>requirements.txt</code></p>
@@ -151,13 +186,13 @@
     <link href="http://sabrinaluo.com/tech/2017/01/03/vpn/"/>
     <id>http://sabrinaluo.com/tech/2017/01/03/vpn/</id>
     <published>2017-01-03T06:42:57.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>今天才发现自从买了新Mac之后根本没有用新电脑写过什么东西，导致我今天居然还要<code>npm install</code>才能跑起来HEXO，真是不知道有多懒。</p>
 <p>作为一个在墙外居住了好几年的人，只知道用Unblock youku翻墙进墙内去看视频，根本不知道在墙内怎么翻出来。早些年的时候，翻到墙外是很简单的，免费的软件也很多，好像也不用VPN啥，host文件里加几个IP啥的就能上Google了，现在真是门槛越来越高了呢……回一趟内地80%我平时上的网站都上不去，公司的网站也上不去，反正根本没法work from home，幸好我是在过年前发现了这个问题，现在还来得及解决一下，不然就呵呵呵呵……</p>
 <p>以前好像也用过<code>.ovpn</code>文件，用命令行跑一下，就连上了vpn，现在已经不记得是怎么用了的…今天忽然发现公司居然有openvpn，妈妈再也不用担心我在内地没法工作了，对的，我的心里只有工作！:P</p>
 <p>通常公司提供的openvpn服务都会有一个portal，也就是有个网址，进入之后需要登录公司提供的账号，然后下载相应的客户端，之后基本上是无脑使用……反正我到现在也不知道我电脑上的credentials是怎么生成的。</p>
-<p>然而高贵的mac总是有各种各样的问题，装好openvpn connect之后居然连接错误<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Fails: Error <span class="built_in">running</span> jsondialog</div></pre></td></tr></table></figure></p>
+<p>然而高贵的mac总是有各种各样的问题，装好openvpn connect之后居然连接错误<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Fails: <span class="builtin-name">Error</span> running jsondialog</div></pre></td></tr></table></figure></p>
 <p>查了一下这是因为mac下的一个什么<code>csrutil</code>保护机制出于enable状态，<code>csrutil status</code>可查看。而disable这个东西需要在recovery mode下跑命令才行……真是麻烦呢。</p>
 <ul>
 <li>重启电脑，按住cmd+r键进入recovery mode</li>
@@ -190,10 +225,10 @@
     <link href="http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/"/>
     <id>http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/</id>
     <published>2016-10-19T07:08:33.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>一直以为这篇已经发过了，结果前两天搜的时候发现搜不到。一直扔在草稿里，今天整理一下之前和最近学到的一些JS小技巧</p>
-<h3 id="利用位运算取整"><a href="#利用位运算取整" class="headerlink" title="利用位运算取整"></a>利用位运算取整</h3><p>利用位运算，与、或、异或、左右移位，<code>&amp;</code> <code>|</code> <code>^</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>&lt;&lt;</code> ，舍去小数点后的数字<a href="http://www.cnblogs.com/kkun/archive/2012/01/30/2332309.html" target="_blank" rel="external">^1</a>，<a href="http://jsperf.com/coercion-vs-casting/3" target="_blank" rel="external">jsPerf</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">6.54321</span>;</div><div class="line"><span class="built_in">console</span>.log(a | <span class="number">0</span>); <span class="comment">//6</span></div><div class="line"><span class="built_in">console</span>.log(a &amp; <span class="number">0</span>); <span class="comment">//6</span></div></pre></td></tr></table></figure></p>
+<h3 id="利用位运算取整"><a href="#利用位运算取整" class="headerlink" title="利用位运算取整"></a>利用位运算取整</h3><p>利用位运算，与、或、异或、左右移位，<code>&amp;</code> <code>|</code> <code>^</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>&lt;&lt;</code> ，舍去小数点后的数字<a href="http://www.cnblogs.com/kkun/archive/2012/01/30/2332309.html" target="_blank" rel="external">^1</a>，<a href="http://jsperf.com/coercion-vs-casting/3" target="_blank" rel="external">jsPerf</a><br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var a = <span class="number">6.54321</span>;</div><div class="line">console.<span class="built_in">log</span>(a <span class="string">| 0); //6</span></div><div class="line">console.<span class="built_in">log</span>(a <span class="meta">&amp; 0); <span class="comment">//6</span></span></div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>按位<strong>非非</strong>运算也是可以的，所以你也可以用<strong>呻吟号</strong>把代码写成这样<code>~~a</code></p>
 </blockquote>
@@ -239,7 +274,7 @@
     <link href="http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/"/>
     <id>http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/</id>
     <published>2016-09-20T08:44:46.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！:(</p>
@@ -280,7 +315,7 @@
     <link href="http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/"/>
     <id>http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/</id>
     <published>2016-07-14T06:41:02.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>前不久给bootstrap提了个<a href="https://github.com/twbs/bootstrap/issues/19997" target="_blank" rel="external">issue</a>，然后被他们的高科技自动回复机器人吓萌比了。<br>有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。</p>
 <p>如果使用cloud based CI，很多功能都已经整合了，所以可以很方便的使用。如上travis的例子，只要在travis配置里开启pull request选项，允许PR过来的时候自动跑测试，就可以实现。</p>
@@ -348,7 +383,7 @@
     <link href="http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/"/>
     <id>http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/</id>
     <published>2016-06-20T09:59:09.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>这篇文章不是讲各种认证方式是怎么实现的，只是简单的介绍如何与微博进行整合。</p>
 <p>微博开放平台允许使用api来开发一些与微博相关的应用，微博提供<strong>Basic Auth</strong>和<strong>OAuth2.0</strong>两种认证方式，其中Basic Auth只能用于测试环境。</p>
@@ -387,14 +422,14 @@
     <link href="http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"/>
     <id>http://sabrinaluo.com/tech/2016/06/02/travis-heroku/</id>
     <published>2016-06-02T07:27:46.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>好久么有写东西了，总感觉一直忙的跟狗一样，身心俱疲，但是又不知道到底在忙什么。</p>
 <p>最近实践了一下利用travis部署到heroku的流程，又莫名其妙的尝试了新的编辑器atom，安装了markdown-preview-plus插件，当然要来写点东西试一试， 也不知道英文的linux下到底是什么问题，webstorm和sublime居然不能打中文，所以之前每次写东西都要去简书边预览边写。</p>
 <p>atom还是很好用的，可能因为我（后）天生就对JS写的东西有好感，记不住快捷键的我，不能徒手写html的我还是需要IDE的帮助，atom就用来写点简单的东西吧。</p>
 <p>travis和heroku都有自己的命令行工具（CLI），尤其travis cli用起来总比徒手写.travis.yml方便许多</p>
 <h3 id="安装travis-cli"><a href="#安装travis-cli" class="headerlink" title="安装travis-cli"></a>安装travis-cli</h3><p>travis-cli是ruby写的，所以安装之前需要安装ruby</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get <span class="keyword">install</span> ruby-<span class="keyword">full</span></div></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="builtin-name">get</span> install ruby-full</div></pre></td></tr></table></figure>
 <p>详细的安装教程可以看官方的这个<a href="https://github.com/travis-ci/travis.rb#installation" target="_blank" rel="external">https://github.com/travis-ci/travis.rb#installation</a></p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">gem</span> install travis -v <span class="number">1</span>.<span class="number">8</span>.<span class="number">2</span> --<span class="literal">no</span>-rdoc --<span class="literal">no</span>-ri</div></pre></td></tr></table></figure>
 <h3 id="安装heroku-cli"><a href="#安装heroku-cli" class="headerlink" title="安装heroku-cli"></a>安装heroku-cli</h3><p>heroku-cli也是ruby写的……有点不懂为啥都喜欢用ruby写cli？js不是挺好的吗，有啥cli是<code>npm install -g</code> 解决不了的吗？…<br>具体的安装教程看</p>
@@ -442,7 +477,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/"/>
     <id>http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/</id>
     <published>2016-04-21T09:07:08.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>为了让各位亲朋好友方便的用撤回信息装x，本宝宝写了一个<a href="http://sabrinaluo.com/nickname-gen">昵称生成器</a><br>虽然是比较简单的页面，但本宝宝还没发布呢，微信就封了这个功能，宝宝心里委屈但宝宝不说…</p>
 <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>今天早些时候，在微信群里看到了这样的撤回信息：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"牛奶"</span>撤回了一条信息并亲了你一下</div></pre></td></tr></table></figure></p>
@@ -504,7 +539,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/"/>
     <id>http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/</id>
     <published>2016-04-14T10:59:37.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>看了好多讲通过git钩子自动部署的，大多讲的绕来绕去乱七八糟思路一点也不清晰…<br>做了一晚上实验之后大概明白了是怎么工作的。</p>
 <h3 id="裸仓库（bare）"><a href="#裸仓库（bare）" class="headerlink" title="裸仓库（bare）"></a>裸仓库（bare）</h3><p>裸仓库跟我们平时<code>git clone</code>得到的仓库太一样，裸仓库其实相当于通过克隆来的仓库里的<code>.git</code>文件夹，整个裸仓库中只有git索引（index），<strong>并没有任何代码相关的东西</strong>。要实现Push to Deploy，首先我们需要一个裸仓库。</p>
@@ -561,7 +596,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/"/>
     <id>http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/</id>
     <published>2016-04-12T04:32:01.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>题外话：<br>一直以为mocha读作“抹茶”并且一直这么读了很久，直到最近看了一个mocha的教学视频，才知道这是摩卡咖啡的摩卡…而抹茶的抹茶应该是matcha…</p>
 <p>在还没有babel的时候，一切都很简单，基础的问题就先不讨论了，这里主要记录一下Babel转码和Istanbul测覆盖率的一些坑。</p>
@@ -618,7 +653,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"/>
     <id>http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/</id>
     <published>2016-04-01T08:38:12.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>JS里的作用域和this一直是一件令人头疼的事情，以前接触的不太多，毕竟面向过程编程的我基本上都不会使用“类”这个概念。</p>
 <p>自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Function)<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">^1</a>就是给懒人用的<strong>简写的匿名函数</strong>而已。后来看到有人挑战阮一峰老师<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">《ECMAScript 6入门》</a>中关于箭头函数this的一些问题<a href="https://github.com/ruanyf/es6tutorial/issues/150" target="_blank" rel="external">^2</a>，才对箭头函数有了一丁点的理解。</p>
@@ -670,7 +705,7 @@
     <link href="http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/"/>
     <id>http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/</id>
     <published>2016-03-14T10:33:31.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>环境：Ubuntu</p>
 <h3 id="SSH连接-EC2"><a href="#SSH连接-EC2" class="headerlink" title="SSH连接 EC2"></a>SSH连接 EC2</h3><p>windows下通常用putty<br>ubuntu下先打个命令<code>ssh</code>看看能否识别命令，如果能就方便很多</p>
@@ -698,7 +733,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="mongodb安装及配置"><a href="#mongodb安装及配置" class="headerlink" title="mongodb安装及配置"></a>mongodb安装及配置</h3><p>有了apt-get一切真是轻松如放屁…连解压缩都不用！也不用再设置环境变量什么的（根部记不住解压缩的命令…）<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="keyword">get</span> install mongodb</div></pre></td></tr></table></figure></p>
+<h3 id="mongodb安装及配置"><a href="#mongodb安装及配置" class="headerlink" title="mongodb安装及配置"></a>mongodb安装及配置</h3><p>有了apt-get一切真是轻松如放屁…连解压缩都不用！也不用再设置环境变量什么的（根部记不住解压缩的命令…）<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="builtin-name">get</span> install mongodb</div></pre></td></tr></table></figure></p>
 <p>安装好了之后，去<strong>根目录</strong>下创建<code>data</code>文件夹即可，然后打<code>mongod</code>命令，应该就启动了，此时访问<code>localhost:27017</code>，如果看到以下文字，就成功启动了芒果DB</p>
 <blockquote>
 <p>You are trying to access MongoDB on the native driver port. For http diagnostic access, add 1000 to the port number</p>
@@ -729,7 +764,7 @@
     <link href="http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"/>
     <id>http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/</id>
     <published>2016-03-07T06:33:03.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。</p>
 <h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，lambda获取到的payload并<strong>不包含 request header</strong>的内容，而只有<strong>request body</strong>的内容。</p>
@@ -788,7 +823,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"/>
     <id>http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/</id>
     <published>2016-02-29T06:04:57.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬<del>汉</del>妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…</p>
 <p>在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…）</p>
@@ -805,7 +840,7 @@
 </li>
 </ul>
 </blockquote>
-<h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight dos"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Set</span>-Cookie: NAME=VALUE; expires=<span class="built_in">DATE</span>; <span class="built_in">path</span>=<span class="built_in">PATH</span>; domain=DOMAIN</div></pre></td></tr></table></figure></p>
+<h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-Cookie: <span class="attribute">NAME</span>=VALUE; <span class="attribute">expires</span>=DATE; <span class="attribute">path</span>=PATH; <span class="attribute">domain</span>=DOMAIN</div></pre></td></tr></table></figure></p>
 <p>NAME VALUE是一对键值<br>expires是过期日期，通常用当前时间的毫秒数加上一段时间：<code>new Date().getTime()+30*24*60*60*1000)</code>，然后<strong>需要调用<code>toUTCString()</code>方法</strong><br>如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失<br>path和domain这个…感觉不太用得到，具体可以看<a href="http://blog.sina.com.cn/s/blog_70c4d9410100z3il.html" target="_blank" rel="external">这篇文章</a></p>
 <p>如果要同时设置多个cookie，同时返回多个<code>Set-Cookie</code>头即可</p>
 <h4 id="maxAge"><a href="#maxAge" class="headerlink" title="maxAge"></a>maxAge</h4><p>有一些服务器端的框架会提供maxAge属性来设置cookie的过期时间，但是原始的Set-Cookie头是不支持maxAge的，所以在通过头部来设置cookie还是乖乖用回expires吧</p>
@@ -839,7 +874,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"/>
     <id>http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/</id>
     <published>2016-02-17T04:31:55.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>每次遇到跨域的问题真是！@#￥%</p>
 <p>我对<code>JSONP</code>的一些浅显的理解就是，有时候会看到类似<code>http://xxx.xx.com/?callback=xxx</code>这样的请求（<code>callback=</code>也可能是<code>jsonp=</code>也可能是<code>jsonpcallback=</code>，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。</p>
@@ -873,7 +908,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"/>
     <id>http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/</id>
     <published>2016-02-03T10:32:51.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>一直都想把自己去过的地方做个地图标记，然而现在能找到的各种现成的地图产品都不太喜欢，所以就用谷歌地图自己写了一个。<br>总结以下常见的问题和坑：</p>
 <h3 id="自动缩放-auto-zoom"><a href="#自动缩放-auto-zoom" class="headerlink" title="自动缩放(auto zoom)"></a>自动缩放(auto zoom)</h3><p>使用场景大多数时候是有很多marker，想要全部显示这些marker，同时zoom当然越大越清晰。</p>
@@ -921,7 +956,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"/>
     <id>http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/</id>
     <published>2016-02-01T06:01:03.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_</p>
 <h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><p>在git中文件有两类，共三种状态：</p>
@@ -965,7 +1000,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"/>
     <id>http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</id>
     <published>2016-01-23T14:52:26.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
+    <updated>2017-07-21T05:46:05.775Z</updated>
     
     <content type="html"><![CDATA[<p>并行和顺序执行的前提当然是，有一堆promise等着你去执行……<br>通常我们把这“一堆”promise对象放到一个数组里，<code>[promise1, promise2, promise3, ...]</code></p>
 <p>我们都知道想要让promise按顺序执行，那就是一个接一个的then。然而手写很多then太累了，而嵌套的promise又是反模式，我之前蠢蠢的<a href="tech/2016/01/18/sequentialize-promise-by-recursion/">用递归解决了顺序执行的问题</a>，后来终于在udacity习得了顺序promise的正确打开方式！</p>
@@ -1019,62 +1054,6 @@
       <category term="sequential" scheme="http://sabrinaluo.com/tech/tags/sequential/"/>
     
       <category term="顺序执行，并行执行" scheme="http://sabrinaluo.com/tech/tags/%E9%A1%BA%E5%BA%8F%E6%89%A7%E8%A1%8C%EF%BC%8C%E5%B9%B6%E8%A1%8C%E6%89%A7%E8%A1%8C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>对浏览器跨域问题的一些理解</title>
-    <link href="http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/"/>
-    <id>http://sabrinaluo.com/tech/2016/01/22/understanding-of-CORS/</id>
-    <published>2016-01-22T07:08:33.000Z</published>
-    <updated>2017-05-29T05:45:57.770Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="问题宝宝"><a href="#问题宝宝" class="headerlink" title="问题宝宝"></a>问题宝宝</h3><h4 id="1-移动应用开发"><a href="#1-移动应用开发" class="headerlink" title="1 移动应用开发"></a>1 移动应用开发</h4><p>之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。<br>开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(<strong>Access-Control-Allow-Origin</strong>)：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">XMLHttpRequest cannot <span class="keyword">load</span> <span class="keyword">http</span>://samlino.local/cag/get_leads. <span class="keyword">No</span> <span class="string">'Access-Control-Allow-Origin'</span> header <span class="keyword">is</span> <span class="keyword">present</span> <span class="keyword">on</span> the requested resource. Origin <span class="string">'http://localhost:63342'</span> <span class="keyword">is</span> therefore <span class="keyword">not</span> allowed access.</div></pre></td></tr></table></figure></p>
-<p>而我当时的解决方法是，在chrome装了一个叫<a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="external">Allow-Control-Allow-Origin</a>的扩展，启用之后就不报错了。</p>
-<p>也不知道什么什么原理，反正就这么一直用着。（不思进取）</p>
-<h4 id="2-网络应用开发"><a href="#2-网络应用开发" class="headerlink" title="2 网络应用开发"></a>2 网络应用开发</h4><p>后来写单页应用（SPA），静态文件的js里调用各大公司的API， github、facebook什么的，反正从来没有报过上面的错…<br>另外还写过用NodeJS做中间层，从NodeJS去API拿数据然后渲染再发到前端，也从来没报过错…</p>
-<p>最近的一个case是，我们有用AWS API Gateway, Lambda, DynamoDB搭建的API，API被调用的时候就会trigger一系列的任务。然后有个小哥偷懒不想写PHP，想在前端直接请求AWS的API。于是问题来了…</p>
-<ul>
-<li>浏览器不停的提示No ‘Access-Control-Allow-Origin’的错误， 拿不到任何返回的数据。</li>
-<li>但是！服务器该做的job却都做了！</li>
-</ul>
-<p>这根本不科学啊！！！所以？到底是什么鬼？！</p>
-<h3 id="同源策略-Same-Origin-Policy"><a href="#同源策略-Same-Origin-Policy" class="headerlink" title="同源策略(Same Origin Policy)"></a>同源策略(Same Origin Policy)</h3><p>同源策略就是只有访问的内容来自<strong>相同协议、相同主机、相同端口</strong>的内容<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">^1</a>时，才会加载访问得到的内容。<strong>浏览器是同源策略的一种实现</strong></p>
-<ul>
-<li>协议：<code>location.protocol</code>，http和https是两种不同的协议</li>
-<li>主机：<code>location.host</code>，不同子域名之间都算跨域，例如www.baidu.com, tieba.baidu.com是两个不同的源</li>
-<li>端口：<code>location.port</code></li>
-</ul>
-<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>之前脑子里大概有个<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">CORS</a>的概念，然后一直以为是服务器拒绝从浏览器跨域访问…因为要解决自己call自己不同域名下的API问题，就是去服务器设置一下header…但其实是都是浏览器在作怪…</p>
-<p>在浏览器中，允许跨域访问的资源的一些例子<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#Cross-origin_network_access" target="_blank" rel="external">^2</a>：<br><code>&lt;script src=&quot;...&quot;&gt;&lt;/script&gt;</code><br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;...&quot;&gt;</code><br><code>&lt;img&gt;</code> <code>&lt;video&gt;</code> <code>&lt;audio&gt;</code><br><code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code><br><code>@font-face</code><br><code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code></p>
-<h3 id="Response-Headers"><a href="#Response-Headers" class="headerlink" title="Response Headers"></a>Response Headers</h3><p>先看看可以在浏览器中跨域请求的别人家(github)的API返回的header：<br><figure class="highlight tp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Credentials:true</div><div class="line">Access-Control-Allow-Origin:*</div><div class="line">Access-Control-Expose-Headers:ETag, Link, <span class="keyword">X</span>-GitHub-OTP, <span class="keyword">X</span>-RateLimit-Limit, <span class="keyword">X</span>-RateLimit-Remaining, <span class="keyword">X</span>-RateLimit-Reset, <span class="keyword">X</span>-OAuth-Scopes, <span class="keyword">X</span>-Accepted-OAuth-Scopes, <span class="keyword">X</span>-Poll-Interval</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>看看自家API返回的header<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">Connection:</span>keep-alive</div><div class="line">Content-<span class="string">Encoding:</span>gzip</div><div class="line">Content-<span class="string">Type:</span>text/html</div><div class="line"><span class="string">Date:</span>Fri, <span class="number">22</span> Jan <span class="number">2016</span> <span class="number">07</span>:<span class="number">07</span>:<span class="number">01</span> GMT</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>差别就在于别人家的API返回了<strong>Access-Control-Allow-Origin:*</strong><br>浏览器读到这个头部之后，才会加载请求的结果。</p>
-<h3 id="跨域的时候服务器收到请求了吗？"><a href="#跨域的时候服务器收到请求了吗？" class="headerlink" title="跨域的时候服务器收到请求了吗？"></a>跨域的时候服务器收到请求了吗？</h3><p>服务器当然收到请求了，不然怎么能返回头部…而且我上面举的诡异的例子中，请求trigger的job都完成了。</p>
-<p>所以也就是说，服务器其实收到了你的请求，并且给你返回了全部的数据，但是浏览器看到头部就把body藏起来了，然后抛出错误提示…</p>
-<h3 id="为什么浏览器不允许跨域访问？"><a href="#为什么浏览器不允许跨域访问？" class="headerlink" title="为什么浏览器不允许跨域访问？"></a>为什么浏览器不允许跨域访问？</h3><p>当然是为了安全……但是这个有点不太好理解，api拿点数据有什么不安全的？！</p>
-<p>下面这个例子比较清楚的说明同源策略是如何避免安全问题的：<a href="http://stackoverflow.com/questions/9222822/why-do-browser-apis-restrict-cross-domain-requests" target="_blank" rel="external">^3</a><br>网站A：一个看起来跟银行网站几乎一样的假网站<br>网站B：真正的银行网站<br>如果没有同源策略：<br>1.当用户来到A网站，以为是真的银行网站，然后输入自己的账号、密码（此时用户的账号、密码已经被网站A获取了）<br>2.网站A利用ajax把账号密码发到真正的银行网站B，然后银行网站返回一个带有token的form需要用户输入手机验证码。<br>3.网站A获得这个form之后显示出来，让用户填入手机验证码……至此，网站A获得了账号、密码、手机验证码，已经可以登陆用户的账号了。</p>
-<p>而当有同源策略时，到第2步的时候，网站A根本无法获取银行网站返回的带token的form，所以就算有了账户和密码，也无法操作用户的账户。</p>
-<p>当然啦，银行的加密机制肯定没有我描述的这么弱智，不然还要U盾之类的东东干嘛，这只是一个为了方便理解安全问题而杜撰的例子…</p>
-<h3 id="好奇宝宝"><a href="#好奇宝宝" class="headerlink" title="好奇宝宝"></a>好奇宝宝</h3><p>不知道chrome的这个插件<a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="external">Allow-Control-Allow-Origin</a>，是怎么实现允许跨域请求的。<br>之前发现启用插件的时候，github上的小图标全都不显示了…</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h3 id=&quot;问题宝宝&quot;&gt;&lt;a href=&quot;#问题宝宝&quot; class=&quot;headerlink&quot; title=&quot;问题宝宝&quot;&gt;&lt;/a&gt;问题宝宝&lt;/h3&gt;&lt;h4 id=&quot;1-移动应用开发&quot;&gt;&lt;a href=&quot;#1-移动应用开发&quot; class=&quot;headerlink&quot; title=&quot;1
-    
-    </summary>
-    
-    
-      <category term="CORS" scheme="http://sabrinaluo.com/tech/tags/CORS/"/>
-    
-      <category term="corss domain" scheme="http://sabrinaluo.com/tech/tags/corss-domain/"/>
-    
-      <category term="同源策略" scheme="http://sabrinaluo.com/tech/tags/%E5%90%8C%E6%BA%90%E7%AD%96%E7%95%A5/"/>
-    
-      <category term="跨域" scheme="http://sabrinaluo.com/tech/tags/%E8%B7%A8%E5%9F%9F/"/>
-    
-      <category term="浏览器" scheme="http://sabrinaluo.com/tech/tags/%E6%B5%8F%E8%A7%88%E5%99%A8/"/>
     
   </entry>
   
