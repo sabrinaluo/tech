@@ -16,92 +16,120 @@
   es6,箭头函数,this,作用域,词法作用域
   ">
   
-  <meta name="author" content="Sabrina">
+  <meta name="author" content="HiiTea">
 
   <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
 
-  <link rel="shortcut icon" type="image/ico"
-        href="/tech/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
   <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 </head>
 
-<body>
-<nav>
-  <div class="container">
-    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
-    <div class="site-search">
-      <form onsubmit="return search()">
-        <label class="form-control">
-          <span class="scope-badge">This website</span>
-          <input id="query" type="text" placeholder="Search" value="">
-          <span class="scope-badge clear-search"> x </span>
-        </label>
-      </form>
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
-    <ul>
-      
-      <li><a href="/tech/archives">Archives</a></li>
-      
-      
-      <li><a href="/tech/categories">Categories</a></li>
-      
-      
-      <li><a href="/tech/tags">Tags</a></li>
-      
-      
-      <li><a href="/tech/atom.xml">RSS</a></li>
-      
-    </ul>
   </div>
 </nav>
 
-<main class="container">
-  <header>
-  <h2>
-    <i class="fa fa-book text-muted"></i>
-    <a href="/tech/">小白妹妹写代码</a>
-    
-    
-  </h2>
-  <div class="header-btn">
-    <div class="btn-group">
-      <a href="/tech/archives" class="btn btn-group-left"><i
-                class="fa fa-file-text"></i> Posts </a>
-      <a href="/tech/archives"
-         class="btn btn-group-right"> 38 </a>
-    </div>
+<div class="main-container">
+  <header class="header-wrapper">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 38 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 114 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 1 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
 
-    <div class="btn-group">
-      <a href="/tech/tags" class="btn btn-group-left"><i
-                class="fa fa-tags"></i> Tags </a>
-      <a href="/tech/tags"
-         class="btn btn-group-right"> 114 </a>
-    </div>
-
-    <div class="btn-group">
-      <a href="/tech/categories" class="btn btn-group-left"><i
-                class="fa fa-list-ul"></i> Categories </a>
-      <a href="/tech/categories"
-         class="btn btn-group-right"> 1 </a>
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
     </div>
   </div>
 </header>
 
 
-<div class="boxed-group" xmlns="http://www.w3.org/1999/html">
+<div class="post-container container">
   <h3>
-    <i class="fa fa-user"></i>
-     <a>Sabrina</a>
-    <span>
-      <i class="fa fa-pencil"></i> Published: 2016-04-01 16:38:12
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="Apr 01, 2016, 4:38:12 PM">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment("20160401", YYYYMMDD).fromNow()}}
     </span>
   </h3>
-  <article>
+
+  <article class="post-content">
     <h1>箭头函数的作用域和this</h1>
     <p>JS里的作用域和this一直是一件令人头疼的事情，以前接触的不太多，毕竟面向过程编程的我基本上都不会使用“类”这个概念。</p>
 <p>自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Function)<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">^1</a>就是给懒人用的<strong>简写的匿名函数</strong>而已。后来看到有人挑战阮一峰老师<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">《ECMAScript 6入门》</a>中关于箭头函数this的一些问题<a href="https://github.com/ruanyf/es6tutorial/issues/150" target="_blank" rel="external">^2</a>，才对箭头函数有了一丁点的理解。</p>
@@ -129,29 +157,29 @@
 </div>
 
 
+</div>
 
+<div class="footer-wrapper container">
+  <footer class="footer">
+    <div class="footer-theme-info float-right">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
 
-</main>
-
-<footer class="container clearfix">
-  <ul class="social-link">
-    <li>© 2016 Sabrina</li>
-
-    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
-    
-    <li><a href="https://github.com/sabrinaluo">Github</a></li>
-    
-    <li><a href="http://weibo.com/206663121">Weibo</a></li>
-    
-  </ul>
-  <div class="theme-info">
-    Theme <a
-            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-    by <a
-            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-  </div>
-  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
-</footer>
+    <a href="http://sabrinaluo.com/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link float-left">
+      <li>© 2016 HiiTea</li>
+      <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+  </footer>
+</div>
 
 
 <script>
@@ -161,12 +189,11 @@
     gcse.type = 'text/javascript';
     gcse.async = true;
     gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-            '//cse.google.com/cse.js?cx=' + cx;
+      '//cse.google.com/cse.js?cx=' + cx;
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-<gcse:search></gcse:search>
 
 
 

@@ -12,123 +12,212 @@
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
-  <meta name="author" content="Sabrina">
+  <meta name="author" content="HiiTea">
 
   <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
 
-  <link rel="shortcut icon" type="image/ico"
-        href="/tech/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
   <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 </head>
 
-<body>
-<nav>
-  <div class="container">
-    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
-    <div class="site-search">
-      <form onsubmit="return search()">
-        <label class="form-control">
-          <span class="scope-badge">This website</span>
-          <input id="query" type="text" placeholder="Search" value="">
-          <span class="scope-badge clear-search"> x </span>
-        </label>
-      </form>
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
-    <ul>
-      
-      <li><a href="/tech/archives">Archives</a></li>
-      
-      
-      <li><a href="/tech/categories">Categories</a></li>
-      
-      
-      <li><a href="/tech/tags">Tags</a></li>
-      
-      
-      <li><a href="/tech/atom.xml">RSS</a></li>
-      
-    </ul>
   </div>
 </nav>
 
-<main class="container">
+<div class="main-container">
   
-<header>
-  <h2>
-    <i class="fa fa-book text-muted"></i>
-    <a href="/tech/">小白妹妹写代码</a>
-    
-    
-  </h2>
-  <div class="header-btn">
-    <div class="btn-group">
-      <a href="/tech/archives" class="btn btn-group-left"><i
-                class="fa fa-file-text"></i> Posts </a>
-      <a href="/tech/archives"
-         class="btn btn-group-right"> 38 </a>
-    </div>
 
-    <div class="btn-group">
-      <a href="/tech/tags" class="btn btn-group-left"><i
-                class="fa fa-tags"></i> Tags </a>
-      <a href="/tech/tags"
-         class="btn btn-group-right"> 114 </a>
-    </div>
+<div class="container-lg">
+  
 
-    <div class="btn-group">
-      <a href="/tech/categories" class="btn btn-group-left"><i
-                class="fa fa-list-ul"></i> Categories </a>
-      <a href="/tech/categories"
-         class="btn btn-group-right"> 1 </a>
+<div class="blog-intro">
+  <div class="blog-intro-user">
+    <img class="avatar" src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460">
+    <div class="user-name">
+      <div class="blog-title">小白妹妹写代码</div>
+      <div class="blog-author">HiiTea</div>
+    </div>
+    <div class="blog-description">
+      我这么可爱一定是男孩子
     </div>
   </div>
-</header>
 
-
-<div class="archive">
-<h2><a href="/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/">AWS EC2 SSH访问 &amp; mongodb 安装</a></h2>
-<p class="read-more">
-   环境：Ubuntu 
-   SSH连接 EC2  windows下通常用putty ubuntu下先打个命令 ssh 看看能否识别命令，如果能就方便很多 
- 要连接EC2通常都会有一个 .pem 的 私钥 文件，另外还会有一个 Public IP  首先设置权限（并不知道这个有什么用，chmod 400使得文件只能被该文件的拥有者读取）       1  2       chmod  400  
-</p>
-</div>
-
-<div class="archive">
-<h2><a href="/tech/2016/03/07/aws-api-gateway-mapping-templates/">AWS API Gateway Mapping Template 获取IP, header等</a></h2>
-<p class="read-more">
-   API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。 
-   适用场景  在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，lambda获取到的payload并 不包含 request header 的内容，而只有 reque
-</p>
-</div>
-
-
-</main>
-
-<footer class="container clearfix">
-  <ul class="social-link">
-    <li>© 2016 Sabrina</li>
-
-    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+  <ul class="user-detail">
     
-    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    <li>
+      <i class="fa fa-map-marker"></i>
+      Hong Kong, China
+    </li>
     
-    <li><a href="http://weibo.com/206663121">Weibo</a></li>
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:luohaojing[at]gmail.com">luohaojing[at]gmail.com</a>
+    </li>
     
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
+    </li>
   </ul>
-  <div class="theme-info">
-    Theme <a
-            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-    by <a
-            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+
+  <div class="social-media">
+    <h4>Social Media</h4>
+    <ul>
+      
+      <li class="social-media-item"><a href="https://github.com/sabrinaluo" target="_blank"><i class="fa fa-github"></i></a></li>
+      
+      <li class="social-media-item"><a href="http://weibo.com/206663121" target="_blank"><i class="fa fa-weibo"></i></a></li>
+      
+    </ul>
   </div>
-  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
-</footer>
+</div>
+
+
+  <div class="blog-detail">
+    
+<nav class="blog-detail-nav">
+  <ul class="clearfix">
+    <li class="">
+      <a href="/tech/">Overview</a></li>
+    <li class="selected">
+      <a href="/tech/archives">Posts <span class="counter">38</span></a>
+    </li>
+    <li class="">
+      <a href="/tech/categories">Categories <span
+                class="counter">1</span></a></li>
+    <li class="">
+      <a href="/tech/tags">Tags <span class="counter">114</span></a></li>
+  </ul>
+</nav>
+
+    <div class="body-secondary">
+      <ul class="archive-list">
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/">AWS EC2 SSH访问 &amp; mongodb 安装</a></h2>
+          <p>
+             环境：Ubuntu 
+   SSH连接 EC2  windows下通常用putty ubuntu下先打个命令 ssh 看看能否识别命令，如果能就方便很多 
+ 要连接EC2通常都会有一个 .pem 的 私钥 文件，另外还会有一个 Public IP  首先设置权限（并不知道这个有什么用，chmod ...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">AWS</li>
+            
+            <li class="tag-list-item">EC2</li>
+            
+            <li class="tag-list-item">ssh</li>
+            
+            <li class="tag-list-item">mongodb</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Uncategorized </span>
+            <span><i class="fa fa-tag"></i> 4 </span>
+            <span>Published {{moment("20160314", 'YYYYMMDD').fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2016/03/07/aws-api-gateway-mapping-templates/">AWS API Gateway Mapping Template 获取IP, header等</a></h2>
+          <p>
+             API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。 
+   适用场景  在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，l...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">AWS</li>
+            
+            <li class="tag-list-item">API Gateway</li>
+            
+            <li class="tag-list-item">lambda</li>
+            
+            <li class="tag-list-item">mapping templates</li>
+            
+            <li class="tag-list-item">header</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Uncategorized </span>
+            <span><i class="fa fa-tag"></i> 5 </span>
+            <span>Published {{moment("20160307", 'YYYYMMDD').fromNow()}}</span>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer">
+    <div class="footer-theme-info float-right">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+
+    <a href="http://sabrinaluo.com/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link float-left">
+      <li>© 2016 HiiTea</li>
+      <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+  </footer>
+</div>
 
 
 <script>
@@ -138,12 +227,11 @@
     gcse.type = 'text/javascript';
     gcse.async = true;
     gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-            '//cse.google.com/cse.js?cx=' + cx;
+      '//cse.google.com/cse.js?cx=' + cx;
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-<gcse:search></gcse:search>
 
 
 

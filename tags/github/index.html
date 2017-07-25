@@ -12,133 +12,241 @@
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
-  <meta name="author" content="Sabrina">
+  <meta name="author" content="HiiTea">
 
   <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
 
-  <link rel="shortcut icon" type="image/ico"
-        href="/tech/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
   <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 </head>
 
-<body>
-<nav>
-  <div class="container">
-    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
-    <div class="site-search">
-      <form onsubmit="return search()">
-        <label class="form-control">
-          <span class="scope-badge">This website</span>
-          <input id="query" type="text" placeholder="Search" value="">
-          <span class="scope-badge clear-search"> x </span>
-        </label>
-      </form>
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
-    <ul>
-      
-      <li><a href="/tech/archives">Archives</a></li>
-      
-      
-      <li><a href="/tech/categories">Categories</a></li>
-      
-      
-      <li><a href="/tech/tags">Tags</a></li>
-      
-      
-      <li><a href="/tech/atom.xml">RSS</a></li>
-      
-    </ul>
   </div>
 </nav>
 
-<main class="container">
+<div class="main-container">
   
-<header>
-  <h2>
-    <i class="fa fa-book text-muted"></i>
-    <a href="/tech/">小白妹妹写代码</a>
-    
-    
-  </h2>
-  <div class="header-btn">
-    <div class="btn-group">
-      <a href="/tech/archives" class="btn btn-group-left"><i
-                class="fa fa-file-text"></i> Posts </a>
-      <a href="/tech/archives"
-         class="btn btn-group-right"> 38 </a>
-    </div>
 
-    <div class="btn-group">
-      <a href="/tech/tags" class="btn btn-group-left"><i
-                class="fa fa-tags"></i> Tags </a>
-      <a href="/tech/tags"
-         class="btn btn-group-right"> 114 </a>
-    </div>
+<div class="container-lg">
+  
 
-    <div class="btn-group">
-      <a href="/tech/categories" class="btn btn-group-left"><i
-                class="fa fa-list-ul"></i> Categories </a>
-      <a href="/tech/categories"
-         class="btn btn-group-right"> 1 </a>
+<div class="blog-intro">
+  <div class="blog-intro-user">
+    <img class="avatar" src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460">
+    <div class="user-name">
+      <div class="blog-title">小白妹妹写代码</div>
+      <div class="blog-author">HiiTea</div>
+    </div>
+    <div class="blog-description">
+      我这么可爱一定是男孩子
     </div>
   </div>
-</header>
 
-
-<div class="archive">
-<h2><a href="/tech/2016/07/14/jenkins-github-pull-request-builder/">Jenkins集成github pull request插件</a></h2>
-<p class="read-more">
-   前不久给bootstrap提了个 issue ，然后被他们的高科技自动回复机器人吓萌比了。 有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。 
- 如果使用cloud based CI，很多功能都已经整合了，所以可以很方便的使用。如上travis的例子，只要在travis配置里开启pull request选项，允许P
-</p>
-</div>
-
-<div class="archive">
-<h2><a href="/tech/2015/12/28/travis-github-hexo/">利用travis自动部署hexo搭建在github的博客</a></h2>
-<p class="read-more">
-   这篇应该属于不务正业系列… 自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。 
-  Travis 是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～ 
- 最初知道travis是因为总在github商看到这种小图标，虽然不知道是什么东东，但是觉得逼格特别高…     
- 关于H
-</p>
-</div>
-
-<div class="archive">
-<h2><a href="/tech/2015/12/13/set-a-custom-domain-for-github-page/">GitHub Page如何绑定域名</a></h2>
-<p class="read-more">
-   本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！ 我本来的github page是 sabrinaluo.github.io ，花了一百多大洋把这个域名变成 sabrinaluo.com ，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ 
- 
-  只讨论一级域名的绑
-</p>
-</div>
-
-
-</main>
-
-<footer class="container clearfix">
-  <ul class="social-link">
-    <li>© 2016 Sabrina</li>
-
-    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+  <ul class="user-detail">
     
-    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    <li>
+      <i class="fa fa-map-marker"></i>
+      Hong Kong, China
+    </li>
     
-    <li><a href="http://weibo.com/206663121">Weibo</a></li>
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:luohaojing[at]gmail.com">luohaojing[at]gmail.com</a>
+    </li>
     
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
+    </li>
   </ul>
-  <div class="theme-info">
-    Theme <a
-            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-    by <a
-            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+
+  <div class="social-media">
+    <h4>Social Media</h4>
+    <ul>
+      
+      <li class="social-media-item"><a href="https://github.com/sabrinaluo" target="_blank"><i class="fa fa-github"></i></a></li>
+      
+      <li class="social-media-item"><a href="http://weibo.com/206663121" target="_blank"><i class="fa fa-weibo"></i></a></li>
+      
+    </ul>
   </div>
-  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
-</footer>
+</div>
+
+
+  <div class="blog-detail">
+    
+<nav class="blog-detail-nav">
+  <ul class="clearfix">
+    <li class="">
+      <a href="/tech/">Overview</a></li>
+    <li class="">
+      <a href="/tech/archives">Posts <span class="counter">38</span></a>
+    </li>
+    <li class="">
+      <a href="/tech/categories">Categories <span
+                class="counter">1</span></a></li>
+    <li class="selected">
+      <a href="/tech/tags">Tags <span class="counter">114</span></a></li>
+  </ul>
+</nav>
+
+    <div class="body-secondary">
+      <ul class="archive-list">
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2016/07/14/jenkins-github-pull-request-builder/">Jenkins集成github pull request插件</a></h2>
+          <p>
+             前不久给bootstrap提了个 issue ，然后被他们的高科技自动回复机器人吓萌比了。 有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。 
+ 如果使用cloud based CI，很多功能都已经整合了，所以可以很...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">持续集成</li>
+            
+            <li class="tag-list-item">jenkins</li>
+            
+            <li class="tag-list-item">github</li>
+            
+            <li class="tag-list-item">CI</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Uncategorized </span>
+            <span><i class="fa fa-tag"></i> 4 </span>
+            <span>Published {{moment("20160714", 'YYYYMMDD').fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2015/12/28/travis-github-hexo/">利用travis自动部署hexo搭建在github的博客</a></h2>
+          <p>
+             这篇应该属于不务正业系列… 自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。 
+  Travis 是一套持续集成的服务器解决方案，也就是等于把jenkins能够实现的都放在了云端，不用自己搭服务器安装了，懒人的福音～ 
+ 最初知道travis是...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">自动部署</li>
+            
+            <li class="tag-list-item">travis</li>
+            
+            <li class="tag-list-item">持续集成</li>
+            
+            <li class="tag-list-item">github</li>
+            
+            <li class="tag-list-item">hexo</li>
+            
+            <li class="tag-list-item">博客</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Uncategorized </span>
+            <span><i class="fa fa-tag"></i> 6 </span>
+            <span>Published {{moment("20151228", 'YYYYMMDD').fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2015/12/13/set-a-custom-domain-for-github-page/">GitHub Page如何绑定域名</a></h2>
+          <p>
+             本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！ 我本来的github page是 sabrinaluo.github.io ，花了一百多大洋把这个域名变成 sabrinaluo.com ，...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">github</li>
+            
+            <li class="tag-list-item">github page</li>
+            
+            <li class="tag-list-item">custom domain</li>
+            
+            <li class="tag-list-item">域名绑定</li>
+            
+            <li class="tag-list-item">二级域名</li>
+            
+            <li class="tag-list-item">域名解析</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Uncategorized </span>
+            <span><i class="fa fa-tag"></i> 6 </span>
+            <span>Published {{moment("20151213", 'YYYYMMDD').fromNow()}}</span>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer">
+    <div class="footer-theme-info float-right">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+
+    <a href="http://sabrinaluo.com/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link float-left">
+      <li>© 2016 HiiTea</li>
+      <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+  </footer>
+</div>
 
 
 <script>
@@ -148,12 +256,11 @@
     gcse.type = 'text/javascript';
     gcse.async = true;
     gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-            '//cse.google.com/cse.js?cx=' + cx;
+      '//cse.google.com/cse.js?cx=' + cx;
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-<gcse:search></gcse:search>
 
 
 

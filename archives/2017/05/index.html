@@ -12,122 +12,211 @@
   </title>
   <meta name="description" content="我这么可爱一定是男孩子">
   
-  <meta name="author" content="Sabrina">
+  <meta name="author" content="HiiTea">
 
   <meta http-equiv="Cache-Control" content="no-transform"/>
   <meta http-equiv="Cache-Control" content="no-siteapp">
 
-  <link rel="shortcut icon" type="image/ico"
-        href="/tech/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
   <link rel="stylesheet" href="/tech/css/main.css">
   <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
 </head>
 
-<body>
-<nav>
-  <div class="container">
-    <a href="/tech/" class="site-logo"><i class="fa fa-github"></i></a>
-    <div class="site-search">
-      <form onsubmit="return search()">
-        <label class="form-control">
-          <span class="scope-badge">This website</span>
-          <input id="query" type="text" placeholder="Search" value="">
-          <span class="scope-badge clear-search"> x </span>
-        </label>
-      </form>
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
     </div>
-    <ul>
-      
-      <li><a href="/tech/archives">Archives</a></li>
-      
-      
-      <li><a href="/tech/categories">Categories</a></li>
-      
-      
-      <li><a href="/tech/tags">Tags</a></li>
-      
-      
-      <li><a href="/tech/atom.xml">RSS</a></li>
-      
-    </ul>
   </div>
 </nav>
 
-<main class="container">
+<div class="main-container">
   
-<header>
-  <h2>
-    <i class="fa fa-book text-muted"></i>
-    <a href="/tech/">小白妹妹写代码</a>
-    
-    
-  </h2>
-  <div class="header-btn">
-    <div class="btn-group">
-      <a href="/tech/archives" class="btn btn-group-left"><i
-                class="fa fa-file-text"></i> Posts </a>
-      <a href="/tech/archives"
-         class="btn btn-group-right"> 38 </a>
-    </div>
 
-    <div class="btn-group">
-      <a href="/tech/tags" class="btn btn-group-left"><i
-                class="fa fa-tags"></i> Tags </a>
-      <a href="/tech/tags"
-         class="btn btn-group-right"> 114 </a>
-    </div>
+<div class="container-lg">
+  
 
-    <div class="btn-group">
-      <a href="/tech/categories" class="btn btn-group-left"><i
-                class="fa fa-list-ul"></i> Categories </a>
-      <a href="/tech/categories"
-         class="btn btn-group-right"> 1 </a>
+<div class="blog-intro">
+  <div class="blog-intro-user">
+    <img class="avatar" src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460">
+    <div class="user-name">
+      <div class="blog-title">小白妹妹写代码</div>
+      <div class="blog-author">HiiTea</div>
+    </div>
+    <div class="blog-description">
+      我这么可爱一定是男孩子
     </div>
   </div>
-</header>
 
-
-<div class="archive">
-<h2><a href="/tech/2017/05/26/interpolation-and-pluralization/">关于本地化的一些技巧</a></h2>
-<p class="read-more">
-   在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。 
-   i18n &amp;amp; i10n  一直以来我都混淆使用这两个term，其中i18n是国际化，主要用于世界通用内容的翻译， 使产品无需做大的改变就能够适应不同的语言和地区的需要 ，包括时间、日期、货币
-</p>
-</div>
-
-<div class="archive">
-<h2><a href="/tech/2017/05/11/thoughts/">一点感悟</a></h2>
-<p class="read-more">
-   不知道为什么，我是比较喜欢JS这种脑残语言的，并且也不想将其他语言用在工作中，比如PHP、PYTHON、JAVA之类的。 
- 其实到最后肯定所有语言都是相通的，比如每种语言都会有自己的 lodash 、 npm 、 package.json ，所以当精通一种语言之后是能对其他语言的人指点江山的。我之前的一个同事新手写python，库也不会用也不知道去哪里下载，我对Python的认识只限于这是一个
-</p>
-</div>
-
-
-</main>
-
-<footer class="container clearfix">
-  <ul class="social-link">
-    <li>© 2016 Sabrina</li>
-
-    <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+  <ul class="user-detail">
     
-    <li><a href="https://github.com/sabrinaluo">Github</a></li>
+    <li>
+      <i class="fa fa-map-marker"></i>
+      Hong Kong, China
+    </li>
     
-    <li><a href="http://weibo.com/206663121">Weibo</a></li>
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:luohaojing[at]gmail.com">luohaojing[at]gmail.com</a>
+    </li>
     
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
+    </li>
   </ul>
-  <div class="theme-info">
-    Theme <a
-            href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-    by <a
-            href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+
+  <div class="social-media">
+    <h4>Social Media</h4>
+    <ul>
+      
+      <li class="social-media-item"><a href="https://github.com/sabrinaluo" target="_blank"><i class="fa fa-github"></i></a></li>
+      
+      <li class="social-media-item"><a href="http://weibo.com/206663121" target="_blank"><i class="fa fa-weibo"></i></a></li>
+      
+    </ul>
   </div>
-  <a href="http://sabrinaluo.com/tech" class="site-logo"><i class="fa fa-github"></i></a>
-</footer>
+</div>
+
+
+  <div class="blog-detail">
+    
+<nav class="blog-detail-nav">
+  <ul class="clearfix">
+    <li class="">
+      <a href="/tech/">Overview</a></li>
+    <li class="selected">
+      <a href="/tech/archives">Posts <span class="counter">38</span></a>
+    </li>
+    <li class="">
+      <a href="/tech/categories">Categories <span
+                class="counter">1</span></a></li>
+    <li class="">
+      <a href="/tech/tags">Tags <span class="counter">114</span></a></li>
+  </ul>
+</nav>
+
+    <div class="body-secondary">
+      <ul class="archive-list">
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2017/05/26/interpolation-and-pluralization/">关于本地化的一些技巧</a></h2>
+          <p>
+             在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。 
+   i18n &amp;amp; i10n  一直以来我都混淆使用这两个term，其中i18n是国际化，主要用...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">interpolation</li>
+            
+            <li class="tag-list-item">pluralization</li>
+            
+            <li class="tag-list-item">localization</li>
+            
+            <li class="tag-list-item">翻译</li>
+            
+            <li class="tag-list-item">本地化</li>
+            
+            <li class="tag-list-item">单复数</li>
+            
+            <li class="tag-list-item">ng-pluralize</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Uncategorized </span>
+            <span><i class="fa fa-tag"></i> 7 </span>
+            <span>Published {{moment("20170526", 'YYYYMMDD').fromNow()}}</span>
+          </div>
+        </li>
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2017/05/11/thoughts/">一点感悟</a></h2>
+          <p>
+             不知道为什么，我是比较喜欢JS这种脑残语言的，并且也不想将其他语言用在工作中，比如PHP、PYTHON、JAVA之类的。 
+ 其实到最后肯定所有语言都是相通的，比如每种语言都会有自己的 lodash 、 npm 、 package.json ，所以当精通一种语言之后是能对其他语言的人指点江山的。我...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">forceSoap12Headers</li>
+            
+            <li class="tag-list-item">soap</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> Uncategorized </span>
+            <span><i class="fa fa-tag"></i> 2 </span>
+            <span>Published {{moment("20170511", 'YYYYMMDD').fromNow()}}</span>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer">
+    <div class="footer-theme-info float-right">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+
+    <a href="http://sabrinaluo.com/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link float-left">
+      <li>© 2016 HiiTea</li>
+      <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+  </footer>
+</div>
 
 
 <script>
@@ -137,12 +226,11 @@
     gcse.type = 'text/javascript';
     gcse.async = true;
     gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
-            '//cse.google.com/cse.js?cx=' + cx;
+      '//cse.google.com/cse.js?cx=' + cx;
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(gcse, s);
   })();
 </script>
-<gcse:search></gcse:search>
 
 
 
