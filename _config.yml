@@ -6,9 +6,10 @@
 title: 小白妹妹写代码
 subtitle: 一个废话很多的程序媛
 description: 我这么可爱一定是男孩子
-author: Sabrina
+author: HiiTea
 language: zh-CN
 timezone: Asia/Shanghai
+favicon: https://assets-cdn.github.com/favicon.ico
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -89,8 +90,9 @@ gcs: 015579750388200492852:dnpv83myu4a
 baidutongji: d8749b933af749e1e5ec931bb403628f
 
 location: Hong Kong, China
-email: luohaojing@gmail.com
+email: luohaojing[at]gmail.com
 
+avatar: https://avatars2.githubusercontent.com/u/5300359?v=4&s=460
 social:
   github: https://github.com/sabrinaluo
   weibo: http://weibo.com/206663121
