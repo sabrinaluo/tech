@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -161,14 +161,14 @@ greeting(name); <span class="comment">//以为得到name之后就可以开心的
 <hr>
 <p>举个栗子…<br>有一个第三方提供的API，访问API能够得到一些用户数据（每访问一次得到一页，假设由于某些限制一页只返回3个用户）以及下一页的index；除了第一页之外，其他的页面都需要下一页的index参数才能访问到。（先不管这个API设计的合不合理…Facebook就有这样的API）<br><a href="http://example.com/user" target="_blank" rel="external">http://example.com/user</a>  <em>–&gt;访问第一页的用户数据</em><br><a href="http://example.com/user?next=xzmca" target="_blank" rel="external">http://example.com/user?next=xzmca</a>  <em>–&gt;访问第二页的用户数据</em><br>请求第一页时返回结果如下：</p>
 <pre><code class="json">{
-&quot;items&quot; : [{
-  &quot;name&quot; : &quot;小白妹妹&quot;,
-   &quot;age&quot; : 10
+<span class="attr">"items"</span> : [{
+  <span class="attr">"name"</span> : <span class="string">"小白妹妹"</span>,
+   <span class="attr">"age"</span> : <span class="number">10</span>
   }, 
   {...},
   {...}],
-&quot;nextPage&quot; : &quot;xzmca&quot;,
-&quot;lastPage&quot; : null
+"nextPage" : "xzmca",
+"lastPage" : null
 }
 </code></pre>
 <p>你可能会有这样的需求：你的APP一次需要显示6个甚至更多个的用户数据。而根据之前的API，一次只能拿到3个数据，那么就只能发出两次请求，并且<strong>第二次请求依赖于第一次请求的结果</strong>，由于异步的原因我们并不知道第一个请求什么时候才完成，<del>而我最初入坑时是让程序发完第一个请求后强制等2秒再发第二个请求我会告诉你们吗…</del></p>
@@ -246,7 +246,7 @@ req1().then(req2).then(<span class="function"><span class="keyword">function</sp
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -270,16 +270,11 @@ req1().then(req2).then(<span class="function"><span class="keyword">function</sp
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -288,6 +283,10 @@ req1().then(req2).then(<span class="function"><span class="keyword">function</sp
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

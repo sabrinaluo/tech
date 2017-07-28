@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  tricks,js,js小技巧
+  js,tricks,js小技巧
   ">
   
   <meta name="author" content="HiiTea">
@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -151,7 +151,7 @@
 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(a &amp;&amp; a.b &amp;&amp; a.b.c === 1)</span>&#123;</div><div class="line">    <span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>前几天看到一个逼格很高的写法，不过我觉得括号太多了，容易写错，而且也没有上面的那种写法简单。不过还是要记录一下，以免以后见到不知道是什么意思。</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(((a|<span class="type">|&#123;&#125;).b</span>|<span class="type">|&#123;&#125;).c</span> === <span class="number">1</span>)&#123;</div><div class="line">    //<span class="built_in">do</span> something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">(a, b)</span><span class="comment">&#123;</span></span></div><div class="line">    a = a || 1; </div><div class="line">    b = b || 2;</div><div class="line"></div><div class="line">    return a + b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="title">abc</span><span class="params">()</span>; <span class="comment">//3</span></div><div class="line">abc(<span class="number">5</span>); <span class="comment">//7</span></div></pre></td></tr></table></figure>
+<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">(a, b)</span><span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">    a = a || 1; </span></span></div><div class="line"><span class="function"><span class="comment">    b = b || 2;</span></span></div><div class="line"><span class="function"><span class="comment"></span></span></div><div class="line"><span class="function"><span class="comment">    return a + b;</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="title">abc</span><span class="params">()</span>;</span> <span class="comment">//3</span></div><div class="line">abc(<span class="number">5</span>); <span class="comment">//7</span></div></pre></td></tr></table></figure>
 <p>有一些情况下函数中需要设置默认值，经常看到有人的写法是<code>typeof</code>先判断这个参数是不是<code>undefined</code>然后再赋值，这种写法实在是太麻烦了……上面的是懒人写法</p>
 <p>感觉善用<code>||</code>和<code>&amp;&amp;</code>还是能搞出很多黑科技的。</p>
 <p>以上，是为打酱油博客一篇。</p>
@@ -160,7 +160,7 @@
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -184,16 +184,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -202,6 +197,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

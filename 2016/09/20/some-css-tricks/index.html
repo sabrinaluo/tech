@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  css,tricks
+  tricks,css
   ">
   
   <meta name="author" content="HiiTea">
@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -138,7 +138,7 @@
 <p>总结一下前段时间学到的几个css小技巧，以免过几天又忘记了</p>
 <h3 id="CSS控制超链接是否可点击：pointer-event"><a href="#CSS控制超链接是否可点击：pointer-event" class="headerlink" title="CSS控制超链接是否可点击：pointer-event"></a>CSS控制超链接是否可点击：pointer-event</h3><p>一开始我听说CSS可以disable超链接的时候我是拒绝的，因为通常在有<code>href</code>属性的时候，都是用js来禁止超链接的。<br>然鹅…CSS里居然有pointer-events<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/pointer-events" target="_blank" rel="external">^1</a>这种黑科技！</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>&#123;</div><div class="line">    <span class="attribute">pointer-events</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="transform-垂直居中-2"><a href="#transform-垂直居中-2" class="headerlink" title="transform 垂直居中 ^2"></a>transform 垂直居中 <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">^2</a></h3><p>CSS垂直居中一直是一个蛋疼的问题，常常需要用到，却没有一个所有浏览器，在所有情况下都适用的解决方案。等我以后有空了，应该专门写一篇讨论CSS垂直居中各种解决方案的博客……别问我以后是什么时候…XD<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.bbb</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-50%);</div><div class="line">    <span class="attribute">top</span>: <span class="number">50%</span></div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aaa"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bbb"</span>&gt;</span>qqq<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="transform-垂直居中-2"><a href="#transform-垂直居中-2" class="headerlink" title="transform 垂直居中 ^2"></a>transform 垂直居中 <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">^2</a></h3><p>CSS垂直居中一直是一个蛋疼的问题，常常需要用到，却没有一个所有浏览器，在所有情况下都适用的解决方案。等我以后有空了，应该专门写一篇讨论CSS垂直居中各种解决方案的博客……别问我以后是什么时候…XD<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.bbb</span>&#123;</span></div><div class="line"><span class="undefined">    position: relative;</span></div><div class="line"><span class="undefined">    transform: translateY(-50%);</span></div><div class="line"><span class="undefined">    top: 50%</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aaa"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bbb"</span>&gt;</span>qqq<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <h3 id="nth-child"><a href="#nth-child" class="headerlink" title="nth-child"></a>nth-child</h3><p>通常一个列表里，总是回遇到需要高亮某几个item的情况，CSS居然还可以通过公式来控制样式，我又涨姿势了。</p>
 <p>以前只知道可以控制奇数偶数这种简单的，后来发现，只要是有规律的，能够写成an+b的公式，都可以适用<code>nth-child</code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child" target="_blank" rel="external">^3</a></p>
 <ul>
@@ -152,7 +152,7 @@
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -176,16 +176,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -194,6 +189,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

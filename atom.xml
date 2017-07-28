@@ -5,7 +5,7 @@
   <link href="/tech/atom.xml" rel="self"/>
   
   <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2017-07-26T16:22:15.602Z</updated>
+  <updated>2017-07-28T03:22:35.931Z</updated>
   <id>http://sabrinaluo.com/tech/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://sabrinaluo.com/tech/2017/07/12/trailing-comma/"/>
     <id>http://sabrinaluo.com/tech/2017/07/12/trailing-comma/</id>
     <published>2017-07-12T03:01:13.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.931Z</updated>
     
     <content type="html"><![CDATA[<p>以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line"><span class="built_in">    1,</span></div><div class="line"><span class="built_in">    2,</span></div><div class="line"><span class="built_in">    3,</span></div><div class="line">]<span class="comment">;</span></div></pre></td></tr></table></figure></p>
 <p>作为一个懒癌晚期患者，觉得要多加一个逗号，真是好麻烦！那是naive的我，当然还不知道有版本控制diff这种高级工具，还停留在复制粘贴文件夹的人工版本控制低级阶段…</p>
@@ -55,7 +55,7 @@
     <link href="http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/"/>
     <id>http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/</id>
     <published>2017-05-26T09:59:03.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.931Z</updated>
     
     <content type="html"><![CDATA[<p>在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。</p>
 <h3 id="i18n-amp-i10n"><a href="#i18n-amp-i10n" class="headerlink" title="i18n &amp; i10n"></a>i18n &amp; i10n</h3><p>一直以来我都混淆使用这两个term，其中i18n是国际化，主要用于世界通用内容的翻译，<strong>使产品无需做大的改变就能够适应不同的语言和地区的需要</strong>，包括时间、日期、货币等；而i10n是本地化，也就是把网站里其他内容进行翻译。</p>
@@ -150,7 +150,7 @@
     <link href="http://sabrinaluo.com/tech/2017/05/11/thoughts/"/>
     <id>http://sabrinaluo.com/tech/2017/05/11/thoughts/</id>
     <published>2017-05-11T03:21:54.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.931Z</updated>
     
     <content type="html"><![CDATA[<p>不知道为什么，我是比较喜欢JS这种脑残语言的，并且也不想将其他语言用在工作中，比如PHP、PYTHON、JAVA之类的。</p>
 <p>其实到最后肯定所有语言都是相通的，比如每种语言都会有自己的<code>lodash</code>、<code>npm</code>、<code>package.json</code>，所以当精通一种语言之后是能对其他语言的人指点江山的。我之前的一个同事新手写python，库也不会用也不知道去哪里下载，我对Python的认识只限于这是一个用缩进来控制块的语言，但搜了一下果然有<code>pip</code>，<code>requirements.txt</code></p>
@@ -186,7 +186,7 @@
     <link href="http://sabrinaluo.com/tech/2017/01/03/vpn/"/>
     <id>http://sabrinaluo.com/tech/2017/01/03/vpn/</id>
     <published>2017-01-03T06:42:57.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.931Z</updated>
     
     <content type="html"><![CDATA[<p>今天才发现自从买了新Mac之后根本没有用新电脑写过什么东西，导致我今天居然还要<code>npm install</code>才能跑起来HEXO，真是不知道有多懒。</p>
 <p>作为一个在墙外居住了好几年的人，只知道用Unblock youku翻墙进墙内去看视频，根本不知道在墙内怎么翻出来。早些年的时候，翻到墙外是很简单的，免费的软件也很多，好像也不用VPN啥，host文件里加几个IP啥的就能上Google了，现在真是门槛越来越高了呢……回一趟内地80%我平时上的网站都上不去，公司的网站也上不去，反正根本没法work from home，幸好我是在过年前发现了这个问题，现在还来得及解决一下，不然就呵呵呵呵……</p>
@@ -225,7 +225,7 @@
     <link href="http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/"/>
     <id>http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/</id>
     <published>2016-10-19T07:08:33.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.931Z</updated>
     
     <content type="html"><![CDATA[<p>一直以为这篇已经发过了，结果前两天搜的时候发现搜不到。一直扔在草稿里，今天整理一下之前和最近学到的一些JS小技巧</p>
 <h3 id="利用位运算取整"><a href="#利用位运算取整" class="headerlink" title="利用位运算取整"></a>利用位运算取整</h3><p>利用位运算，与、或、异或、左右移位，<code>&amp;</code> <code>|</code> <code>^</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>&lt;&lt;</code> ，舍去小数点后的数字<a href="http://www.cnblogs.com/kkun/archive/2012/01/30/2332309.html" target="_blank" rel="external">^1</a>，<a href="http://jsperf.com/coercion-vs-casting/3" target="_blank" rel="external">jsPerf</a><br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var a = <span class="number">6.54321</span>;</div><div class="line">console.<span class="built_in">log</span>(a <span class="string">| 0); //6</span></div><div class="line">console.<span class="built_in">log</span>(a <span class="meta">&amp; 0); <span class="comment">//6</span></span></div></pre></td></tr></table></figure></p>
@@ -247,7 +247,7 @@
 <figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(a &amp;&amp; a.b &amp;&amp; a.b.c === 1)</span>&#123;</div><div class="line">    <span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>前几天看到一个逼格很高的写法，不过我觉得括号太多了，容易写错，而且也没有上面的那种写法简单。不过还是要记录一下，以免以后见到不知道是什么意思。</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(((a|<span class="type">|&#123;&#125;).b</span>|<span class="type">|&#123;&#125;).c</span> === <span class="number">1</span>)&#123;</div><div class="line">    //<span class="built_in">do</span> something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">(a, b)</span><span class="comment">&#123;</span></span></div><div class="line">    a = a || 1; </div><div class="line">    b = b || 2;</div><div class="line"></div><div class="line">    return a + b;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="title">abc</span><span class="params">()</span>; <span class="comment">//3</span></div><div class="line">abc(<span class="number">5</span>); <span class="comment">//7</span></div></pre></td></tr></table></figure>
+<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">(a, b)</span><span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">    a = a || 1; </span></span></div><div class="line"><span class="function"><span class="comment">    b = b || 2;</span></span></div><div class="line"><span class="function"><span class="comment"></span></span></div><div class="line"><span class="function"><span class="comment">    return a + b;</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="title">abc</span><span class="params">()</span>;</span> <span class="comment">//3</span></div><div class="line">abc(<span class="number">5</span>); <span class="comment">//7</span></div></pre></td></tr></table></figure>
 <p>有一些情况下函数中需要设置默认值，经常看到有人的写法是<code>typeof</code>先判断这个参数是不是<code>undefined</code>然后再赋值，这种写法实在是太麻烦了……上面的是懒人写法</p>
 <p>感觉善用<code>||</code>和<code>&amp;&amp;</code>还是能搞出很多黑科技的。</p>
 <p>以上，是为打酱油博客一篇。</p>
@@ -261,9 +261,9 @@
     </summary>
     
     
-      <category term="tricks" scheme="http://sabrinaluo.com/tech/tags/tricks/"/>
-    
       <category term="js" scheme="http://sabrinaluo.com/tech/tags/js/"/>
+    
+      <category term="tricks" scheme="http://sabrinaluo.com/tech/tags/tricks/"/>
     
       <category term="js小技巧" scheme="http://sabrinaluo.com/tech/tags/js%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
@@ -274,7 +274,7 @@
     <link href="http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/"/>
     <id>http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/</id>
     <published>2016-09-20T08:44:46.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！:(</p>
@@ -283,7 +283,7 @@
 <p>总结一下前段时间学到的几个css小技巧，以免过几天又忘记了</p>
 <h3 id="CSS控制超链接是否可点击：pointer-event"><a href="#CSS控制超链接是否可点击：pointer-event" class="headerlink" title="CSS控制超链接是否可点击：pointer-event"></a>CSS控制超链接是否可点击：pointer-event</h3><p>一开始我听说CSS可以disable超链接的时候我是拒绝的，因为通常在有<code>href</code>属性的时候，都是用js来禁止超链接的。<br>然鹅…CSS里居然有pointer-events<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/pointer-events" target="_blank" rel="external">^1</a>这种黑科技！</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>&#123;</div><div class="line">    <span class="attribute">pointer-events</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="transform-垂直居中-2"><a href="#transform-垂直居中-2" class="headerlink" title="transform 垂直居中 ^2"></a>transform 垂直居中 <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">^2</a></h3><p>CSS垂直居中一直是一个蛋疼的问题，常常需要用到，却没有一个所有浏览器，在所有情况下都适用的解决方案。等我以后有空了，应该专门写一篇讨论CSS垂直居中各种解决方案的博客……别问我以后是什么时候…XD<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></div><div class="line"><span class="selector-class">.bbb</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(-50%);</div><div class="line">    <span class="attribute">top</span>: <span class="number">50%</span></div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aaa"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bbb"</span>&gt;</span>qqq<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="transform-垂直居中-2"><a href="#transform-垂直居中-2" class="headerlink" title="transform 垂直居中 ^2"></a>transform 垂直居中 <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">^2</a></h3><p>CSS垂直居中一直是一个蛋疼的问题，常常需要用到，却没有一个所有浏览器，在所有情况下都适用的解决方案。等我以后有空了，应该专门写一篇讨论CSS垂直居中各种解决方案的博客……别问我以后是什么时候…XD<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.bbb</span>&#123;</span></div><div class="line"><span class="undefined">    position: relative;</span></div><div class="line"><span class="undefined">    transform: translateY(-50%);</span></div><div class="line"><span class="undefined">    top: 50%</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aaa"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bbb"</span>&gt;</span>qqq<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <h3 id="nth-child"><a href="#nth-child" class="headerlink" title="nth-child"></a>nth-child</h3><p>通常一个列表里，总是回遇到需要高亮某几个item的情况，CSS居然还可以通过公式来控制样式，我又涨姿势了。</p>
 <p>以前只知道可以控制奇数偶数这种简单的，后来发现，只要是有规律的，能够写成an+b的公式，都可以适用<code>nth-child</code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child" target="_blank" rel="external">^3</a></p>
 <ul>
@@ -304,9 +304,9 @@
     </summary>
     
     
-      <category term="css" scheme="http://sabrinaluo.com/tech/tags/css/"/>
-    
       <category term="tricks" scheme="http://sabrinaluo.com/tech/tags/tricks/"/>
+    
+      <category term="css" scheme="http://sabrinaluo.com/tech/tags/css/"/>
     
   </entry>
   
@@ -315,7 +315,7 @@
     <link href="http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/"/>
     <id>http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/</id>
     <published>2016-07-14T06:41:02.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>前不久给bootstrap提了个<a href="https://github.com/twbs/bootstrap/issues/19997" target="_blank" rel="external">issue</a>，然后被他们的高科技自动回复机器人吓萌比了。<br>有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。</p>
 <p>如果使用cloud based CI，很多功能都已经整合了，所以可以很方便的使用。如上travis的例子，只要在travis配置里开启pull request选项，允许PR过来的时候自动跑测试，就可以实现。</p>
@@ -383,7 +383,7 @@
     <link href="http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/"/>
     <id>http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/</id>
     <published>2016-06-20T09:59:09.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>这篇文章不是讲各种认证方式是怎么实现的，只是简单的介绍如何与微博进行整合。</p>
 <p>微博开放平台允许使用api来开发一些与微博相关的应用，微博提供<strong>Basic Auth</strong>和<strong>OAuth2.0</strong>两种认证方式，其中Basic Auth只能用于测试环境。</p>
@@ -422,7 +422,7 @@
     <link href="http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"/>
     <id>http://sabrinaluo.com/tech/2016/06/02/travis-heroku/</id>
     <published>2016-06-02T07:27:46.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>好久么有写东西了，总感觉一直忙的跟狗一样，身心俱疲，但是又不知道到底在忙什么。</p>
 <p>最近实践了一下利用travis部署到heroku的流程，又莫名其妙的尝试了新的编辑器atom，安装了markdown-preview-plus插件，当然要来写点东西试一试， 也不知道英文的linux下到底是什么问题，webstorm和sublime居然不能打中文，所以之前每次写东西都要去简书边预览边写。</p>
@@ -477,7 +477,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/"/>
     <id>http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/</id>
     <published>2016-04-21T09:07:08.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>为了让各位亲朋好友方便的用撤回信息装x，本宝宝写了一个<a href="http://sabrinaluo.com/nickname-gen">昵称生成器</a><br>虽然是比较简单的页面，但本宝宝还没发布呢，微信就封了这个功能，宝宝心里委屈但宝宝不说…</p>
 <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>今天早些时候，在微信群里看到了这样的撤回信息：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"牛奶"</span>撤回了一条信息并亲了你一下</div></pre></td></tr></table></figure></p>
@@ -539,16 +539,16 @@
     <link href="http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/"/>
     <id>http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/</id>
     <published>2016-04-14T10:59:37.000Z</published>
-    <updated>2017-07-26T16:22:15.602Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>看了好多讲通过git钩子自动部署的，大多讲的绕来绕去乱七八糟思路一点也不清晰…<br>做了一晚上实验之后大概明白了是怎么工作的。</p>
 <h3 id="裸仓库（bare）"><a href="#裸仓库（bare）" class="headerlink" title="裸仓库（bare）"></a>裸仓库（bare）</h3><p>裸仓库跟我们平时<code>git clone</code>得到的仓库太一样，裸仓库其实相当于通过克隆来的仓库里的<code>.git</code>文件夹，整个裸仓库中只有git索引（index），<strong>并没有任何代码相关的东西</strong>。要实现Push to Deploy，首先我们需要一个裸仓库。</p>
 <p>在克隆时使用 <code>--bare</code>参数来克隆一个裸仓库<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init <span class="comment">--bare xxx-bare</span></div></pre></td></tr></table></figure></p>
-<p>###钩子（hook）<br>普通仓库<code>.git</code>文件夹下有一个<code>hooks</code>文件夹，裸仓库下直接有一个<code>hooks</code>文件夹，里面有各种各样以<code>.sample</code>结尾的钩子，当把<code>.sample</code>后缀删除时，钩子就是激活状态。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.git</span></div><div class="line">├───hooks</div><div class="line">│   └───post-update<span class="selector-class">.sample</span>   </div><div class="line">└─── ...</div></pre></td></tr></table></figure></p>
+<p>###钩子（hook）<br>普通仓库<code>.git</code>文件夹下有一个<code>hooks</code>文件夹，裸仓库下直接有一个<code>hooks</code>文件夹，里面有各种各样以<code>.sample</code>结尾的钩子，当把<code>.sample</code>后缀删除时，钩子就是激活状态。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.git</div><div class="line">├───hooks</div><div class="line">│   └───post-update<span class="selector-class">.sample</span>   </div><div class="line">└─── ...</div></pre></td></tr></table></figure></p>
 <p>你可以在钩子文件里写一些bash命令，被激活的钩子被触发时会执行你的bash命令。</p>
 <p>与deploy相关的通常使用<code>post-update</code>钩子或者<code>post-receive</code>钩子<a href="https://www.kernel.org/pub/software/scm/git/docs/githooks.html" target="_blank" rel="external">^1</a>，关于这两个钩子到底有什么不同，我是没太看懂，大概的理解是这两个钩子被trigger的时候收到的信息不一样，如果需要用commit的相关信息来做一些事情的话要仔细研究（比如可以设置某个分支收到了推送就做相应的事情之类），其他如果只是通过bash来跑一些node相关的部署命令，两个都可以。这篇文章只给一个最简单的例子，跟分支啊什么的都没关系，只要收到推送就部署。</p>
 <p>要实现Push to Deploy，我们需要修改裸仓库中相应的钩子文件</p>
-<h3 id="裸仓库是怎么工作的"><a href="#裸仓库是怎么工作的" class="headerlink" title="裸仓库是怎么工作的"></a>裸仓库是怎么工作的</h3><p>可以在本地同一个文件夹下先创建一个裸仓库名为xxx-remote（模拟远程服务器），再创建一个xxx-local仓库（模拟本地），将xxx-remote添加为本地仓库的远程仓库，在本地仓库写一个<code>README.md</code>文件，提交并push<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx-remote</div><div class="line">git init xxx-local</div><div class="line">cd xxx-local</div><div class="line">git remote <span class="keyword">add</span><span class="bash"> origin ../xxx-remote</span></div><div class="line">echo test123&gt;README.md</div><div class="line">git <span class="keyword">add</span><span class="bash"> .</span></div><div class="line">git commit -m <span class="string">'add readme file'</span></div><div class="line">git push -u origin master</div></pre></td></tr></table></figure></p>
+<h3 id="裸仓库是怎么工作的"><a href="#裸仓库是怎么工作的" class="headerlink" title="裸仓库是怎么工作的"></a>裸仓库是怎么工作的</h3><p>可以在本地同一个文件夹下先创建一个裸仓库名为xxx-remote（模拟远程服务器），再创建一个xxx-local仓库（模拟本地），将xxx-remote添加为本地仓库的远程仓库，在本地仓库写一个<code>README.md</code>文件，提交并push<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx-remote</div><div class="line">git init xxx-local</div><div class="line">cd xxx-local</div><div class="line">git remote <span class="keyword">add</span><span class="bash"> origin ../xxx-remote</span></div><div class="line"><span class="bash"><span class="built_in">echo</span> test123&gt;README.md</span></div><div class="line"><span class="bash">git add .</span></div><div class="line"><span class="bash">git commit -m <span class="string">'add readme file'</span></span></div><div class="line"><span class="bash">git push -u origin master</span></div></pre></td></tr></table></figure></p>
 <p>之后切换到远程仓库文件夹，查看git log<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ..</div><div class="line"><span class="built_in">cd</span> xxx-remote</div><div class="line">git <span class="built_in">log</span></div></pre></td></tr></table></figure></p>
 <p>将能够看到有一条commit记录，提交信息是 add readme file，远程仓库收到了本地仓库的push</p>
 <h3 id="钩子是怎么工作的"><a href="#钩子是怎么工作的" class="headerlink" title="钩子是怎么工作的"></a>钩子是怎么工作的</h3><p>进入远程仓库，将<code>hooks</code>文件夹下的<code>post-update.sample</code>改名为<code>post-update</code>，打开并编辑为如下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">set</span> -x <span class="comment">#显示每条命令</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"push push"</span></div></pre></td></tr></table></figure></p>
@@ -596,7 +596,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/"/>
     <id>http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/</id>
     <published>2016-04-12T04:32:01.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>题外话：<br>一直以为mocha读作“抹茶”并且一直这么读了很久，直到最近看了一个mocha的教学视频，才知道这是摩卡咖啡的摩卡…而抹茶的抹茶应该是matcha…</p>
 <p>在还没有babel的时候，一切都很简单，基础的问题就先不讨论了，这里主要记录一下Babel转码和Istanbul测覆盖率的一些坑。</p>
@@ -606,7 +606,7 @@
 <li><code>lib</code>用来存放编译后的代码</li>
 <li><code>test</code>用来放测试脚本</li>
 </ul>
-<p>在<code>test</code>文件夹下，通常有一个<code>mocha.opts</code>文件用来存放mocha的参数<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">-compilers <span class="symbol">js:</span>babel-register</span></div><div class="line">-<span class="ruby">-<span class="keyword">require</span> babel-polyfill</span></div></pre></td></tr></table></figure></p>
+<p>在<code>test</code>文件夹下，通常有一个<code>mocha.opts</code>文件用来存放mocha的参数<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">-compilers <span class="symbol">js:</span>babel-register</span></div><div class="line"><span class="ruby">--<span class="keyword">require</span> babel-polyfill</span></div></pre></td></tr></table></figure></p>
 <p>如果用到了需要用babel-polyfill才能实现的方法就需要加上第二句，别忘了<code>npm install babel-polyfill --save-dev</code></p>
 <p>生成覆盖率的测试命令：（<code>_mocha</code> 是有下划线的）<a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="external">^1</a><br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">istanbul</span> <span class="comment">cover</span> <span class="comment">_mocha</span> <span class="literal">-</span><span class="literal">-</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">opts</span> <span class="string">.</span><span class="comment">/test/mocha</span><span class="string">.</span><span class="comment">opts</span></div></pre></td></tr></table></figure></p>
 <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">babel src/ -d <span class="class"><span class="keyword">lib</span>/ --<span class="title">presets</span> <span class="title">es2015</span> --<span class="title">source</span>-<span class="title">map</span> <span class="title">both</span></span></div></pre></td></tr></table></figure>
@@ -653,7 +653,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"/>
     <id>http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/</id>
     <published>2016-04-01T08:38:12.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>JS里的作用域和this一直是一件令人头疼的事情，以前接触的不太多，毕竟面向过程编程的我基本上都不会使用“类”这个概念。</p>
 <p>自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Function)<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">^1</a>就是给懒人用的<strong>简写的匿名函数</strong>而已。后来看到有人挑战阮一峰老师<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">《ECMAScript 6入门》</a>中关于箭头函数this的一些问题<a href="https://github.com/ruanyf/es6tutorial/issues/150" target="_blank" rel="external">^2</a>，才对箭头函数有了一丁点的理解。</p>
@@ -705,7 +705,7 @@
     <link href="http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/"/>
     <id>http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/</id>
     <published>2016-03-14T10:33:31.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>环境：Ubuntu</p>
 <h3 id="SSH连接-EC2"><a href="#SSH连接-EC2" class="headerlink" title="SSH连接 EC2"></a>SSH连接 EC2</h3><p>windows下通常用putty<br>ubuntu下先打个命令<code>ssh</code>看看能否识别命令，如果能就方便很多</p>
@@ -764,7 +764,7 @@
     <link href="http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"/>
     <id>http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/</id>
     <published>2016-03-07T06:33:03.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。</p>
 <h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，lambda获取到的payload并<strong>不包含 request header</strong>的内容，而只有<strong>request body</strong>的内容。</p>
@@ -823,7 +823,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"/>
     <id>http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/</id>
     <published>2016-02-29T06:04:57.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬<del>汉</del>妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…</p>
 <p>在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…）</p>
@@ -874,12 +874,12 @@
     <link href="http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"/>
     <id>http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/</id>
     <published>2016-02-17T04:31:55.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>每次遇到跨域的问题真是！@#￥%</p>
 <p>我对<code>JSONP</code>的一些浅显的理解就是，有时候会看到类似<code>http://xxx.xx.com/?callback=xxx</code>这样的请求（<code>callback=</code>也可能是<code>jsonp=</code>也可能是<code>jsonpcallback=</code>，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。</p>
 <p>由于这个回调函数已经发给了服务器，返回的结果其实是一个函数，函数的入参是获取的数据。</p>
-<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  <span class="attr">url</span>: <span class="string">'http://xx.xx.com/xxx'</span>,</div><div class="line">  <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">  <span class="attr">dataType</span>: <span class="string">'jsonp'</span>,</div><div class="line">  <span class="comment">//jsonp: 'callback',</span></div><div class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="comment">//do something here;</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$.ajax(options);</div></pre></td></tr></table></figure></p>
+<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  url: <span class="string">'http://xx.xx.com/xxx'</span>,</div><div class="line">  method: <span class="string">'GET'</span>,</div><div class="line">  dataType: <span class="string">'jsonp'</span>,</div><div class="line">  <span class="comment">//jsonp: 'callback',</span></div><div class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="comment">//do something here;</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$.ajax(options);</div></pre></td></tr></table></figure></p>
 <p>其中需要注意的是，一定要声明<strong><code>dataType</code></strong>，然后把回调函数写在success后面就可以了。<br>另外一开始提到，服务器端对jsonp的实现可能不同，所以在<code>options</code>中，有时候需要声明<code>jsonp</code>对应的字符串，默认是<code>&quot;callback&quot;</code>。例如：如果服务器实现jsonp是通过<code>http://xxx.xx.com/?jsonpcallback=xxx</code>，那么就需要在<code>options</code>中声明<code>jsonp:&#39;jsonpcallback&#39;</code></p>
 <p>原理据说和<code>&lt;script src=&quot;...&quot;&gt;</code>差不多，我现在还不是很明白=，=</p>
 <p>参考<br><a href="http://www.runoob.com/json/json-jsonp.html" target="_blank" rel="external">http://www.runoob.com/json/json-jsonp.html</a></p>
@@ -908,7 +908,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"/>
     <id>http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/</id>
     <published>2016-02-03T10:32:51.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>一直都想把自己去过的地方做个地图标记，然而现在能找到的各种现成的地图产品都不太喜欢，所以就用谷歌地图自己写了一个。<br>总结以下常见的问题和坑：</p>
 <h3 id="自动缩放-auto-zoom"><a href="#自动缩放-auto-zoom" class="headerlink" title="自动缩放(auto zoom)"></a>自动缩放(auto zoom)</h3><p>使用场景大多数时候是有很多marker，想要全部显示这些marker，同时zoom当然越大越清晰。</p>
@@ -956,7 +956,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"/>
     <id>http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/</id>
     <published>2016-02-01T06:01:03.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_</p>
 <h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><p>在git中文件有两类，共三种状态：</p>
@@ -1000,7 +1000,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"/>
     <id>http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</id>
     <published>2016-01-23T14:52:26.000Z</published>
-    <updated>2017-07-26T16:22:15.598Z</updated>
+    <updated>2017-07-28T03:22:35.927Z</updated>
     
     <content type="html"><![CDATA[<p>并行和顺序执行的前提当然是，有一堆promise等着你去执行……<br>通常我们把这“一堆”promise对象放到一个数组里，<code>[promise1, promise2, promise3, ...]</code></p>
 <p>我们都知道想要让promise按顺序执行，那就是一个接一个的then。然而手写很多then太累了，而嵌套的promise又是反模式，我之前蠢蠢的<a href="tech/2016/01/18/sequentialize-promise-by-recursion/">用递归解决了顺序执行的问题</a>，后来终于在udacity习得了顺序promise的正确打开方式！</p>
@@ -1018,7 +1018,7 @@
 <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">|<span class="string">---------</span>|</div><div class="line">google1   |<span class="string">---------</span>|</div><div class="line">            google2 |<span class="string">---------</span>|</div><div class="line">                     amazon1  |<span class="string">---------</span>|</div><div class="line">                              amazon2   |<span class="string">---------</span>|</div><div class="line">                                        facebook1 |<span class="string">--------</span>|</div><div class="line">                                                  facebook2</div></pre></td></tr></table></figure>
 </li>
 <li><p>google1执行完就执行google1，amazon1执行完就执行amazon2，但对google, amazon, facebook的顺序没有要求</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">|<span class="string">------------------</span>|</div><div class="line">google1            |<span class="string">-------------</span>|</div><div class="line">                   google2</div><div class="line">|<span class="string">---------</span>|</div><div class="line">amazon1   |<span class="string">-----------</span>|</div><div class="line">          amazon2</div><div class="line">|<span class="string">------------</span>|</div><div class="line">facebook1    |<span class="string">-------------</span>|<span class="string">  </span></div><div class="line">             facebook2</div></pre></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">|<span class="string">------------------</span>|</div><div class="line">google1            |<span class="string">-------------</span>|</div><div class="line">                   google2</div><div class="line">|<span class="string">---------</span>|</div><div class="line">amazon1   |<span class="string">-----------</span>|</div><div class="line">          amazon2</div><div class="line">|<span class="string">------------</span>|</div><div class="line">facebook1    |<span class="string">-------------</span>|<span class="string">  </span></div><div class="line"><span class="string">             facebook2</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="Promise并行执行"><a href="#Promise并行执行" class="headerlink" title="Promise并行执行"></a>Promise并行执行</h3><p>对于场景1，主要就是用到<code>Promise.all</code>，因为是数组，所以在处理的过程中通常会用到<code>.map</code>或<code>.forEach</code><br><iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/HiiTea/zfjvr4pz/1/embedded/js,resources,html,css,result/light" frameborder="0" allowfullscreen></iframe><br><img src="http://7xow88.com1.z0.glb.clouddn.com/tech-promise1.png" alt="promise例1网络请求时间线"><br>可以看到3个user请求是同时进行（并行），3个repos请求也是同时进行（并行），由于使用了<code>Promise.all</code>，所以repos请求等待users请求全部完成才开始。</p>

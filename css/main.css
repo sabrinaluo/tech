@@ -11,6 +11,13 @@ body {
   min-width: 1020px;
   word-wrap: break-word;
 }
+@media (max-width: 414px) {
+  body {
+    width: 100%;
+    min-width: 100%;
+    background-color: #fafbfc;
+  }
+}
 a,
 a:link,
 a:visited {
@@ -49,6 +56,11 @@ a:hover {
 .container::after {
   clear: both;
 }
+@media (max-width: 414px) {
+  .container {
+    width: 100%;
+  }
+}
 .container-lg {
   max-width: 1012px;
   padding-left: 16px;
@@ -67,6 +79,7 @@ a:hover {
   .container-lg {
     padding: 0;
     margin: 0;
+    width: 100%;
   }
 }
 .list-none {
@@ -87,6 +100,16 @@ a:hover {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+@media (min-width: 414px) {
+  .mobile-only {
+    display: none;
+  }
+}
+@media (max-width: 414px) {
+  .desktop-only {
+    display: none;
+  }
+}
 .navbar-wrapper {
   position: relative;
 }
@@ -102,6 +125,11 @@ a:hover {
   float: left;
   margin: -13px 15px -15px -2px;
   white-space: nowrap;
+}
+@media (max-width: 414px) {
+  .navbar-logo {
+    margin-left: 10px;
+  }
 }
 .navbar-nav {
   padding: 0;
@@ -349,6 +377,11 @@ pre {
   line-height: normal;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
+@media (max-width: 414px) {
+  pre {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+  }
+}
 .highlight {
   display: block;
   background: #fff;
@@ -412,6 +445,16 @@ pre {
   border-radius: 3px;
   margin-bottom: 30px;
 }
+@media (max-width: 414px) {
+  .post-container {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+  }
+}
 .post-container >h3 {
   background-color: #f6f8fa;
   margin: 0;
@@ -422,6 +465,11 @@ pre {
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
   border-radius: 3px 3px 0 0;
+}
+@media (max-width: 414px) {
+  .post-container >h3 {
+    padding: 15px;
+  }
 }
 .post-date {
   font-size: 13px;
@@ -434,6 +482,12 @@ pre {
   word-wrap: break-word;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 16px;
+}
+@media (max-width: 414px) {
+  .post-content {
+    padding: 15px;
+    font-size: 15px;
+  }
 }
 .post-content >*:first-child {
   margin-top: 0 !important;
@@ -521,15 +575,36 @@ pre {
   color: #586069;
   border-top: 1px solid #eaecef;
 }
+@media (max-width: 414px) {
+  .footer {
+    padding: 15px;
+    color: #959da5;
+    text-align: center;
+  }
+}
 .footer-social-link {
   margin: 0 0 0 -10px;
   padding: 0;
   list-style: none;
+  float: left;
+}
+@media (max-width: 414px) {
+  .footer-social-link {
+    float: none;
+  }
 }
 .footer-social-link li {
   display: inline-block;
   line-height: 16px;
   margin-left: 10px;
+}
+.footer-theme-info {
+  float: right;
+}
+@media (max-width: 414px) {
+  .footer-theme-info {
+    float: none;
+  }
 }
 .footer-logo {
   position: absolute;
@@ -546,6 +621,21 @@ pre {
 }
 .footer-logo:hover {
   color: #959da5;
+}
+@media (max-width: 414px) {
+  .footer-logo {
+    margin: 0;
+    display: block;
+    position: relative;
+    top: 0;
+    left: 0;
+    font-size: 37px;
+  }
+}
+@media (max-width: 414px) {
+  .calendar-container {
+    display: none;
+  }
 }
 .calendar-container h3 {
   font-size: 16px;
@@ -644,6 +734,8 @@ pre {
     width: 100%;
     padding-left: 16px;
     padding-right: 16px;
+    background-color: #fafbfc;
+    border-bottom: 1px solid #e1e4e8;
   }
 }
 .blog-intro .avatar {
@@ -654,12 +746,13 @@ pre {
     width: 110px;
     display: block;
     float: left;
+    margin-right: 15px;
   }
 }
 @media (max-width: 414px) {
   .blog-intro-user {
     padding-top: 15px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
   }
 }
 .blog-intro .user-detail {
@@ -673,8 +766,23 @@ pre {
   white-space: nowrap;
   vertical-align: top;
 }
+@media (max-width: 414px) {
+  .blog-intro .user-detail {
+    padding: 0;
+    margin-top: 7px;
+    margin-left: -2px;
+    border: none;
+    font-size: 12px;
+    line-height: 1.8;
+  }
+}
 .blog-intro .user-detail li {
   padding-top: 4px;
+}
+@media (max-width: 414px) {
+  .blog-intro .user-detail li {
+    padding: 0;
+  }
 }
 .blog-intro .user-detail i {
   display: inline-block;
@@ -721,10 +829,22 @@ pre {
 .user-name {
   padding: 16px 0;
 }
+@media (max-width: 414px) {
+  .user-name {
+    padding: 0;
+  }
+}
 .blog-title {
   font-size: 26px;
   line-height: 30px;
   font-weight: 600;
+}
+@media (max-width: 414px) {
+  .blog-title {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
 }
 .blog-author {
   font-size: 20px;
@@ -732,6 +852,12 @@ pre {
   font-weight: 300;
   line-height: 24px;
   color: #666;
+}
+@media (max-width: 414px) {
+  .blog-author {
+    margin: 0;
+    font-size: 12px;
+  }
 }
 .blog-description {
   margin-bottom: 12px;
@@ -741,6 +867,8 @@ pre {
 @media (max-width: 414px) {
   .blog-description {
     clear: both;
+    font-size: 12px;
+    margin: 8px 0 0 0;
   }
 }
 .blog-detail {
@@ -819,6 +947,15 @@ pre {
   padding: 0;
   margin: 0 0 24px 0;
 }
+@media (max-width: 414px) {
+  .recent-post {
+    width: 100%;
+    border: 1px solid #d1d5da;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+  }
+}
 .recent-post-item {
   border: 1px solid #d1d5da;
   -webkit-border-radius: 3px;
@@ -831,16 +968,45 @@ pre {
   height: 118px;
   float: left;
 }
+@media (max-width: 414px) {
+  .recent-post-item {
+    width: 100%;
+    float: none;
+    border: none;
+    height: auto;
+    margin: 0;
+    padding: 14px;
+    border-top: 1px solid #d1d5da;
+  }
+  .recent-post-item:first-child {
+    border-top: none;
+  }
+}
 .recent-post-item:nth-child(odd) {
   margin-right: 5px;
 }
+@media (max-width: 414px) {
+  .recent-post-item:nth-child(odd) {
+    magrin: 0;
+  }
+}
 .recent-post-item:nth-child(even) {
   margin-left: 5px;
+}
+@media (max-width: 414px) {
+  .recent-post-item:nth-child(even) {
+    margin: 0;
+  }
 }
 .post-title {
   margin: 0;
   line-height: 21px;
   max-width: 325px;
+}
+@media (max-width: 414px) {
+  .post-title {
+    white-space: normal;
+  }
 }
 .post-title i {
   padding-right: 5px;
@@ -952,4 +1118,9 @@ pre {
 }
 #google-search .gsib_b {
   display: none;
+}
+@media (max-width: 414px) {
+  .disqus-container {
+    padding: 0 15px;
+  }
 }

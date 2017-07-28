@@ -1,3 +1,8 @@
+@media (max-width: $screen-sm) {
+  .calendar-container {
+    display: none;
+  }
+}
 .calendar-container h3 {
   font-size: 16px;
   font-weight: normal;

@@ -3,6 +3,14 @@
   border-radius: 3px;
   margin-bottom: 30px;
 }
+@media (max-width: $screen-sm) {
+  .post-container {
+    border-radius: 0;
+    border-right: none;
+    border-left: none;
+    border-top: none;
+  }
+}
 .post-container >h3 {
   background-color: $grey-lighter;
   margin: 0;
@@ -10,6 +18,11 @@
   font-size: 14px;
   line-height: 17px;
   border-bottom: 1px solid $grey-border;
+}
+@media (max-width: $screen-sm) {
+  .post-container >h3 {
+    padding: 15px;
+  }
 }
 .post-date {
   font-size: 13px;
@@ -22,6 +35,12 @@
   word-wrap: break-word;
   font-family: $font-family-main;
   font-size: 16px;
+}
+@media (max-width: $screen-sm) {
+  .post-content {
+    padding: 15px;
+    font-size: 15px;
+  }
 }
 .post-content >*:first-child {
   margin-top: 0 !important;

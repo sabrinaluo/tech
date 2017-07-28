@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -143,7 +143,7 @@
 <h1 id="module-exports"><a href="#module-exports" class="headerlink" title="module.exports"></a>module.exports</h1><p>假设我有一个JS文件内容如下：</p>
 <pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
 <span class="built_in">module</span>.exports = {
-  <span class="attr">print</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
+  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
 }
 <span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象已经有了print()方法</span>
 </code></pre>
@@ -155,7 +155,7 @@
 <pre><code class="javascript"><span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports为空对象{}</span>
 <span class="built_in">console</span>.log(exports); <span class="comment">//你会看到Module中的exports为空对象{}</span>
 <span class="built_in">module</span>.exports = {
-  <span class="attr">print</span> : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
+  print : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{<span class="built_in">console</span>.log(<span class="number">12345</span>)}
 }
 <span class="built_in">console</span>.log(<span class="built_in">module</span>); <span class="comment">//你会看到Module中的exports对象有了print()方法</span>
 exports.name = <span class="string">'小白妹妹'</span>;
@@ -203,7 +203,7 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -227,16 +227,11 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -245,6 +240,10 @@ console.log(module); //你会看到Module的exports中还是只有name属性！�
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

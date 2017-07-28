@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -181,11 +181,11 @@
 <li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
 <p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
 <pre><code class="javascript"><span class="comment">// git pop之后的冲突文件看起来长这样：</span>
-&lt;&lt;<span class="xml"><span class="tag">&lt;&lt;&lt;&lt;&lt; <span class="attr">their</span> <span class="attr">code</span>
-<span class="attr">var</span> <span class="attr">a</span> = <span class="string">123;</span>
-=======
-<span class="string">var</span> <span class="attr">a</span> = <span class="string">456;</span>
-&gt;</span>&gt;&gt;&gt;&gt;&gt; my code</span>
+&lt;&lt;<span class="xml"><span class="tag">&lt;&lt;&lt;&lt;&lt; <span class="attr">their</span> <span class="attr">code</span></span></span>
+<span class="xml">var a = 123;</span>
+<span class="xml">=======</span>
+<span class="xml">var a = 456;</span>
+<span class="xml">&gt;&gt;&gt;&gt;&gt;&gt; my code</span>
 </code></pre>
 <pre><code class="javascript"><span class="comment">// 冲突解决后，看起来应该长这样：</span>
 <span class="keyword">var</span> a = <span class="number">123</span>;
@@ -203,7 +203,7 @@
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -227,16 +227,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -245,6 +240,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

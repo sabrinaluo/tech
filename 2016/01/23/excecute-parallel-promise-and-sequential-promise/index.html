@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -147,7 +147,7 @@
 <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">|<span class="string">---------</span>|</div><div class="line">google1   |<span class="string">---------</span>|</div><div class="line">            google2 |<span class="string">---------</span>|</div><div class="line">                     amazon1  |<span class="string">---------</span>|</div><div class="line">                              amazon2   |<span class="string">---------</span>|</div><div class="line">                                        facebook1 |<span class="string">--------</span>|</div><div class="line">                                                  facebook2</div></pre></td></tr></table></figure>
 </li>
 <li><p>google1执行完就执行google1，amazon1执行完就执行amazon2，但对google, amazon, facebook的顺序没有要求</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">|<span class="string">------------------</span>|</div><div class="line">google1            |<span class="string">-------------</span>|</div><div class="line">                   google2</div><div class="line">|<span class="string">---------</span>|</div><div class="line">amazon1   |<span class="string">-----------</span>|</div><div class="line">          amazon2</div><div class="line">|<span class="string">------------</span>|</div><div class="line">facebook1    |<span class="string">-------------</span>|<span class="string">  </span></div><div class="line">             facebook2</div></pre></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">|<span class="string">------------------</span>|</div><div class="line">google1            |<span class="string">-------------</span>|</div><div class="line">                   google2</div><div class="line">|<span class="string">---------</span>|</div><div class="line">amazon1   |<span class="string">-----------</span>|</div><div class="line">          amazon2</div><div class="line">|<span class="string">------------</span>|</div><div class="line">facebook1    |<span class="string">-------------</span>|<span class="string">  </span></div><div class="line"><span class="string">             facebook2</span></div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="Promise并行执行"><a href="#Promise并行执行" class="headerlink" title="Promise并行执行"></a>Promise并行执行</h3><p>对于场景1，主要就是用到<code>Promise.all</code>，因为是数组，所以在处理的过程中通常会用到<code>.map</code>或<code>.forEach</code><br><iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/HiiTea/zfjvr4pz/1/embedded/js,resources,html,css,result/light" frameborder="0" allowfullscreen></iframe><br><img src="http://7xow88.com1.z0.glb.clouddn.com/tech-promise1.png" alt="promise例1网络请求时间线"><br>可以看到3个user请求是同时进行（并行），3个repos请求也是同时进行（并行），由于使用了<code>Promise.all</code>，所以repos请求等待users请求全部完成才开始。</p>
@@ -171,7 +171,7 @@
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -195,16 +195,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -213,6 +208,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

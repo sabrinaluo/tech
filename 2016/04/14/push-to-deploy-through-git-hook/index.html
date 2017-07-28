@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -134,11 +134,11 @@
     <p>看了好多讲通过git钩子自动部署的，大多讲的绕来绕去乱七八糟思路一点也不清晰…<br>做了一晚上实验之后大概明白了是怎么工作的。</p>
 <h3 id="裸仓库（bare）"><a href="#裸仓库（bare）" class="headerlink" title="裸仓库（bare）"></a>裸仓库（bare）</h3><p>裸仓库跟我们平时<code>git clone</code>得到的仓库太一样，裸仓库其实相当于通过克隆来的仓库里的<code>.git</code>文件夹，整个裸仓库中只有git索引（index），<strong>并没有任何代码相关的东西</strong>。要实现Push to Deploy，首先我们需要一个裸仓库。</p>
 <p>在克隆时使用 <code>--bare</code>参数来克隆一个裸仓库<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init <span class="comment">--bare xxx-bare</span></div></pre></td></tr></table></figure></p>
-<p>###钩子（hook）<br>普通仓库<code>.git</code>文件夹下有一个<code>hooks</code>文件夹，裸仓库下直接有一个<code>hooks</code>文件夹，里面有各种各样以<code>.sample</code>结尾的钩子，当把<code>.sample</code>后缀删除时，钩子就是激活状态。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.git</span></div><div class="line">├───hooks</div><div class="line">│   └───post-update<span class="selector-class">.sample</span>   </div><div class="line">└─── ...</div></pre></td></tr></table></figure></p>
+<p>###钩子（hook）<br>普通仓库<code>.git</code>文件夹下有一个<code>hooks</code>文件夹，裸仓库下直接有一个<code>hooks</code>文件夹，里面有各种各样以<code>.sample</code>结尾的钩子，当把<code>.sample</code>后缀删除时，钩子就是激活状态。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.git</div><div class="line">├───hooks</div><div class="line">│   └───post-update<span class="selector-class">.sample</span>   </div><div class="line">└─── ...</div></pre></td></tr></table></figure></p>
 <p>你可以在钩子文件里写一些bash命令，被激活的钩子被触发时会执行你的bash命令。</p>
 <p>与deploy相关的通常使用<code>post-update</code>钩子或者<code>post-receive</code>钩子<a href="https://www.kernel.org/pub/software/scm/git/docs/githooks.html" target="_blank" rel="external">^1</a>，关于这两个钩子到底有什么不同，我是没太看懂，大概的理解是这两个钩子被trigger的时候收到的信息不一样，如果需要用commit的相关信息来做一些事情的话要仔细研究（比如可以设置某个分支收到了推送就做相应的事情之类），其他如果只是通过bash来跑一些node相关的部署命令，两个都可以。这篇文章只给一个最简单的例子，跟分支啊什么的都没关系，只要收到推送就部署。</p>
 <p>要实现Push to Deploy，我们需要修改裸仓库中相应的钩子文件</p>
-<h3 id="裸仓库是怎么工作的"><a href="#裸仓库是怎么工作的" class="headerlink" title="裸仓库是怎么工作的"></a>裸仓库是怎么工作的</h3><p>可以在本地同一个文件夹下先创建一个裸仓库名为xxx-remote（模拟远程服务器），再创建一个xxx-local仓库（模拟本地），将xxx-remote添加为本地仓库的远程仓库，在本地仓库写一个<code>README.md</code>文件，提交并push<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx-remote</div><div class="line">git init xxx-local</div><div class="line">cd xxx-local</div><div class="line">git remote <span class="keyword">add</span><span class="bash"> origin ../xxx-remote</span></div><div class="line">echo test123&gt;README.md</div><div class="line">git <span class="keyword">add</span><span class="bash"> .</span></div><div class="line">git commit -m <span class="string">'add readme file'</span></div><div class="line">git push -u origin master</div></pre></td></tr></table></figure></p>
+<h3 id="裸仓库是怎么工作的"><a href="#裸仓库是怎么工作的" class="headerlink" title="裸仓库是怎么工作的"></a>裸仓库是怎么工作的</h3><p>可以在本地同一个文件夹下先创建一个裸仓库名为xxx-remote（模拟远程服务器），再创建一个xxx-local仓库（模拟本地），将xxx-remote添加为本地仓库的远程仓库，在本地仓库写一个<code>README.md</code>文件，提交并push<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx-remote</div><div class="line">git init xxx-local</div><div class="line">cd xxx-local</div><div class="line">git remote <span class="keyword">add</span><span class="bash"> origin ../xxx-remote</span></div><div class="line"><span class="bash"><span class="built_in">echo</span> test123&gt;README.md</span></div><div class="line"><span class="bash">git add .</span></div><div class="line"><span class="bash">git commit -m <span class="string">'add readme file'</span></span></div><div class="line"><span class="bash">git push -u origin master</span></div></pre></td></tr></table></figure></p>
 <p>之后切换到远程仓库文件夹，查看git log<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ..</div><div class="line"><span class="built_in">cd</span> xxx-remote</div><div class="line">git <span class="built_in">log</span></div></pre></td></tr></table></figure></p>
 <p>将能够看到有一条commit记录，提交信息是 add readme file，远程仓库收到了本地仓库的push</p>
 <h3 id="钩子是怎么工作的"><a href="#钩子是怎么工作的" class="headerlink" title="钩子是怎么工作的"></a>钩子是怎么工作的</h3><p>进入远程仓库，将<code>hooks</code>文件夹下的<code>post-update.sample</code>改名为<code>post-update</code>，打开并编辑为如下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">set</span> -x <span class="comment">#显示每条命令</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"push push"</span></div></pre></td></tr></table></figure></p>
@@ -168,7 +168,7 @@
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -192,16 +192,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -210,6 +205,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

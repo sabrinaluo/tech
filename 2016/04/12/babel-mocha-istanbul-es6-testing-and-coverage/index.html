@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -139,7 +139,7 @@
 <li><code>lib</code>用来存放编译后的代码</li>
 <li><code>test</code>用来放测试脚本</li>
 </ul>
-<p>在<code>test</code>文件夹下，通常有一个<code>mocha.opts</code>文件用来存放mocha的参数<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">-compilers <span class="symbol">js:</span>babel-register</span></div><div class="line">-<span class="ruby">-<span class="keyword">require</span> babel-polyfill</span></div></pre></td></tr></table></figure></p>
+<p>在<code>test</code>文件夹下，通常有一个<code>mocha.opts</code>文件用来存放mocha的参数<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">-compilers <span class="symbol">js:</span>babel-register</span></div><div class="line"><span class="ruby">--<span class="keyword">require</span> babel-polyfill</span></div></pre></td></tr></table></figure></p>
 <p>如果用到了需要用babel-polyfill才能实现的方法就需要加上第二句，别忘了<code>npm install babel-polyfill --save-dev</code></p>
 <p>生成覆盖率的测试命令：（<code>_mocha</code> 是有下划线的）<a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="external">^1</a><br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">istanbul</span> <span class="comment">cover</span> <span class="comment">_mocha</span> <span class="literal">-</span><span class="literal">-</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">opts</span> <span class="string">.</span><span class="comment">/test/mocha</span><span class="string">.</span><span class="comment">opts</span></div></pre></td></tr></table></figure></p>
 <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">babel src/ -d <span class="class"><span class="keyword">lib</span>/ --<span class="title">presets</span> <span class="title">es2015</span> --<span class="title">source</span>-<span class="title">map</span> <span class="title">both</span></span></div></pre></td></tr></table></figure>
@@ -162,7 +162,7 @@
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -186,16 +186,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -204,6 +199,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

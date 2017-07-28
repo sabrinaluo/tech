@@ -36,7 +36,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -60,7 +60,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -76,7 +76,7 @@
 </nav>
 
 <div class="main-container">
-  <header class="header-wrapper">
+  <header class="header-wrapper desktop-only">
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
@@ -134,7 +134,7 @@
     <p>每次遇到跨域的问题真是！@#￥%</p>
 <p>我对<code>JSONP</code>的一些浅显的理解就是，有时候会看到类似<code>http://xxx.xx.com/?callback=xxx</code>这样的请求（<code>callback=</code>也可能是<code>jsonp=</code>也可能是<code>jsonpcallback=</code>，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。</p>
 <p>由于这个回调函数已经发给了服务器，返回的结果其实是一个函数，函数的入参是获取的数据。</p>
-<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  <span class="attr">url</span>: <span class="string">'http://xx.xx.com/xxx'</span>,</div><div class="line">  <span class="attr">method</span>: <span class="string">'GET'</span>,</div><div class="line">  <span class="attr">dataType</span>: <span class="string">'jsonp'</span>,</div><div class="line">  <span class="comment">//jsonp: 'callback',</span></div><div class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="comment">//do something here;</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$.ajax(options);</div></pre></td></tr></table></figure></p>
+<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  url: <span class="string">'http://xx.xx.com/xxx'</span>,</div><div class="line">  method: <span class="string">'GET'</span>,</div><div class="line">  dataType: <span class="string">'jsonp'</span>,</div><div class="line">  <span class="comment">//jsonp: 'callback',</span></div><div class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="comment">//do something here;</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$.ajax(options);</div></pre></td></tr></table></figure></p>
 <p>其中需要注意的是，一定要声明<strong><code>dataType</code></strong>，然后把回调函数写在success后面就可以了。<br>另外一开始提到，服务器端对jsonp的实现可能不同，所以在<code>options</code>中，有时候需要声明<code>jsonp</code>对应的字符串，默认是<code>&quot;callback&quot;</code>。例如：如果服务器实现jsonp是通过<code>http://xxx.xx.com/?jsonpcallback=xxx</code>，那么就需要在<code>options</code>中声明<code>jsonp:&#39;jsonpcallback&#39;</code></p>
 <p>原理据说和<code>&lt;script src=&quot;...&quot;&gt;</code>差不多，我现在还不是很明白=，=</p>
 <p>参考<br><a href="http://www.runoob.com/json/json-jsonp.html" target="_blank" rel="external">http://www.runoob.com/json/json-jsonp.html</a></p>
@@ -143,7 +143,7 @@
 </div>
 
 
-<div class="container">
+<div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
 
@@ -167,16 +167,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -185,6 +180,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 

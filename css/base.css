@@ -11,6 +11,13 @@ body {
   min-width: 1020px;
   word-wrap: break-word;
 }
+@media (max-width: $screen-sm) {
+  body {
+    width: 100%;
+    min-width: 100%;
+    background-color: #fafbfc;
+  }
+}
 a,
 a:link,
 a:visited {
@@ -49,6 +56,11 @@ a:hover {
 .container::after {
   clear: both;
 }
+@media (max-width: $screen-sm) {
+  .container {
+    width: 100%;
+  }
+}
 .container-lg {
   max-width: 1012px;
   padding-left: 16px;
@@ -67,6 +79,7 @@ a:hover {
   .container-lg {
     padding: 0;
     margin: 0;
+    width: 100%;
   }
 }
 .list-none {
@@ -86,4 +99,14 @@ a:hover {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+@media (min-width: $screen-sm) {
+  .mobile-only {
+    display: none;
+  }
+}
+@media (max-width: $screen-sm) {
+  .desktop-only {
+    display: none;
+  }
 }

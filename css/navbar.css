@@ -14,6 +14,11 @@
   margin: -13px 15px -15px -2px;
   white-space: nowrap;
 }
+@media (max-width: $screen-sm) {
+  .navbar-logo {
+    margin-left: 10px;
+  }
+}
 .navbar-nav {
   padding: 0;
   margin: 0;

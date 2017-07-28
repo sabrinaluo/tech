@@ -32,6 +32,11 @@ pre {
   line-height: normal;
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
 }
+@media (max-width: $screen-sm) {
+  pre {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+  }
+}
 .highlight {
   display: block;
   background: #fff;

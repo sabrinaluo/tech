@@ -32,7 +32,7 @@
     <div class="container clearfix">
       <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
 
-      <div class="navbar-search float-left">
+      <div class="navbar-search float-left desktop-only">
         <div class="navbar-search-form">
           <label for="gsc-i-id1">This website</label>
           <div id="google-search">
@@ -56,7 +56,7 @@
         
       </ul>
 
-      <ul class="navbar-nav user-nav float-right">
+      <ul class="navbar-nav user-nav float-right desktop-only">
         <li class="user-nav-notification">
           <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
         </li>
@@ -83,13 +83,30 @@
     <div class="user-name">
       <div class="blog-title">小白妹妹写代码</div>
       <div class="blog-author">HiiTea</div>
+        <ul class="user-detail mobile-only">
+    
+    <li>
+      <i class="fa fa-map-marker"></i>
+      Hong Kong, China
+    </li>
+    
+    <li>
+      <i class="fa fa-envelope-o"></i>
+      <a href="mailto:luohaojing[at]gmail.com">luohaojing[at]gmail.com</a>
+    </li>
+    
+    <li>
+      <i class="fa fa-link"></i>
+      <a href="http://sabrinaluo.com/tech">http://sabrinaluo.com/tech</a>
+    </li>
+  </ul>
     </div>
     <div class="blog-description">
       我这么可爱一定是男孩子
     </div>
   </div>
 
-  <ul class="user-detail">
+  <ul class="user-detail desktop-only">
     
     <li>
       <i class="fa fa-map-marker"></i>
@@ -107,7 +124,7 @@
     </li>
   </ul>
 
-  <div class="social-media">
+  <div class="social-media desktop-only">
     <h4>Social Media</h4>
     <ul>
       
@@ -122,7 +139,7 @@
 
   <div class="blog-detail">
     
-<nav class="blog-detail-nav">
+<nav class="blog-detail-nav desktop-only">
   <ul class="clearfix">
     <li class="">
       <a href="/tech/">Overview</a></li>
@@ -244,9 +261,9 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">tricks</li>
-            
             <li class="tag-list-item">js</li>
+            
+            <li class="tag-list-item">tricks</li>
             
             <li class="tag-list-item">js小技巧</li>
             
@@ -270,9 +287,9 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">css</li>
-            
             <li class="tag-list-item">tricks</li>
+            
+            <li class="tag-list-item">css</li>
             
           </ul>
           <div class="post-info">
@@ -1050,16 +1067,11 @@
 </div>
 
 <div class="footer-wrapper container">
-  <footer class="footer">
-    <div class="footer-theme-info float-right">
-      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
-      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
-    </div>
-
+  <footer class="footer clearfix">
     <a href="http://sabrinaluo.com/tech" class="footer-logo">
       <i class="fa fa-github"></i>
     </a>
-    <ul class="footer-social-link float-left">
+    <ul class="footer-social-link">
       <li>© 2016 HiiTea</li>
       <li><a href="http://sabrinaluo.com/tech">Home</a></li>
       
@@ -1068,6 +1080,10 @@
       <li><a href="http://weibo.com/206663121">Weibo</a></li>
       
     </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
   </footer>
 </div>
 
