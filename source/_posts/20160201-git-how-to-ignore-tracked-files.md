@@ -21,12 +21,12 @@ tags: [git, gitignore, 'update index']
 
 ### 解决方法
 正常情况，跑以下的命令就能忽略掉已经track的**文件夹**：
-```
+``` bash
 git ls-files -z node_modules/ | xargs -0 git update-index --assume-unchanged
 ```
 
 如果只需要忽略**单个文件**，则以下命令就能搞定。
-```
+``` bash
 git update-index --assume-unchanged <file name>
 ```
 
@@ -37,7 +37,7 @@ git update-index --assume-unchanged <file name>
 终于有一天，大家想通了，决定将`node_modules`文件夹移出git index，但是如果删除了整个文件夹commit之后，项目要跑起来，又要重新`npm install`，懒癌患者倒地不起…
 
 下面这个命令可以解决上述问题：
-```
+``` bash
 git rm --cached -r node_modules
 ```
 

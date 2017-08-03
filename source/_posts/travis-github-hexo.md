@@ -19,8 +19,10 @@ tags: [travis, github, hexo, 博客, 自动部署, 持续集成]
 ### Prerequisite
 注册一个travis账号，绑定github，并为相应的repo开启travis服务
 在repo中添加`.travis.yml`文件，下面是我个人的配置。我是将source和public放在同一个repo的不同分支里，源文件放在master分支，生成后的网页放在gh-pages分支。
+
 {% gist d905eeed53d9368fdee6 %}
-``` 
+
+```
 ## 目录结构如下，其中.travis文件夹用于存放github的sshkey加密文件，以及ssh的相关配置
 └── blog
     ├── _config.yml
@@ -33,21 +35,21 @@ tags: [travis, github, hexo, 博客, 自动部署, 持续集成]
     │   ├── id_rsa.enc
     │   └── ssh_config
     └── .travis.yml
-``` 
+```
 
 ### 注意事项
 ``` 
 before_install:
 - openssl aes-256-cbc -K $encrypted_e011a6d7eebf_key -iv $encrypted_e011a6d7eebf_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
-``` 
+```
 * **$encrypted_e011a6d7eebf_key**这一串加密的key每个人都不同，请不要直接复制。请使用
 `$ travis encrypt-file ssh_key --add ` 这条命令将相应的key写入`.travis.yml`中。
 * **记得检查`.travis.yml`文件**，因为在自动写入文件的过程中很可能出现了**自动换行**的问题（我是linuxmint 用webstorm遇到了这个问题），如果有换行的问题把换行符删除即可，否则会导致travis在命令跑到这里的时候出问题使得building failed。
 * 另外如果有将相应的文件移到相应的文件夹中，请记得在命令中修改相应的path
 *  如果你最后deploy的不是master分支，请在`packag.json`中使用下面的依赖
-``` 
+```
 "hexo-deployer-git": "hexojs/hexo-deployer-git#495fc6d"
-``` 
+```
 hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。
 
 ### `.travis.yml`文件解释

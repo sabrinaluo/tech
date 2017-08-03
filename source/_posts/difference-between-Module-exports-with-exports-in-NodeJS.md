@@ -39,14 +39,16 @@ module.exports = {
   print : function(){console.log(12345)}
 }
 console.log(module); //你会看到Module中的exports对象已经有了print()方法
-``` 
+```
+
 有了上面的基础，很容易理解`module.export`其实是**给Module实例中的exports对象中添加方法/属性**。
 
 # exports
 通常使用exports的时候，是这么用的：
 ``` javascript
 exports.print = function(){console.log(12345)}
-``` 
+```
+
 假设我有一个JS文件内容如下：
 ``` javascript
 console.log(module); //你会看到Module中的exports为空对象{}
@@ -57,12 +59,12 @@ module.exports = {
 console.log(module); //你会看到Module中的exports对象有了print()方法
 exports.name = '小白妹妹';
 console.log(module); //你会看到Module中的exports对象不仅有了print()方法，还有了name属性
-``` 
+```
 由此也能看出，传说中的**`exports`其实是`module.exports`的引用**，你可以这么理解，NodeJS在你的代码**之前**悄悄的加了以下代码：
 ``` 
 var module = new Module();
 var exports = module.exports;
-``` 
+```
 **这也就是为什么你并没有定义`exports`这个变量，却能console.log出来而不会报错的原因**。
 
 # require
@@ -71,37 +73,37 @@ require的时候NodeJS会~~到处~~去找有没有这个模块，如果有，ret
 
 # DOs & DONTs
 * √你可以这样：
-``` 
+```
 module.exports.name = '小白妹妹';
 exports.age = 10;
 module.exports.print = function(){console.log(12345)};
-``` 
+```
 如果只是使用`.`来添加属性和方法，`module.exports`和`exports`混用是完全可以的，这种情况下，感觉`exports`就是给懒人用的…毕竟能少写几个7个字符呢！
 * √也可以这样：
-``` 
+```
 module.exports = {
   name = '小白妹妹';
 };
 exports.age = 10;
 module.exports.print = function(){console.log(12345)};
-``` 
+```
 * **×但不可以这样**：
-``` 
+```
 module.exports = {
   name = '小白妹妹';
 };
 exports = {age:10}; // exports现在是{age:10}这个对象的引用，不再是module.exports的引用了
 console.log(module); //你会看到Module的exports中只有name属性！！！
-``` 
+```
 * **×也不可以这样**：
-``` 
+```
 exports.age = 10; 
 console.log(module); //你会看到Module的exports中多了age属性
 module.exports = {
   name = '小白妹妹';
 };
 console.log(module); //你会看到Module的exports中还是只有name属性！！！
-``` 
+```
 # 总结
 还是那一句话，`module.exports`和`exports`的区别就是`var a={}; var b=a;`，a和b的区别
 >* 改变`exports`的指向后所添加的`exports.xxx`都是无效的。因为require返回的只会是`module.exports`

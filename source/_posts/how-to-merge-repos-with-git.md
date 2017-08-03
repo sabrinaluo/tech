@@ -15,7 +15,8 @@ git fetch other
 git checkout -b repo2 other/master
 git checkout master
 git merge repo2
-``` 
+```
+
 解释：
 1. 进入repo1文件夹
 2. 添加repo2作为repo1的远程仓库，并命名为other

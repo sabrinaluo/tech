@@ -6,7 +6,6 @@ tags: [X-WSSE, WSSE, auth, SHA1]
 
 关于HTTP的各种验证方式我其实一种都不知道…X-WSSE这一种奇怪的方式是我在整合Emarsys的API时了解到的。由于自身比较懒，就到Github上搜搜有没有现成的能够生成UsernameToken的包可以用，以省去重复发明轮子的功夫，然而掉进了坑里，与[node-wsse](https://github.com/bouzuya/node-wsse)的作者大战了好几个回合…
 
---- 
 此文章不讨论验证的原理，只讨论X-WSSE UsernameToken的生成方式，其中主要是生成**passwordDigest**。
 验证嘛，用户名username，密码password肯定是少不了的，此外还需要nonce，timeStamp，有了这几样再按照下面的步骤一步步就可以生成符合WSSE标准的token了。
 
@@ -18,9 +17,10 @@ UsernameToken的生成一共需要**5个步骤**：
 一个字符串通常加密之后密码摘要默认是binary的，比如Adobe[^2]，但有些公司可能要求以hex方式生成摘要…比如万恶的Emarsys[^3]…而关于这个摘要到底应该是binary还是hex，据说业界也是模糊不清的，只能由着各家公司按自身情况使用两种方式中的某一种来实现验证[^4]；
 4. 把上一步得到的密码摘要按照```base64```进行编码，就能得到passwordDigest；
 5. 按照以下方式拼接字符串，把各个双引号内换成上面步骤所提到的值，即可得到UsernameToken，看起来长这样：
+
 ``` 
 UsernameToken Username="username", PasswordDigest="passwordDigest", Nonce="nonce", Created="timeStamp"
-``` 
+```
 
 [^1]: http://www.xml.com/pub/a/2003/12/17/dive.html
 [^2]: https://marketing.adobe.com/developer/cn/documentation/authentication-1/wsse-authentication-2

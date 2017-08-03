@@ -51,11 +51,11 @@ tags: [git, version control, 版本控制]
  =======
  var a = 456;
  >>>>>>> my code
-``` 
+```
 ``` javascript
 // 冲突解决后，看起来应该长这样：
  var a = 123;
-``` 
+```
 * `git merge <branch name>` 合并分支，将指定分支与当前分支合并
 > `origin/master`分支为远程主分支
 * `git push origin <branch name>` 把分支推送到远程

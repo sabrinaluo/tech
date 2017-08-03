@@ -10,7 +10,8 @@ tags: [promise chain, promise链]
 
 ### 如何破坏promise链
 如果有这样一个promise链：
-``` 
+
+```
 p1().then(p2).then(p3)
   .then(function(data) {
     console.log('data: ' + data);
@@ -39,13 +40,14 @@ function p3() {
     resolve(789);
   });
 }
-``` 
+```
+
 上面这个例子，你看到的console.log会是这样：
-``` 
+```
 p1 resolved
 p2 rejected
 error: 456
-``` 
+```
 并没有看到`p3`的log，而是看到了error message，也就是说：
 
 **在一个promise链中，只要任何一个promise被reject，promise链就被破坏了，reject之后的promise都不会再执行，而是直接调用`.catch`方法**。
@@ -56,7 +58,7 @@ error: 456
 这个情况在什么时候会用到呢？比如你有一个队列，队列里有很多任务，这些任务并不互相依赖执行后返回的结果。每个任务完成的时间都是不确定的，并且计算资源只允许一次执行一个任务。简单的来说，就是**做完A之后再去做B，并且AB是相互独立的**
 
 假如我现在有一堆promise对象，大概长这样：
-``` 
+```
 //p2, p3与p1相似
 //当doSomething()执行完毕的时候，调用resolve()
 //使得当前promise状态转变为fulfilled即可
@@ -73,7 +75,7 @@ p1.then(function() {
     return p3
   })
   .catch()
-``` 
+```
 > 请注意，前一部破坏Promise链中分定义的p1 p2 p3是**函数**，而此部分定义的p1 p2 p3是**对象！对象！对象！**
 
 * 如前面提到，promise是一个有then方法的对象，因此p1可以直接调用then
