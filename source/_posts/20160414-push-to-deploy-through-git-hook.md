@@ -6,13 +6,13 @@ tags: [git, hook, 自动部署]
 做了一晚上实验之后大概明白了是怎么工作的。
 
 ### 裸仓库（bare）
-裸仓库跟我们平时`git clone`得到的仓库太一样，裸仓库其实相当于通过克隆来的仓库里的`.git`文件夹，整个裸仓库中只有git索引（index），**并没有任何代码相关的东西**。要实现Push to Deploy，首先我们需要一个裸仓库。
+裸仓库跟我们平时`git clone`得到的仓库不太一样，裸仓库其实相当于通过克隆来的仓库里的`.git`文件夹，整个裸仓库中只有git索引（index），**并没有任何代码相关的东西**。要实现Push to Deploy，首先我们需要一个裸仓库。
 
 在克隆时使用 `--bare`参数来克隆一个裸仓库
 ```
 git init --bare xxx-bare
 ```
-###钩子（hook）
+### 钩子（hook）
 普通仓库`.git`文件夹下有一个`hooks`文件夹，裸仓库下直接有一个`hooks`文件夹，里面有各种各样以`.sample`结尾的钩子，当把`.sample`后缀删除时，钩子就是激活状态。
 ```
 .git
@@ -92,4 +92,5 @@ git remote add origin ubuntu@59.64.123.123:home/xxx.git
 
 ### 参考
 [1]: https://www.kernel.org/pub/software/scm/git/docs/githooks.html
+
 [^1]: https://www.kernel.org/pub/software/scm/git/docs/githooks.html
