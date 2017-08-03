@@ -137,28 +137,18 @@
 <p>关于Hexo和github page这里就不讨论了，教程网上一搜一大堆。用travis属于进阶内容了，能搜到这篇文章的，应该也都具备了最基础的知识。</p>
 <p>为什么需要travis来自动部署博客呢，像我这种废话多的人，倾诉欲随时随地会喷发…然后如果当时手边没有电脑，或者有电脑了但不是我的电脑，欲火就被一盆水浇灭了…而有了travis之后呢，只要给我一台能上网的电脑，分分钟就能发博客并且更新到自己的网站…</p>
 <p><a href="https://zespia.tw/blog/2015/01/21/continuous-deployment-to-github-with-travis/" target="_blank" rel="external">具体教程（来自Hexo的作者Tommy）</a>网上已经有一些了，但不是很多，这里主要说一说其中容易遇到的坑。</p>
-<h3 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h3><p>注册一个travis账号，绑定github，并为相应的repo开启travis服务<br>在repo中添加<code>.travis.yml</code>文件，下面是我个人的配置。我是将source和public放在同一个repo的不同分支里，源文件放在master分支，生成后的网页放在gh-pages分支。<br><script src="//gist.github.com/d905eeed53d9368fdee6.js"></script></p>
-<pre><code>## 目录结构如下，其中.travis文件夹用于存放github的sshkey加密文件，以及ssh的相关配置
-└── blog
-    ├── _config.yml
-    ├── package.json
-    ├── README.md
-    ├── scaffolds
-    ├── source
-    │   └── _posts
-    ├── .travis
-    │   ├── id_rsa.enc
-    │   └── ssh_config
-    └── .travis.yml
-</code></pre><h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><pre><code>before_install:
-- openssl aes-256-cbc -K $encrypted_e011a6d7eebf_key -iv $encrypted_e011a6d7eebf_iv -in .travis/id_rsa.enc -out ~/.ssh/id_rsa -d
-</code></pre><ul>
+<h3 id="Prerequisite"><a href="#Prerequisite" class="headerlink" title="Prerequisite"></a>Prerequisite</h3><p>注册一个travis账号，绑定github，并为相应的repo开启travis服务<br>在repo中添加<code>.travis.yml</code>文件，下面是我个人的配置。我是将source和public放在同一个repo的不同分支里，源文件放在master分支，生成后的网页放在gh-pages分支。</p>
+<script src="//gist.github.com/d905eeed53d9368fdee6.js"></script>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">## 目录结构如下，其中<span class="selector-class">.travis</span>文件夹用于存放<span class="selector-tag">github</span>的<span class="selector-tag">sshkey</span>加密文件，以及<span class="selector-tag">ssh</span>的相关配置</div><div class="line">└── <span class="selector-tag">blog</span></div><div class="line">    ├── _<span class="selector-tag">config</span><span class="selector-class">.yml</span></div><div class="line">    ├── <span class="selector-tag">package</span><span class="selector-class">.json</span></div><div class="line">    ├── <span class="selector-tag">README</span><span class="selector-class">.md</span></div><div class="line">    ├── <span class="selector-tag">scaffolds</span></div><div class="line">    ├── <span class="selector-tag">source</span></div><div class="line">    │   └── _<span class="selector-tag">posts</span></div><div class="line">    ├── <span class="selector-class">.travis</span></div><div class="line">    │   ├── <span class="selector-tag">id_rsa</span><span class="selector-class">.enc</span></div><div class="line">    │   └── <span class="selector-tag">ssh_config</span></div><div class="line">    └── <span class="selector-class">.travis</span><span class="selector-class">.yml</span></div></pre></td></tr></table></figure>
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><figure class="highlight stata"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">before_install:</div><div class="line">- openssl aes-256-cbc -K <span class="variable">$encrypted_e011a6d7eebf_key</span> -iv <span class="variable">$encrypted_e011a6d7eebf_iv</span> -<span class="keyword">in</span> .travis/id_rsa.<span class="keyword">enc</span> -<span class="keyword">out</span> ~/.ssh/id_rsa -<span class="built_in">d</span></div></pre></td></tr></table></figure>
+<ul>
 <li><strong>$encrypted_e011a6d7eebf_key</strong>这一串加密的key每个人都不同，请不要直接复制。请使用<br><code>$ travis encrypt-file ssh_key --add</code> 这条命令将相应的key写入<code>.travis.yml</code>中。</li>
 <li><strong>记得检查<code>.travis.yml</code>文件</strong>，因为在自动写入文件的过程中很可能出现了<strong>自动换行</strong>的问题（我是linuxmint 用webstorm遇到了这个问题），如果有换行的问题把换行符删除即可，否则会导致travis在命令跑到这里的时候出问题使得building failed。</li>
 <li>另外如果有将相应的文件移到相应的文件夹中，请记得在命令中修改相应的path</li>
-<li>如果你最后deploy的不是master分支，请在<code>packag.json</code>中使用下面的依赖<pre><code>&quot;hexo-deployer-git&quot;: &quot;hexojs/hexo-deployer-git#495fc6d&quot;
-</code></pre>hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。</li>
+<li>如果你最后deploy的不是master分支，请在<code>packag.json</code>中使用下面的依赖<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"hexo-deployer-git"</span>: <span class="string">"hexojs/hexo-deployer-git#495fc6d"</span></div></pre></td></tr></table></figure>
+</li>
 </ul>
+<p>hexo-deployer-git在0.0.4及之前的版本都是hardcode了默认使用master分支来deploy，当使用非master分支来进行deploy时（本文例子中使用gh-pages分支中的内容）则会报错，上述版本修复了该问题。</p>
 <h3 id="travis-yml文件解释"><a href="#travis-yml文件解释" class="headerlink" title=".travis.yml文件解释"></a><code>.travis.yml</code>文件解释</h3><p>整个配置其实是告诉travis：</p>
 <ol>
 <li>使用node 4.0版本来build我的程序</li>

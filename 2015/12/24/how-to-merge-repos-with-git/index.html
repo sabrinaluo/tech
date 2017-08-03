@@ -133,14 +133,7 @@
     <h1>git merge repo 如何合并两个仓库</h1>
     <p>为什么我每天都会有一些奇奇怪怪的需求…</p>
 <p>我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推<code>push -f</code>，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！</p>
-<h3 id="如何合并两个仓库"><a href="#如何合并两个仓库" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：</p>
-<pre><code class="bash"><span class="built_in">cd</span> repo1
-git remote add other ../repo2
-git fetch other
-git checkout -b repo2 other/master
-git checkout master
-git merge repo2
-</code></pre>
+<h3 id="如何合并两个仓库"><a href="#如何合并两个仓库" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> repo1</div><div class="line">git remote add other ../repo2</div><div class="line">git fetch other</div><div class="line">git checkout -b repo2 other/master</div><div class="line">git checkout master</div><div class="line">git merge repo2</div></pre></td></tr></table></figure></p>
 <p>解释：</p>
 <ol>
 <li>进入repo1文件夹</li>

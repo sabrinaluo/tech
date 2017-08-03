@@ -143,21 +143,15 @@
 <ul>
 <li>下载daynamodb-local：<a href="http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz" target="_blank" rel="external">点这里下载</a></li>
 <li>解压文件</li>
-<li>进入文件目录执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-</code></pre></li>
+<li>进入文件目录执行以下命令：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -Djava<span class="selector-class">.library</span><span class="selector-class">.path</span>=./DynamoDBLocal_lib -jar DynamoDBLocal<span class="selector-class">.jar</span> -sharedDb</div></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li>安装awscli，执行以下命令：<pre><code>pip install awscli
-</code></pre></li>
-<li>配置环境变量，执行以下命令：<pre><code>aws configure
-</code></pre><ul>
-<li>这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要<strong>成功注册AWS服务</strong>之后在AWS的网站上会看到</li>
-<li>AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为<code>us-east-1</code></li>
-</ul>
+<li><p>安装awscli，执行以下命令：</p>
+<figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pip install awscli</div><div class="line">``` </div><div class="line"><span class="number">4.</span> 配置环境变量，执行以下命令：</div></pre></td></tr></table></figure>
 </li>
-<li>启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：<pre><code>java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
-</code></pre></li>
 </ol>
+<p>aws configure<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> * 这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要**成功注册AWS服务**之后在AWS的网站上会看到</div><div class="line"> * AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为`us-east<span class="number">-1</span>`</div><div class="line"><span class="number">5.</span> 启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：</div><div class="line">``` </div><div class="line">java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb</div></pre></td></tr></table></figure></p>
 <p>参考：<br>[1] <a href="http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/" target="_blank" rel="external">http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/</a><br>[2] <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html#Tools.DynamoDBLocal.DownloadingAndRunning" target="_blank" rel="external">DynamoDBLocal Downloading And Running</a><br>[3] <a href="http://aws.amazon.com/cli/" target="_blank" rel="external">http://aws.amazon.com/cli/</a><br>[4] <a href="http://boto3.readthedocs.org/en/latest/guide/configuration.html" target="_blank" rel="external">http://boto3.readthedocs.org/en/latest/guide/configuration.html</a></p>
 
   </article>
