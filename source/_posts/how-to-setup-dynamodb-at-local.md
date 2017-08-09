@@ -25,7 +25,7 @@ java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 3. 安装awscli，执行以下命令：
 ```
 pip install awscli
-``` 
+```
 4. 配置环境变量，执行以下命令：
 ```
 aws configure
@@ -33,7 +33,7 @@ aws configure
  * 这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要**成功注册AWS服务**之后在AWS的网站上会看到
  * AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为`us-east-1`
 5. 启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：
-``` 
+```
 java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 ```
 
