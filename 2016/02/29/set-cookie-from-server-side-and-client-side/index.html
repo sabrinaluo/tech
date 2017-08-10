@@ -113,7 +113,7 @@
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 1 </a>
+           class="header-toolbar-right"> 16 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -164,13 +164,13 @@
 </li>
 </ul>
 </blockquote>
-<h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-Cookie: <span class="attribute">NAME</span>=VALUE; <span class="attribute">expires</span>=DATE; <span class="attribute">path</span>=PATH; <span class="attribute">domain</span>=DOMAIN</div></pre></td></tr></table></figure></p>
+<h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-Cookie: NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN</div></pre></td></tr></table></figure></p>
 <p>NAME VALUE是一对键值<br>expires是过期日期，通常用当前时间的毫秒数加上一段时间：<code>new Date().getTime()+30*24*60*60*1000)</code>，然后<strong>需要调用<code>toUTCString()</code>方法</strong><br>如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失<br>path和domain这个…感觉不太用得到，具体可以看<a href="http://blog.sina.com.cn/s/blog_70c4d9410100z3il.html" target="_blank" rel="external">这篇文章</a></p>
 <p>如果要同时设置多个cookie，同时返回多个<code>Set-Cookie</code>头即可</p>
 <h4 id="maxAge"><a href="#maxAge" class="headerlink" title="maxAge"></a>maxAge</h4><p>有一些服务器端的框架会提供maxAge属性来设置cookie的过期时间，但是原始的Set-Cookie头是不支持maxAge的，所以在通过头部来设置cookie还是乖乖用回expires吧</p>
-<h3 id="浏览器端读取cookie"><a href="#浏览器端读取cookie" class="headerlink" title="浏览器端读取cookie"></a>浏览器端读取cookie</h3><p>JS原生方法：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie;</div></pre></td></tr></table></figure></p>
-<p>读取的cookie是一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cookieA = <span class="built_in">document</span>.cookie.replace(<span class="regexp">/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/</span>, <span class="string">"$1"</span>);</div></pre></td></tr></table></figure></p>
-<h3 id="request-cookie-浏览器端设置cookie"><a href="#request-cookie-浏览器端设置cookie" class="headerlink" title="request cookie 浏览器端设置cookie"></a>request cookie 浏览器端设置cookie</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'cookie_example=123'</span>+<span class="string">';expires='</span>+expire+<span class="string">';path=/'</span>;</div></pre></td></tr></table></figure>
+<h3 id="浏览器端读取cookie"><a href="#浏览器端读取cookie" class="headerlink" title="浏览器端读取cookie"></a>浏览器端读取cookie</h3><p>JS原生方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cookies = document.cookie;</div></pre></td></tr></table></figure></p>
+<p>读取的cookie是一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cookieA = document.cookie.replace(/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/, &quot;$1&quot;);</div></pre></td></tr></table></figure></p>
+<h3 id="request-cookie-浏览器端设置cookie"><a href="#request-cookie-浏览器端设置cookie" class="headerlink" title="request cookie 浏览器端设置cookie"></a>request cookie 浏览器端设置cookie</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie = &apos;cookie_example=123&apos;+&apos;;expires=&apos;+expire+&apos;;path=/&apos;;</div></pre></td></tr></table></figure>
 <p>如果要设置多个cookie，多次调用<code>document.cookie</code>即可</p>
 <h4 id="document-cookie"><a href="#document-cookie" class="headerlink" title="document.cookie"></a>document.cookie</h4><p>这个document的behavior有点奇怪，明明返回的是个字符串，本来以为每次设置cookie得用新的字符串连接旧的字符串，但其实直接等于新的值也并不会覆盖旧的值，不知道实现这个属性&amp;方法混用的原理是什么0,0</p>
 <p>####NOTE<br>通常设置cookie的时候都会把path设置为<code>/</code>，这样同一个域名下，所有路径都共用一个cookie<br>如果没有设置path，某些框架可能默认会使用创建cookie时的路径作为path，这样就可能存在多个path不同的同名cookie。</p>

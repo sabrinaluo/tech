@@ -113,7 +113,7 @@
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 1 </a>
+           class="header-toolbar-right"> 16 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -157,7 +157,7 @@
 <p>首先我想到的是，肉眼看上去同样的body，为什么得到不同的结果？很可能是encoding的问题。单步调试后发现库里并没有任何encoding的动作，所以排除该问题。</p>
 <p>后来我注意到，第三方库在发送请求的时候发了很多header，把这些header也写进postman之后，果然返回了同样的错误。而之前同事测试时，postman里header都是默认值。所以可以肯定问题出在header上。</p>
 <p>删除了<code>SOAPAction</code>这个header之后，请求就成功了。再具体到库里去搜这个<code>SOAPAction</code>，发现有一段</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!<span class="keyword">this</span>.wsdl.<span class="keyword">options</span>.forceSoap12Headers) &#123;</div><div class="line">  headers.SOAPAction = <span class="string">'"'</span> + soapAction + <span class="string">'"'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (!this.wsdl.options.forceSoap12Headers) &#123;</div><div class="line">  headers.SOAPAction = &apos;&quot;&apos; + soapAction + &apos;&quot;&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>猜测应该是有一个<code>forceSoap12Headers</code>相关的设置，再去文档里一搜，果然有，把这个设置为<code>true</code>之后，问题就解决了。前后大概花了一小时。</p>
 <p>写这篇是想说，磨刀不误砍柴工，首先你得学会怎么磨刀，然后得学会怎么砍柴，这样才能磨刀不误砍柴工。对于一个完全不熟悉的东西，因为掌握了最基本的方法，才能万物归一的去解决。</p>
 <p>我反对对于不熟悉的东西，一上来就通看文档。在工作当中，是没有那么多时间让你从头去看文档，把所有东西都弄明白之后才开始工作的。<br>文档对于没有经验的人来说看quick start部分就够，因为就算看到<code>forceSoap12Headers</code>，也不知道是干什么用的。<br>对于有经验的人，才会需要在一开始就去细看<code>forceSoap12Headers</code>的设置</p>

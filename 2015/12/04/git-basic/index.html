@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  git,版本控制,version control
+  git,version control,版本控制
   ">
   
   <meta name="author" content="HiiTea">
@@ -113,7 +113,7 @@
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 1 </a>
+           class="header-toolbar-right"> 16 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -198,7 +198,7 @@
 <li><code>git stash</code> 将本地的工作副本暂时存起来</li>
 <li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
 <p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// git pop之后的冲突文件看起来长这样：</span></div><div class="line"> &lt;&lt;<span class="xml"><span class="tag">&lt;&lt;&lt;&lt;&lt; <span class="attr">their</span> <span class="attr">code</span></span></span></div><div class="line"><span class="xml"> var a = 123;</span></div><div class="line"><span class="xml"> =======</span></div><div class="line"><span class="xml"> var a = 456;</span></div><div class="line"><span class="xml"> &gt;&gt;&gt;&gt;&gt;&gt;&gt; my code</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// git pop之后的冲突文件看起来长这样：</span></div><div class="line"> &lt;&lt;&lt;&lt;&lt;&lt;&lt; their code</div><div class="line"> var a = 123;</div><div class="line"> =======</div><div class="line"> var a = 456;</div><div class="line"> &gt;&gt;&gt;&gt;&gt;&gt;&gt; my code</div></pre></td></tr></table></figure>
 </blockquote>
 </li>
 </ul>

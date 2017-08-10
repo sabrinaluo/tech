@@ -13,7 +13,7 @@
   <meta name="description" content="我这么可爱一定是男孩子">
   
   <meta name="keywords" content="
-  AWS,环境配置,DynamoDB,本地安装,亚马逊,云服务
+  AWS,DynamoDB,环境配置,本地安装,亚马逊,云服务
   ">
   
   <meta name="author" content="HiiTea">
@@ -113,7 +113,7 @@
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 1 </a>
+           class="header-toolbar-right"> 16 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -155,27 +155,27 @@
 <p>本文是Linux环境下的安装和配置，windows下我还不会…</p>
 <ol>
 <li><p>安装JAVA SDK</p>
-<figure class="highlight smali"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo<span class="built_in"> add-apt-repository </span>ppa:webupd8team/java</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install oracle-java8-installer</div><div class="line">$ sudo apt-get install oracle-java8-set-default</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ sudo add-apt-repository ppa:webupd8team/java</div><div class="line">$ sudo apt-get update</div><div class="line">$ sudo apt-get install oracle-java8-installer</div><div class="line">$ sudo apt-get install oracle-java8-set-default</div></pre></td></tr></table></figure>
 </li>
 <li><p>安装dynamodb-local</p>
 <ul>
 <li>下载daynamodb-local：<a href="http://dynamodb-local.s3-website-us-west-2.amazonaws.com/dynamodb_local_latest.tar.gz" target="_blank" rel="external">点这里下载</a></li>
 <li>解压文件</li>
-<li>进入文件目录执行以下命令：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -Djava<span class="selector-class">.library</span><span class="selector-class">.path</span>=./DynamoDBLocal_lib -jar DynamoDBLocal<span class="selector-class">.jar</span> -sharedDb</div></pre></td></tr></table></figure>
+<li>进入文件目录执行以下命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb</div></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
 <li><p>安装awscli，执行以下命令：</p>
-<figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip <span class="keyword">install</span> awscli</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install awscli</div></pre></td></tr></table></figure>
 </li>
 <li><p>配置环境变量，执行以下命令：</p>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">aws configure</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">aws configure</div></pre></td></tr></table></figure>
 <ul>
 <li>这时会让你输入AWS_ACCESS_KEY_ID和AWS_SECRET_ACCESS_KEY，这两个值需要<strong>成功注册AWS服务</strong>之后在AWS的网站上会看到</li>
 <li>AWS_DEFAULT_REGION，根据需要设置，也就是你的数据库打算放在AWS的那个区就设为哪个区，如果只是测试一下，懒得去看有什么区域，那么好吧，你可以设为<code>us-east-1</code></li>
 </ul>
 </li>
-<li>启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -Djava<span class="selector-class">.library</span><span class="selector-class">.path</span>=./DynamoDBLocal_lib -jar DynamoDBLocal<span class="selector-class">.jar</span> -sharedDb</div></pre></td></tr></table></figure>
+<li>启动dynamodb，进入dynamodb目录（也就是你解压dynamodb的地方），执行以下命令：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>参考：<br>[1] <a href="http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/" target="_blank" rel="external">http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/</a><br>[2] <a href="http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html#Tools.DynamoDBLocal.DownloadingAndRunning" target="_blank" rel="external">DynamoDBLocal Downloading And Running</a><br>[3] <a href="http://aws.amazon.com/cli/" target="_blank" rel="external">http://aws.amazon.com/cli/</a><br>[4] <a href="http://boto3.readthedocs.org/en/latest/guide/configuration.html" target="_blank" rel="external">http://boto3.readthedocs.org/en/latest/guide/configuration.html</a></p>

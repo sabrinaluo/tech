@@ -5,7 +5,7 @@
   <link href="/tech/atom.xml" rel="self"/>
   
   <link href="http://sabrinaluo.com/tech/"/>
-  <updated>2017-08-09T16:49:43.788Z</updated>
+  <updated>2017-08-10T08:37:25.548Z</updated>
   <id>http://sabrinaluo.com/tech/</id>
   
   <author>
@@ -20,14 +20,14 @@
     <link href="http://sabrinaluo.com/tech/2017/07/12/trailing-comma/"/>
     <id>http://sabrinaluo.com/tech/2017/07/12/trailing-comma/</id>
     <published>2017-07-12T03:01:13.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
-    <content type="html"><![CDATA[<p>以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line"><span class="built_in">    1,</span></div><div class="line"><span class="built_in">    2,</span></div><div class="line"><span class="built_in">    3,</span></div><div class="line">]<span class="comment">;</span></div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<p>以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    1,</div><div class="line">    2,</div><div class="line">    3,</div><div class="line">];</div></pre></td></tr></table></figure></p>
 <p>作为一个懒癌晚期患者，觉得要多加一个逗号，真是好麻烦！那是naive的我，当然还不知道有版本控制diff这种高级工具，还停留在复制粘贴文件夹的人工版本控制低级阶段…</p>
 <p>后来看到几家大厂的代码规范<a href="https://github.com/airbnb/javascript#functions--signature-invocation-indentation" target="_blank" rel="external">^1</a>, <a href="https://google.github.io/styleguide/jsguide.html#features-arrays-trailing-comma" target="_blank" rel="external">^2</a>中都有相应的规范。Airbnb的JS代码规范是非常火的，然而最开始的时候我个人比较喜欢的是Google的JS代码规范，就因为A家有我不喜欢的trailing comma。没想到，过了一段时间之后，G家也采用了这一条…而恰好也是这段时间，我一直在思考为什么有的人要把代码写的那么不clean？多年的经验告诉我，所有规则一定都是有原因的！</p>
 <p>传图好麻烦…我就文字描述一下吧。凡是用过git的人应该都知道有diff view这种东西，用来比较两个版本的代码有什么区别。没有尾逗号的时候，当你需要添加一个元素，就需要在最后一个元素的<strong>1. 末尾加上一个逗号，2.换行添加新内容</strong>，如下面的例子所示。</p>
-<p>Before<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">var foo</span> = [</div><div class="line">    1,</div><div class="line">    2</div><div class="line">];</div></pre></td></tr></table></figure></p>
-<p>After<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    <span class="number">1</span>,</div><div class="line">    <span class="number">2</span>,</div><div class="line">    <span class="number">3</span></div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>Before<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    1,</div><div class="line">    2</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>After<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    1,</div><div class="line">    2,</div><div class="line">    3</div><div class="line">];</div></pre></td></tr></table></figure></p>
 <p>这样一来，diff view中就会显示修改了<strong>两行</strong>代码。如果使用尾逗号，则添加一个元素只需要<strong>1.换行添加新内容</strong>即可，diff view中显示只修改（添加）了一行代码。</p>
 <h3 id="一点人生感悟"><a href="#一点人生感悟" class="headerlink" title="一点人生感悟"></a>一点人生感悟</h3><p>这个世界上，凡事都是trade off，算法复杂度里要么时间换空间要么空间换时间。<br>尾逗号也一样，想要diff view clean，代码就不那么clean；想要代码clean，diff view就不那么clean。<br>所以搞清楚自己想要什么，又有什么可以去trade off，就很重要了。</p>
 <h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[1] <a href="https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8" target="_blank" rel="external">https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8</a><br>[2] <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas</a></p>
@@ -35,18 +35,20 @@
     
     <summary type="html">
     
-      &lt;p&gt;以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：&lt;br&gt;&lt;figure class=&quot;highlight autohotkey&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/d
+      &lt;p&gt;以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;d
     
     </summary>
     
+      <category term="CODE STYLE" scheme="http://sabrinaluo.com/tech/categories/CODE-STYLE/"/>
+    
+    
+      <category term="版本控制" scheme="http://sabrinaluo.com/tech/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
     
       <category term="trailing comma" scheme="http://sabrinaluo.com/tech/tags/trailing-comma/"/>
     
       <category term="comma-dangle" scheme="http://sabrinaluo.com/tech/tags/comma-dangle/"/>
     
       <category term="尾逗号" scheme="http://sabrinaluo.com/tech/tags/%E5%B0%BE%E9%80%97%E5%8F%B7/"/>
-    
-      <category term="版本控制" scheme="http://sabrinaluo.com/tech/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/"/>
     
   </entry>
   
@@ -55,7 +57,7 @@
     <link href="http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/"/>
     <id>http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/</id>
     <published>2017-05-26T09:59:03.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。</p>
 <h3 id="i18n-amp-i10n"><a href="#i18n-amp-i10n" class="headerlink" title="i18n &amp; i10n"></a>i18n &amp; i10n</h3><p>一直以来我都混淆使用这两个term，其中i18n是国际化，主要用于世界通用内容的翻译，<strong>使产品无需做大的改变就能够适应不同的语言和地区的需要</strong>，包括时间、日期、货币等；而i10n是本地化，也就是把网站里其他内容进行翻译。</p>
@@ -83,7 +85,7 @@
 </tbody>
 </table>
 <p>但是template里写太多的if else 容易使得逻辑混乱，也不利于维护，机智的我今天忽然发现angular其实有一个专门的指令来做这个事:</p>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ng-pluralize <span class="built_in">count</span>=<span class="string">"personCount"</span></div><div class="line">                 when=<span class="comment">"&#123;'0': 'Nobody is viewing.',</span></div><div class="line">                     <span class="string">'one'</span>: <span class="string">'1 person is viewing.'</span>,</div><div class="line">                     <span class="string">'other'</span>: <span class="string">'&#123;&#125; people are viewing.'</span>&#125;<span class="comment">"&gt;</span></div><div class="line">&lt;/ng-pluralize&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ng-pluralize count=&quot;personCount&quot;</div><div class="line">                 when=&quot;&#123;&apos;0&apos;: &apos;Nobody is viewing.&apos;,</div><div class="line">                     &apos;one&apos;: &apos;1 person is viewing.&apos;,</div><div class="line">                     &apos;other&apos;: &apos;&#123;&#125; people are viewing.&apos;&#125;&quot;&gt;</div><div class="line">&lt;/ng-pluralize&gt;</div></pre></td></tr></table></figure>
 <p>这个指令的本质其实跟if else类似，使用了一个hash map来储存对应的翻译，而我们可以利用这个指令，把when的值写到controller里，这样会比较美观 XD</p>
 <h3 id="插值-interpolation"><a href="#插值-interpolation" class="headerlink" title="插值 interpolation"></a>插值 interpolation</h3><p>有时候我们不得不把一整句话打断成多个部分，比如“step 1 of 5 ”，而对应的中文如果要求翻译成“第1步（共5步）”。这种情况下，如果使用断句的方法来翻译，中文需要有3个key，分别对应</p>
 <table>
@@ -117,7 +119,7 @@
 <p>Compiles a string with markup into an interpolation function</p>
 </blockquote>
 <p>翻译时，大多时候时候都是用<code>angular-translate</code>，这个第三方的服务能很好的处理插值，使用的标记是两个花括号<code>{{}}</code></p>
-<figure class="highlight xquery"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//基本用法</div><div class="line">$translate(translationId[, interpolateParams], interpolationId, defaultTranslationText, forceLanguage);</div><div class="line"></div><div class="line">//例子</div><div class="line">$scope.stepInfoText = $filter(<span class="string">'translate'</span>)(<span class="string">'widget-progress-bar.step.text'</span>, &#123;currentStep:<span class="number">1</span>, totalStep: <span class="number">5</span>&#125;);</div><div class="line"></div><div class="line">//翻译文件 *.properties</div><div class="line">widget-progress-bar.step.text=step &#123;&#123;currentStep&#125;&#125; <span class="keyword">of</span> &#123;&#123;totalStep&#125;&#125;</div><div class="line">//output: step <span class="number">1</span> <span class="keyword">of</span> <span class="number">5</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//基本用法</div><div class="line">$translate(translationId[, interpolateParams], interpolationId, defaultTranslationText, forceLanguage);</div><div class="line"></div><div class="line">//例子</div><div class="line">$scope.stepInfoText = $filter(&apos;translate&apos;)(&apos;widget-progress-bar.step.text&apos;, &#123;currentStep:1, totalStep: 5&#125;);</div><div class="line"></div><div class="line">//翻译文件 *.properties</div><div class="line">widget-progress-bar.step.text=step &#123;&#123;currentStep&#125;&#125; of &#123;&#123;totalStep&#125;&#125;</div><div class="line">//output: step 1 of 5</div></pre></td></tr></table></figure>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1: <a href="https://docs.angularjs.org/guide/i18n" target="_blank" rel="external">https://docs.angularjs.org/guide/i18n</a><br>2: <a href="https://docs.angularjs.org/api/ng/directive/ngPluralize" target="_blank" rel="external">https://docs.angularjs.org/api/ng/directive/ngPluralize</a><br>3: <a href="https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize" target="_blank" rel="external">https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize</a><br>4: <a href="https://docs.angularjs.org/api/ng/service/$interpolate" target="_blank" rel="external">https://docs.angularjs.org/api/ng/service/$interpolate</a><br>5: <a href="https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate" target="_blank" rel="external">https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate</a></p>
 ]]></content>
     
@@ -127,6 +129,8 @@
 &lt;h3 id=&quot;i18n-amp-i10n&quot;&gt;&lt;a href=&quot;#i18n
     
     </summary>
+    
+      <category term="AngularJS" scheme="http://sabrinaluo.com/tech/categories/AngularJS/"/>
     
     
       <category term="interpolation" scheme="http://sabrinaluo.com/tech/tags/interpolation/"/>
@@ -150,7 +154,7 @@
     <link href="http://sabrinaluo.com/tech/2017/05/11/thoughts/"/>
     <id>http://sabrinaluo.com/tech/2017/05/11/thoughts/</id>
     <published>2017-05-11T03:21:54.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>不知道为什么，我是比较喜欢JS这种脑残语言的，并且也不想将其他语言用在工作中，比如PHP、PYTHON、JAVA之类的。</p>
 <p>其实到最后肯定所有语言都是相通的，比如每种语言都会有自己的<code>lodash</code>、<code>npm</code>、<code>package.json</code>，所以当精通一种语言之后是能对其他语言的人指点江山的。我之前的一个同事新手写python，库也不会用也不知道去哪里下载，我对Python的认识只限于这是一个用缩进来控制块的语言，但搜了一下果然有<code>pip</code>，<code>requirements.txt</code></p>
@@ -160,7 +164,7 @@
 <p>首先我想到的是，肉眼看上去同样的body，为什么得到不同的结果？很可能是encoding的问题。单步调试后发现库里并没有任何encoding的动作，所以排除该问题。</p>
 <p>后来我注意到，第三方库在发送请求的时候发了很多header，把这些header也写进postman之后，果然返回了同样的错误。而之前同事测试时，postman里header都是默认值。所以可以肯定问题出在header上。</p>
 <p>删除了<code>SOAPAction</code>这个header之后，请求就成功了。再具体到库里去搜这个<code>SOAPAction</code>，发现有一段</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (!<span class="keyword">this</span>.wsdl.<span class="keyword">options</span>.forceSoap12Headers) &#123;</div><div class="line">  headers.SOAPAction = <span class="string">'"'</span> + soapAction + <span class="string">'"'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (!this.wsdl.options.forceSoap12Headers) &#123;</div><div class="line">  headers.SOAPAction = &apos;&quot;&apos; + soapAction + &apos;&quot;&apos;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>猜测应该是有一个<code>forceSoap12Headers</code>相关的设置，再去文档里一搜，果然有，把这个设置为<code>true</code>之后，问题就解决了。前后大概花了一小时。</p>
 <p>写这篇是想说，磨刀不误砍柴工，首先你得学会怎么磨刀，然后得学会怎么砍柴，这样才能磨刀不误砍柴工。对于一个完全不熟悉的东西，因为掌握了最基本的方法，才能万物归一的去解决。</p>
 <p>我反对对于不熟悉的东西，一上来就通看文档。在工作当中，是没有那么多时间让你从头去看文档，把所有东西都弄明白之后才开始工作的。<br>文档对于没有经验的人来说看quick start部分就够，因为就算看到<code>forceSoap12Headers</code>，也不知道是干什么用的。<br>对于有经验的人，才会需要在一开始就去细看<code>forceSoap12Headers</code>的设置</p>
@@ -174,6 +178,8 @@
     
     </summary>
     
+      <category term="心得体会" scheme="http://sabrinaluo.com/tech/categories/%E5%BF%83%E5%BE%97%E4%BD%93%E4%BC%9A/"/>
+    
     
       <category term="forceSoap12Headers" scheme="http://sabrinaluo.com/tech/tags/forceSoap12Headers/"/>
     
@@ -186,13 +192,13 @@
     <link href="http://sabrinaluo.com/tech/2017/01/03/vpn/"/>
     <id>http://sabrinaluo.com/tech/2017/01/03/vpn/</id>
     <published>2017-01-03T06:42:57.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>今天才发现自从买了新Mac之后根本没有用新电脑写过什么东西，导致我今天居然还要<code>npm install</code>才能跑起来HEXO，真是不知道有多懒。</p>
 <p>作为一个在墙外居住了好几年的人，只知道用Unblock youku翻墙进墙内去看视频，根本不知道在墙内怎么翻出来。早些年的时候，翻到墙外是很简单的，免费的软件也很多，好像也不用VPN啥，host文件里加几个IP啥的就能上Google了，现在真是门槛越来越高了呢……回一趟内地80%我平时上的网站都上不去，公司的网站也上不去，反正根本没法work from home，幸好我是在过年前发现了这个问题，现在还来得及解决一下，不然就呵呵呵呵……</p>
 <p>以前好像也用过<code>.ovpn</code>文件，用命令行跑一下，就连上了vpn，现在已经不记得是怎么用了的…今天忽然发现公司居然有openvpn，妈妈再也不用担心我在内地没法工作了，对的，我的心里只有工作！:P</p>
 <p>通常公司提供的openvpn服务都会有一个portal，也就是有个网址，进入之后需要登录公司提供的账号，然后下载相应的客户端，之后基本上是无脑使用……反正我到现在也不知道我电脑上的credentials是怎么生成的。</p>
-<p>然而高贵的mac总是有各种各样的问题，装好openvpn connect之后居然连接错误<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Fails: <span class="builtin-name">Error</span> running jsondialog</div></pre></td></tr></table></figure></p>
+<p>然而高贵的mac总是有各种各样的问题，装好openvpn connect之后居然连接错误<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Fails: Error running jsondialog</div></pre></td></tr></table></figure></p>
 <p>查了一下这是因为mac下的一个什么<code>csrutil</code>保护机制出于enable状态，<code>csrutil status</code>可查看。而disable这个东西需要在recovery mode下跑命令才行……真是麻烦呢。</p>
 <ul>
 <li>重启电脑，按住cmd+r键进入recovery mode</li>
@@ -225,14 +231,14 @@
     <link href="http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/"/>
     <id>http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/</id>
     <published>2016-10-19T07:08:33.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>一直以为这篇已经发过了，结果前两天搜的时候发现搜不到。一直扔在草稿里，今天整理一下之前和最近学到的一些JS小技巧</p>
-<h3 id="利用位运算取整"><a href="#利用位运算取整" class="headerlink" title="利用位运算取整"></a>利用位运算取整</h3><p>利用位运算，与、或、异或、左右移位，<code>&amp;</code> <code>|</code> <code>^</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>&lt;&lt;</code> ，舍去小数点后的数字<a href="http://www.cnblogs.com/kkun/archive/2012/01/30/2332309.html" target="_blank" rel="external">^1</a>，<a href="http://jsperf.com/coercion-vs-casting/3" target="_blank" rel="external">jsPerf</a><br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var a = <span class="number">6.54321</span>;</div><div class="line">console.<span class="built_in">log</span>(a <span class="string">| 0); //6</span></div><div class="line">console.<span class="built_in">log</span>(a <span class="meta">&amp; 0); <span class="comment">//6</span></span></div></pre></td></tr></table></figure></p>
+<h3 id="利用位运算取整"><a href="#利用位运算取整" class="headerlink" title="利用位运算取整"></a>利用位运算取整</h3><p>利用位运算，与、或、异或、左右移位，<code>&amp;</code> <code>|</code> <code>^</code> <code>&gt;&gt;</code> <code>&gt;&gt;&gt;</code> <code>&lt;&lt;</code> ，舍去小数点后的数字<a href="http://www.cnblogs.com/kkun/archive/2012/01/30/2332309.html" target="_blank" rel="external">^1</a>，<a href="http://jsperf.com/coercion-vs-casting/3" target="_blank" rel="external">jsPerf</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var a = 6.54321;</div><div class="line">console.log(a | 0); //6</div><div class="line">console.log(a &amp; 0); //6</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>按位<strong>非非</strong>运算也是可以的，所以你也可以用<strong>呻吟号</strong>把代码写成这样<code>~~a</code></p>
 </blockquote>
-<h3 id="字符串转换为数字"><a href="#字符串转换为数字" class="headerlink" title="+ 字符串转换为数字"></a>+ 字符串转换为数字</h3><p>利用加号 <code>+</code> 将数字字符串转换为数字类型<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="string">"56789"</span>;</div><div class="line"><span class="keyword">var</span> b = +a;</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> b); <span class="comment">//number</span></div><div class="line"><span class="built_in">console</span>.log(b); <span class="comment">//56789</span></div></pre></td></tr></table></figure></p>
+<h3 id="字符串转换为数字"><a href="#字符串转换为数字" class="headerlink" title="+ 字符串转换为数字"></a>+ 字符串转换为数字</h3><p>利用加号 <code>+</code> 将数字字符串转换为数字类型<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var a = &quot;56789&quot;;</div><div class="line">var b = +a;</div><div class="line">console.log(typeof b); //number</div><div class="line">console.log(b); //56789</div></pre></td></tr></table></figure></p>
 <blockquote>
 <ul>
 <li>只能是十进制</li>
@@ -240,14 +246,14 @@
 </ul>
 </blockquote>
 <h3 id="强制转换为布林类型"><a href="#强制转换为布林类型" class="headerlink" title="!! 强制转换为布林类型"></a>!! 强制转换为布林类型</h3><p>利用<code>!!</code>将变量类型强制转换为<code>boolean</code>类型</p>
-<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a=<span class="number">123</span>;</div><div class="line"><span class="keyword">typeof</span> a; <span class="comment">//nmuber</span></div><div class="line"><span class="keyword">typeof</span> !!a; <span class="comment">//boolean</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var a=123;</div><div class="line">typeof a; //nmuber</div><div class="line">typeof !!a; //boolean</div></pre></td></tr></table></figure>
 <h3 id="避免can-not-read-property-‘xxx’-of-null的小技巧"><a href="#避免can-not-read-property-‘xxx’-of-null的小技巧" class="headerlink" title="避免can not read property ‘xxx’ of null的小技巧"></a>避免<code>can not read property ‘xxx’ of null</code>的小技巧</h3><p>经常会遇到的一个情况是下面的代码会报错<code>can not read property &#39;c&#39; of null</code></p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(a.b.c === 1)</span>&#123;</div><div class="line">    <span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if(a.b.c === 1)&#123;</div><div class="line">    //do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>以前自己的写法以及经常见到的写法是这样</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span><span class="comment">(a &amp;&amp; a.b &amp;&amp; a.b.c === 1)</span>&#123;</div><div class="line">    <span class="comment">//do something</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if(a &amp;&amp; a.b &amp;&amp; a.b.c === 1)&#123;</div><div class="line">    //do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>前几天看到一个逼格很高的写法，不过我觉得括号太多了，容易写错，而且也没有上面的那种写法简单。不过还是要记录一下，以免以后见到不知道是什么意思。</p>
-<figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(((a|<span class="type">|&#123;&#125;).b</span>|<span class="type">|&#123;&#125;).c</span> === <span class="number">1</span>)&#123;</div><div class="line">    //<span class="built_in">do</span> something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight delphi"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">abc</span><span class="params">(a, b)</span><span class="comment">&#123;</span></span></div><div class="line"><span class="function"><span class="comment">    a = a || 1; </span></span></div><div class="line"><span class="function"><span class="comment">    b = b || 2;</span></span></div><div class="line"><span class="function"><span class="comment"></span></span></div><div class="line"><span class="function"><span class="comment">    return a + b;</span></span></div><div class="line"><span class="function"><span class="comment">&#125;</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"><span class="title">abc</span><span class="params">()</span>;</span> <span class="comment">//3</span></div><div class="line">abc(<span class="number">5</span>); <span class="comment">//7</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if(((a||&#123;&#125;).b||&#123;&#125;).c === 1)&#123;</div><div class="line">    //do something</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="设置默认值"><a href="#设置默认值" class="headerlink" title="|| 设置默认值"></a>|| 设置默认值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">function abc(a, b)&#123;</div><div class="line">    a = a || 1; </div><div class="line">    b = b || 2;</div><div class="line"></div><div class="line">    return a + b;</div><div class="line">&#125;</div><div class="line"></div><div class="line">abc(); //3</div><div class="line">abc(5); //7</div></pre></td></tr></table></figure>
 <p>有一些情况下函数中需要设置默认值，经常看到有人的写法是<code>typeof</code>先判断这个参数是不是<code>undefined</code>然后再赋值，这种写法实在是太麻烦了……上面的是懒人写法</p>
 <p>感觉善用<code>||</code>和<code>&amp;&amp;</code>还是能搞出很多黑科技的。</p>
 <p>以上，是为打酱油博客一篇。</p>
@@ -260,10 +266,12 @@
     
     </summary>
     
+      <category term="JS" scheme="http://sabrinaluo.com/tech/categories/JS/"/>
     
-      <category term="tricks" scheme="http://sabrinaluo.com/tech/tags/tricks/"/>
     
       <category term="js" scheme="http://sabrinaluo.com/tech/tags/js/"/>
+    
+      <category term="tricks" scheme="http://sabrinaluo.com/tech/tags/tricks/"/>
     
       <category term="js小技巧" scheme="http://sabrinaluo.com/tech/tags/js%E5%B0%8F%E6%8A%80%E5%B7%A7/"/>
     
@@ -274,7 +282,7 @@
     <link href="http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/"/>
     <id>http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/</id>
     <published>2016-09-20T08:44:46.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！:(</p>
@@ -282,8 +290,8 @@
 <p>好久没有写什么东西了，可能是因为最近一直做的事情都是在重复搬砖，没有什么新鲜的东西…更可能是因为太懒了…</p>
 <p>总结一下前段时间学到的几个css小技巧，以免过几天又忘记了</p>
 <h3 id="CSS控制超链接是否可点击：pointer-event"><a href="#CSS控制超链接是否可点击：pointer-event" class="headerlink" title="CSS控制超链接是否可点击：pointer-event"></a>CSS控制超链接是否可点击：pointer-event</h3><p>一开始我听说CSS可以disable超链接的时候我是拒绝的，因为通常在有<code>href</code>属性的时候，都是用js来禁止超链接的。<br>然鹅…CSS里居然有pointer-events<a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/pointer-events" target="_blank" rel="external">^1</a>这种黑科技！</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">a</span>&#123;</div><div class="line">    <span class="attribute">pointer-events</span>: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="transform-垂直居中-2"><a href="#transform-垂直居中-2" class="headerlink" title="transform 垂直居中 ^2"></a>transform 垂直居中 <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">^2</a></h3><p>CSS垂直居中一直是一个蛋疼的问题，常常需要用到，却没有一个所有浏览器，在所有情况下都适用的解决方案。等我以后有空了，应该专门写一篇讨论CSS垂直居中各种解决方案的博客……别问我以后是什么时候…XD<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line"><span class="css"><span class="selector-class">.bbb</span>&#123;</span></div><div class="line"><span class="undefined">    position: relative;</span></div><div class="line"><span class="undefined">    transform: translateY(-50%);</span></div><div class="line"><span class="undefined">    top: 50%</span></div><div class="line"><span class="undefined">&#125;</span></div><div class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"aaa"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bbb"</span>&gt;</span>qqq<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">a&#123;</div><div class="line">    pointer-events: none;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="transform-垂直居中-2"><a href="#transform-垂直居中-2" class="headerlink" title="transform 垂直居中 ^2"></a>transform 垂直居中 <a href="http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/" target="_blank" rel="external">^2</a></h3><p>CSS垂直居中一直是一个蛋疼的问题，常常需要用到，却没有一个所有浏览器，在所有情况下都适用的解决方案。等我以后有空了，应该专门写一篇讨论CSS垂直居中各种解决方案的博客……别问我以后是什么时候…XD<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;style&gt;</div><div class="line">.bbb&#123;</div><div class="line">    position: relative;</div><div class="line">    transform: translateY(-50%);</div><div class="line">    top: 50%</div><div class="line">&#125;</div><div class="line">&lt;/style&gt;</div><div class="line">&lt;div class=&quot;aaa&quot;&gt;</div><div class="line">  &lt;div class=&quot;bbb&quot;&gt;qqq&lt;/div&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure></p>
 <h3 id="nth-child"><a href="#nth-child" class="headerlink" title="nth-child"></a>nth-child</h3><p>通常一个列表里，总是回遇到需要高亮某几个item的情况，CSS居然还可以通过公式来控制样式，我又涨姿势了。</p>
 <p>以前只知道可以控制奇数偶数这种简单的，后来发现，只要是有规律的，能够写成an+b的公式，都可以适用<code>nth-child</code><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child" target="_blank" rel="external">^3</a></p>
 <ul>
@@ -303,6 +311,8 @@
     
     </summary>
     
+      <category term="CSS" scheme="http://sabrinaluo.com/tech/categories/CSS/"/>
+    
     
       <category term="css" scheme="http://sabrinaluo.com/tech/tags/css/"/>
     
@@ -315,7 +325,7 @@
     <link href="http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/"/>
     <id>http://sabrinaluo.com/tech/2016/07/14/jenkins-github-pull-request-builder/</id>
     <published>2016-07-14T06:41:02.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>前不久给bootstrap提了个<a href="https://github.com/twbs/bootstrap/issues/19997" target="_blank" rel="external">issue</a>，然后被他们的高科技自动回复机器人吓萌比了。<br>有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。</p>
 <p>如果使用cloud based CI，很多功能都已经整合了，所以可以很方便的使用。如上travis的例子，只要在travis配置里开启pull request选项，允许PR过来的时候自动跑测试，就可以实现。</p>
@@ -367,12 +377,14 @@
     
     </summary>
     
+      <category term="DEVOPS" scheme="http://sabrinaluo.com/tech/categories/DEVOPS/"/>
+    
+    
+      <category term="github" scheme="http://sabrinaluo.com/tech/tags/github/"/>
     
       <category term="持续集成" scheme="http://sabrinaluo.com/tech/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
     
       <category term="jenkins" scheme="http://sabrinaluo.com/tech/tags/jenkins/"/>
-    
-      <category term="github" scheme="http://sabrinaluo.com/tech/tags/github/"/>
     
       <category term="CI" scheme="http://sabrinaluo.com/tech/tags/CI/"/>
     
@@ -383,7 +395,7 @@
     <link href="http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/"/>
     <id>http://sabrinaluo.com/tech/2016/06/20/intro-of-oauth2-0/</id>
     <published>2016-06-20T09:59:09.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>这篇文章不是讲各种认证方式是怎么实现的，只是简单的介绍如何与微博进行整合。</p>
 <p>微博开放平台允许使用api来开发一些与微博相关的应用，微博提供<strong>Basic Auth</strong>和<strong>OAuth2.0</strong>两种认证方式，其中Basic Auth只能用于测试环境。</p>
@@ -412,6 +424,8 @@
     
     </summary>
     
+      <category term="AUTH" scheme="http://sabrinaluo.com/tech/categories/AUTH/"/>
+    
     
       <category term="OAuth2.0" scheme="http://sabrinaluo.com/tech/tags/OAuth2-0/"/>
     
@@ -422,29 +436,29 @@
     <link href="http://sabrinaluo.com/tech/2016/06/02/travis-heroku/"/>
     <id>http://sabrinaluo.com/tech/2016/06/02/travis-heroku/</id>
     <published>2016-06-02T07:27:46.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>好久么有写东西了，总感觉一直忙的跟狗一样，身心俱疲，但是又不知道到底在忙什么。</p>
 <p>最近实践了一下利用travis部署到heroku的流程，又莫名其妙的尝试了新的编辑器atom，安装了markdown-preview-plus插件，当然要来写点东西试一试， 也不知道英文的linux下到底是什么问题，webstorm和sublime居然不能打中文，所以之前每次写东西都要去简书边预览边写。</p>
 <p>atom还是很好用的，可能因为我（后）天生就对JS写的东西有好感，记不住快捷键的我，不能徒手写html的我还是需要IDE的帮助，atom就用来写点简单的东西吧。</p>
 <p>travis和heroku都有自己的命令行工具（CLI），尤其travis cli用起来总比徒手写.travis.yml方便许多</p>
 <h3 id="安装travis-cli"><a href="#安装travis-cli" class="headerlink" title="安装travis-cli"></a>安装travis-cli</h3><p>travis-cli是ruby写的，所以安装之前需要安装ruby</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="builtin-name">get</span> install ruby-full</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install ruby-full</div></pre></td></tr></table></figure>
 <p>详细的安装教程可以看官方的这个<a href="https://github.com/travis-ci/travis.rb#installation" target="_blank" rel="external">https://github.com/travis-ci/travis.rb#installation</a></p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">gem</span> install travis -v <span class="number">1</span>.<span class="number">8</span>.<span class="number">2</span> --<span class="literal">no</span>-rdoc --<span class="literal">no</span>-ri</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gem install travis -v 1.8.2 --no-rdoc --no-ri</div></pre></td></tr></table></figure>
 <h3 id="安装heroku-cli"><a href="#安装heroku-cli" class="headerlink" title="安装heroku-cli"></a>安装heroku-cli</h3><p>heroku-cli也是ruby写的……有点不懂为啥都喜欢用ruby写cli？js不是挺好的吗，有啥cli是<code>npm install -g</code> 解决不了的吗？…<br>具体的安装教程看</p>
 <ul>
 <li><a href="https://toolbelt.heroku.com" target="_blank" rel="external">https://toolbelt.heroku.com</a></li>
 <li><a href="https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli" target="_blank" rel="external">https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli</a></li>
 </ul>
-<figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O- http<span class="variable">s:</span>//toolbelt.heroku.<span class="keyword">com</span>/install-ubuntu.<span class="keyword">sh</span> | <span class="keyword">sh</span></div></pre></td></tr></table></figure>
-<h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">travis login</span></div></pre></td></tr></table></figure>
-<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">heroku login</span></div></pre></td></tr></table></figure>
-<h3 id="travis-yml"><a href="#travis-yml" class="headerlink" title=".travis.yml"></a>.travis.yml</h3><p>在项目的根目录下执行以下命令，将会生成<code>.travis.yml</code>文件<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">travis init</div><div class="line">travis <span class="built_in">setup</span> heroku</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh</div></pre></td></tr></table></figure>
+<h3 id="登陆"><a href="#登陆" class="headerlink" title="登陆"></a>登陆</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">travis login</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">heroku login</div></pre></td></tr></table></figure>
+<h3 id="travis-yml"><a href="#travis-yml" class="headerlink" title=".travis.yml"></a>.travis.yml</h3><p>在项目的根目录下执行以下命令，将会生成<code>.travis.yml</code>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">travis init</div><div class="line">travis setup heroku</div></pre></td></tr></table></figure></p>
 <blockquote>
 <p>注意：一定要通过命令行登陆heroku，否则travis会卡住，也不报错啥的反正就一直没反应</p>
 </blockquote>
-<p>打开<code>.travis.yml</code>文件可以看到除了基本的信息之外，还有<code>deploy</code>相关的信息，其中比较让人疑惑的是<code>api_key</code>，这个<code>api_key</code>其实是你的heroku账户的token加密之后的一个字符串。heroku的token看起来是一个类似uuid5的字符串，可以通过以下命令查看<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">heroku</span> <span class="selector-tag">auth</span><span class="selector-pseudo">:token</span></div></pre></td></tr></table></figure></p>
+<p>打开<code>.travis.yml</code>文件可以看到除了基本的信息之外，还有<code>deploy</code>相关的信息，其中比较让人疑惑的是<code>api_key</code>，这个<code>api_key</code>其实是你的heroku账户的token加密之后的一个字符串。heroku的token看起来是一个类似uuid5的字符串，可以通过以下命令查看<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">heroku auth:token</div></pre></td></tr></table></figure></p>
 <p>有一个问题我不太明白的是，之前用travis加密文件<code>travis encrypt-file path/of/file --add</code>的时候，可以在travis网站对应repo的setting里看到多出的环境变量，用来加密的key value，然后需要用<code>openssl</code>命令来解密。</p>
 <p>但加密heroku的token后，并没有生成任何新的环境变量，而且也无需在<code>.travis.yml</code>中执行解密的相关操作。</p>
 <p>那么用来加密的key value到底存在哪里了呢？！</p>
@@ -461,14 +475,16 @@
     
     </summary>
     
+      <category term="DEVOPS" scheme="http://sabrinaluo.com/tech/categories/DEVOPS/"/>
     
-      <category term="自动部署" scheme="http://sabrinaluo.com/tech/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/"/>
     
       <category term="travis" scheme="http://sabrinaluo.com/tech/tags/travis/"/>
     
-      <category term="heroku" scheme="http://sabrinaluo.com/tech/tags/heroku/"/>
+      <category term="自动部署" scheme="http://sabrinaluo.com/tech/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/"/>
     
       <category term="持续集成" scheme="http://sabrinaluo.com/tech/tags/%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/"/>
+    
+      <category term="heroku" scheme="http://sabrinaluo.com/tech/tags/heroku/"/>
     
   </entry>
   
@@ -477,11 +493,11 @@
     <link href="http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/"/>
     <id>http://sabrinaluo.com/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/</id>
     <published>2016-04-21T09:07:08.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>为了让各位亲朋好友方便的用撤回信息装x，本宝宝写了一个<a href="http://sabrinaluo.com/nickname-gen">昵称生成器</a><br>虽然是比较简单的页面，但本宝宝还没发布呢，微信就封了这个功能，宝宝心里委屈但宝宝不说…</p>
-<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>今天早些时候，在微信群里看到了这样的撤回信息：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"牛奶"</span>撤回了一条信息并亲了你一下</div></pre></td></tr></table></figure></p>
-<p>开始的时候我是一脸懵逼的，然后知道复制牛奶的昵称，然后再修改就可以实现这个效果，<strong>一定要复制，一个字一个字打就不行</strong>。<br>之后有同学转发了<a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY5NzI4MQ==&amp;mid=505551279&amp;idx=1&amp;sn=f10a4b837a10ed9c4a252c606f2f7c7f&amp;scene=1&amp;srcid=0421JP3AeSA1CmbSqEn1rLMh&amp;from=singlemessage&amp;isappinstalled=0&amp;pass_ticket=HbJ8e6BomIu6b3R%2Bi6i69%2FT2TY3g%2FHUMQSItE5M2cd8%3D" target="_blank" rel="external">一篇文章</a>，然后大家纷纷搞出了各种有趣的效果：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="number">1.</span> <span class="string">"zz并亲了你一下"</span>撤回了一条消息</div><div class="line"><span class="number">2.</span> <span class="string">"朱饼饼息消条一了回撤"</span>并又瘦了一斤</div><div class="line"><span class="number">3.</span> <span class="string">"仝哈哈"</span>撤回了一条消息下一你了亲并</div></pre></td></tr></table></figure></p>
+<h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>今天早些时候，在微信群里看到了这样的撤回信息：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;牛奶&quot;撤回了一条信息并亲了你一下</div></pre></td></tr></table></figure></p>
+<p>开始的时候我是一脸懵逼的，然后知道复制牛奶的昵称，然后再修改就可以实现这个效果，<strong>一定要复制，一个字一个字打就不行</strong>。<br>之后有同学转发了<a href="https://mp.weixin.qq.com/s?__biz=MzAwNDY5NzI4MQ==&amp;mid=505551279&amp;idx=1&amp;sn=f10a4b837a10ed9c4a252c606f2f7c7f&amp;scene=1&amp;srcid=0421JP3AeSA1CmbSqEn1rLMh&amp;from=singlemessage&amp;isappinstalled=0&amp;pass_ticket=HbJ8e6BomIu6b3R%2Bi6i69%2FT2TY3g%2FHUMQSItE5M2cd8%3D" target="_blank" rel="external">一篇文章</a>，然后大家纷纷搞出了各种有趣的效果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1. &quot;zz并亲了你一下&quot;撤回了一条消息</div><div class="line">2. &quot;朱饼饼息消条一了回撤&quot;并又瘦了一斤</div><div class="line">3. &quot;仝哈哈&quot;撤回了一条消息下一你了亲并</div></pre></td></tr></table></figure></p>
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>机智的我一开始就猜到，肯定是有些什么看不见的特殊字符导致的。</p>
 <p>作为一只前端狗，首先想到的当然是打开web微信，F12，看看昵称里到底是什么鬼，果然不出所料，我的昵称是这样的：<code>&amp;#8238;&amp;#8238;&amp;#8238; 用卵么什有没并而然&amp;#8237;萝卜</code></p>
 <p>于是开始找这个<code>&amp;#8238;</code>特殊字符到底是做什么的，机智的我很快就找到了<a href="http://www.fileformat.info/info/unicode/char/202e/index.htm" target="_blank" rel="external">^1</a><br>首先这种字符叫做<em>Unicode_control_characters</em><a href="https://en.wikipedia.org/wiki/Unicode_control_characters" target="_blank" rel="external">^2</a><br>要知道更详细的内容（比如这种字符最开始是用于阿拉伯文等东亚文字的排版，另外类似的字符还有好几个，但）可以看看wiki的双向文稿<a href="https://zh.wikipedia.org/wiki/%E9%9B%99%E5%90%91%E6%96%87%E7%A8%BF" target="_blank" rel="external">^3</a>，还有其他更详细的使用范例<a href="https://www.w3.org/International/questions/qa-bidi-unicode-controls" target="_blank" rel="external">^4</a></p>
@@ -508,7 +524,7 @@
 </table>
 <p>所以<code>8237</code>的作用是从左到右显示，<code>8238</code>的作用是从右到左显示。</p>
 <p>也就是说，跟在<code>8238</code>后面的字符串将从右到左显示（原来的排版方式会被override，直到遇到其他的控制排版的字符(Unicode_control_characters)）；而跟在<code>8237</code>后面的字符串将从左到右显示。</p>
-<p>由于大家在复制的时候根本看不到这些字符，而且可能因为在修改昵称时<strong>删除</strong>或<strong>加多</strong>了这些特殊符号，所以产生了各种奇怪的效果。而前面提到的最正确我的昵称应该是只有一个<code>8238</code>，也就是这样<br><figure class="highlight cal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;<span class="string">#8238</span>;用卵么什有没并而然&amp;<span class="string">#8237</span>;萝卜</div></pre></td></tr></table></figure></p>
+<p>由于大家在复制的时候根本看不到这些字符，而且可能因为在修改昵称时<strong>删除</strong>或<strong>加多</strong>了这些特殊符号，所以产生了各种奇怪的效果。而前面提到的最正确我的昵称应该是只有一个<code>8238</code>，也就是这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;#8238;用卵么什有没并而然&amp;#8237;萝卜</div></pre></td></tr></table></figure></p>
 <p>微信撤回信息的显示逻辑是，<code>&quot;昵称&quot;+撤回了一条信息</code>，昵称前后是有引号的。<br>所以实际上，撤回信息的<strong>字符串</strong>是<code>&quot;&amp;#8238;用卵么什有没并而然&amp;#8237;萝卜&quot;撤回了一条信息</code>。<br>根据之前提到的<code>8238</code>和<code>8237</code>的作用以及前提条件（正常情况下我们看到的字都是从左到右显示），分解过程如下：（LTR从左到右，RTL从右到左）</p>
 <ol>
 <li>`第一个引号是正常显示，这个引号是LTR显示的强字符： （”）</li>
@@ -539,20 +555,20 @@
     <link href="http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/"/>
     <id>http://sabrinaluo.com/tech/2016/04/14/push-to-deploy-through-git-hook/</id>
     <published>2016-04-14T10:59:37.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>看了好多讲通过git钩子自动部署的，大多讲的绕来绕去乱七八糟思路一点也不清晰…<br>做了一晚上实验之后大概明白了是怎么工作的。</p>
 <h3 id="裸仓库（bare）"><a href="#裸仓库（bare）" class="headerlink" title="裸仓库（bare）"></a>裸仓库（bare）</h3><p>裸仓库跟我们平时<code>git clone</code>得到的仓库不太一样，裸仓库其实相当于通过克隆来的仓库里的<code>.git</code>文件夹，整个裸仓库中只有git索引（index），<strong>并没有任何代码相关的东西</strong>。要实现Push to Deploy，首先我们需要一个裸仓库。</p>
-<p>在克隆时使用 <code>--bare</code>参数来克隆一个裸仓库<br><figure class="highlight ada"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init <span class="comment">--bare xxx-bare</span></div></pre></td></tr></table></figure></p>
-<h3 id="钩子（hook）"><a href="#钩子（hook）" class="headerlink" title="钩子（hook）"></a>钩子（hook）</h3><p>普通仓库<code>.git</code>文件夹下有一个<code>hooks</code>文件夹，裸仓库下直接有一个<code>hooks</code>文件夹，里面有各种各样以<code>.sample</code>结尾的钩子，当把<code>.sample</code>后缀删除时，钩子就是激活状态。<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.git</div><div class="line">├───hooks</div><div class="line">│   └───post-update<span class="selector-class">.sample</span>   </div><div class="line">└─── ...</div></pre></td></tr></table></figure></p>
+<p>在克隆时使用 <code>--bare</code>参数来克隆一个裸仓库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx-bare</div></pre></td></tr></table></figure></p>
+<h3 id="钩子（hook）"><a href="#钩子（hook）" class="headerlink" title="钩子（hook）"></a>钩子（hook）</h3><p>普通仓库<code>.git</code>文件夹下有一个<code>hooks</code>文件夹，裸仓库下直接有一个<code>hooks</code>文件夹，里面有各种各样以<code>.sample</code>结尾的钩子，当把<code>.sample</code>后缀删除时，钩子就是激活状态。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.git</div><div class="line">├───hooks</div><div class="line">│   └───post-update.sample   </div><div class="line">└─── ...</div></pre></td></tr></table></figure></p>
 <p>你可以在钩子文件里写一些bash命令，被激活的钩子被触发时会执行你的bash命令。</p>
 <p>与deploy相关的通常使用<code>post-update</code>钩子或者<code>post-receive</code>钩子<a href="https://www.kernel.org/pub/software/scm/git/docs/githooks.html" target="_blank" rel="external">^1</a>，关于这两个钩子到底有什么不同，我是没太看懂，大概的理解是这两个钩子被trigger的时候收到的信息不一样，如果需要用commit的相关信息来做一些事情的话要仔细研究（比如可以设置某个分支收到了推送就做相应的事情之类），其他如果只是通过bash来跑一些node相关的部署命令，两个都可以。这篇文章只给一个最简单的例子，跟分支啊什么的都没关系，只要收到推送就部署。</p>
 <p>要实现Push to Deploy，我们需要修改裸仓库中相应的钩子文件</p>
-<h3 id="裸仓库是怎么工作的"><a href="#裸仓库是怎么工作的" class="headerlink" title="裸仓库是怎么工作的"></a>裸仓库是怎么工作的</h3><p>可以在本地同一个文件夹下先创建一个裸仓库名为xxx-remote（模拟远程服务器），再创建一个xxx-local仓库（模拟本地），将xxx-remote添加为本地仓库的远程仓库，在本地仓库写一个<code>README.md</code>文件，提交并push<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx-remote</div><div class="line">git init xxx-local</div><div class="line">cd xxx-local</div><div class="line">git remote <span class="keyword">add</span><span class="bash"> origin ../xxx-remote</span></div><div class="line"><span class="bash"><span class="built_in">echo</span> test123&gt;README.md</span></div><div class="line"><span class="bash">git add .</span></div><div class="line"><span class="bash">git commit -m <span class="string">'add readme file'</span></span></div><div class="line"><span class="bash">git push -u origin master</span></div></pre></td></tr></table></figure></p>
-<p>之后切换到远程仓库文件夹，查看git log<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ..</div><div class="line"><span class="built_in">cd</span> xxx-remote</div><div class="line">git <span class="built_in">log</span></div></pre></td></tr></table></figure></p>
+<h3 id="裸仓库是怎么工作的"><a href="#裸仓库是怎么工作的" class="headerlink" title="裸仓库是怎么工作的"></a>裸仓库是怎么工作的</h3><p>可以在本地同一个文件夹下先创建一个裸仓库名为xxx-remote（模拟远程服务器），再创建一个xxx-local仓库（模拟本地），将xxx-remote添加为本地仓库的远程仓库，在本地仓库写一个<code>README.md</code>文件，提交并push<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx-remote</div><div class="line">git init xxx-local</div><div class="line">cd xxx-local</div><div class="line">git remote add origin ../xxx-remote</div><div class="line">echo test123&gt;README.md</div><div class="line">git add .</div><div class="line">git commit -m &apos;add readme file&apos;</div><div class="line">git push -u origin master</div></pre></td></tr></table></figure></p>
+<p>之后切换到远程仓库文件夹，查看git log<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd ..</div><div class="line">cd xxx-remote</div><div class="line">git log</div></pre></td></tr></table></figure></p>
 <p>将能够看到有一条commit记录，提交信息是 add readme file，远程仓库收到了本地仓库的push</p>
-<h3 id="钩子是怎么工作的"><a href="#钩子是怎么工作的" class="headerlink" title="钩子是怎么工作的"></a>钩子是怎么工作的</h3><p>进入远程仓库，将<code>hooks</code>文件夹下的<code>post-update.sample</code>改名为<code>post-update</code>，打开并编辑为如下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">set</span> -x <span class="comment">#显示每条命令</span></div><div class="line"><span class="built_in">echo</span> <span class="string">"push push"</span></div></pre></td></tr></table></figure></p>
-<p>修改本地仓库的文件，进行一次推送，将会看到远程服务器执行了相应的命令<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Total <span class="number">0</span> (delta <span class="number">0</span>), reused <span class="number">0</span> (delta <span class="number">0</span>)</div><div class="line"><span class="symbol">remote:</span> + echo <span class="keyword">push</span> <span class="keyword">push</span></div><div class="line"><span class="symbol">remote:</span> <span class="keyword">push</span> <span class="keyword">push</span></div><div class="line">To ../xxx</div><div class="line"> + <span class="number">41</span>b78ee..<span class="number">.055</span>cec9 master -&gt; master (forced update)</div></pre></td></tr></table></figure></p>
+<h3 id="钩子是怎么工作的"><a href="#钩子是怎么工作的" class="headerlink" title="钩子是怎么工作的"></a>钩子是怎么工作的</h3><p>进入远程仓库，将<code>hooks</code>文件夹下的<code>post-update.sample</code>改名为<code>post-update</code>，打开并编辑为如下内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">set -x #显示每条命令</div><div class="line">echo &quot;push push&quot;</div></pre></td></tr></table></figure></p>
+<p>修改本地仓库的文件，进行一次推送，将会看到远程服务器执行了相应的命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Total 0 (delta 0), reused 0 (delta 0)</div><div class="line">remote: + echo push push</div><div class="line">remote: push push</div><div class="line">To ../xxx</div><div class="line"> + 41b78ee...055cec9 master -&gt; master (forced update)</div></pre></td></tr></table></figure></p>
 <h3 id="一个完整的场景举例"><a href="#一个完整的场景举例" class="headerlink" title="一个完整的场景举例"></a>一个完整的场景举例</h3><p>假设有一台远程服务器上跑着一个网站，希望每次git push之后这个网站就自动更新。<br>为了方便：</p>
 <ul>
 <li>假设远程服务器上放了<strong>裸仓库</strong>和<strong>网站</strong>，自动部署的过程就是裸仓库收到push之后更新一下网站的文件夹</li>
@@ -562,13 +578,13 @@
 <p>我们需要：</p>
 <ol>
 <li><p>在这台远程服务器上创建一个裸仓库，假如名叫xxx。克隆repo取名为website，用于存放网站文件</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx</div><div class="line">git <span class="keyword">clone</span> <span class="title">./xxx</span> website</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git init --bare xxx</div><div class="line">git clone ./xxx website</div></pre></td></tr></table></figure>
 </li>
 <li><p>修改远程服务器下<code>hooks</code>文件夹下的<code>post-update.sample</code>改名为<code>post-update</code>，编辑为如下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="built_in">set</span> -x <span class="comment">#显示每条命令</span></div><div class="line">git reset --hard origin/master <span class="comment">#防止因为forced push而导致无法checkout</span></div><div class="line">git checkout</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">set -x #显示每条命令</div><div class="line">git reset --hard origin/master #防止因为forced push而导致无法checkout</div><div class="line">git checkout</div></pre></td></tr></table></figure>
 </li>
 <li><p>在本地repo添加远程仓库</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin ubuntu<span class="variable">@59</span>.<span class="number">64.123</span>.<span class="number">123</span><span class="symbol">:home/xxx</span>.git</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git remote add origin ubuntu@59.64.123.123:home/xxx.git</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>4.在本地仓库修改文件并push</p>
@@ -582,12 +598,16 @@
     
     </summary>
     
+      <category term="GIT" scheme="http://sabrinaluo.com/tech/categories/GIT/"/>
+    
+      <category term="DEVOPS" scheme="http://sabrinaluo.com/tech/categories/GIT/DEVOPS/"/>
+    
     
       <category term="git" scheme="http://sabrinaluo.com/tech/tags/git/"/>
     
-      <category term="hook" scheme="http://sabrinaluo.com/tech/tags/hook/"/>
-    
       <category term="自动部署" scheme="http://sabrinaluo.com/tech/tags/%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2/"/>
+    
+      <category term="hook" scheme="http://sabrinaluo.com/tech/tags/hook/"/>
     
   </entry>
   
@@ -596,7 +616,7 @@
     <link href="http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/"/>
     <id>http://sabrinaluo.com/tech/2016/04/12/babel-mocha-istanbul-es6-testing-and-coverage/</id>
     <published>2016-04-12T04:32:01.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>题外话：<br>一直以为mocha读作“抹茶”并且一直这么读了很久，直到最近看了一个mocha的教学视频，才知道这是摩卡咖啡的摩卡…而抹茶的抹茶应该是matcha…</p>
 <p>在还没有babel的时候，一切都很简单，基础的问题就先不讨论了，这里主要记录一下Babel转码和Istanbul测覆盖率的一些坑。</p>
@@ -606,15 +626,15 @@
 <li><code>lib</code>用来存放编译后的代码</li>
 <li><code>test</code>用来放测试脚本</li>
 </ul>
-<p>在<code>test</code>文件夹下，通常有一个<code>mocha.opts</code>文件用来存放mocha的参数<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">-<span class="ruby">-compilers <span class="symbol">js:</span>babel-register</span></div><div class="line"><span class="ruby">--<span class="keyword">require</span> babel-polyfill</span></div></pre></td></tr></table></figure></p>
+<p>在<code>test</code>文件夹下，通常有一个<code>mocha.opts</code>文件用来存放mocha的参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">--compilers js:babel-register</div><div class="line">--require babel-polyfill</div></pre></td></tr></table></figure></p>
 <p>如果用到了需要用babel-polyfill才能实现的方法就需要加上第二句，别忘了<code>npm install babel-polyfill --save-dev</code></p>
-<p>生成覆盖率的测试命令：（<code>_mocha</code> 是有下划线的）<a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="external">^1</a><br><figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">istanbul</span> <span class="comment">cover</span> <span class="comment">_mocha</span> <span class="literal">-</span><span class="literal">-</span>  <span class="literal">-</span><span class="literal">-</span><span class="comment">opts</span> <span class="string">.</span><span class="comment">/test/mocha</span><span class="string">.</span><span class="comment">opts</span></div></pre></td></tr></table></figure></p>
-<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">babel src/ -d <span class="class"><span class="keyword">lib</span>/ --<span class="title">presets</span> <span class="title">es2015</span> --<span class="title">source</span>-<span class="title">map</span> <span class="title">both</span></span></div></pre></td></tr></table></figure>
+<p>生成覆盖率的测试命令：（<code>_mocha</code> 是有下划线的）<a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="external">^1</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">istanbul cover _mocha --  --opts ./test/mocha.opts</div></pre></td></tr></table></figure></p>
+<h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">babel src/ -d lib/ --presets es2015 --source-map both</div></pre></td></tr></table></figure>
 <p>使用<code>--source-map both</code>参数将会生成source map，有了source map，istanbul就能够追踪到<code>src</code>下的源代码的覆盖率</p>
 <h3 id="正确的require"><a href="#正确的require" class="headerlink" title="正确的require"></a>正确的require</h3><p>在mocha中，一定要require <code>src</code>文件夹下的文件，而不是<code>lib</code>文件夹下的文件。虽然两个文件夹下的文件mocha都能测，但是覆盖率会有一些问题。</p>
 <h3 id="可能的问题"><a href="#可能的问题" class="headerlink" title="可能的问题"></a>可能的问题</h3><ul>
 <li><p>出现以下错误提示时，很可能因为istanbul的版本过低，使用<code>1.0.0-alpha.2</code>版本可以正常运行</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No coverage information was collected, <span class="keyword">exit</span> without writing coverage information</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">No coverage information was collected, exit without writing coverage information</div></pre></td></tr></table></figure>
 </li>
 <li><p>istanbul生成的覆盖率文件里代码几乎都是<strong>红色</strong>的，这是因为编译时没有 <code>--source-map both</code> 参数，追踪的是<code>lib</code>文件夹下的覆盖率</p>
 </li>
@@ -632,6 +652,8 @@
 &lt;p&gt;在还没有babel的时候，一切都很简单，基础的问题就先不讨论了，这里主要记录一下Babel转码
     
     </summary>
+    
+      <category term="TOOLS" scheme="http://sabrinaluo.com/tech/categories/TOOLS/"/>
     
     
       <category term="ES6" scheme="http://sabrinaluo.com/tech/tags/ES6/"/>
@@ -653,26 +675,26 @@
     <link href="http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/"/>
     <id>http://sabrinaluo.com/tech/2016/04/01/scope-and-this-of-arrow-function/</id>
     <published>2016-04-01T08:38:12.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>JS里的作用域和this一直是一件令人头疼的事情，以前接触的不太多，毕竟面向过程编程的我基本上都不会使用“类”这个概念。</p>
 <p>自从开始学习ES6，很长一段时间都认为箭头函数(Arrow Function)<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">^1</a>就是给懒人用的<strong>简写的匿名函数</strong>而已。后来看到有人挑战阮一峰老师<a href="http://es6.ruanyifeng.com/" target="_blank" rel="external">《ECMAScript 6入门》</a>中关于箭头函数this的一些问题<a href="https://github.com/ruanyf/es6tutorial/issues/150" target="_blank" rel="external">^2</a>，才对箭头函数有了一丁点的理解。</p>
 <p>我平时的工作基本上都是各种第三方的API整合，于是各种异步请求，promise都是家常便饭。由于SalesForce没有直接的nodejs sdk，所以自己写一个自定义的类就不可避免了。在写的过程中，关于this踩到坑里了，所以就有了这篇文章。</p>
 <h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>其中一个简单的功能是，查找用户是否存在，若存在则发送欢迎邮件（整个流程对应<code>onBoardFlow</code>）。实际场景比这个要复杂，可能需要连续发送好几个请求，为了避免<em>回调地狱</em>，所有的请求我都用promise包了起来。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SalesForce</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(email, username) &#123;</div><div class="line">    <span class="keyword">this</span>.email = email;</div><div class="line">    <span class="keyword">this</span>.username = username;</div><div class="line">  &#125;</div><div class="line">  checkUser()&#123;</div><div class="line">    <span class="keyword">return</span> getUserByName(<span class="keyword">this</span>.username); <span class="comment">//发送一个请求到salesforce，返回一个promise</span></div><div class="line">  &#125;</div><div class="line">  sendEmail()&#123;</div><div class="line">    <span class="keyword">return</span> send(<span class="keyword">this</span>.email); <span class="comment">//发送一个请求通知salesforce发送邮件，返回一个promise</span></div><div class="line">  &#125;</div><div class="line">  onBoardFlow()&#123;</div><div class="line">    <span class="comment">//....</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p><strong>在<code>onBoardFlow</code>中，搞不清this和作用域的我首先这么写：</strong><br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">//</span>例<span class="number">1</span></div><div class="line"><span class="keyword">this</span>.checkuser().<span class="keyword">then</span>(<span class="keyword">this</span>.sendEmail);  <span class="regexp">//</span>Cannot read property <span class="string">'email'</span> <span class="keyword">of</span> <span class="literal">undefined</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&apos;use strict&apos;;</div><div class="line">class SalesForce &#123;</div><div class="line">  constructor(email, username) &#123;</div><div class="line">    this.email = email;</div><div class="line">    this.username = username;</div><div class="line">  &#125;</div><div class="line">  checkUser()&#123;</div><div class="line">    return getUserByName(this.username); //发送一个请求到salesforce，返回一个promise</div><div class="line">  &#125;</div><div class="line">  sendEmail()&#123;</div><div class="line">    return send(this.email); //发送一个请求通知salesforce发送邮件，返回一个promise</div><div class="line">  &#125;</div><div class="line">  onBoardFlow()&#123;</div><div class="line">    //....</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="方案"><a href="#方案" class="headerlink" title="方案"></a>方案</h3><p><strong>在<code>onBoardFlow</code>中，搞不清this和作用域的我首先这么写：</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//例1</div><div class="line">this.checkuser().then(this.sendEmail);  //Cannot read property &apos;email&apos; of undefined</div></pre></td></tr></table></figure></p>
 <p>然后想到了在promise链中，this指向的是global；</p>
 <blockquote>
 <p>Q: <strong>为什么能找到<code>this.sendEmail()</code>方法，却找不到<code>this.email</code>属性呢？</strong><br>A: 我的理解是：因为<code>this.sendEmail</code>是作为参数传入，传入的this是then外部的this，也就是<code>SalesForce</code>对象；<br>而this.sendEmail函数的作用域中产生了<strong>新的this</strong>，而这个this指向global（浏览器中为window对象）；在严格模式下this为undefined；</p>
 </blockquote>
-<p><strong>然后容易想到的就是各种_this self，然后bind(this) call(_this)之类的</strong><br><figure class="highlight kotlin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//例2</span></div><div class="line"><span class="keyword">this</span>.checkuser().then(<span class="keyword">this</span>.sendEmail.bind(<span class="keyword">this</span>));  <span class="comment">//it works !</span></div></pre></td></tr></table></figure></p>
+<p><strong>然后容易想到的就是各种_this self，然后bind(this) call(_this)之类的</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">//例2</div><div class="line">this.checkuser().then(this.sendEmail.bind(this));  //it works !</div></pre></td></tr></table></figure></p>
 <p>这样是可以正常工作的，但感觉怪怪的，每个then都要<code>bind(this)</code>真是一点也不优雅。</p>
-<p><strong>匿名函数和箭头函数原来不一样啊</strong><br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//例3</span></div><div class="line"><span class="keyword">this</span>.checkuser().then(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.sendEmail();</div><div class="line">&#125;);  <span class="comment">//Cannot read property 'updateFunnelData' of undefined</span></div></pre></td></tr></table></figure></p>
+<p><strong>匿名函数和箭头函数原来不一样啊</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">//例3</div><div class="line">this.checkuser().then(function()&#123;</div><div class="line">  return this.sendEmail();</div><div class="line">&#125;);  //Cannot read property &apos;updateFunnelData&apos; of undefined</div></pre></td></tr></table></figure></p>
 <p>此时<code>this.sendEmail</code>的this是then中的匿名函数新产生的promise作用域下的this，非严格模式下指向global</p>
 <blockquote>
 <p>在箭头函数出现之前，每个新定义的函数都将新产生自己作用域下的this, arguments等对象<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank" rel="external">^1</a></p>
 </blockquote>
-<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">例<span class="number">4</span></div><div class="line"><span class="keyword">this</span>.checkuser().<span class="keyword">then</span>(<span class="function"><span class="params">()</span>=&gt;</span><span class="keyword">this</span>.sendEmail());  <span class="regexp">//i</span>t works!</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">例4</div><div class="line">this.checkuser().then(()=&gt;this.sendEmail());  //it works!</div></pre></td></tr></table></figure>
 <h3 id="词法作用域"><a href="#词法作用域" class="headerlink" title="词法作用域"></a>词法作用域</h3><p>作用域内可以嵌套作用域，从而形成作用域链，在最外层的也就是全局作用域，当在内部查找一个对象时，会顺着作用域链最内层，层层向外寻找，直到找到为止。</p>
 <p>在例3中，匿名函数的作用域中产生了新的<code>this</code>，该<code>this</code>指向global<br>在例4中，箭头函数的作用域中没有产生新的this，所以顺着作用域链层层往外寻找<code>this</code>，找到<code>onBoardFlow()</code>的作用域时，找到了<code>this</code>，而此时<code>this</code>就是<code>SalesForce</code>对象</p>
 <h3 id="为什么promise中的this指向global"><a href="#为什么promise中的this指向global" class="headerlink" title="为什么promise中的this指向global"></a>为什么promise中的this指向global</h3><p>这个，我还没学会…</p>
@@ -705,11 +727,11 @@
     <link href="http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/"/>
     <id>http://sabrinaluo.com/tech/2016/03/14/aws-ec2-ssh-access-mongodb-installation/</id>
     <published>2016-03-14T10:33:31.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>环境：Ubuntu</p>
 <h3 id="SSH连接-EC2"><a href="#SSH连接-EC2" class="headerlink" title="SSH连接 EC2"></a>SSH连接 EC2</h3><p>windows下通常用putty<br>ubuntu下先打个命令<code>ssh</code>看看能否识别命令，如果能就方便很多</p>
-<p>要连接EC2通常都会有一个<code>.pem</code>的<strong>私钥</strong>文件，另外还会有一个<strong>Public IP</strong><br>首先设置权限（并不知道这个有什么用，chmod 400使得文件只能被该文件的拥有者读取）<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">chmod</span> 400 <span class="comment">/*path*/</span><span class="selector-tag">my-key-pair</span><span class="selector-class">.pem</span></div><div class="line"><span class="selector-tag">ssh</span> <span class="selector-tag">-i</span> <span class="comment">/*path*/</span><span class="selector-tag">my-key-pair</span><span class="selector-class">.pem</span> <span class="selector-tag">username</span>@<span class="keyword">59</span>.<span class="keyword">64</span>.<span class="keyword">123</span>.<span class="keyword">1</span></div></pre></td></tr></table></figure></p>
+<p>要连接EC2通常都会有一个<code>.pem</code>的<strong>私钥</strong>文件，另外还会有一个<strong>Public IP</strong><br>首先设置权限（并不知道这个有什么用，chmod 400使得文件只能被该文件的拥有者读取）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod 400 /*path*/my-key-pair.pem</div><div class="line">ssh -i /*path*/my-key-pair.pem username@59.64.123.1</div></pre></td></tr></table></figure></p>
 <p>其中username默认如下：<a href="http://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank" rel="external">^1</a></p>
 <table>
 <thead>
@@ -733,12 +755,12 @@
 </tr>
 </tbody>
 </table>
-<h3 id="mongodb安装及配置"><a href="#mongodb安装及配置" class="headerlink" title="mongodb安装及配置"></a>mongodb安装及配置</h3><p>有了apt-get一切真是轻松如放屁…连解压缩都不用！也不用再设置环境变量什么的（根部记不住解压缩的命令…）<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-<span class="builtin-name">get</span> install mongodb</div></pre></td></tr></table></figure></p>
+<h3 id="mongodb安装及配置"><a href="#mongodb安装及配置" class="headerlink" title="mongodb安装及配置"></a>mongodb安装及配置</h3><p>有了apt-get一切真是轻松如放屁…连解压缩都不用！也不用再设置环境变量什么的（根部记不住解压缩的命令…）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mongodb</div></pre></td></tr></table></figure></p>
 <p>安装好了之后，去<strong>根目录</strong>下创建<code>data</code>文件夹即可，然后打<code>mongod</code>命令，应该就启动了，此时访问<code>localhost:27017</code>，如果看到以下文字，就成功启动了芒果DB</p>
 <blockquote>
 <p>You are trying to access MongoDB on the native driver port. For http diagnostic access, add 1000 to the port number</p>
 </blockquote>
-<p>如果有error通常是没有data文件夹，设置<code>dbpath</code>后再尝试启动<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod <span class="params">--dbpath=</span><span class="string">./path_of</span> _data</div></pre></td></tr></table></figure></p>
+<p>如果有error通常是没有data文件夹，设置<code>dbpath</code>后再尝试启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --dbpath=./path_of _data</div></pre></td></tr></table></figure></p>
 ]]></content>
     
     <summary type="html">
@@ -747,6 +769,8 @@
 &lt;h3 id=&quot;SSH连接-EC2&quot;&gt;&lt;a href=&quot;#SSH连接-EC2&quot; class=&quot;headerlink&quot; title=&quot;SSH连接 EC2&quot;&gt;&lt;/a&gt;SSH连接 EC2&lt;/h3&gt;&lt;p&gt;windows下通常用putty&lt;br&gt;ubunt
     
     </summary>
+    
+      <category term="AWS" scheme="http://sabrinaluo.com/tech/categories/AWS/"/>
     
     
       <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
@@ -764,7 +788,7 @@
     <link href="http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/"/>
     <id>http://sabrinaluo.com/tech/2016/03/07/aws-api-gateway-mapping-templates/</id>
     <published>2016-03-07T06:33:03.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。</p>
 <h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，lambda获取到的payload并<strong>不包含 request header</strong>的内容，而只有<strong>request body</strong>的内容。</p>
@@ -774,7 +798,7 @@
 <li>在API Gateway界面中选中具体的api方法，点击右侧的<strong>Intergration Request</strong></li>
 <li>在底部点击<strong>Mapping Templates</strong></li>
 <li>点击<strong>Add Mapping Template</strong>，输入<code>application/json</code>，点击√进行确认</li>
-<li>在右侧新出现的区域，点击编辑按钮（铅笔图标），输入需要的变量即可，例如要获取ip：<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"body"</span>: <span class="variable">$input</span>.json(<span class="string">'$'</span>),</div><div class="line">  <span class="string">"source_ip"</span> : <span class="string">"<span class="variable">$context</span>.identity.sourceIp"</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>在右侧新出现的区域，点击编辑按钮（铅笔图标），输入需要的变量即可，例如要获取ip：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;body&quot;: $input.json(&apos;$&apos;),</div><div class="line">  &quot;source_ip&quot; : &quot;$context.identity.sourceIp&quot;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>其中<code>$input.json(&#39;$&#39;)</code>是请求时客户端发来的body</p>
@@ -805,6 +829,8 @@
     
     </summary>
     
+      <category term="AWS" scheme="http://sabrinaluo.com/tech/categories/AWS/"/>
+    
     
       <category term="AWS" scheme="http://sabrinaluo.com/tech/tags/AWS/"/>
     
@@ -823,7 +849,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/"/>
     <id>http://sabrinaluo.com/tech/2016/02/29/set-cookie-from-server-side-and-client-side/</id>
     <published>2016-02-29T06:04:57.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>http协议什么的，不知道跟通信有没有关系…作为一个通信科班出身的硬<del>汉</del>妹，对各种协议基本上只能说出名字，别的一窍不通=，= 所以当我知道cookie原来是在header里的时候，当时我就震惊了…</p>
 <p>在服务器端，各种框架都已经包装好了方便设置cookie的方法，比如nodejs的express，php的codeignitor、laravel（我居然都被迫写过php了，真是逼良为娼…）</p>
@@ -840,13 +866,13 @@
 </li>
 </ul>
 </blockquote>
-<h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-Cookie: <span class="attribute">NAME</span>=VALUE; <span class="attribute">expires</span>=DATE; <span class="attribute">path</span>=PATH; <span class="attribute">domain</span>=DOMAIN</div></pre></td></tr></table></figure></p>
+<h4 id="一个完整的cookie-header"><a href="#一个完整的cookie-header" class="headerlink" title="一个完整的cookie header"></a>一个完整的cookie header</h4><p>一个完整的cookie头长这样<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Set-Cookie: NAME=VALUE; expires=DATE; path=PATH; domain=DOMAIN</div></pre></td></tr></table></figure></p>
 <p>NAME VALUE是一对键值<br>expires是过期日期，通常用当前时间的毫秒数加上一段时间：<code>new Date().getTime()+30*24*60*60*1000)</code>，然后<strong>需要调用<code>toUTCString()</code>方法</strong><br>如果不设置expires，在浏览器中这个cookie将被当做session对待，也就是关闭了浏览器cookie就消失<br>path和domain这个…感觉不太用得到，具体可以看<a href="http://blog.sina.com.cn/s/blog_70c4d9410100z3il.html" target="_blank" rel="external">这篇文章</a></p>
 <p>如果要同时设置多个cookie，同时返回多个<code>Set-Cookie</code>头即可</p>
 <h4 id="maxAge"><a href="#maxAge" class="headerlink" title="maxAge"></a>maxAge</h4><p>有一些服务器端的框架会提供maxAge属性来设置cookie的过期时间，但是原始的Set-Cookie头是不支持maxAge的，所以在通过头部来设置cookie还是乖乖用回expires吧</p>
-<h3 id="浏览器端读取cookie"><a href="#浏览器端读取cookie" class="headerlink" title="浏览器端读取cookie"></a>浏览器端读取cookie</h3><p>JS原生方法：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cookies = <span class="built_in">document</span>.cookie;</div></pre></td></tr></table></figure></p>
-<p>读取的cookie是一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cookieA = <span class="built_in">document</span>.cookie.replace(<span class="regexp">/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/</span>, <span class="string">"$1"</span>);</div></pre></td></tr></table></figure></p>
-<h3 id="request-cookie-浏览器端设置cookie"><a href="#request-cookie-浏览器端设置cookie" class="headerlink" title="request cookie 浏览器端设置cookie"></a>request cookie 浏览器端设置cookie</h3><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.cookie = <span class="string">'cookie_example=123'</span>+<span class="string">';expires='</span>+expire+<span class="string">';path=/'</span>;</div></pre></td></tr></table></figure>
+<h3 id="浏览器端读取cookie"><a href="#浏览器端读取cookie" class="headerlink" title="浏览器端读取cookie"></a>浏览器端读取cookie</h3><p>JS原生方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cookies = document.cookie;</div></pre></td></tr></table></figure></p>
+<p>读取的cookie是一个分号分隔的包含所有cookie键值字符串，可以通过正则表达式来提取需要的cookie<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var cookieA = document.cookie.replace(/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/, &quot;$1&quot;);</div></pre></td></tr></table></figure></p>
+<h3 id="request-cookie-浏览器端设置cookie"><a href="#request-cookie-浏览器端设置cookie" class="headerlink" title="request cookie 浏览器端设置cookie"></a>request cookie 浏览器端设置cookie</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie = &apos;cookie_example=123&apos;+&apos;;expires=&apos;+expire+&apos;;path=/&apos;;</div></pre></td></tr></table></figure>
 <p>如果要设置多个cookie，多次调用<code>document.cookie</code>即可</p>
 <h4 id="document-cookie"><a href="#document-cookie" class="headerlink" title="document.cookie"></a>document.cookie</h4><p>这个document的behavior有点奇怪，明明返回的是个字符串，本来以为每次设置cookie得用新的字符串连接旧的字符串，但其实直接等于新的值也并不会覆盖旧的值，不知道实现这个属性&amp;方法混用的原理是什么0,0</p>
 <p>####NOTE<br>通常设置cookie的时候都会把path设置为<code>/</code>，这样同一个域名下，所有路径都共用一个cookie<br>如果没有设置path，某些框架可能默认会使用创建cookie时的路径作为path，这样就可能存在多个path不同的同名cookie。</p>
@@ -874,12 +900,12 @@
     <link href="http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/"/>
     <id>http://sabrinaluo.com/tech/2016/02/17/using-jQuery-to-handle-CORS-with-jsonp/</id>
     <published>2016-02-17T04:31:55.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>每次遇到跨域的问题真是！@#￥%</p>
 <p>我对<code>JSONP</code>的一些浅显的理解就是，有时候会看到类似<code>http://xxx.xx.com/?callback=xxx</code>这样的请求（<code>callback=</code>也可能是<code>jsonp=</code>也可能是<code>jsonpcallback=</code>，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。</p>
 <p>由于这个回调函数已经发给了服务器，返回的结果其实是一个函数，函数的入参是获取的数据。</p>
-<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> options = &#123;</div><div class="line">  url: <span class="string">'http://xx.xx.com/xxx'</span>,</div><div class="line">  method: <span class="string">'GET'</span>,</div><div class="line">  dataType: <span class="string">'jsonp'</span>,</div><div class="line">  <span class="comment">//jsonp: 'callback',</span></div><div class="line">  success: <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</div><div class="line">    <span class="comment">//do something here;</span></div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$.ajax(options);</div></pre></td></tr></table></figure></p>
+<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var options = &#123;</div><div class="line">  url: &apos;http://xx.xx.com/xxx&apos;,</div><div class="line">  method: &apos;GET&apos;,</div><div class="line">  dataType: &apos;jsonp&apos;,</div><div class="line">  //jsonp: &apos;callback&apos;,</div><div class="line">  success: function(data)&#123;</div><div class="line">    //do something here;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$.ajax(options);</div></pre></td></tr></table></figure></p>
 <p>其中需要注意的是，一定要声明<strong><code>dataType</code></strong>，然后把回调函数写在success后面就可以了。<br>另外一开始提到，服务器端对jsonp的实现可能不同，所以在<code>options</code>中，有时候需要声明<code>jsonp</code>对应的字符串，默认是<code>&quot;callback&quot;</code>。例如：如果服务器实现jsonp是通过<code>http://xxx.xx.com/?jsonpcallback=xxx</code>，那么就需要在<code>options</code>中声明<code>jsonp:&#39;jsonpcallback&#39;</code></p>
 <p>原理据说和<code>&lt;script src=&quot;...&quot;&gt;</code>差不多，我现在还不是很明白=，=</p>
 <p>参考<br><a href="http://www.runoob.com/json/json-jsonp.html" target="_blank" rel="external">http://www.runoob.com/json/json-jsonp.html</a></p>
@@ -892,14 +918,16 @@
     
     </summary>
     
+      <category term="JQUERY" scheme="http://sabrinaluo.com/tech/categories/JQUERY/"/>
     
-      <category term="CORS" scheme="http://sabrinaluo.com/tech/tags/CORS/"/>
-    
-      <category term="跨域" scheme="http://sabrinaluo.com/tech/tags/%E8%B7%A8%E5%9F%9F/"/>
     
       <category term="jQuery" scheme="http://sabrinaluo.com/tech/tags/jQuery/"/>
     
+      <category term="CORS" scheme="http://sabrinaluo.com/tech/tags/CORS/"/>
+    
       <category term="JSONP" scheme="http://sabrinaluo.com/tech/tags/JSONP/"/>
+    
+      <category term="跨域" scheme="http://sabrinaluo.com/tech/tags/%E8%B7%A8%E5%9F%9F/"/>
     
   </entry>
   
@@ -908,13 +936,13 @@
     <link href="http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/"/>
     <id>http://sabrinaluo.com/tech/2016/02/03/experiencing-google-map-js-api/</id>
     <published>2016-02-03T10:32:51.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>一直都想把自己去过的地方做个地图标记，然而现在能找到的各种现成的地图产品都不太喜欢，所以就用谷歌地图自己写了一个。<br>总结以下常见的问题和坑：</p>
 <h3 id="自动缩放-auto-zoom"><a href="#自动缩放-auto-zoom" class="headerlink" title="自动缩放(auto zoom)"></a>自动缩放(auto zoom)</h3><p>使用场景大多数时候是有很多marker，想要全部显示这些marker，同时zoom当然越大越清晰。</p>
 <ul>
 <li>首先需要一个marker的位置列表 <code>markerList</code>，单个元素长这样<code>{lat:xxx,lng:xxx}</code></li>
-<li>遍历列表，把元素传入<code>google.maps.LatLngBounds</code>实例的<code>extend</code>方法<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> latlngbounds = <span class="keyword">new</span> google.maps.LatLngBounds();</div><div class="line">markerList.<span class="keyword">forEach</span>(<span class="function"><span class="keyword">function</span> <span class="params">(item)</span> </span>&#123;</div><div class="line">  latlngbounds.extend(item);</div><div class="line">&#125;);</div><div class="line">map.fitBounds(latlngbounds);</div></pre></td></tr></table></figure>
+<li>遍历列表，把元素传入<code>google.maps.LatLngBounds</code>实例的<code>extend</code>方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var latlngbounds = new google.maps.LatLngBounds();</div><div class="line">markerList.forEach(function (item) &#123;</div><div class="line">  latlngbounds.extend(item);</div><div class="line">&#125;);</div><div class="line">map.fitBounds(latlngbounds);</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>然而这有一个很多人提到的问题，就是缩放效果不平滑。(smooth这个词，我还是百度了smooth scroll才写的出字面意思来，我现在中文是有多差…)<br>这个暂时没什么解决方法，API本身就是这样的。据说谷歌本身的地图是h5的canvas绘制的，但通过API生成的地图不是同样的原理…谷歌居然自己都不用自己的API …</p>
@@ -924,11 +952,11 @@
 <p>比如这样一个例子：有两组marker，<strong>有交集</strong>。想要让第一组先BOUNCE，之后停止第一组，让第二组BOUNCE。很容易想到的方法是，通过遍历，把第一组的动画全部设置为NULL，再把第二组动画全部设置为BOUNCE。然而交集的这一部分只会BOUNCE一次然后就停了…因为计算速度很快，从NULL到BOUNCE不到700ms，动画其实还处于NULL状态。</p>
 <p>可以参考官方的这个例子，<a href="https://developers.google.com/maps/documentation/javascript/examples/marker-animations" target="_blank" rel="external">https://developers.google.com/maps/documentation/javascript/examples/marker-animations</a> ，当你双击marker的时候，其实就是模拟了快速切换状态，但动画效果并不如预期…</p>
 <p>解决方案：求差集，也就是把交集的部分去掉，在设置动画为NULL</p>
-<h3 id="自定义地图样式"><a href="#自定义地图样式" class="headerlink" title="自定义地图样式"></a>自定义地图样式</h3><p><a href="https://snazzymaps.com/" target="_blank" rel="external">https://snazzymaps.com/</a> 这个网站有很多已经设计好的样式，选喜欢的直接复制代码放到<code>StyledMapType()</code>方法中即可，然后给这个样式取个名字，下例中我使用了<a href="https://snazzymaps.com/style/134/light-dream" target="_blank" rel="external">light dream</a> 这个样式<br><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mapStyle = <span class="built_in">new</span> google.maps.StyledMapType([....])</div><div class="line"><span class="keyword">map</span>.mapTypes.set(<span class="string">'lightDream'</span>, mapStyle);</div><div class="line"><span class="keyword">map</span>.setMapTypeId(<span class="string">'lightDream'</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="自定义地图样式"><a href="#自定义地图样式" class="headerlink" title="自定义地图样式"></a>自定义地图样式</h3><p><a href="https://snazzymaps.com/" target="_blank" rel="external">https://snazzymaps.com/</a> 这个网站有很多已经设计好的样式，选喜欢的直接复制代码放到<code>StyledMapType()</code>方法中即可，然后给这个样式取个名字，下例中我使用了<a href="https://snazzymaps.com/style/134/light-dream" target="_blank" rel="external">light dream</a> 这个样式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var mapStyle = new google.maps.StyledMapType([....])</div><div class="line">map.mapTypes.set(&apos;lightDream&apos;, mapStyle);</div><div class="line">map.setMapTypeId(&apos;lightDream&apos;);</div></pre></td></tr></table></figure></p>
 <h3 id="遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数"><a href="#遍历添加-event-listener-同时又需要传参数给-google-maps-event-addListener-的回调函数" class="headerlink" title="遍历添加 event listener 同时又需要传参数给 google.maps.event.addListener() 的回调函数"></a>遍历添加 event listener 同时又需要传参数给 <code>google.maps.event.addListener()</code> 的回调函数</h3><p>不太理解event.addListener的工作原理，但根据我踩的坑推测这是一个异步的方法（否则为什么有回调函数？！）</p>
 <p>这个时候就要用到高大上的<strong>闭包</strong>。下面这个例子中，如果不把<code>addListener</code>包起来，每次cityHandler收到的city都是遍历的最后一个city。因为遍历速度太快，而回调还没有执行，等回调执行的时候city已经遍历到最后一个了…</p>
 <p>不用闭包的话，用promise应该也能解决这个问题，但是感觉promise需要写的code会比较多一些。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> cityList=[&#123;marker:googleMapMarker,city:<span class="string">'Beijing'</span>&#125;,...];</div><div class="line">cityList.<span class="keyword">forEach</span>(<span class="function"><span class="keyword">function</span><span class="params">(item)</span></span>&#123;</div><div class="line">  (<span class="function"><span class="keyword">function</span> <span class="params">(marker, city)</span> </span>&#123;</div><div class="line">    google.maps.event.addListener(marker, <span class="string">'click'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> </span>&#123;</div><div class="line">      cityHandler(city);</div><div class="line">    &#125;);</div><div class="line">  &#125;)(item.marker, item.city)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var cityList=[&#123;marker:googleMapMarker,city:&apos;Beijing&apos;&#125;,...];</div><div class="line">cityList.forEach(function(item)&#123;</div><div class="line">  (function (marker, city) &#123;</div><div class="line">    google.maps.event.addListener(marker, &apos;click&apos;, function (e) &#123;</div><div class="line">      cityHandler(city);</div><div class="line">    &#125;);</div><div class="line">  &#125;)(item.marker, item.city)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
 <h3 id="原生marker图标"><a href="#原生marker图标" class="headerlink" title="原生marker图标"></a>原生marker图标</h3><p><a href="http://mabp.kiev.ua/2010/01/12/google-map-markers/" target="_blank" rel="external">http://mabp.kiev.ua/2010/01/12/google-map-markers/</a></p>
 <h3 id="参考："><a href="#参考：" class="headerlink" title="参考："></a>参考：</h3><p><a href="https://developers.google.com/maps/documentation/javascript/reference" target="_blank" rel="external">https://developers.google.com/maps/documentation/javascript/reference</a></p>
 ]]></content>
@@ -956,7 +984,7 @@
     <link href="http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/"/>
     <id>http://sabrinaluo.com/tech/2016/02/01/git-how-to-ignore-tracked-files/</id>
     <published>2016-02-01T06:01:03.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>我也不想中英文混杂的取标题……但我实在翻译无能…_(:з」∠)_</p>
 <h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><p>在git中文件有两类，共三种状态：</p>
@@ -986,6 +1014,8 @@
     
     </summary>
     
+      <category term="GIT" scheme="http://sabrinaluo.com/tech/categories/GIT/"/>
+    
     
       <category term="git" scheme="http://sabrinaluo.com/tech/tags/git/"/>
     
@@ -1000,7 +1030,7 @@
     <link href="http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/"/>
     <id>http://sabrinaluo.com/tech/2016/01/23/excecute-parallel-promise-and-sequential-promise/</id>
     <published>2016-01-23T14:52:26.000Z</published>
-    <updated>2017-08-09T16:49:43.788Z</updated>
+    <updated>2017-08-10T08:37:25.548Z</updated>
     
     <content type="html"><![CDATA[<p>并行和顺序执行的前提当然是，有一堆promise等着你去执行……<br>通常我们把这“一堆”promise对象放到一个数组里，<code>[promise1, promise2, promise3, ...]</code></p>
 <p>我们都知道想要让promise按顺序执行，那就是一个接一个的then。然而手写很多then太累了，而嵌套的promise又是反模式，我之前蠢蠢的<a href="tech/2016/01/18/sequentialize-promise-by-recursion/">用递归解决了顺序执行的问题</a>，后来终于在udacity习得了顺序promise的正确打开方式！</p>
@@ -1012,13 +1042,13 @@
 <p>因此，很容易想到下面几种情况：</p>
 <ol>
 <li><p>等第一步全部执行完，再执行第二步（并行执行）</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">|<span class="string">--------------------</span>|</div><div class="line">google第一步          |<span class="string">------------------</span>|</div><div class="line">amazon第一步        google第二步</div><div class="line">facebook第一步      amazon第二步 </div><div class="line">                   facebook第二步</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">|--------------------|</div><div class="line">google第一步          |------------------|</div><div class="line">amazon第一步        google第二步</div><div class="line">facebook第一步      amazon第二步 </div><div class="line">                   facebook第二步</div></pre></td></tr></table></figure>
 </li>
 <li><p>对第一步的顺序有要求，必须严格按照google, amazon, facebook的顺序执行（顺序执行）</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">|<span class="string">---------</span>|</div><div class="line">google1   |<span class="string">---------</span>|</div><div class="line">            google2 |<span class="string">---------</span>|</div><div class="line">                     amazon1  |<span class="string">---------</span>|</div><div class="line">                              amazon2   |<span class="string">---------</span>|</div><div class="line">                                        facebook1 |<span class="string">--------</span>|</div><div class="line">                                                  facebook2</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">|---------|</div><div class="line">google1   |---------|</div><div class="line">            google2 |---------|</div><div class="line">                     amazon1  |---------|</div><div class="line">                              amazon2   |---------|</div><div class="line">                                        facebook1 |--------|</div><div class="line">                                                  facebook2</div></pre></td></tr></table></figure>
 </li>
 <li><p>google1执行完就执行google1，amazon1执行完就执行amazon2，但对google, amazon, facebook的顺序没有要求</p>
-<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">|<span class="string">------------------</span>|</div><div class="line">google1            |<span class="string">-------------</span>|</div><div class="line">                   google2</div><div class="line">|<span class="string">---------</span>|</div><div class="line">amazon1   |<span class="string">-----------</span>|</div><div class="line">          amazon2</div><div class="line">|<span class="string">------------</span>|</div><div class="line">facebook1    |<span class="string">-------------</span>|<span class="string">  </span></div><div class="line"><span class="string">             facebook2</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">|------------------|</div><div class="line">google1            |-------------|</div><div class="line">                   google2</div><div class="line">|---------|</div><div class="line">amazon1   |-----------|</div><div class="line">          amazon2</div><div class="line">|------------|</div><div class="line">facebook1    |-------------|  </div><div class="line">             facebook2</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <h3 id="Promise并行执行"><a href="#Promise并行执行" class="headerlink" title="Promise并行执行"></a>Promise并行执行</h3><p>对于场景1，主要就是用到<code>Promise.all</code>，因为是数组，所以在处理的过程中通常会用到<code>.map</code>或<code>.forEach</code><br><iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/HiiTea/zfjvr4pz/1/embedded/js,resources,html,css,result/light" frameborder="0" allowfullscreen></iframe><br><img src="http://7xow88.com1.z0.glb.clouddn.com/tech-promise1.png" alt="promise例1网络请求时间线"><br>可以看到3个user请求是同时进行（并行），3个repos请求也是同时进行（并行），由于使用了<code>Promise.all</code>，所以repos请求等待users请求全部完成才开始。</p>
@@ -1028,8 +1058,8 @@
 <li>then(then(then()))，then的嵌套…</li>
 </ol>
 <p>promise链的本质其实就是从头then到尾，但是第一种方法怎么用程序来实现，也就是上面提到的小技巧，就是值得学习的地方了。（反正我觉得太巧妙了！！！我自己就想不到…）</p>
-<p>大概跟在做求和运算时候的思想一样：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//求和的时候通常这么做，先定义一个<span class="built_in">sum</span>，然后依次往里做加法</div><div class="line">var <span class="built_in">sum</span> = <span class="number">0</span>;</div><div class="line">array.forEach(<span class="function"><span class="keyword">function</span><span class="params">(item)</span></span> &#123;</div><div class="line">  <span class="built_in">sum</span> = <span class="built_in">sum</span> + item;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//要得到一个<span class="keyword">then</span> <span class="keyword">then</span> <span class="keyword">then</span>的promise链，先定义一个已经resolve了的promise，然后依次往后<span class="keyword">then</span>…</div><div class="line">var <span class="keyword">sequence</span> = Promise.resolve();</div><div class="line">array.forEach(<span class="function"><span class="keyword">function</span><span class="params">(item)</span></span> &#123;</div><div class="line">  <span class="keyword">sequence</span> = <span class="keyword">sequence</span>.<span class="keyword">then</span>(...)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>大概跟在做求和运算时候的思想一样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//求和的时候通常这么做，先定义一个sum，然后依次往里做加法</div><div class="line">var sum = 0;</div><div class="line">array.forEach(function(item) &#123;</div><div class="line">  sum = sum + item;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//要得到一个then then then的promise链，先定义一个已经resolve了的promise，然后依次往后then…</div><div class="line">var sequence = Promise.resolve();</div><div class="line">array.forEach(function(item) &#123;</div><div class="line">  sequence = sequence.then(...)</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>下面给出场景2的代码：<br><iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/HiiTea/sq2aga08/embedded/js,resources,html,css,result/light" frameborder="0" allowfullscreen></iframe><br><img src="http://7xow88.com1.z0.glb.clouddn.com/tech-promise2.png" alt="promise例2网络请求时间线"><br>可以看到请求是按顺序依次发出</p>
 <h3 id="并行执行和顺序执行混用"><a href="#并行执行和顺序执行混用" class="headerlink" title="并行执行和顺序执行混用"></a>并行执行和顺序执行混用</h3><p>场景3:<br><iframe scrolling="no" width="100%" height="300" src="http://jsfiddle.net/HiiTea/z09xjowq/1/embedded/js,resources,html,css,result/light" frameborder="0" allowfullscreen></iframe><br><img src="http://7xow88.com1.z0.glb.clouddn.com/tech-promise3.png" alt="promise例3网络请求时间线"><br>可以看到users请求是并行发出，但完成时间不一样，而repos请求是在<strong>对应的</strong>users请求完成后就立即执行</p>
 <h3 id="混用的另一种情况"><a href="#混用的另一种情况" class="headerlink" title="混用的另一种情况"></a>混用的另一种情况</h3><p>有了以上的知识，很容易写出最后一种混用的情况，users按顺序执行，等users全部执行完之后并发执行repos。我比较懒…这个我就不写了…</p>
@@ -1045,6 +1075,8 @@
 &lt;p&gt;我们都知道想要让promise按顺序
     
     </summary>
+    
+      <category term="JS" scheme="http://sabrinaluo.com/tech/categories/JS/"/>
     
     
       <category term="Promise" scheme="http://sabrinaluo.com/tech/tags/Promise/"/>
