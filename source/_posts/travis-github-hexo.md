@@ -1,6 +1,8 @@
+---
 title: 利用travis自动部署hexo搭建在github的博客
 date: 2015-12-28 12:00:56
 tags: [travis, github, hexo, 博客, 自动部署, 持续集成]
+categories: DEVOPS
 ---
 这篇应该属于不务正业系列…
 自从知道了持续集成（Continuous Integration）这个概念之后感觉开启了新世界的大门。

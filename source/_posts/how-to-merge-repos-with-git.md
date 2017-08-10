@@ -1,6 +1,8 @@
+---
 title: git merge repo 如何合并两个仓库
 date: 2015-12-24 14:58:32
 tags: [git, merge repo, 合并仓库]
+categories: GIT
 ---
 为什么我每天都会有一些奇奇怪怪的需求…
 

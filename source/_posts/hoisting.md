@@ -1,6 +1,8 @@
+---
 title: JS变量提升(Hoisting)
 date: 2015-12-21 10:24:02
 tags: [hoisting, 变量提升]
+categories: JS
 ---
 写了无数JS也依旧没听过变量提升…
 

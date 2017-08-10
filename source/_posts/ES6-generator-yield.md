@@ -1,6 +1,8 @@
+---
 title: 对generator和yield的一些理解
 date: 2016-01-12 17:11:28
 tags: [ES6, generator, yield]
+categories: [JS, ES6]
 ---
 于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯ES6的小白假装会写ES6…
 

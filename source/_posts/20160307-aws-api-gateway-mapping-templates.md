@@ -1,6 +1,8 @@
+---
 title: AWS API Gateway Mapping Template 获取IP, header等
 date: 2016-03-07 14:33:03
 tags: [AWS, API Gateway, lambda, mapping templates, header]
+categories: AWS
 ---
 API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。
 

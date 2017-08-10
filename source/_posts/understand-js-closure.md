@@ -1,6 +1,8 @@
+---
 title: 对JS闭包(Closure)的一些理解
 date: 2015-12-19 19:22:27
 tags: [JS, closure, 闭包]
+categories: JS
 ---
 昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…
 ```

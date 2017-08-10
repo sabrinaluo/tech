@@ -1,6 +1,8 @@
+---
 title: 微博开放平台的Basic Auth和OAuth2.0认证
 date: 2016-06-20 17:59:09
 tags: [OAuth2.0]
+categories: AUTH
 ---
 这篇文章不是讲各种认证方式是怎么实现的，只是简单的介绍如何与微博进行整合。
 

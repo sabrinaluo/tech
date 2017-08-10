@@ -1,6 +1,8 @@
+---
 title: git merge commits 如何合并多个提交为一个
 date: 2015-12-24 15:08:49
 tags: [git, merge commits, 合并提交]
+categories: GIT
 ---
 因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。
 

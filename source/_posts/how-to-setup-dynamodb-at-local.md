@@ -1,6 +1,8 @@
+---
 title: AWS DynamoDB的本地安装及环境配置
 date: 2015-12-14 14:39:35
 tags: [AWS, DynamoDB, 环境配置, 本地安装, 亚马逊, 云服务]
+categories: AWS
 ---
 [DynamoDB](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html)是亚马逊AWS云服务提供的一个NoSQL的数据库…
 

@@ -1,6 +1,8 @@
+---
 title: AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置
 date: 2015-12-15 10:55:13
 tags: [AWS, API Gateway, AWS Lambda, RESTful, 开发环境, 测试环境, 生产环境, 环境配置]
+categories: [DEVOPS, AWS]
 ---
 本文**不是**介绍 [AWS API Gateway](https://aws.amazon.com/api-gateway/) 和 [AWS Lambda](https://aws.amazon.com/lambda/)的基本用法的…=(:з」∠)_
 

@@ -1,6 +1,8 @@
+---
 title: 对JS类和继承的一些理解
 date: 2015-12-31 11:36:54
 tags: [JS, prototype, 继承, 原型]
+categories: JS
 ---
 本文只总结最常用的实现方法，不具体讨论各种实现方法的优缺点（这些具体可以看[《JavaScript高级程序设计》](http://book.douban.com/subject/10546125/)）。
 

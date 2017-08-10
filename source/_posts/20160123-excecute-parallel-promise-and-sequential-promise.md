@@ -1,6 +1,8 @@
+---
 title: Promise的顺序执行和并行执行
 date: 2016-01-23 22:52:26
 tags: [Promise, parallel, sequential, 顺序执行，并行执行]
+categories: JS
 ---
 并行和顺序执行的前提当然是，有一堆promise等着你去执行……
 通常我们把这“一堆”promise对象放到一个数组里，`[promise1, promise2, promise3, ...]`

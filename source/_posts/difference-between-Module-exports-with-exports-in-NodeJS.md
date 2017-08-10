@@ -1,6 +1,8 @@
+---
 title: 对module.exports和exports的一些理解
 date: 2015-12-16 11:00:27
 tags: [NodeJS, Module.exports, exports, 模块导出]
+categories: NodeJS
 ---
 可能是有史以来最简单通俗易懂的有关Module.exports和exports区别的文章了。
 

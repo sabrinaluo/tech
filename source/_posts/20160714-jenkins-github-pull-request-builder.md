@@ -1,6 +1,8 @@
+---
 title: Jenkins集成github pull request插件
 date: 2016-07-14 14:41:02
 tags: [jenkins, github, CI, 持续集成]
+categories: DEVOPS
 ---
 前不久给bootstrap提了个[issue](https://github.com/twbs/bootstrap/issues/19997)，然后被他们的高科技自动回复机器人吓萌比了。
 有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。

@@ -1,6 +1,8 @@
+---
 title: jQuery中利用JSONP进行跨域GET请求
 date: 2016-02-17 12:31:55
 tags: [jQuery, CORS, JSONP, 跨域]
+categories: JQUERY
 ---
 每次遇到跨域的问题真是！@#￥%
 

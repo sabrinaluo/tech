@@ -1,6 +1,8 @@
+---
 title: 对Promise中的resolve，reject，catch的理解
 date: 2015-12-22 11:36:07
 tags: [promise chain, promise链]
+categories: JS
 ---
 对promise这个概念之前已经有了一些浅显的理解，[相关文章->戳这里](http://sabrinaluo.com/tech/2015/12/01/promise/)，最近又有了一些新的理解。
 

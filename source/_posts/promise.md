@@ -1,6 +1,8 @@
+---
 title: 我所理解的Promise
 date: 2015-12-01 18:46:26
 tags: promise
+categories: JS
 ---
 （嫌我话多的可以直接看分割线之后的部分…）
 以前高中的时候自己捣腾博客，一直也就只会用JQuery写点按钮事件什么的，连表单提交都没写过，后来误打误撞做了前端码农旧觉得JS的异步模式实在是太坑爹，当你搞清楚异步回调的时候，又会发现[回调地狱(Callback Hell)](http://callbackhell.com/)太坑爹…

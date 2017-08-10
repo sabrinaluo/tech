@@ -1,6 +1,8 @@
+---
 title: 结合使用Babel Mocha Istanbul进行ES6代码测试和覆盖率测试
 date: 2016-04-12 12:32:01
 tags: [ES6, mocha, istanbul, babel, 测试, 代码覆盖率]
+categories: TOOLS
 ---
 题外话：
 一直以为mocha读作“抹茶”并且一直这么读了很久，直到最近看了一个mocha的教学视频，才知道这是摩卡咖啡的摩卡…而抹茶的抹茶应该是matcha…
