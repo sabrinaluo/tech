@@ -2,7 +2,7 @@
 title: 如何通过Git钩子自动部署(Push to Deploy)
 date: 2016-04-14 18:59:37
 tags: [git, hook, 自动部署]
-categories: [GIT, DEVOPS]
+categories: GIT
 ---
 看了好多讲通过git钩子自动部署的，大多讲的绕来绕去乱七八糟思路一点也不清晰…
 做了一晚上实验之后大概明白了是怎么工作的。

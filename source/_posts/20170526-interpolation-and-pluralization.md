@@ -2,7 +2,7 @@
 title: 关于本地化的一些技巧
 date: 2017-05-26 17:59:03
 tags: [interpolation, pluralization, localization, 翻译, 本地化, 单复数, ng-pluralize]
-categories: [AngularJS]
+categories: AngularJS
 ---
 在香港工作总是能接触到各种“本地化”的需求，大多数网站至少都会有中英文两个版本，有的还会分简体中文和繁体中文。而在实现本地化的过程中，由于英文与中文的文法、语序等差异，会有很多情况需要处理。
 
