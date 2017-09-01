@@ -6,7 +6,7 @@ categories: JS
 ---
 **2016-01-24更新**
 我还是觉得嵌套多层的promise是反模式，不推荐使用，机智的我学会了另一种不嵌套不递归的方法，请看这里：
-(Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise)
+[Promise的顺序执行和并行执行](tech/2016/01/23/excecute-parallel-promise-and-sequential-promise)
 
 **以下为原文：**
 
