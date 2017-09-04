@@ -15,7 +15,7 @@ category: AngularJS
   <my-customer></my-customer>
 </div>
 ```
-``` Javascript
+``` javascript
 angular.module('docsScopeProblemExample', [])
 .controller('NaomiController', ['$scope', function($scope) {
   $scope.customer = {
@@ -38,7 +38,7 @@ angular.module('docsScopeProblemExample', [])
 ```
 
 Isolated scope 其实就是当你在directive里要return的那个object里，定义一个scope属性，这个`scope`会override controller中的`$scope`，从而实现isolated。
-```
+``` javascript
 angular.module('docsIsolateScopeDirective', [])
 .controller('Controller', ['$scope', function($scope) {
   $scope.naomi = { name: 'Naomi', address: '1600 Amphitheatre' };
@@ -57,7 +57,7 @@ angular.module('docsIsolateScopeDirective', [])
 
 ### `=` `&` `@` `?`
 通常在写Angular的时候经常看到别人的指令scope里会有下面着这样`=` `@` `&`的符号，我自己呢，90%的时候都是用`=`，也不知道其他符号到底是干什么用的。今天无心工作，仔细研究了一下。
-``` JavaScript
+``` javascript
 app.directive('myDirective', function(){
     return {
         scope: {
@@ -73,7 +73,7 @@ app.directive('myDirective', function(){
 这个好理解，父子两个scope，任何一个改变，剩下的一个也跟着一起改变
 
 需要注意的是，传入参数时，是没有花括号的
-```
+``` html
 <my-directive options="options"></my-directive>
 ```
 
@@ -81,7 +81,7 @@ app.directive('myDirective', function(){
 首先，单向绑定传入的是一个**字！符！串！**；其次，父scope改变子scope跟着变，但子scope改变时，父scope不会改变！
 
 由于传入的是一个字符串，所以是需要花括号的，如下，假如父scope中`name='Lucy'`，第一个指令接收到的是`'name'`这个字符串，第二个指令接受的才是`'Lucy'`这个字符串
-```
+``` html
 <my-directive name="name"></my-directive>
 <my-directive name="{{name}}"></my-directive>
 ```
@@ -101,6 +101,21 @@ app.directive('myDirective', function(){
 
 我能想到的潜在的问题就是，会存在`undefined is not a function`，但如果检查一下属性是否存在是否类型function不就可以了？？？我知道可能会有问题，但到底会有什么问题呢？🤔
 
+---- 更新 ----
+大概知道原因了…不用`@`很好理解，用`@`传入的是个字符串不是函数；而不用`=`因为双向绑定存在子scope改变父scope中的函数的风险，并且也会有`$watch`的开销，一定程度上影响性能。
+https://stackoverflow.com/questions/29857998/proper-way-to-pass-functions-to-directive-for-execution-in-link
+
+`&`绑定后，返回的是一个返回父scope中对应函数的函数😂，有点拗口。举个栗子：
+``` html
+<my-directive callback="sayHi(a,b,c)"></my-directive>
+```
+指令中的`scope.callback`值为`function(locals){ return parentGet(scope, locals);}`
+
+所以`scope.callback({a:1,b:2,c:3})`等价于`parentScope.sayHi(1,2,3)`
+需要注意的是:
+- `scope.callback({a:1,b:2,c:3})`的入参是一个`object`
+- 如果是这样`scope.callback({a:1,b:2})`，则`c`的值会与`parentScope.c`相同。也就是说，如果**子scope**传入的`obj`中没有定义对应参数，各参数的默认值与`parentScope`中的对应值一致。如果**父子scope**中都没有定义相关参数，则为`undefined`
+
 #### `?`
 问号这个挺简单的，跟glob啊，正则的里面的`?`意思相似，就是说该属性是否是必需选项，当有问号的时候，说明对应的属性可以省略，而不会报错`NON_ASSIGNABLE_MODEL_EXPRESSION `
 
@@ -116,3 +131,4 @@ app.directive('myDirective', function(){
 [2] https://blog.coding.net/blog/angularjs-directive-isolate-scope  
 [3] https://stackoverflow.com/questions/14908133/what-is-the-difference-between-vs-and-in-angularjs  
 [4] https://stackoverflow.com/questions/20447786/whats-the-meaning-of-in-angularjs-directive-isolate-scope-declaration  
+[5] https://stackoverflow.com/questions/29857998/proper-way-to-pass-functions-to-directive-for-execution-in-link  
