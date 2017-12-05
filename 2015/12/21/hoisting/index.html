@@ -103,7 +103,7 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 40 </a>
+           class="header-toolbar-right"> 41 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
@@ -143,23 +143,23 @@
     <i class="fa fa-user-o"></i>
     HiiTea
 
-    <span class="post-date float-right" title="Dec 21, 2015, 10:24:02 AM">
+    <span class="post-date float-right" title="{{moment(1450664642000).format('MMM DD, YYYY, h:mm:ss A')}}">
       <i class="fa fa-pencil-square-o"></i>
-      {{moment("20151221", YYYYMMDD).fromNow()}}
+      {{moment(1450664642000).fromNow()}}
     </span>
   </h3>
 
   <article class="post-content">
     <h1>JS变量提升(Hoisting)</h1>
     <p>写了无数JS也依旧没听过变量提升…</p>
-<p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="external">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
+<p>变量提升(Hoisting)这个概念，我第一次见到是在万人膜拜的<a href="https://github.com/airbnb/javascript" target="_blank" rel="noopener">Airbnb JS 代码风格</a>中见到。看完这一节大概明白是在说什么，然后觉得非常奇怪，这个概念平时写代码什么情况下用的到呢？</p>
 <p>我写了这么久JS，从来也不会先用变量后定义的呀，而且别的语言好像根本没有这个概念，难怪我从来没有遇到相关问题，难怪我没听过这个概念。难怪写强类型语言的各大神都是JS一生黑…</p>
 <p>后来大概问了问各种前辈，纷纷表示，这个概念在面试的时候和检查别人Bug的时候才会用到… (︶︿︶)</p>
 <p>解释器是什么东东我还没搞明白…但是变量提升其实可以转换成另一个问题：<br>当你在定义一个变量的时候，解释器是怎么解析的？</p>
-<p>先看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function test()&#123;</div><div class="line">  console.log(a);</div><div class="line">  var a = 123;</div><div class="line">&#125;</div><div class="line">test(); //调用这个函数，你会看到console中输出的是undefined</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">function test()&#123;</div><div class="line">  var a = 123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面的代码，解释器是这么理解的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">function test()&#123;</div><div class="line">  var a; </div><div class="line">  a = 123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>而最开始的例子中，解释器是这么理解的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">function test()&#123;</div><div class="line">  var a;</div><div class="line">  console.log(a);</div><div class="line">  a = 123;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>先看一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">  console.log(a);</span><br><span class="line">  var a = 123;</span><br><span class="line">&#125;</span><br><span class="line">test(); //调用这个函数，你会看到console中输出的是undefined</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">  var a = 123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码，解释器是这么理解的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">  var a; </span><br><span class="line">  a = 123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>而最开始的例子中，解释器是这么理解的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function test()&#123;</span><br><span class="line">  var a;</span><br><span class="line">  console.log(a);</span><br><span class="line">  a = 123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>一句话总结：变量提升就是JS解释器在解析JS的时候会把所有变量的<strong>声明</strong>提升到该变量作用域的最顶端。</p>
 <blockquote>
 <p>请注意：<strong>只提升声明，不提升赋值</strong>！</p>
@@ -169,6 +169,7 @@
 </div>
 
 
+    
 <div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
@@ -186,6 +187,7 @@
     (d.head || d.body).appendChild(s);
   })();
 </script>
+
 
 
 

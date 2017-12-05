@@ -164,7 +164,7 @@
     <li class="selected">
       <a href="/tech/">Overview</a></li>
     <li class="">
-      <a href="/tech/archives">Posts <span class="counter">40</span></a>
+      <a href="/tech/archives">Posts <span class="counter">41</span></a>
     </li>
     <li class="">
       <a href="/tech/categories">Categories <span
@@ -177,6 +177,23 @@
     <div class="body-secondary">
       <p class="right-title">Recent post</p>
       <ul class="recent-post clearfix">
+        
+        <li class="recent-post-item">
+          <div class="clearfix">
+            <h5 class="post-title text-ellipsis">
+              <i class="fa fa-bars"></i>
+              <a href="/tech/2017/12/05/angular-directive-only-one-root-element/">angular指令什么情况下只能有一个根元素(root element)</a>
+            </h5>
+            <p class="post-description text-ellipsis desktop-only">
+               好久么有记录什么有用的知识了，总是猴子掰玉米似的学点忘点:( 
+   问题  在写自定义指令(cu
+            </p>
+            <p class="post-info desktop-only">
+              <span><i class="fa fa-folder-open"></i> AngularJS</span>
+              <span><i class="fa fa-tag"></i> 2 </span>
+            </p>
+          </div>
+        </li>
         
         <li class="recent-post-item">
           <div class="clearfix">
@@ -254,22 +271,6 @@
             <p class="post-info desktop-only">
               <span><i class="fa fa-folder-open"></i> 心得体会</span>
               <span><i class="fa fa-tag"></i> 2 </span>
-            </p>
-          </div>
-        </li>
-        
-        <li class="recent-post-item">
-          <div class="clearfix">
-            <h5 class="post-title text-ellipsis">
-              <i class="fa fa-bars"></i>
-              <a href="/tech/2017/01/03/vpn/">openvpn在mac下的一点问题</a>
-            </h5>
-            <p class="post-description text-ellipsis desktop-only">
-               今天才发现自从买了新Mac之后根本没有用新电脑写过什么东西，导致我今天居然还要 npm insta
-            </p>
-            <p class="post-info desktop-only">
-              <span><i class="fa fa-folder-open"></i> Uncategorized</span>
-              <span><i class="fa fa-tag"></i> 3 </span>
             </p>
           </div>
         </li>
@@ -361,7 +362,7 @@
 
 
 <script>
-  var posts = [{"date":"2016-09-20","title":"CSS的几个小技巧：pointer-events, transform垂直居中,nth-child","url":"http://sabrinaluo.com/tech/2016/09/20/some-css-tricks/"},{"date":"2016-10-19","title":"一些js小技巧","url":"http://sabrinaluo.com/tech/2016/10/19/some-js-tricks/"},{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/2017/01/03/vpn/"},{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/2017/05/11/thoughts/"},{"date":"2017-05-26","title":"关于本地化的一些技巧","url":"http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/"},{"date":"2017-07-12","title":"尾逗号(Trailing Comma)的意义","url":"http://sabrinaluo.com/tech/2017/07/12/trailing-comma/"},{"date":"2017-08-14","title":"用webpack打包react组件","url":"http://sabrinaluo.com/tech/2017/08/14/react-component-with-webpack/"},{"date":"2017-09-01","title":"Angular directive指令相关的scope问题(= @ & ?)","url":"http://sabrinaluo.com/tech/2017/09/01/angular-directive-scope/"}];
+  var posts = [{"date":"2017-01-03","title":"openvpn在mac下的一点问题","url":"http://sabrinaluo.com/tech/2017/01/03/vpn/"},{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/2017/05/11/thoughts/"},{"date":"2017-05-26","title":"关于本地化的一些技巧","url":"http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/"},{"date":"2017-07-12","title":"尾逗号(Trailing Comma)的意义","url":"http://sabrinaluo.com/tech/2017/07/12/trailing-comma/"},{"date":"2017-08-14","title":"用webpack打包react组件","url":"http://sabrinaluo.com/tech/2017/08/14/react-component-with-webpack/"},{"date":"2017-09-01","title":"Angular directive指令相关的scope问题(= @ & ?)","url":"http://sabrinaluo.com/tech/2017/09/01/angular-directive-scope/"},{"date":"2017-12-05","title":"angular指令什么情况下只能有一个根元素(root element)","url":"http://sabrinaluo.com/tech/2017/12/05/angular-directive-only-one-root-element/"}];
   var today = moment().format('YYYY-MM-DD');
   var oneYearAgo = moment(today).subtract(1, 'years');
   posts = posts.filter(function(post) {

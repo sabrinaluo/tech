@@ -103,7 +103,7 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 40 </a>
+           class="header-toolbar-right"> 41 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
@@ -143,9 +143,9 @@
     <i class="fa fa-user-o"></i>
     HiiTea
 
-    <span class="post-date float-right" title="Mar 07, 2016, 2:33:03 PM">
+    <span class="post-date float-right" title="{{moment(1457332383000).format('MMM DD, YYYY, h:mm:ss A')}}">
       <i class="fa fa-pencil-square-o"></i>
-      {{moment("20160307", YYYYMMDD).fromNow()}}
+      {{moment(1457332383000).fromNow()}}
     </span>
   </h3>
 
@@ -153,13 +153,13 @@
     <h1>AWS API Gateway Mapping Template 获取IP, header等</h1>
     <p>API Gateway暂时没有详细的中文文档，翻译无能的我实在不知道Mapping Template应该翻译成什么比较好。</p>
 <h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>在配合API Gateway和Lambda来搭建RESTful API时，Lambda获取的payload并非通常服务器端获取的一个request对象，lambda获取到的payload并<strong>不包含 request header</strong>的内容，而只有<strong>request body</strong>的内容。</p>
-<p>header中的部分内容可以通过API Gateway提供的变量从mapping template中获取。可以获取的内容包括IP, http方法，路由参数，query等，具体可以看文档<a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html" target="_blank" rel="external">^1</a></p>
+<p>header中的部分内容可以通过API Gateway提供的变量从mapping template中获取。可以获取的内容包括IP, http方法，路由参数，query等，具体可以看文档<a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html" target="_blank" rel="noopener">^1</a></p>
 <h3 id="设置方法"><a href="#设置方法" class="headerlink" title="设置方法"></a>设置方法</h3><p>按照理论来说，AWS设置可以通过界面设置的都可以通过脚本来设置。下面只介绍在界面中的设置：</p>
 <ol>
 <li>在API Gateway界面中选中具体的api方法，点击右侧的<strong>Intergration Request</strong></li>
 <li>在底部点击<strong>Mapping Templates</strong></li>
 <li>点击<strong>Add Mapping Template</strong>，输入<code>application/json</code>，点击√进行确认</li>
-<li>在右侧新出现的区域，点击编辑按钮（铅笔图标），输入需要的变量即可，例如要获取ip：<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  &quot;body&quot;: $input.json(&apos;$&apos;),</div><div class="line">  &quot;source_ip&quot; : &quot;$context.identity.sourceIp&quot;,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>在右侧新出现的区域，点击编辑按钮（铅笔图标），输入需要的变量即可，例如要获取ip：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;body&quot;: $input.json(&apos;$&apos;),</span><br><span class="line">  &quot;source_ip&quot; : &quot;$context.identity.sourceIp&quot;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>其中<code>$input.json(&#39;$&#39;)</code>是请求时客户端发来的body</p>
@@ -178,14 +178,15 @@
 </li>
 </ol>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
-<li><a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/how-to-method-settings-execution-console.html" target="_blank" rel="external">http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/how-to-method-settings-execution-console.html</a></li>
-<li><a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/request-response-data-mappings.html" target="_blank" rel="external">http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/request-response-data-mappings.html</a></li>
+<li><a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/how-to-method-settings-execution-console.html" target="_blank" rel="noopener">http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/how-to-method-settings-execution-console.html</a></li>
+<li><a href="http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/request-response-data-mappings.html" target="_blank" rel="noopener">http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/request-response-data-mappings.html</a></li>
 </ul>
 
   </article>
 </div>
 
 
+    
 <div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
@@ -203,6 +204,7 @@
     (d.head || d.body).appendChild(s);
   })();
 </script>
+
 
 
 

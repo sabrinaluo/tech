@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    angular指令什么情况下只能有一个根元素(root element) | 小白妹妹写代码
+  </title>
+  <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  angular,directive
+  ">
+  
+  <meta name="author" content="HiiTea">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 41 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 121 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 15 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="{{moment(1512458883000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1512458883000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>angular指令什么情况下只能有一个根元素(root element)</h1>
+    <p>好久么有记录什么有用的知识了，总是猴子掰玉米似的学点忘点:(</p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在写自定义指令(custom directive)的时候，经常遇到下面这个错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: [$compile:tplrt] Template for directive &apos;xxx&apos; must have exactly one root element.</span><br></pre></td></tr></table></figure></p>
+<p>但有时候又发现别人写的指令超过一个根元素，却并没有报错，真是非常的confusing🤔</p>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>官访文档在directive一节是找不到任何和replace有关的东西，后来是在$compile一节找到的，然而又已经弃用了……(又要感叹了，前端圈真特喵难混)</p>
+<p>以下为文档说明</p>
+<blockquote>
+<p>replace (DEPRECATED)  </p>
+<ul>
+<li>replace will be removed in next major release - i.e. v2.0).  </li>
+<li>Specifies what the template should replace. Defaults to false.  <ul>
+<li>true - the template will replace the directive’s element.  </li>
+<li>false - the template will replace the contents of the directive’s element.  </li>
+</ul>
+</li>
+<li>The replacement process migrates all of the attributes / classes from the old element to the new one. See the Directives Guide for an example.</li>
+</ul>
+</blockquote>
+<p>大概是说这个replace属性没什么卵用…实际使用的时候也觉得没什么场景是非要replace不可的，不过为了避免在jq selector里使用一堆莫名其妙的dom名称，replace一下让Html看起来更正常一点（对，我们就是jQuery和angular混用，就是这么任！性！🤷‍）</p>
+<h3 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h3><p>在写组件template的时候用根元素把其他元素wrap起来，其实一个很好的习惯，这样一来，根元素上可以有css class，在使用sass之类的css预处理器时，有根类会使得维护成本变低</p>
+<p>那么为什么会存在有多余一个根元素的组件呢？</p>
+<p>我个人的感觉是，组件在最初设计时，并没有考虑到之后的扩展性，比如要写一个dropdown组件，首先想到的肯定是把select元素作为根元素，于是模板成了这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select class=&quot;xxxx&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
+<p>之后来了个需求：当所选的选项是某一些特定选项时，显示一个error message。这一下就比较尴尬了……</p>
+<p>error message这个<code>div</code>只能和<code>select</code>同一个level才行，因为加在<code>select</code>里是肯定不会显示的。而一旦新加一个wrapper把之前的模板包起来，之前的css可能都要重写才会看起来没有变化。此时影响最小的做法就是移除指令中的<code>replace:true</code>属性，然后加多一个根元素了😂</p>
+<p>Angular本身compile的机制是，如果没有replace:true，默认就是false，<strong>会自动创建一个<code>&lt;directive-name&gt;</code>元素作为根元素</strong>包裹住模板中的全部内容。</p>
+<p>以上。</p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sabrinaluo.com/tech/2017/12/05/angular-directive-only-one-root-element/";
+    this.page.identifier = 1512458883;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hiitea-tech.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <a href="http://sabrinaluo.com/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2016 HiiTea</li>
+      <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+  </footer>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>

@@ -103,7 +103,7 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 40 </a>
+           class="header-toolbar-right"> 41 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
@@ -143,9 +143,9 @@
     <i class="fa fa-user-o"></i>
     HiiTea
 
-    <span class="post-date float-right" title="Mar 14, 2016, 6:33:31 PM">
+    <span class="post-date float-right" title="{{moment(1457951611000).format('MMM DD, YYYY, h:mm:ss A')}}">
       <i class="fa fa-pencil-square-o"></i>
-      {{moment("20160314", YYYYMMDD).fromNow()}}
+      {{moment(1457951611000).fromNow()}}
     </span>
   </h3>
 
@@ -153,8 +153,8 @@
     <h1>AWS EC2 SSH访问 &amp; mongodb 安装</h1>
     <p>环境：Ubuntu</p>
 <h3 id="SSH连接-EC2"><a href="#SSH连接-EC2" class="headerlink" title="SSH连接 EC2"></a>SSH连接 EC2</h3><p>windows下通常用putty<br>ubuntu下先打个命令<code>ssh</code>看看能否识别命令，如果能就方便很多</p>
-<p>要连接EC2通常都会有一个<code>.pem</code>的<strong>私钥</strong>文件，另外还会有一个<strong>Public IP</strong><br>首先设置权限（并不知道这个有什么用，chmod 400使得文件只能被该文件的拥有者读取）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">chmod 400 /*path*/my-key-pair.pem</div><div class="line">ssh -i /*path*/my-key-pair.pem username@59.64.123.1</div></pre></td></tr></table></figure></p>
-<p>其中username默认如下：<a href="http://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank" rel="external">^1</a></p>
+<p>要连接EC2通常都会有一个<code>.pem</code>的<strong>私钥</strong>文件，另外还会有一个<strong>Public IP</strong><br>首先设置权限（并不知道这个有什么用，chmod 400使得文件只能被该文件的拥有者读取）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chmod 400 /*path*/my-key-pair.pem</span><br><span class="line">ssh -i /*path*/my-key-pair.pem username@59.64.123.1</span><br></pre></td></tr></table></figure></p>
+<p>其中username默认如下：<a href="http://docs.aws.amazon.com/zh_cn/AWSEC2/latest/UserGuide/AccessingInstancesLinux.html" target="_blank" rel="noopener">^1</a></p>
 <table>
 <thead>
 <tr>
@@ -177,17 +177,18 @@
 </tr>
 </tbody>
 </table>
-<h3 id="mongodb安装及配置"><a href="#mongodb安装及配置" class="headerlink" title="mongodb安装及配置"></a>mongodb安装及配置</h3><p>有了apt-get一切真是轻松如放屁…连解压缩都不用！也不用再设置环境变量什么的（根部记不住解压缩的命令…）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mongodb</div></pre></td></tr></table></figure></p>
+<h3 id="mongodb安装及配置"><a href="#mongodb安装及配置" class="headerlink" title="mongodb安装及配置"></a>mongodb安装及配置</h3><p>有了apt-get一切真是轻松如放屁…连解压缩都不用！也不用再设置环境变量什么的（根部记不住解压缩的命令…）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mongodb</span><br></pre></td></tr></table></figure></p>
 <p>安装好了之后，去<strong>根目录</strong>下创建<code>data</code>文件夹即可，然后打<code>mongod</code>命令，应该就启动了，此时访问<code>localhost:27017</code>，如果看到以下文字，就成功启动了芒果DB</p>
 <blockquote>
 <p>You are trying to access MongoDB on the native driver port. For http diagnostic access, add 1000 to the port number</p>
 </blockquote>
-<p>如果有error通常是没有data文件夹，设置<code>dbpath</code>后再尝试启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mongod --dbpath=./path_of _data</div></pre></td></tr></table></figure></p>
+<p>如果有error通常是没有data文件夹，设置<code>dbpath</code>后再尝试启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mongod --dbpath=./path_of _data</span><br></pre></td></tr></table></figure></p>
 
   </article>
 </div>
 
 
+    
 <div class="container disqus-container">
   <div id="disqus_thread"></div>
 </div>
@@ -205,6 +206,7 @@
     (d.head || d.body).appendChild(s);
   })();
 </script>
+
 
 
 
