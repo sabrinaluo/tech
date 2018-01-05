@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 41 </a>
+           class="header-toolbar-right"> 42 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 121 </a>
+           class="header-toolbar-right"> 123 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -161,7 +161,7 @@
 </ul>
 <p>在<code>test</code>文件夹下，通常有一个<code>mocha.opts</code>文件用来存放mocha的参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">--compilers js:babel-register</span><br><span class="line">--require babel-polyfill</span><br></pre></td></tr></table></figure></p>
 <p>如果用到了需要用babel-polyfill才能实现的方法就需要加上第二句，别忘了<code>npm install babel-polyfill --save-dev</code></p>
-<p>生成覆盖率的测试命令：（<code>_mocha</code> 是有下划线的）<a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="noopener">^1</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">istanbul cover _mocha --  --opts ./test/mocha.opts</span><br></pre></td></tr></table></figure></p>
+<p>生成覆盖率的测试命令：（<code>_mocha</code> 是有下划线的）[^1]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">istanbul cover _mocha --  --opts ./test/mocha.opts</span><br></pre></td></tr></table></figure></p>
 <h3 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">babel src/ -d lib/ --presets es2015 --source-map both</span><br></pre></td></tr></table></figure>
 <p>使用<code>--source-map both</code>参数将会生成source map，有了source map，istanbul就能够追踪到<code>src</code>下的源代码的覆盖率</p>
 <h3 id="正确的require"><a href="#正确的require" class="headerlink" title="正确的require"></a>正确的require</h3><p>在mocha中，一定要require <code>src</code>文件夹下的文件，而不是<code>lib</code>文件夹下的文件。虽然两个文件夹下的文件mocha都能测，但是覆盖率会有一些问题。</p>
@@ -174,9 +174,9 @@
 <li>istanbul生成的覆盖率文件总是显示100%，就算有些地方没测，也显示100%，这是因为在Mocha里require的是<code>lib</code>而非<code>src</code></li>
 </ul>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>我最喜欢mocha的报告形式是<code>-R nyan</code>，一只可爱的喵星人，没有错的时候是这样的^_^，有错的时候是这样的O_O，反正就是萌萌萌。</p>
-<p>然而最实用的报告形式可能是<code>-R mochawesome</code>，需要<code>npm i mochawesome</code>安装插件，生成直观的html测试报告<a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="noopener">^2</a></p>
+<p>然而最实用的报告形式可能是<code>-R mochawesome</code>，需要<code>npm i mochawesome</code>安装插件，生成直观的html测试报告[^2]</p>
 <p>平时遇到的问题十有八九一搜都能找到阮一峰老师的教程…这覆盖率也太高了？！</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[1] <a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/06/istanbul.html</a><br>[2] <a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[1] <a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/06/istanbul.html</a><br>[2] <a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html</a><br>[^1]: <a href="http://www.ruanyifeng.com/blog/2015/06/istanbul.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/06/istanbul.html</a><br>[^2]: <a href="http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html</a></p>
 
   </article>
 </div>
