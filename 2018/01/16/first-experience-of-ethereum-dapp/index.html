@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    以太坊智能合约应用初体验 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  Ethereum,Smart Contract,DApp,Blockchain
+  ">
+  
+  <meta name="author" content="HiiTea">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 44 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 130 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 17 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="{{moment(1516114662000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1516114662000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>以太坊智能合约应用初体验</h1>
+    <p>我刚来香港那年（2012年）上了 Pf.Lau 的 enterpreneur 课知道了比特币，那个时候好像才CNY700多块钱一枚，13年的炒的最火的时候大概涨到了6000，如今五年多过去，比特币最高已经十几万人民币一枚了，反正我是没挣到钱:( ， 14年找工作的时候还差点去了一家比特币平台公司，这应该就是我跟区块链最初的良缘了。</p>
+<p>最近半年也不知道为啥区块链特别火，到处的人们都在谈论区块链，感觉泡沫又快崩溃了。我个人是不看好比特币的货币属性的，但是对于区块链的去中心化以及智能合约应用却是很看好的。而且以太坊(Ethereum，缩写为ETH)最火的开发平台(truffle)又是我最喜欢的js，所以就看了看demo学了ETH界的hello world (pet shop)</p>
+<p>总的来说感觉配置环境还是有一点点麻烦，需要安装nodejs, npm, truffle(开发平台), ganache(本地区块链), MetaMask(chrome插件)</p>
+<p>官方给的demo不错，缺点是很多文件解释的不太清楚。<br>大概流程如下：</p>
+<ol>
+<li>解压官方demo <code>truffle unbox pet-shop</code></li>
+<li>编写合约Adoption.sol, 编译(compoile)合约 (目前还不知道编译是干什么用的)</li>
+<li>运行本地区块链</li>
+<li>编写迁移配置文件(<code>/migrates/*</code>)，迁移(migrate)应用到本地区块链</li>
+<li>测试合约</li>
+<li>编写前端 (web3.js)</li>
+<li>应用完成，可于网页中收养宠物</li>
+</ol>
+<p>合约部分是用<code>solidity</code>，这是开发ETH应用所使用的语言，是静态类型语言，需要声明变量的类型，函数入参的类型及返回值的类型。用分号分隔每一句代码。</p>
+<p>官方的例子是前后端全都在一个项目里，不知道是否可以前后端放在不同的项目里分开开发，前端负责界面、业务逻辑、web3整合，后端负责合约的编写。不知道这样是否可行。</p>
+<p>—– 分割线 ——<br>又看了两眼，感觉过程是这样的：</p>
+<ul>
+<li>编译的时候生成了<code>/build/</code>文件夹下的与合约相关的json文件</li>
+<li>migrate的时候极有可能是把对应的json放到区块链上去</li>
+<li>前端通过 <code>App.web3Provider = new Web3.providers.HttpProvider(&#39;http://localhost:7545&#39;);</code> 服务器获取合约相关的内容，由web3将获取的内容包装成一个实例</li>
+<li>前端通过web3生成的实例进行相应操作</li>
+</ul>
+<p>如果是按照以上的流程来走的话，前后端就是完全可以分开开发的了。初来乍到，如有猜的不对的地方还请各位大佬多多指教。:)</p>
+<p><strong>Reference:</strong><br><a href="http://truffleframework.com/tutorials/pet-shop" target="_blank" rel="noopener">http://truffleframework.com/tutorials/pet-shop</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "http://sabrinaluo.com/tech/2018/01/16/first-experience-of-ethereum-dapp/";
+    this.page.identifier = 1516114662;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hiitea-tech.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <a href="http://sabrinaluo.com/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2016 HiiTea</li>
+      <li><a href="http://sabrinaluo.com/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+  </footer>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>
