@@ -103,19 +103,19 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 44 </a>
+           class="header-toolbar-right"> 45 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 130 </a>
+           class="header-toolbar-right"> 133 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 17 </a>
+           class="header-toolbar-right"> 18 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -154,10 +154,10 @@
     <p>每次遇到跨域的问题真是！@#￥%</p>
 <p>我对<code>JSONP</code>的一些浅显的理解就是，有时候会看到类似<code>http://xxx.xx.com/?callback=xxx</code>这样的请求（<code>callback=</code>也可能是<code>jsonp=</code>也可能是<code>jsonpcallback=</code>，这个取决于服务器端是怎么实现jsonp的），这样的请求做的事情简单的来说就是等得到所有数据之后就执行回调函数。</p>
 <p>由于这个回调函数已经发给了服务器，返回的结果其实是一个函数，函数的入参是获取的数据。</p>
-<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var options = &#123;</span><br><span class="line">  url: &apos;http://xx.xx.com/xxx&apos;,</span><br><span class="line">  method: &apos;GET&apos;,</span><br><span class="line">  dataType: &apos;jsonp&apos;,</span><br><span class="line">  //jsonp: &apos;callback&apos;,</span><br><span class="line">  success: function(data)&#123;</span><br><span class="line">    //do something here;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">$.ajax(options);</span><br></pre></td></tr></table></figure></p>
+<p>jQuery的ajax请求其实能很简单的在客户端进行跨域GET请求，具体如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var options = &#123;</div><div class="line">  url: &apos;http://xx.xx.com/xxx&apos;,</div><div class="line">  method: &apos;GET&apos;,</div><div class="line">  dataType: &apos;jsonp&apos;,</div><div class="line">  //jsonp: &apos;callback&apos;,</div><div class="line">  success: function(data)&#123;</div><div class="line">    //do something here;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">$.ajax(options);</div></pre></td></tr></table></figure></p>
 <p>其中需要注意的是，一定要声明<strong><code>dataType</code></strong>，然后把回调函数写在success后面就可以了。<br>另外一开始提到，服务器端对jsonp的实现可能不同，所以在<code>options</code>中，有时候需要声明<code>jsonp</code>对应的字符串，默认是<code>&quot;callback&quot;</code>。例如：如果服务器实现jsonp是通过<code>http://xxx.xx.com/?jsonpcallback=xxx</code>，那么就需要在<code>options</code>中声明<code>jsonp:&#39;jsonpcallback&#39;</code></p>
 <p>原理据说和<code>&lt;script src=&quot;...&quot;&gt;</code>差不多，我现在还不是很明白=，=</p>
-<p>参考<br><a href="http://www.runoob.com/json/json-jsonp.html" target="_blank" rel="noopener">http://www.runoob.com/json/json-jsonp.html</a></p>
+<p>参考<br><a href="http://www.runoob.com/json/json-jsonp.html" target="_blank" rel="external">http://www.runoob.com/json/json-jsonp.html</a></p>
 
   </article>
 </div>

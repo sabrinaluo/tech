@@ -103,19 +103,19 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 44 </a>
+           class="header-toolbar-right"> 45 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 130 </a>
+           class="header-toolbar-right"> 133 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 17 </a>
+           class="header-toolbar-right"> 18 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -151,13 +151,13 @@
 
   <article class="post-content">
     <h1>GitHub Page如何绑定域名</h1>
-    <p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" target="_blank" rel="noopener">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
+    <p>本文假设你已经在github建立了一个yourname.github.io的网站，为了看起来逼格更高，更好记，更professional，所以要绑定域名？！<br>我本来的github page是<a href="http://sabrinaluo.github.io" target="_blank" rel="external">sabrinaluo.github.io</a>，花了一百多大洋把这个域名变成<a href="http://sabrinaluo.com">sabrinaluo.com</a>，github.io到.com，为了省6个字符，居然要花一百多大洋QAQ</p>
 <hr>
-<p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是www.abc.com</strong> </p>
+<p><del>只讨论一级域名的绑定，不讨论二级域名的绑定（因为我不会呀）</del><br><strong>先讨论一级域名的绑定，假设是<a href="http://www.abc.com" target="_blank" rel="external">www.abc.com</a></strong> </p>
 <ol>
 <li>首先…你要有一个<del>男盆友</del>域名…没有的话就去godaddy买一个；</li>
 <li><p>然后打开你的cmd console，ping一下你的github page，也就是输入<code>ping yourname.github.io</code>，你会看到你的页面所在的主机的IP地址，下面的例子IP是103.245.222.133，不知道是不是所有人的IP都一样呢。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">C:\&gt;ping yourname.github.io</span><br><span class="line">正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:</span><br><span class="line">来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58</span><br><span class="line">来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58</span><br><span class="line">来自 103.245.222.133 的回复: 字节=32 时间=8ms TTL=58</span><br><span class="line">来自 103.245.222.133 的回复: 字节=32 时间=12ms TTL=58</span><br><span class="line">103.245.222.133 的 Ping 统计信息:</span><br><span class="line">数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，</span><br><span class="line">往返行程的估计时间(以毫秒为单位):</span><br><span class="line">最短 = 5ms，最长 = 12ms，平均 = 7ms</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">C:\&gt;ping yourname.github.io</div><div class="line">正在 Ping github.map.fastly.net [103.245.222.133] 具有 32 字节的数据:</div><div class="line">来自 103.245.222.133 的回复: 字节=32 时间=5ms TTL=58</div><div class="line">来自 103.245.222.133 的回复: 字节=32 时间=6ms TTL=58</div><div class="line">来自 103.245.222.133 的回复: 字节=32 时间=8ms TTL=58</div><div class="line">来自 103.245.222.133 的回复: 字节=32 时间=12ms TTL=58</div><div class="line">103.245.222.133 的 Ping 统计信息:</div><div class="line">数据包: 已发送 = 4，已接收 = 4，丢失 = 0 (0% 丢失)，</div><div class="line">往返行程的估计时间(以毫秒为单位):</div><div class="line">最短 = 5ms，最长 = 12ms，平均 = 7ms</div></pre></td></tr></table></figure>
 </li>
 <li><p>登录你的godday账号，设置一下DNS的A记录：</p>
 <ul>
@@ -170,7 +170,7 @@
 </li>
 <li><p>然后就等等等，等10分钟左右，在浏览器里访问一下你新买的域名，如果看到github的404页面，就说明DNS的设置已经成功了</p>
 </li>
-<li>最后，在你的yourname.github.io这个repo创建一个名为<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">``` </span><br><span class="line">abc.com</span><br></pre></td></tr></table></figure></li>
+<li>最后，在你的yourname.github.io这个repo创建一个名为<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">``` </div><div class="line">abc.com</div></pre></td></tr></table></figure></li>
 </ol>
 <p>是的，你没看错，就是辣么简单！</p>
 <p><strong>二级域名的设置</strong><br>假如你有两个github page，一个是blog，一个是news，那你的两个二级域名分别就是：</p>
@@ -180,7 +180,7 @@
 </ul>
 <ol>
 <li>到godday设置两条<strong>A记录</strong>，分别设置blog及news指向github page的IP</li>
-<li>到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">blog.abc.com</span><br></pre></td></tr></table></figure>
+<li>到对应的git repo下面添加对应的CNAME文件，例如在blog这个repo下的CNAME是<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">blog.abc.com</div></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>整个过程其实做的事情大概可以理解为：</p>

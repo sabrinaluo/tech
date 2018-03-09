@@ -103,19 +103,19 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 44 </a>
+           class="header-toolbar-right"> 45 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 130 </a>
+           class="header-toolbar-right"> 133 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 17 </a>
+           class="header-toolbar-right"> 18 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -151,8 +151,8 @@
 
   <article class="post-content">
     <h1>版本控制及git常用基本命令</h1>
-    <p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="noopener">codecademy</a>跟着教程一步步走）</p>
-<p><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="noopener">Version Control</a>)工具。</p>
+    <p>（此文章适合听说过git，大概知道git是什么东东，但是又不会git命令的童鞋阅读。<br>时间充裕的童鞋可以到<a href="https://www.codecademy.com/learn/learn-git" target="_blank" rel="external">codecademy</a>跟着教程一步步走）</p>
+<p><a href="https://git-scm.com/" target="_blank" rel="external">Git</a>是一个分布式的版本管理(<a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank" rel="external">Version Control</a>)工具。</p>
 <p>版本管理这个概念很多童鞋可能不是很清楚，但其实在代码创作的过程中很可能已经使用过了一些传统的方法，比如我初中高中的时候创作博客模板的时候，对同一个模板想做一些不同的调整，同时又担心调整后原来的功能啊显示啊的会受到影响，那时候还不知道github之类的东东，于是<del>机智地</del></p>
 <blockquote>
 <ol>
@@ -200,11 +200,11 @@
 <li><code>git stash</code> 将本地的工作副本暂时存起来</li>
 <li><code>git pop</code> 将存起来的工作副本放出来…<blockquote>
 <p><code>git stash</code> 和 <code>git pop</code> 通常在<code>git pull</code>或<code>git merge</code>的时候如果有冲突(conflict)的时候使用，<code>pop</code>之后有冲突的工作副本会变成如下的样子，冲突的resolve就是选取最终的内容，然后删除多余的内容，包括&lt;&lt;&lt; ===&gt;&gt;&gt;这些行也要删除，让代码看起来和正常的代码一样。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// git pop之后的冲突文件看起来长这样：</span></span><br><span class="line"> &lt;&lt;&lt;&lt;&lt;&lt;&lt; their code</span><br><span class="line"> var a = 123;</span><br><span class="line"> =======</span><br><span class="line"> var a = 456;</span><br><span class="line"> &gt;&gt;&gt;&gt;&gt;&gt;&gt; my code</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// git pop之后的冲突文件看起来长这样：</span></div><div class="line"> &lt;&lt;&lt;&lt;&lt;&lt;&lt; their code</div><div class="line"> var a = 123;</div><div class="line"> =======</div><div class="line"> var a = 456;</div><div class="line"> &gt;&gt;&gt;&gt;&gt;&gt;&gt; my code</div></pre></td></tr></table></figure>
 </blockquote>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 冲突解决后，看起来应该长这样：</span></span><br><span class="line"> <span class="keyword">var</span> a = <span class="number">123</span>;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 冲突解决后，看起来应该长这样：</span></div><div class="line"> <span class="keyword">var</span> a = <span class="number">123</span>;</div></pre></td></tr></table></figure>
 <ul>
 <li><code>git merge &lt;branch name&gt;</code> 合并分支，将指定分支与当前分支合并<blockquote>
 <p><code>origin/master</code>分支为远程主分支</p>

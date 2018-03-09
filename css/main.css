@@ -565,6 +565,21 @@ pre {
 .post-content >table th {
   font-weight: 600;
 }
+.post-content kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #444d56;
+  vertical-align: middle;
+  background-color: #fafbfc;
+  border: solid 1px #c6cbd1;
+  border-bottom-color: #959da5;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #959da5;
+}
 .footer {
   position: relative;
   padding-top: 40px;

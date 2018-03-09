@@ -103,19 +103,19 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 44 </a>
+           class="header-toolbar-right"> 45 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 130 </a>
+           class="header-toolbar-right"> 133 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 17 </a>
+           class="header-toolbar-right"> 18 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -151,15 +151,15 @@
 
   <article class="post-content">
     <h1>尾逗号(Trailing Comma)的意义</h1>
-    <p>以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var foo = [</span><br><span class="line">    1,</span><br><span class="line">    2,</span><br><span class="line">    3,</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+    <p>以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    1,</div><div class="line">    2,</div><div class="line">    3,</div><div class="line">];</div></pre></td></tr></table></figure></p>
 <p>作为一个懒癌晚期患者，觉得要多加一个逗号，真是好麻烦！那是naive的我，当然还不知道有版本控制diff这种高级工具，还停留在复制粘贴文件夹的人工版本控制低级阶段…</p>
-<p>后来看到几家大厂的代码规范<a href="https://github.com/airbnb/javascript#functions--signature-invocation-indentation" target="_blank" rel="noopener">^1</a>, <a href="https://google.github.io/styleguide/jsguide.html#features-arrays-trailing-comma" target="_blank" rel="noopener">^2</a>中都有相应的规范。Airbnb的JS代码规范是非常火的，然而最开始的时候我个人比较喜欢的是Google的JS代码规范，就因为A家有我不喜欢的trailing comma。没想到，过了一段时间之后，G家也采用了这一条…而恰好也是这段时间，我一直在思考为什么有的人要把代码写的那么不clean？多年的经验告诉我，所有规则一定都是有原因的！</p>
+<p>后来看到几家大厂的代码规范<a href="https://github.com/airbnb/javascript#functions--signature-invocation-indentation" target="_blank" rel="external">^1</a>, <a href="https://google.github.io/styleguide/jsguide.html#features-arrays-trailing-comma" target="_blank" rel="external">^2</a>中都有相应的规范。Airbnb的JS代码规范是非常火的，然而最开始的时候我个人比较喜欢的是Google的JS代码规范，就因为A家有我不喜欢的trailing comma。没想到，过了一段时间之后，G家也采用了这一条…而恰好也是这段时间，我一直在思考为什么有的人要把代码写的那么不clean？多年的经验告诉我，所有规则一定都是有原因的！</p>
 <p>传图好麻烦…我就文字描述一下吧。凡是用过git的人应该都知道有diff view这种东西，用来比较两个版本的代码有什么区别。没有尾逗号的时候，当你需要添加一个元素，就需要在最后一个元素的<strong>1. 末尾加上一个逗号，2.换行添加新内容</strong>，如下面的例子所示。</p>
-<p>Before<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var foo = [</span><br><span class="line">    1,</span><br><span class="line">    2</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
-<p>After<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var foo = [</span><br><span class="line">    1,</span><br><span class="line">    2,</span><br><span class="line">    3</span><br><span class="line">];</span><br></pre></td></tr></table></figure></p>
+<p>Before<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    1,</div><div class="line">    2</div><div class="line">];</div></pre></td></tr></table></figure></p>
+<p>After<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var foo = [</div><div class="line">    1,</div><div class="line">    2,</div><div class="line">    3</div><div class="line">];</div></pre></td></tr></table></figure></p>
 <p>这样一来，diff view中就会显示修改了<strong>两行</strong>代码。如果使用尾逗号，则添加一个元素只需要<strong>1.换行添加新内容</strong>即可，diff view中显示只修改（添加）了一行代码。</p>
 <h3 id="一点人生感悟"><a href="#一点人生感悟" class="headerlink" title="一点人生感悟"></a>一点人生感悟</h3><p>这个世界上，凡事都是trade off，算法复杂度里要么时间换空间要么空间换时间。<br>尾逗号也一样，想要diff view clean，代码就不那么clean；想要代码clean，diff view就不那么clean。<br>所以搞清楚自己想要什么，又有什么可以去trade off，就很重要了。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[1] <a href="https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8" target="_blank" rel="noopener">https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8</a><br>[2] <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas</a></p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p>[1] <a href="https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8" target="_blank" rel="external">https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8</a><br>[2] <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas</a></p>
 
   </article>
 </div>

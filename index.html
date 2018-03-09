@@ -164,19 +164,35 @@
     <li class="selected">
       <a href="/tech/">Overview</a></li>
     <li class="">
-      <a href="/tech/archives">Posts <span class="counter">44</span></a>
+      <a href="/tech/archives">Posts <span class="counter">45</span></a>
     </li>
     <li class="">
       <a href="/tech/categories">Categories <span
-                class="counter">17</span></a></li>
+                class="counter">18</span></a></li>
     <li class="">
-      <a href="/tech/tags">Tags <span class="counter">130</span></a></li>
+      <a href="/tech/tags">Tags <span class="counter">133</span></a></li>
   </ul>
 </nav>
 
     <div class="body-secondary">
       <p class="right-title">Recent post</p>
       <ul class="recent-post clearfix">
+        
+        <li class="recent-post-item">
+          <div class="clearfix">
+            <h5 class="post-title text-ellipsis">
+              <i class="fa fa-bars"></i>
+              <a href="/tech/2018/03/09/tips-for-webstorm/">WebStorm的一些小技巧</a>
+            </h5>
+            <p class="post-description text-ellipsis desktop-only">
+               从我最开始学js，就一直用的是webstorm，因为很穷，一直都是用lanyu的盗版……我也很想买
+            </p>
+            <p class="post-info desktop-only">
+              <span><i class="fa fa-folder-open"></i> IDE</span>
+              <span><i class="fa fa-tag"></i> 3 </span>
+            </p>
+          </div>
+        </li>
         
         <li class="recent-post-item">
           <div class="clearfix">
@@ -255,22 +271,6 @@
             <p class="post-info desktop-only">
               <span><i class="fa fa-folder-open"></i> AngularJS</span>
               <span><i class="fa fa-tag"></i> 4 </span>
-            </p>
-          </div>
-        </li>
-        
-        <li class="recent-post-item">
-          <div class="clearfix">
-            <h5 class="post-title text-ellipsis">
-              <i class="fa fa-bars"></i>
-              <a href="/tech/2017/08/14/react-component-with-webpack/">用webpack打包react组件</a>
-            </h5>
-            <p class="post-description text-ellipsis desktop-only">
-                 吐槽  好多人都吐槽Webpack配置太复杂了，然而1.x我都还没学会现在都已经3.x了，前段
-            </p>
-            <p class="post-info desktop-only">
-              <span><i class="fa fa-folder-open"></i> WEBPACK</span>
-              <span><i class="fa fa-tag"></i> 3 </span>
             </p>
           </div>
         </li>
@@ -362,7 +362,7 @@
 
 
 <script>
-  var posts = [{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/2017/05/11/thoughts/"},{"date":"2017-05-26","title":"关于本地化的一些技巧","url":"http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/"},{"date":"2017-07-12","title":"尾逗号(Trailing Comma)的意义","url":"http://sabrinaluo.com/tech/2017/07/12/trailing-comma/"},{"date":"2017-08-14","title":"用webpack打包react组件","url":"http://sabrinaluo.com/tech/2017/08/14/react-component-with-webpack/"},{"date":"2017-09-01","title":"Angular directive指令相关的scope问题(= @ & ?)","url":"http://sabrinaluo.com/tech/2017/09/01/angular-directive-scope/"},{"date":"2017-12-05","title":"angular指令什么情况下只能有一个根元素(root element)","url":"http://sabrinaluo.com/tech/2017/12/05/angular-directive-only-one-root-element/"},{"date":"2018-01-05","title":"神奇的toLocaleString, Intl.NumberFormat","url":"http://sabrinaluo.com/tech/2018/01/05/the-magic-of-tolocalestring/"},{"date":"2018-01-12","title":"HTML DOM Element - image","url":"http://sabrinaluo.com/tech/2018/01/12/image-element/"},{"date":"2018-01-16","title":"以太坊智能合约应用初体验","url":"http://sabrinaluo.com/tech/2018/01/16/first-experience-of-ethereum-dapp/"}];
+  var posts = [{"date":"2017-05-11","title":"一点感悟","url":"http://sabrinaluo.com/tech/2017/05/11/thoughts/"},{"date":"2017-05-26","title":"关于本地化的一些技巧","url":"http://sabrinaluo.com/tech/2017/05/26/interpolation-and-pluralization/"},{"date":"2017-07-12","title":"尾逗号(Trailing Comma)的意义","url":"http://sabrinaluo.com/tech/2017/07/12/trailing-comma/"},{"date":"2017-08-14","title":"用webpack打包react组件","url":"http://sabrinaluo.com/tech/2017/08/14/react-component-with-webpack/"},{"date":"2017-09-01","title":"Angular directive指令相关的scope问题(= @ & ?)","url":"http://sabrinaluo.com/tech/2017/09/01/angular-directive-scope/"},{"date":"2017-12-05","title":"angular指令什么情况下只能有一个根元素(root element)","url":"http://sabrinaluo.com/tech/2017/12/05/angular-directive-only-one-root-element/"},{"date":"2018-01-05","title":"神奇的toLocaleString, Intl.NumberFormat","url":"http://sabrinaluo.com/tech/2018/01/05/the-magic-of-tolocalestring/"},{"date":"2018-01-12","title":"HTML DOM Element - image","url":"http://sabrinaluo.com/tech/2018/01/12/image-element/"},{"date":"2018-01-16","title":"以太坊智能合约应用初体验","url":"http://sabrinaluo.com/tech/2018/01/16/first-experience-of-ethereum-dapp/"},{"date":"2018-03-09","title":"WebStorm的一些小技巧","url":"http://sabrinaluo.com/tech/2018/03/09/tips-for-webstorm/"}];
   var today = moment().format('YYYY-MM-DD');
   var oneYearAgo = moment(today).subtract(1, 'years');
   posts = posts.filter(function(post) {
