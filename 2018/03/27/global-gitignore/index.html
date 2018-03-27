@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    global .gitignore | 小白妹妹写代码
+  </title>
+  <meta name="description" content="我这么可爱一定是男孩子">
+  
+  <meta name="keywords" content="
+  gitignore,Git
+  ">
+  
+  <meta name="author" content="HiiTea">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 46 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 134 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 19 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="{{moment(1522125584000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1522125584000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>global .gitignore</h1>
+    <h3 id="为什么需要全局-gitignore"><a href="#为什么需要全局-gitignore" class="headerlink" title="为什么需要全局 .gitignore"></a>为什么需要全局 <code>.gitignore</code></h3><p>通常来说，在repo中提交跟IDE相关的文件并非最佳实践，所以大多数时候会在<code>.gitignore</code>中加入IDE相关的文件pattern，然而市面上的IDE很多，不同程序员对IDE也有着自己的偏好，似乎不太可能把市面上所有的IDE都列出来。</p>
+<p>除此之外，可能还有一些其他情况下，希望在本地ignore某些文件，但却不希望提交到远程的<code>.gitignore</code>中。</p>
+<p>这种时候就该Git的 <strong>global ignore</strong> 上场啦！</p>
+<p>添加全局<code>gitignore</code>之后会在本地所有的repo中都ignore在其中列出的文件，以达到本地忽略特定文件的效果，通常都是IDE啦…例如，本地ignore 与 <code>.idea</code> 相关的所有文件，但我们并不需要修改repo中的<code>.gitignore</code>文件。</p>
+<h3 id="如何设置全局-gitignore"><a href="#如何设置全局-gitignore" class="headerlink" title="如何设置全局 .gitignore"></a>如何设置全局 <code>.gitignore</code></h3><p>首先在根文件夹<code>~</code>下创建一个<code>.gitignore_global</code>文件，（也可以在其他文件夹创建，但通常习惯于根文件夹下），然后运行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global core.excludesfile ~/.gitignore_global</div></pre></td></tr></table></figure></p>
+<p>如果使用sourcetree就更简单了：<br><strong>menu &gt; sourcetree &gt; preference &gt; git</strong><br>将会看到 <strong>global ignore list:</strong> 字样，添加刚刚创建的<code>.gitignore_global</code>文件即可</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="external">https://help.github.com/articles/ignoring-files/</a><br><a href="https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore" target="_blank" rel="external">https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://sabrinaluo.github.io/tech/2018/03/27/global-gitignore/";
+    this.page.identifier = 1522125584;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hiitea-tech.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <a href="https://sabrinaluo.github.io/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2016 HiiTea</li>
+      <li><a href="https://sabrinaluo.github.io/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+  </footer>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>
