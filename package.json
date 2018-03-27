@@ -1,8 +1,8 @@
 {
-  "name": "Hiitea-Tech-Blog",
+  "name": "hiitea-tech-blog",
   "version": "1.0.0",
   "author": "Sabrina Luo <luohaojing@gmail.com>",
-  "homepage": "http://sabrinaluo.com/tech",
+  "homepage": "https://sabrinaluo.github.io/tech",
   "license": "CC-BY-NC-SA-3.0",
   "repository": "sabrinaluo/tech",
   "engines": {
