@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -155,9 +155,9 @@
 <p>除此之外，可能还有一些其他情况下，希望在本地ignore某些文件，但却不希望提交到远程的<code>.gitignore</code>中。</p>
 <p>这种时候就该Git的 <strong>global ignore</strong> 上场啦！</p>
 <p>添加全局<code>gitignore</code>之后会在本地所有的repo中都ignore在其中列出的文件，以达到本地忽略特定文件的效果，通常都是IDE啦…例如，本地ignore 与 <code>.idea</code> 相关的所有文件，但我们并不需要修改repo中的<code>.gitignore</code>文件。</p>
-<h3 id="如何设置全局-gitignore"><a href="#如何设置全局-gitignore" class="headerlink" title="如何设置全局 .gitignore"></a>如何设置全局 <code>.gitignore</code></h3><p>首先在根文件夹<code>~</code>下创建一个<code>.gitignore_global</code>文件，（也可以在其他文件夹创建，但通常习惯于根文件夹下），然后运行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config --global core.excludesfile ~/.gitignore_global</div></pre></td></tr></table></figure></p>
+<h3 id="如何设置全局-gitignore"><a href="#如何设置全局-gitignore" class="headerlink" title="如何设置全局 .gitignore"></a>如何设置全局 <code>.gitignore</code></h3><p>首先在根文件夹<code>~</code>下创建一个<code>.gitignore_global</code>文件，（也可以在其他文件夹创建，但通常习惯于根文件夹下），然后运行以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.excludesfile ~/.gitignore_global</span><br></pre></td></tr></table></figure></p>
 <p>如果使用sourcetree就更简单了：<br><strong>menu &gt; sourcetree &gt; preference &gt; git</strong><br>将会看到 <strong>global ignore list:</strong> 字样，添加刚刚创建的<code>.gitignore_global</code>文件即可</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="external">https://help.github.com/articles/ignoring-files/</a><br><a href="https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore" target="_blank" rel="external">https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://help.github.com/articles/ignoring-files/" target="_blank" rel="noopener">https://help.github.com/articles/ignoring-files/</a><br><a href="https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore" target="_blank" rel="noopener">https://stackoverflow.com/questions/30907829/sourcetree-adding-files-in-global-gitignore-not-in-repository-gitignore</a></p>
 
   </article>
 </div>

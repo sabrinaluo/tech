@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -163,11 +163,11 @@
 </ul>
 <h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>参考这样一个例子：<br>一个项目因为一些莫名其妙的原因对<code>node_modules</code>文件夹进行了track，然后每次check out出来<code>npm install</code>的时候，很可能这些依赖包就更新了，然后又因为一些莫名其妙的原因，始终没有人把这个文件夹移出git的index，于是你也不好意思删除这个文件夹做一次commit。然而，每次都有几十上百条<code>modified: node_modules/xxx</code>，根本找不到自己真正修改和添加的文件…</p>
 <p>于是问题来了，怎么样才能把<code>node_module</code> ignore，但又不commit这些change呢？</p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>正常情况，跑以下的命令就能忽略掉已经track的<strong>文件夹</strong>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git ls-files -z node_modules/ | xargs -0 git update-index --assume-unchanged</div></pre></td></tr></table></figure></p>
-<p>如果只需要忽略<strong>单个文件</strong>，则以下命令就能搞定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git update-index --assume-unchanged &lt;file name&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>正常情况，跑以下的命令就能忽略掉已经track的<strong>文件夹</strong>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git ls-files -z node_modules/ | xargs -0 git update-index --assume-unchanged</span><br></pre></td></tr></table></figure></p>
+<p>如果只需要忽略<strong>单个文件</strong>，则以下命令就能搞定。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git update-index --assume-unchanged &lt;file name&gt;</span><br></pre></td></tr></table></figure></p>
 <p>因为update-index不支持递归<code>-r</code>，所以只能通过上面提到的方法来实现忽略文件夹<br>（憋问我为什么不支持…我也不知道）</p>
 <h3 id="另一种情况：将tracked文件移出index，但仍然保留在本地"><a href="#另一种情况：将tracked文件移出index，但仍然保留在本地" class="headerlink" title="另一种情况：将tracked文件移出index，但仍然保留在本地"></a>另一种情况：将tracked文件移出index，但仍然保留在本地</h3><p>终于有一天，大家想通了，决定将<code>node_modules</code>文件夹移出git index，但是如果删除了整个文件夹commit之后，项目要跑起来，又要重新<code>npm install</code>，懒癌患者倒地不起…</p>
-<p>下面这个命令可以解决上述问题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rm --cached -r node_modules</div></pre></td></tr></table></figure></p>
+<p>下面这个命令可以解决上述问题：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rm --cached -r node_modules</span><br></pre></td></tr></table></figure></p>
 <h3 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h3><p>我反正是无法理解把诸如npm包，bower包，composer包等等等的第三方依赖放到git里去track，那么还要package.json干啥=，=</p>
 
   </article>

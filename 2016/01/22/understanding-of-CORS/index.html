@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -151,8 +151,8 @@
 
   <article class="post-content">
     <h1>对浏览器跨域问题的一些理解</h1>
-    <h3 id="问题宝宝"><a href="#问题宝宝" class="headerlink" title="问题宝宝"></a>问题宝宝</h3><h4 id="1-移动应用开发"><a href="#1-移动应用开发" class="headerlink" title="1 移动应用开发"></a>1 移动应用开发</h4><p>之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。<br>开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(<strong>Access-Control-Allow-Origin</strong>)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">XMLHttpRequest cannot load http://samlino.local/cag/get_leads. No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource. Origin &apos;http://localhost:63342&apos; is therefore not allowed access.</div></pre></td></tr></table></figure></p>
-<p>而我当时的解决方法是，在chrome装了一个叫<a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="external">Allow-Control-Allow-Origin</a>的扩展，启用之后就不报错了。</p>
+    <h3 id="问题宝宝"><a href="#问题宝宝" class="headerlink" title="问题宝宝"></a>问题宝宝</h3><h4 id="1-移动应用开发"><a href="#1-移动应用开发" class="headerlink" title="1 移动应用开发"></a>1 移动应用开发</h4><p>之前用Ionic写mobile app，移动app自然是少不了调用RESTful API的数据。<br>开发的时候用浏览器进行调试，然后console里不停的出现下面的提示(<strong>Access-Control-Allow-Origin</strong>)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">XMLHttpRequest cannot load http://samlino.local/cag/get_leads. No &apos;Access-Control-Allow-Origin&apos; header is present on the requested resource. Origin &apos;http://localhost:63342&apos; is therefore not allowed access.</span><br></pre></td></tr></table></figure></p>
+<p>而我当时的解决方法是，在chrome装了一个叫<a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="noopener">Allow-Control-Allow-Origin</a>的扩展，启用之后就不报错了。</p>
 <p>也不知道什么什么原理，反正就这么一直用着。（不思进取）</p>
 <h4 id="2-网络应用开发"><a href="#2-网络应用开发" class="headerlink" title="2 网络应用开发"></a>2 网络应用开发</h4><p>后来写单页应用（SPA），静态文件的js里调用各大公司的API， github、facebook什么的，反正从来没有报过上面的错…<br>另外还写过用NodeJS做中间层，从NodeJS去API拿数据然后渲染再发到前端，也从来没报过错…</p>
 <p>最近的一个case是，我们有用AWS API Gateway, Lambda, DynamoDB搭建的API，API被调用的时候就会trigger一系列的任务。然后有个小哥偷懒不想写PHP，想在前端直接请求AWS的API。于是问题来了…</p>
@@ -161,24 +161,24 @@
 <li>但是！服务器该做的job却都做了！</li>
 </ul>
 <p>这根本不科学啊！！！所以？到底是什么鬼？！</p>
-<h3 id="同源策略-Same-Origin-Policy"><a href="#同源策略-Same-Origin-Policy" class="headerlink" title="同源策略(Same Origin Policy)"></a>同源策略(Same Origin Policy)</h3><p>同源策略就是只有访问的内容来自<strong>相同协议、相同主机、相同端口</strong>的内容<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="external">^1</a>时，才会加载访问得到的内容。<strong>浏览器是同源策略的一种实现</strong></p>
+<h3 id="同源策略-Same-Origin-Policy"><a href="#同源策略-Same-Origin-Policy" class="headerlink" title="同源策略(Same Origin Policy)"></a>同源策略(Same Origin Policy)</h3><p>同源策略就是只有访问的内容来自<strong>相同协议、相同主机、相同端口</strong>的内容<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy" target="_blank" rel="noopener">^1</a>时，才会加载访问得到的内容。<strong>浏览器是同源策略的一种实现</strong></p>
 <ul>
 <li>协议：<code>location.protocol</code>，http和https是两种不同的协议</li>
-<li>主机：<code>location.host</code>，不同子域名之间都算跨域，例如<a href="http://www.baidu.com" target="_blank" rel="external">www.baidu.com</a>, tieba.baidu.com是两个不同的源</li>
+<li>主机：<code>location.host</code>，不同子域名之间都算跨域，例如<a href="http://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a>, tieba.baidu.com是两个不同的源</li>
 <li>端口：<code>location.port</code></li>
 </ul>
-<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>之前脑子里大概有个<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="external">CORS</a>的概念，然后一直以为是服务器拒绝从浏览器跨域访问…因为要解决自己call自己不同域名下的API问题，就是去服务器设置一下header…但其实是都是浏览器在作怪…</p>
-<p>在浏览器中，允许跨域访问的资源的一些例子<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#Cross-origin_network_access" target="_blank" rel="external">^2</a>：<br><code>&lt;script src=&quot;...&quot;&gt;&lt;/script&gt;</code><br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;...&quot;&gt;</code><br><code>&lt;img&gt;</code> <code>&lt;video&gt;</code> <code>&lt;audio&gt;</code><br><code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code><br><code>@font-face</code><br><code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code></p>
-<h3 id="Response-Headers"><a href="#Response-Headers" class="headerlink" title="Response Headers"></a>Response Headers</h3><p>先看看可以在浏览器中跨域请求的别人家(github)的API返回的header：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Access-Control-Allow-Credentials:true</div><div class="line">Access-Control-Allow-Origin:*</div><div class="line">Access-Control-Expose-Headers:ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>看看自家API返回的header<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Connection:keep-alive</div><div class="line">Content-Encoding:gzip</div><div class="line">Content-Type:text/html</div><div class="line">Date:Fri, 22 Jan 2016 07:07:01 GMT</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<h3 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h3><p>之前脑子里大概有个<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS" target="_blank" rel="noopener">CORS</a>的概念，然后一直以为是服务器拒绝从浏览器跨域访问…因为要解决自己call自己不同域名下的API问题，就是去服务器设置一下header…但其实是都是浏览器在作怪…</p>
+<p>在浏览器中，允许跨域访问的资源的一些例子<a href="https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy#Cross-origin_network_access" target="_blank" rel="noopener">^2</a>：<br><code>&lt;script src=&quot;...&quot;&gt;&lt;/script&gt;</code><br><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;...&quot;&gt;</code><br><code>&lt;img&gt;</code> <code>&lt;video&gt;</code> <code>&lt;audio&gt;</code><br><code>&lt;object&gt;</code> <code>&lt;embed&gt;</code> <code>&lt;applet&gt;</code><br><code>@font-face</code><br><code>&lt;frame&gt;</code> <code>&lt;iframe&gt;</code></p>
+<h3 id="Response-Headers"><a href="#Response-Headers" class="headerlink" title="Response Headers"></a>Response Headers</h3><p>先看看可以在浏览器中跨域请求的别人家(github)的API返回的header：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access-Control-Allow-Credentials:true</span><br><span class="line">Access-Control-Allow-Origin:*</span><br><span class="line">Access-Control-Expose-Headers:ETag, Link, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>看看自家API返回的header<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Connection:keep-alive</span><br><span class="line">Content-Encoding:gzip</span><br><span class="line">Content-Type:text/html</span><br><span class="line">Date:Fri, 22 Jan 2016 07:07:01 GMT</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 <p>差别就在于别人家的API返回了<strong>Access-Control-Allow-Origin:*</strong><br>浏览器读到这个头部之后，才会加载请求的结果。</p>
 <h3 id="跨域的时候服务器收到请求了吗？"><a href="#跨域的时候服务器收到请求了吗？" class="headerlink" title="跨域的时候服务器收到请求了吗？"></a>跨域的时候服务器收到请求了吗？</h3><p>服务器当然收到请求了，不然怎么能返回头部…而且我上面举的诡异的例子中，请求trigger的job都完成了。</p>
 <p>所以也就是说，服务器其实收到了你的请求，并且给你返回了全部的数据，但是浏览器看到头部就把body藏起来了，然后抛出错误提示…</p>
 <h3 id="为什么浏览器不允许跨域访问？"><a href="#为什么浏览器不允许跨域访问？" class="headerlink" title="为什么浏览器不允许跨域访问？"></a>为什么浏览器不允许跨域访问？</h3><p>当然是为了安全……但是这个有点不太好理解，api拿点数据有什么不安全的？！</p>
-<p>下面这个例子比较清楚的说明同源策略是如何避免安全问题的：<a href="http://stackoverflow.com/questions/9222822/why-do-browser-apis-restrict-cross-domain-requests" target="_blank" rel="external">^3</a><br>网站A：一个看起来跟银行网站几乎一样的假网站<br>网站B：真正的银行网站<br>如果没有同源策略：<br>1.当用户来到A网站，以为是真的银行网站，然后输入自己的账号、密码（此时用户的账号、密码已经被网站A获取了）<br>2.网站A利用ajax把账号密码发到真正的银行网站B，然后银行网站返回一个带有token的form需要用户输入手机验证码。<br>3.网站A获得这个form之后显示出来，让用户填入手机验证码……至此，网站A获得了账号、密码、手机验证码，已经可以登陆用户的账号了。</p>
+<p>下面这个例子比较清楚的说明同源策略是如何避免安全问题的：<a href="http://stackoverflow.com/questions/9222822/why-do-browser-apis-restrict-cross-domain-requests" target="_blank" rel="noopener">^3</a><br>网站A：一个看起来跟银行网站几乎一样的假网站<br>网站B：真正的银行网站<br>如果没有同源策略：<br>1.当用户来到A网站，以为是真的银行网站，然后输入自己的账号、密码（此时用户的账号、密码已经被网站A获取了）<br>2.网站A利用ajax把账号密码发到真正的银行网站B，然后银行网站返回一个带有token的form需要用户输入手机验证码。<br>3.网站A获得这个form之后显示出来，让用户填入手机验证码……至此，网站A获得了账号、密码、手机验证码，已经可以登陆用户的账号了。</p>
 <p>而当有同源策略时，到第2步的时候，网站A根本无法获取银行网站返回的带token的form，所以就算有了账户和密码，也无法操作用户的账户。</p>
 <p>当然啦，银行的加密机制肯定没有我描述的这么弱智，不然还要U盾之类的东东干嘛，这只是一个为了方便理解安全问题而杜撰的例子…</p>
-<h3 id="好奇宝宝"><a href="#好奇宝宝" class="headerlink" title="好奇宝宝"></a>好奇宝宝</h3><p>不知道chrome的这个插件<a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="external">Allow-Control-Allow-Origin</a>，是怎么实现允许跨域请求的。<br>之前发现启用插件的时候，github上的小图标全都不显示了…</p>
+<h3 id="好奇宝宝"><a href="#好奇宝宝" class="headerlink" title="好奇宝宝"></a>好奇宝宝</h3><p>不知道chrome的这个插件<a href="https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi" target="_blank" rel="noopener">Allow-Control-Allow-Origin</a>，是怎么实现允许跨域请求的。<br>之前发现启用插件的时候，github上的小图标全都不显示了…</p>
 
   </article>
 </div>

@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -152,7 +152,7 @@
   <article class="post-content">
     <h1>angular指令什么情况下只能有一个根元素(root element)</h1>
     <p>好久么有记录什么有用的知识了，总是猴子掰玉米似的学点忘点:(</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在写自定义指令(custom directive)的时候，经常遇到下面这个错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Error: [$compile:tplrt] Template for directive &apos;xxx&apos; must have exactly one root element.</div></pre></td></tr></table></figure></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>在写自定义指令(custom directive)的时候，经常遇到下面这个错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: [$compile:tplrt] Template for directive &apos;xxx&apos; must have exactly one root element.</span><br></pre></td></tr></table></figure></p>
 <p>但有时候又发现别人写的指令超过一个根元素，却并没有报错，真是非常的confusing🤔</p>
 <h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>官访文档在directive一节是找不到任何和replace有关的东西，后来是在$compile一节找到的，然而又已经弃用了……(又要感叹了，前端圈真特喵难混)</p>
 <p>以下为文档说明</p>
@@ -171,7 +171,7 @@
 <p>大概是说这个replace属性没什么卵用…实际使用的时候也觉得没什么场景是非要replace不可的，不过为了避免在jq selector里使用一堆莫名其妙的dom名称，replace一下让Html看起来更正常一点（对，我们就是jQuery和angular混用，就是这么任！性！🤷‍）</p>
 <h3 id="感悟"><a href="#感悟" class="headerlink" title="感悟"></a>感悟</h3><p>在写组件template的时候用根元素把其他元素wrap起来，其实一个很好的习惯，这样一来，根元素上可以有css class，在使用sass之类的css预处理器时，有根类会使得维护成本变低</p>
 <p>那么为什么会存在有多余一个根元素的组件呢？</p>
-<p>我个人的感觉是，组件在最初设计时，并没有考虑到之后的扩展性，比如要写一个dropdown组件，首先想到的肯定是把select元素作为根元素，于是模板成了这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;select class=&quot;xxxx&quot;&gt;</div><div class="line">...</div><div class="line">&lt;/select&gt;</div></pre></td></tr></table></figure></p>
+<p>我个人的感觉是，组件在最初设计时，并没有考虑到之后的扩展性，比如要写一个dropdown组件，首先想到的肯定是把select元素作为根元素，于是模板成了这样：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;select class=&quot;xxxx&quot;&gt;</span><br><span class="line">...</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure></p>
 <p>之后来了个需求：当所选的选项是某一些特定选项时，显示一个error message。这一下就比较尴尬了……</p>
 <p>error message这个<code>div</code>只能和<code>select</code>同一个level才行，因为加在<code>select</code>里是肯定不会显示的。而一旦新加一个wrapper把之前的模板包起来，之前的css可能都要重写才会看起来没有变化。此时影响最小的做法就是移除指令中的<code>replace:true</code>属性，然后加多一个根元素了😂</p>
 <p>Angular本身compile的机制是，如果没有replace:true，默认就是false，<strong>会自动创建一个<code>&lt;directive-name&gt;</code>元素作为根元素</strong>包裹住模板中的全部内容。</p>

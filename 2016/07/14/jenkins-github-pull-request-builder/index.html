@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -151,7 +151,7 @@
 
   <article class="post-content">
     <h1>Jenkins集成github pull request插件</h1>
-    <p>前不久给bootstrap提了个<a href="https://github.com/twbs/bootstrap/issues/19997" target="_blank" rel="external">issue</a>，然后被他们的高科技自动回复机器人吓萌比了。<br>有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。</p>
+    <p>前不久给bootstrap提了个<a href="https://github.com/twbs/bootstrap/issues/19997" target="_blank" rel="noopener">issue</a>，然后被他们的高科技自动回复机器人吓萌比了。<br>有印象之前给，某些repo提PR的时候，如果是用的Travis CI，也会有相应的提示该PR是否pass了所有test case。</p>
 <p>如果使用cloud based CI，很多功能都已经整合了，所以可以很方便的使用。如上travis的例子，只要在travis配置里开启pull request选项，允许PR过来的时候自动跑测试，就可以实现。</p>
 <p>然而，如果使用的是jenkins这种自己服务器上的CI，配置就稍微有点麻烦了。</p>
 <h3 id="整合push和jenkins"><a href="#整合push和jenkins" class="headerlink" title="整合push和jenkins"></a>整合push和jenkins</h3><p>github repo页面 &gt; Settings &gt; webhooks &amp; services</p>
@@ -165,7 +165,7 @@
 <h3 id="整合pull-request"><a href="#整合pull-request" class="headerlink" title="整合pull request"></a>整合pull request</h3><p>这里重点说一下怎么整合jenkins和github的pull request，<strong>实现每当有pull request时，触发CI跑测试，并将测试结果显示在github上</strong>。</p>
 <p>这里需要分别在github和jenkins做相应的设置。</p>
 <p>github中的设置与上部分提到的相同，主要是填url</p>
-<p>jenkins服务器中：<br>首先需要安装 <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin" target="_blank" rel="external">github pull request builder plugin</a></p>
+<p>jenkins服务器中：<br>首先需要安装 <a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin" target="_blank" rel="noopener">github pull request builder plugin</a></p>
 <p>添加用户名、密码、token等等credentials相关的需要在jenkins的管理面板添加</p>
 <ul>
 <li>source code management，除基本选项外，需要填写advanced选项。<ul>
@@ -192,7 +192,7 @@
 </ul>
 <p>最后保存设置，提交一个pr，如果设置都正确的话，在提交pr的页面将能看到一个“正在checking…”的提示，当测试跑完之后将能看到check passed或者check failed。另外也能够在pr overview页面看到pr后面会有个绿色的小勾或红色的小叉。</p>
 <p>于是谁提交的pr不通过测试就能一目了然，再也不用帮别人fix test case啦！</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://jakubstas.com/github-and-jenkins-pull-request-checking" target="_blank" rel="external">http://jakubstas.com/github-and-jenkins-pull-request-checking</a><br><a href="http://jakubstas.com/github-and-jenkins-integration" target="_blank" rel="external">http://jakubstas.com/github-and-jenkins-integration</a><br><a href="https://www.theguild.nl/building-github-pull-requests-with-jenkins" target="_blank" rel="external">https://www.theguild.nl/building-github-pull-requests-with-jenkins</a><br><a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin</a><br><a href="https://github.com/jenkinsci/ghprb-plugin" target="_blank" rel="external">https://github.com/jenkinsci/ghprb-plugin</a></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="http://jakubstas.com/github-and-jenkins-pull-request-checking" target="_blank" rel="noopener">http://jakubstas.com/github-and-jenkins-pull-request-checking</a><br><a href="http://jakubstas.com/github-and-jenkins-integration" target="_blank" rel="noopener">http://jakubstas.com/github-and-jenkins-integration</a><br><a href="https://www.theguild.nl/building-github-pull-requests-with-jenkins" target="_blank" rel="noopener">https://www.theguild.nl/building-github-pull-requests-with-jenkins</a><br><a href="https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin" target="_blank" rel="noopener">https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin</a><br><a href="https://github.com/jenkinsci/ghprb-plugin" target="_blank" rel="noopener">https://github.com/jenkinsci/ghprb-plugin</a></p>
 
   </article>
 </div>

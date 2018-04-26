@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -151,7 +151,7 @@
 
   <article class="post-content">
     <h1>AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置</h1>
-    <p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="external">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="external">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
+    <p>本文<strong>不是</strong>介绍 <a href="https://aws.amazon.com/api-gateway/" target="_blank" rel="noopener">AWS API Gateway</a> 和 <a href="https://aws.amazon.com/lambda/" target="_blank" rel="noopener">AWS Lambda</a>的基本用法的…=(:з」∠)_</p>
 <p>简单的来说，有了AWS的API Gateway和Lambda这两样东东，再加一个数据库（<em>最好当然是用AWS DynamoDB啦，或者AWS EC2上装mysql，不用AWS也可以，但是访问速度可能会有一定影响，毕竟如果都用AWS的话算是走内网会快一些？！</em>），不需要任何网络应用的框架你就能开发出非常RESTful的API了，简直是中小型公司提高开发效率的神器！</p>
 <p>再简单的来说，API Gateway给你提供一个URL，当这个url被访问的时候，就会调用你设置的某个Lambda函数，这个函数执行完了之后就会返回你设定的数据。也就是说，以前你在服务器端收到一个请求，然后<strong>“做一堆事”</strong>完了之后发出响应Response的这个“做一堆事”和Response，写在一个Lambda函数里就可以了。</p>
 <blockquote>
@@ -167,7 +167,7 @@
 <li><strong>Lambda名为stageTest。</strong> <em>（endpoint的名字和lambda名字可以不同…原谅我是取名无能星人…）</em></li>
 </ul>
 <h3 id="DEV-QA-PROD-环境的设置"><a href="#DEV-QA-PROD-环境的设置" class="headerlink" title="DEV / QA / PROD 环境的设置"></a>DEV / QA / PROD 环境的设置</h3><ol>
-<li><strong>为API Gateway创建不同的stage<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^1</a>，假设创建了3个分别是dev，qa，prod。</strong> <em>（教程是官方英文的，点引用的链接就可以看到，憋让我翻译，我懒…我知道还有pre-prod，多加一个下面的解释就得多写好多字(ಥ_ಥ)）</em><blockquote>
+<li><strong>为API Gateway创建不同的stage<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="noopener">^1</a>，假设创建了3个分别是dev，qa，prod。</strong> <em>（教程是官方英文的，点引用的链接就可以看到，憋让我翻译，我懒…我知道还有pre-prod，多加一个下面的解释就得多写好多字(ಥ_ಥ)）</em><blockquote>
 <p>设置了stage之后你的api endpoin看起来大概长这样：</p>
 <ul>
 <li><aws-apiid>.execute-api.<aws-region>.amazonaws.com/dev</aws-region></aws-apiid></li>
@@ -176,13 +176,13 @@
 </ul>
 </blockquote>
 </li>
-<li><strong>为每个的Stage设置stageVariables<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="external">^2</a>，假设为每个Stage都设置了一个名为env的变量</strong><ul>
+<li><strong>为每个的Stage设置stageVariables<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html" target="_blank" rel="noopener">^2</a>，假设为每个Stage都设置了一个名为env的变量</strong><ul>
 <li>dev这个stage中env变量的值为DEV</li>
 <li>qa这个stage中env变量的值为QA</li>
 <li>prod这个stage中env变量的值为PROD</li>
 </ul>
 </li>
-<li><strong>Lambda stageTest()函数创建不同的alias<a href="http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html" target="_blank" rel="external">^3</a>，假设创建了3个分别是DEV，QA，PROD，分别指向不同的版本。</strong><blockquote>
+<li><strong>Lambda stageTest()函数创建不同的alias<a href="http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html" target="_blank" rel="noopener">^3</a>，假设创建了3个分别是DEV，QA，PROD，分别指向不同的版本。</strong><blockquote>
 <ul>
 <li>在每次deploy后，都是$LATEST版本，点action&gt;publish new version发布不同的版本</li>
 <li>建议DEV指向$LATEST版本，QA和PROD指向其他稳定的版本</li>
@@ -190,7 +190,7 @@
 </ul>
 </blockquote>
 </li>
-<li><strong>整合API /stageTest 的GET方法与Lambda stageTest()<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html" target="_blank" rel="external">^5</a></strong><ul>
+<li><strong>整合API /stageTest 的GET方法与Lambda stageTest()<a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html" target="_blank" rel="noopener">^5</a></strong><ul>
 <li>首先在API Gateway的界面中设置每个API方法的<strong>Integration Request</strong>：Integration Type选择Lambda Function；Lambda Function填<code>stageTest:${stageVariables.env}</code>，<strong>${stageVariables.env}</strong>就是第2步中，设置的变量。</li>
 <li>设置Lambda Function名称的时候一定要记得点旁边的√保存，保存的时候，AWS会弹出一个对话框，需要给函数加上权限才能使用stageVariables变量。加的时候记得要执行三次命令，也就是在AWS给出的命令的对应的位置改成 <code>stageTest:DEV</code>，<code>stageTest:QA</code>，<code>stageTest:PROD</code> 每个执行一次。</li>
 <li>执行以上命令之前，你必须：<ul>
@@ -206,11 +206,11 @@
 <li>如果你已经部署了很多lambda和api却没有使用stage的话…似乎是不太可能手动去AWS界面上一个一个设置的</li>
 <li>就算你已经在使用stage了，似乎也不太可能每次都手动去AWS界面上一个一个deploy最新的版本以及改变alias指向的版本的…</li>
 </ul>
-<p>这个时候，你就必须研究<a href="https://aws.amazon.com/cli/" target="_blank" rel="external">AWS CLI</a>，然后写shell以及借助其他工具来进行自动化部署了…</p>
+<p>这个时候，你就必须研究<a href="https://aws.amazon.com/cli/" target="_blank" rel="noopener">AWS CLI</a>，然后写shell以及借助其他工具来进行自动化部署了…</p>
 <p>其他参考：</p>
 <ul>
-<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html</a></li>
-<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference" target="_blank" rel="external">http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference</a></li>
+<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html" target="_blank" rel="noopener">http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html</a></li>
+<li><a href="http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference" target="_blank" rel="noopener">http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference</a></li>
 </ul>
 
   </article>

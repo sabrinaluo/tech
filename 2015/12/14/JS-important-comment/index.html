@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -151,8 +151,8 @@
 
   <article class="post-content">
     <h1>JS注释中的感叹号是干什么用的/*! */</h1>
-    <p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="external">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*!</span></div><div class="line"> * EJS</div><div class="line"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</div><div class="line"> * MIT Licensed</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * Module dependencies.</div><div class="line"> */</div></pre></td></tr></table></figure></p>
-<p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="external">TJ写的EJS模板引擎</a></p>
+    <p>前几天看了一个帖子<a href="http://www.jianshu.com/p/fdae559d1ed5" target="_blank" rel="noopener">我招不到想要的程序员</a>，里面有一点是说<strong>非极端情况下，一本以下的不要</strong>。本来学历这种事情大家都无所谓，毕竟我所认识的大多数都是985、211的本硕博。只有当进入了另一个不同的世界，才觉得学历还挺重要的…<br>我的JS基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的QQ群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……<br>有一天我看代码的时候发现很多规范的JS都会有这样的注释：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*!</span></span><br><span class="line"><span class="comment"> * EJS</span></span><br><span class="line"><span class="comment"> * Copyright(c) 2012 TJ Holowaychuk &lt;tj@vision-media.ca&gt;</span></span><br><span class="line"><span class="comment"> * MIT Licensed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Module dependencies.</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure></p>
+<p>以上来自我的男神<a href="https://github.com/tj/ejs/blob/master/ejs.js" target="_blank" rel="noopener">TJ写的EJS模板引擎</a></p>
 <p>我就在QQ群里问了这样一个问题：</p>
 <blockquote>
 <p>第一个注释中的感叹号是什么意思，为什么第一个有感叹号，第二个没有？</p>
@@ -165,12 +165,12 @@
 <li>因为缺乏经验而无法正确的描述问题，无法命中问题的关键字</li>
 </ul>
 <p>像我这样比较懒的人，最希望的就是能有一个在现实生活中认识的经验丰富的大神，这种弱鸡问题，一问就有答案了。然而我并不认识这样的大神。(ಥ_ಥ)</p>
-<p>直到后来无意中看到<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="external">阮一峰老师的SASS教程</a>，提到<strong>重要注释</strong>这个概念，受到一点启发，然后机智的我想到把感叹号直接翻译成英文，以’exclamation js comment’作为关键字来搜索，果然我不是一个人…（嗯，我变成了一条狗）<br><a href="http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files" target="_blank" rel="external">http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files</a></p>
+<p>直到后来无意中看到<a href="http://www.ruanyifeng.com/blog/2012/06/sass.html" target="_blank" rel="noopener">阮一峰老师的SASS教程</a>，提到<strong>重要注释</strong>这个概念，受到一点启发，然后机智的我想到把感叹号直接翻译成英文，以’exclamation js comment’作为关键字来搜索，果然我不是一个人…（嗯，我变成了一条狗）<br><a href="http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files" target="_blank" rel="noopener">http://stackoverflow.com/questions/11248363/the-purpose-of-starting-an-initial-comment-with-in-javascript-and-css-files</a></p>
 <blockquote>
 <p>我不是为了输赢，我就是认真 –罗永浩</p>
 </blockquote>
 <hr>
-<p>对前端工程化稍微有点知识的，就会知道在最后deploy之前会有一个步骤是minify / uglify，这个过程中注释都会被删除，而这个以<code>/*!</code>开头的重要注释则会被保留，通常重要注释是用来注释版权之类的信息<a href="https://zoompf.com/blog/2009/11/jsmin-important-comments-and-copyright-violations" target="_blank" rel="external">^1</a></p>
+<p>对前端工程化稍微有点知识的，就会知道在最后deploy之前会有一个步骤是minify / uglify，这个过程中注释都会被删除，而这个以<code>/*!</code>开头的重要注释则会被保留，通常重要注释是用来注释版权之类的信息<a href="https://zoompf.com/blog/2009/11/jsmin-important-comments-and-copyright-violations" target="_blank" rel="noopener">^1</a></p>
 
   </article>
 </div>

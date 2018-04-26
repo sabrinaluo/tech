@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -153,23 +153,23 @@
     <h1>git merge commits 如何合并多个提交为一个</h1>
     <p>因为我是那种经常改一个错别字就忙着要提交一次的人…所以总是会产生很多无意义的提交，于是合并多个提交为一个就成了我的刚性需求。</p>
 <p>关于合并多个提交，主要是要搞清楚<code>rebase</code>的用法。</p>
-<h3 id="查看提交历史，git-log"><a href="#查看提交历史，git-log" class="headerlink" title="查看提交历史，git log"></a>查看提交历史，git log</h3><p>首先你要知道自己想合并的是哪几个提交，可以使用<code>git log</code>命令来查看提交历史，假如最近4条历史如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">commit ada2cd944fc81cf0051c6b6cac62fad9ae6830d3</div><div class="line">commit 0e25f1237eeaf9ae02b5b48b888a844ed288e7e3</div><div class="line">commit ddbd8fd1d52aec0bbedc65a1a0add159344d4ae2</div><div class="line">commit 2aad0182a613b2e73b44ebbf0d5536126f714cb9</div></pre></td></tr></table></figure></p>
+<h3 id="查看提交历史，git-log"><a href="#查看提交历史，git-log" class="headerlink" title="查看提交历史，git log"></a>查看提交历史，git log</h3><p>首先你要知道自己想合并的是哪几个提交，可以使用<code>git log</code>命令来查看提交历史，假如最近4条历史如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">commit ada2cd944fc81cf0051c6b6cac62fad9ae6830d3</span><br><span class="line">commit 0e25f1237eeaf9ae02b5b48b888a844ed288e7e3</span><br><span class="line">commit ddbd8fd1d52aec0bbedc65a1a0add159344d4ae2</span><br><span class="line">commit 2aad0182a613b2e73b44ebbf0d5536126f714cb9</span><br></pre></td></tr></table></figure></p>
 <p>历史记录是按照时间排序的，时间近的排在前面。</p>
 <h3 id="git-rebase"><a href="#git-rebase" class="headerlink" title="git rebase"></a>git rebase</h3><p>想要合并1-3条，有两个方法</p>
 <ol>
 <li><p>从HEAD版本开始往过去数3个版本</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase -i HEAD~3</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~3</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>指名要合并的版本之前的版本号</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git rebase -i 2aad018</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i 2aad018</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <blockquote>
 <p>请注意<strong>2aad018</strong>这个版本是不参与合并的，可以把它当做一个坐标</p>
 </blockquote>
-<h3 id="选取要合并的提交"><a href="#选取要合并的提交" class="headerlink" title="选取要合并的提交"></a>选取要合并的提交</h3><p>执行了rebase命令之后，会弹出一个窗口，头几行如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pick ada2cd9</div><div class="line">pick 0e25f12</div><div class="line">pick ddbd8fd</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>将<code>pick</code>改为<code>squash</code>或者<code>s</code>，之后保存并关闭文本编辑窗口即可。改完之后文本内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">s ada2cd9</div><div class="line">s 0e25f12</div><div class="line">s ddbd8fd</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>参考：<br>[1] <a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="external">https://git-scm.com/docs/git-rebase</a><br>[2] <a href="http://blog.csdn.net/yangcs2009/article/details/47166361" target="_blank" rel="external">http://blog.csdn.net/yangcs2009/article/details/47166361</a></p>
+<h3 id="选取要合并的提交"><a href="#选取要合并的提交" class="headerlink" title="选取要合并的提交"></a>选取要合并的提交</h3><p>执行了rebase命令之后，会弹出一个窗口，头几行如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pick ada2cd9</span><br><span class="line">pick 0e25f12</span><br><span class="line">pick ddbd8fd</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>将<code>pick</code>改为<code>squash</code>或者<code>s</code>，之后保存并关闭文本编辑窗口即可。改完之后文本内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s ada2cd9</span><br><span class="line">s 0e25f12</span><br><span class="line">s ddbd8fd</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<p>参考：<br>[1] <a href="https://git-scm.com/docs/git-rebase" target="_blank" rel="noopener">https://git-scm.com/docs/git-rebase</a><br>[2] <a href="http://blog.csdn.net/yangcs2009/article/details/47166361" target="_blank" rel="noopener">http://blog.csdn.net/yangcs2009/article/details/47166361</a></p>
 
   </article>
 </div>

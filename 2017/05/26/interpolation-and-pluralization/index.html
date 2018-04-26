@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -177,7 +177,7 @@
 </tbody>
 </table>
 <p>但是template里写太多的if else 容易使得逻辑混乱，也不利于维护，机智的我今天忽然发现angular其实有一个专门的指令来做这个事:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ng-pluralize count=&quot;personCount&quot;</div><div class="line">                 when=&quot;&#123;&apos;0&apos;: &apos;Nobody is viewing.&apos;,</div><div class="line">                     &apos;one&apos;: &apos;1 person is viewing.&apos;,</div><div class="line">                     &apos;other&apos;: &apos;&#123;&#125; people are viewing.&apos;&#125;&quot;&gt;</div><div class="line">&lt;/ng-pluralize&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ng-pluralize count=&quot;personCount&quot;</span><br><span class="line">                 when=&quot;&#123;&apos;0&apos;: &apos;Nobody is viewing.&apos;,</span><br><span class="line">                     &apos;one&apos;: &apos;1 person is viewing.&apos;,</span><br><span class="line">                     &apos;other&apos;: &apos;&#123;&#125; people are viewing.&apos;&#125;&quot;&gt;</span><br><span class="line">&lt;/ng-pluralize&gt;</span><br></pre></td></tr></table></figure>
 <p>这个指令的本质其实跟if else类似，使用了一个hash map来储存对应的翻译，而我们可以利用这个指令，把when的值写到controller里，这样会比较美观 XD</p>
 <h3 id="插值-interpolation"><a href="#插值-interpolation" class="headerlink" title="插值 interpolation"></a>插值 interpolation</h3><p>有时候我们不得不把一整句话打断成多个部分，比如“step 1 of 5 ”，而对应的中文如果要求翻译成“第1步（共5步）”。这种情况下，如果使用断句的方法来翻译，中文需要有3个key，分别对应</p>
 <table>
@@ -211,8 +211,8 @@
 <p>Compiles a string with markup into an interpolation function</p>
 </blockquote>
 <p>翻译时，大多时候时候都是用<code>angular-translate</code>，这个第三方的服务能很好的处理插值，使用的标记是两个花括号<code>{{}}</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">//基本用法</div><div class="line">$translate(translationId[, interpolateParams], interpolationId, defaultTranslationText, forceLanguage);</div><div class="line"></div><div class="line">//例子</div><div class="line">$scope.stepInfoText = $filter(&apos;translate&apos;)(&apos;widget-progress-bar.step.text&apos;, &#123;currentStep:1, totalStep: 5&#125;);</div><div class="line"></div><div class="line">//翻译文件 *.properties</div><div class="line">widget-progress-bar.step.text=step &#123;&#123;currentStep&#125;&#125; of &#123;&#123;totalStep&#125;&#125;</div><div class="line">//output: step 1 of 5</div></pre></td></tr></table></figure>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1: <a href="https://docs.angularjs.org/guide/i18n" target="_blank" rel="external">https://docs.angularjs.org/guide/i18n</a><br>2: <a href="https://docs.angularjs.org/api/ng/directive/ngPluralize" target="_blank" rel="external">https://docs.angularjs.org/api/ng/directive/ngPluralize</a><br>3: <a href="https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize" target="_blank" rel="external">https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize</a><br>4: <a href="https://docs.angularjs.org/api/ng/service/$interpolate" target="_blank" rel="external">https://docs.angularjs.org/api/ng/service/$interpolate</a><br>5: <a href="https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate" target="_blank" rel="external">https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//基本用法</span><br><span class="line">$translate(translationId[, interpolateParams], interpolationId, defaultTranslationText, forceLanguage);</span><br><span class="line"></span><br><span class="line">//例子</span><br><span class="line">$scope.stepInfoText = $filter(&apos;translate&apos;)(&apos;widget-progress-bar.step.text&apos;, &#123;currentStep:1, totalStep: 5&#125;);</span><br><span class="line"></span><br><span class="line">//翻译文件 *.properties</span><br><span class="line">widget-progress-bar.step.text=step &#123;&#123;currentStep&#125;&#125; of &#123;&#123;totalStep&#125;&#125;</span><br><span class="line">//output: step 1 of 5</span><br></pre></td></tr></table></figure>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>1: <a href="https://docs.angularjs.org/guide/i18n" target="_blank" rel="noopener">https://docs.angularjs.org/guide/i18n</a><br>2: <a href="https://docs.angularjs.org/api/ng/directive/ngPluralize" target="_blank" rel="noopener">https://docs.angularjs.org/api/ng/directive/ngPluralize</a><br>3: <a href="https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize" target="_blank" rel="noopener">https://stackoverflow.com/questions/27259723/angularjs-pluralization-with-angular-translate-and-ng-pluralize</a><br>4: <a href="https://docs.angularjs.org/api/ng/service/$interpolate" target="_blank" rel="noopener">https://docs.angularjs.org/api/ng/service/$interpolate</a><br>5: <a href="https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate" target="_blank" rel="noopener">https://angular-translate.github.io/docs/#/api/pascalprecht.translate.$translate</a></p>
 
   </article>
 </div>

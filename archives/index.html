@@ -164,18 +164,41 @@
     <li class="">
       <a href="/tech/">Overview</a></li>
     <li class="selected">
-      <a href="/tech/archives">Posts <span class="counter">46</span></a>
+      <a href="/tech/archives">Posts <span class="counter">47</span></a>
     </li>
     <li class="">
       <a href="/tech/categories">Categories <span
                 class="counter">19</span></a></li>
     <li class="">
-      <a href="/tech/tags">Tags <span class="counter">134</span></a></li>
+      <a href="/tech/tags">Tags <span class="counter">136</span></a></li>
   </ul>
 </nav>
 
     <div class="body-secondary">
       <ul class="archive-list">
+        
+        <li class="archive-list-item">
+          <h2><a href="/tech/2018/04/26/Object-is/">Object.is()</a></h2>
+          <p>
+             前几天写测试的时候，有个地方需要检查Object的reference是否改变，jest中的 toEqual(value) 是deep compare，不适用于reference，于是查看了一下应该使用 toBe(value) 。 
+ 
+  toBe  just checks that a valu...
+          </p>
+          <ul class="tag-list clearfix">
+            
+            <li class="tag-list-item">ES6</li>
+            
+            <li class="tag-list-item">Object， Jest</li>
+            
+            <li class="tag-list-item">infinity</li>
+            
+          </ul>
+          <div class="post-info">
+            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span><i class="fa fa-tag"></i> 3 </span>
+            <span>Published {{moment(1524716715000).fromNow()}}</span>
+          </div>
+        </li>
         
         <li class="archive-list-item">
           <h2><a href="/tech/2018/03/27/global-gitignore/">global .gitignore</a></h2>
@@ -288,7 +311,7 @@
           <h2><a href="/tech/2017/12/05/angular-directive-only-one-root-element/">angular指令什么情况下只能有一个根元素(root element)</a></h2>
           <p>
              好久么有记录什么有用的知识了，总是猴子掰玉米似的学点忘点:( 
-   问题  在写自定义指令(custom directive)的时候，经常遇到下面这个错误：       1      Error: [$compile:tplrt] Template for directive &amp;apos;xxx...
+   问题  在写自定义指令(custom directive)的时候，经常遇到下面这个错误：       1       Error: [$compile:tplrt] Template for directive &amp;apos;xx...
           </p>
           <ul class="tag-list clearfix">
             
@@ -352,8 +375,8 @@
         <li class="archive-list-item">
           <h2><a href="/tech/2017/07/12/trailing-comma/">尾逗号(Trailing Comma)的意义</a></h2>
           <p>
-             以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：       1  2  3  4  5      var foo = [      1,      2,      3,  ];       
- 作为一个懒癌晚期患者，觉得要多加一个逗号，真是好麻烦！那是naive的我...
+             以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：       1   2   3   4   5       var foo = [       1,       2,       3,   ];        
+ 作为一个懒癌晚期患者，觉得要多加一个逗号，真是好麻烦...
           </p>
           <ul class="tag-list clearfix">
             
@@ -479,9 +502,9 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">css</li>
-            
             <li class="tag-list-item">tricks</li>
+            
+            <li class="tag-list-item">css</li>
             
           </ul>
           <div class="post-info">
@@ -562,7 +585,7 @@
           <h2><a href="/tech/2016/04/21/theory-analysis-for-wechat-recall-message-nickname/">微信撤回信息昵称显示原理分析</a></h2>
           <p>
                吐槽  为了让各位亲朋好友方便的用撤回信息装x，本宝宝写了一个 昵称生成器  虽然是比较简单的页面，但本宝宝还没发布呢，微信就封了这个功能，宝宝心里委屈但宝宝不说… 
-   起因  今天早些时候，在微信群里看到了这样的撤回信息：       1      &amp;quot;牛奶&amp;quot;撤回了一条...
+   起因  今天早些时候，在微信群里看到了这样的撤回信息：       1       &amp;quot;牛奶&amp;quot;撤回了一...
           </p>
           <ul class="tag-list clearfix">
             
@@ -1037,7 +1060,7 @@
         <li class="archive-list-item">
           <h2><a href="/tech/2015/12/19/understand-js-closure/">对JS闭包(Closure)的一些理解</a></h2>
           <p>
-             昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…       1  2  3  4  5      function isType(type) &amp;#123;    return function(obj) &amp;#123;      return &amp;#12...
+             昨天无聊在github上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…       1   2   3   4   5       function isType(type) &amp;#123;     return function(obj) &amp;#123;       retu...
           </p>
           <ul class="tag-list clearfix">
             

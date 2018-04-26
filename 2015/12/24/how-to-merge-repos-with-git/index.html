@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -153,13 +153,13 @@
     <h1>git merge repo 如何合并两个仓库</h1>
     <p>为什么我每天都会有一些奇奇怪怪的需求…</p>
 <p>我之前在github上用hexo搭了一个静态博客，每次hexo deploy的时候，就会在gh-pages分支提交一个commit。但是由于hexo-deployer-git本身的逻辑是，每次都是强推<code>push -f</code>，于是每当我换电脑（比如从家里换到公司里）的时候，我的commit记录就会丢失…但是像我这种虚荣心强的人，一个错别字都要commit一次来增加我在github commit的次数…所以，我家里的电脑和公司的电脑，两个repo的commit log都不能丢！！一个都不能少！！</p>
-<h3 id="如何合并两个仓库"><a href="#如何合并两个仓库" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> repo1</div><div class="line">git remote add other ../repo2</div><div class="line">git fetch other</div><div class="line">git checkout -b repo2 other/master</div><div class="line">git checkout master</div><div class="line">git merge repo2</div></pre></td></tr></table></figure></p>
+<h3 id="如何合并两个仓库"><a href="#如何合并两个仓库" class="headerlink" title="如何合并两个仓库"></a>如何合并两个仓库</h3><p>假设现在有两个repo：repo1，repo2，每个repo中都已经有一堆提交记录了，现在想把repo2中的记录合并到repo1中，命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> repo1</span><br><span class="line">git remote add other ../repo2</span><br><span class="line">git fetch other</span><br><span class="line">git checkout -b repo2 other/master</span><br><span class="line">git checkout master</span><br><span class="line">git merge repo2</span><br></pre></td></tr></table></figure></p>
 <p>解释：</p>
 <ol>
 <li>进入repo1文件夹</li>
 <li>添加repo2作为repo1的远程仓库，并命名为other</li>
 <li>将repo2的内容获取到repo1<blockquote>
-<p>注意，使用fetch而不是pull，关于fetch和pull的区别<a href="https://stackoverflow.com/questions/292357/what-are-the-differences-between-git-pull-and-git-fetch" target="_blank" rel="external">请戳这里</a></p>
+<p>注意，使用fetch而不是pull，关于fetch和pull的区别<a href="https://stackoverflow.com/questions/292357/what-are-the-differences-between-git-pull-and-git-fetch" target="_blank" rel="noopener">请戳这里</a></p>
 </blockquote>
 </li>
 <li>在repo1中创建名为repo2的新分支，同时切换到该分支，并且使用上一步获取的内容中的master分支的内容</li>
@@ -167,7 +167,7 @@
 <li>将repo2分支的内容合并到master分支</li>
 </ol>
 <h3 id="一句话总结"><a href="#一句话总结" class="headerlink" title="一句话总结"></a>一句话总结</h3><p>将一个仓库的内容checkout到另一个仓库的一个分支，将该分支与master分支合并</p>
-<p>参考：<br>[1] <a href="http://blog.csdn.net/gouboft/article/details/8450696" target="_blank" rel="external">http://blog.csdn.net/gouboft/article/details/8450696</a></p>
+<p>参考：<br>[1] <a href="http://blog.csdn.net/gouboft/article/details/8450696" target="_blank" rel="noopener">http://blog.csdn.net/gouboft/article/details/8450696</a></p>
 
   </article>
 </div>

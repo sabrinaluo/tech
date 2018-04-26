@@ -103,13 +103,13 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 46 </a>
+           class="header-toolbar-right"> 47 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 134 </a>
+           class="header-toolbar-right"> 136 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
@@ -151,16 +151,16 @@
 
   <article class="post-content">
     <h1>HTML DOM Element - image</h1>
-    <p>忘了是去年还是前年写了一个urbtix抢演唱会票的chrome小插件 <a href="https://github.com/sabrinaluo/urbtix-helper" target="_blank" rel="external">https://github.com/sabrinaluo/urbtix-helper</a> （每次都进不去网站，一次都没抢到😂），逻辑其实很简单，就是当用户设置了<code>event_id</code> <code>perfomence_id</code> <code>seat_type</code> <code>ticket_amount</code>之后，凡是自动点击的就由程序自动点击，以加快整个购票过程。</p>
-<p>为了让界面和用户体验更好，所以在界面加了一个图片，来展示对应的演唱会海报（海报是通过urbtix的url扒来的，e.g. <a href="https://ticket.urbtix.hk/internet/p_image/cover/34505.jpg" target="_blank" rel="external">https://ticket.urbtix.hk/internet/p_image/cover/34505.jpg</a> ）。一直以来urbtix都是用<code>.jpg</code>图片文件，今天忽然发现，他们居然有些图片是<code>.jpeg</code>的🙄</p>
+    <p>忘了是去年还是前年写了一个urbtix抢演唱会票的chrome小插件 <a href="https://github.com/sabrinaluo/urbtix-helper" target="_blank" rel="noopener">https://github.com/sabrinaluo/urbtix-helper</a> （每次都进不去网站，一次都没抢到😂），逻辑其实很简单，就是当用户设置了<code>event_id</code> <code>perfomence_id</code> <code>seat_type</code> <code>ticket_amount</code>之后，凡是自动点击的就由程序自动点击，以加快整个购票过程。</p>
+<p>为了让界面和用户体验更好，所以在界面加了一个图片，来展示对应的演唱会海报（海报是通过urbtix的url扒来的，e.g. <a href="https://ticket.urbtix.hk/internet/p_image/cover/34505.jpg" target="_blank" rel="noopener">https://ticket.urbtix.hk/internet/p_image/cover/34505.jpg</a> ）。一直以来urbtix都是用<code>.jpg</code>图片文件，今天忽然发现，他们居然有些图片是<code>.jpeg</code>的🙄</p>
 <p>于是问题就来了，如果不爬取urbtix的html是无法知道正确的图片格式的，所以一个代替的方案是，在<code>.jpg</code>下载失败时尝试使用<code>.jpeg</code>来下载，这就涉及到怎么检测图片是否加载成功…</p>
 <p>搜了一下google，发现是非常基础的知识，这种时候就觉得自己基础实在是太差了…☹</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> image = <span class="keyword">new</span> Image();</div><div class="line"><span class="comment">// 相当于 document.createElement('img')</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> image = <span class="keyword">new</span> Image();</span><br><span class="line"><span class="comment">// 相当于 document.createElement('img')</span></span><br></pre></td></tr></table></figure>
 <h3 id="image-onload"><a href="#image-onload" class="headerlink" title="image.onload"></a>image.onload</h3><p>当图片加载完成时，触发image.onload</p>
 <h3 id="image-onerror"><a href="#image-onerror" class="headerlink" title="image.onerror"></a>image.onerror</h3><p>当图片加载出现错误时，触发image.onerror</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 继续上面的例子</span></div><div class="line">image.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">'ok'</span>) &#125;;</div><div class="line">image.onerror = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">'error'</span>) &#125;;</div><div class="line"></div><div class="line">image.src = <span class="string">'https://ticket.urbtix.hk/internet/p_image/cover/34505.jpg'</span>;</div><div class="line"><span class="comment">// → 'error'</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 继续上面的例子</span></span><br><span class="line">image.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">'ok'</span>) &#125;;</span><br><span class="line">image.onerror = <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="string">'error'</span>) &#125;;</span><br><span class="line"></span><br><span class="line">image.src = <span class="string">'https://ticket.urbtix.hk/internet/p_image/cover/34505.jpg'</span>;</span><br><span class="line"><span class="comment">// → 'error'</span></span><br></pre></td></tr></table></figure>
 <p>以上，就是辣么简单啦。</p>
-<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image</a><br><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/image" target="_blank" rel="external">https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/image</a></p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference:"></a>Reference:</h3><p><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image</a><br><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/image" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/image</a></p>
 
   </article>
 </div>
