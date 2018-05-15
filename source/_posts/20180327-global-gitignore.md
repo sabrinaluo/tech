@@ -1,8 +1,8 @@
 ---
 title: global .gitignore
 date: 2018-03-27 12:39:44
-tags: [Git, gitignore]
-category: Git
+tags: [git, gitignore]
+category: GIT
 ---
 ### 为什么需要全局 `.gitignore`
 通常来说，在repo中提交跟IDE相关的文件并非最佳实践，所以大多数时候会在`.gitignore`中加入IDE相关的文件pattern，然而市面上的IDE很多，不同程序员对IDE也有着自己的偏好，似乎不太可能把市面上所有的IDE都列出来。
