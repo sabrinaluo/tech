@@ -72,7 +72,7 @@
         <li><a href="/tech/tags">Tags</a></li>
         
         
-        <li><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        <li class="desktop-only"><a href="/tech/atom.xml" target="_blank">RSS</a></li>
         
       </ul>
 
@@ -168,37 +168,14 @@
     </li>
     <li class="selected">
       <a href="/tech/categories">Categories <span
-                class="counter">19</span></a></li>
+                class="counter">17</span></a></li>
     <li class="">
-      <a href="/tech/tags">Tags <span class="counter">136</span></a></li>
+      <a href="/tech/tags">Tags <span class="counter">135</span></a></li>
   </ul>
 </nav>
 
     <div class="body-secondary">
       <ul class="archive-list">
-        
-        <li class="archive-list-item">
-          <h2><a href="/tech/2018/04/26/Object-is/">Object.is()</a></h2>
-          <p>
-             前几天写测试的时候，有个地方需要检查Object的reference是否改变，jest中的 toEqual(value) 是deep compare，不适用于reference，于是查看了一下应该使用 toBe(value) 。 
- 
-  toBe  just checks that a valu...
-          </p>
-          <ul class="tag-list clearfix">
-            
-            <li class="tag-list-item">ES6</li>
-            
-            <li class="tag-list-item">Object， Jest</li>
-            
-            <li class="tag-list-item">infinity</li>
-            
-          </ul>
-          <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
-            <span><i class="fa fa-tag"></i> 3 </span>
-            <span>Published {{moment(1524716715000).fromNow()}}</span>
-          </div>
-        </li>
         
         <li class="archive-list-item">
           <h2><a href="/tech/2018/01/05/the-magic-of-tolocalestring/">神奇的toLocaleString, Intl.NumberFormat</a></h2>
@@ -207,15 +184,19 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">JS</li>
+            <li class="tag-list-item"><a href="/tech/tags/JS/">JS</a></li>
             
-            <li class="tag-list-item">internationalization</li>
+            <li class="tag-list-item"><a href="/tech/tags/internationalization/">internationalization</a></li>
             
-            <li class="tag-list-item">国际化</li>
+            <li class="tag-list-item"><a href="/tech/tags/国际化/">国际化</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 3 </span>
             <span>Published {{moment(1515124800000).fromNow()}}</span>
           </div>
@@ -229,15 +210,19 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">js</li>
+            <li class="tag-list-item"><a href="/tech/tags/js/">js</a></li>
             
-            <li class="tag-list-item">tricks</li>
+            <li class="tag-list-item"><a href="/tech/tags/tricks/">tricks</a></li>
             
-            <li class="tag-list-item">js小技巧</li>
+            <li class="tag-list-item"><a href="/tech/tags/js小技巧/">js小技巧</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 3 </span>
             <span>Published {{moment(1476860913000).fromNow()}}</span>
           </div>
@@ -251,17 +236,21 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">Promise</li>
+            <li class="tag-list-item"><a href="/tech/tags/Promise/">Promise</a></li>
             
-            <li class="tag-list-item">parallel</li>
+            <li class="tag-list-item"><a href="/tech/tags/parallel/">parallel</a></li>
             
-            <li class="tag-list-item">sequential</li>
+            <li class="tag-list-item"><a href="/tech/tags/sequential/">sequential</a></li>
             
-            <li class="tag-list-item">顺序执行，并行执行</li>
+            <li class="tag-list-item"><a href="/tech/tags/顺序执行，并行执行/">顺序执行，并行执行</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 4 </span>
             <span>Published {{moment(1453560746000).fromNow()}}</span>
           </div>
@@ -277,37 +266,19 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">promise</li>
+            <li class="tag-list-item"><a href="/tech/tags/promise/">promise</a></li>
             
-            <li class="tag-list-item">递归</li>
+            <li class="tag-list-item"><a href="/tech/tags/递归/">递归</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 2 </span>
             <span>Published {{moment(1453108998000).fromNow()}}</span>
-          </div>
-        </li>
-        
-        <li class="archive-list-item">
-          <h2><a href="/tech/2016/01/12/ES6-generator-yield/">对generator和yield的一些理解</a></h2>
-          <p>
-             于是也是入了ES6的坑，为什么只有babel这种ES6转ES5的工具，而没有ES5转ES6的工具呢？可能有，但是我不知道。如果有的话，就能把5转成6，起码看起来逼格高了一大截，也能让我这种还不习惯ES6的小白假装会写ES6… 
- 简单的看了一下相关的概念，觉得还不太理解…就好像最开始看 原型链 一...
-          </p>
-          <ul class="tag-list clearfix">
-            
-            <li class="tag-list-item">ES6</li>
-            
-            <li class="tag-list-item">generator</li>
-            
-            <li class="tag-list-item">yield</li>
-            
-          </ul>
-          <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
-            <span><i class="fa fa-tag"></i> 3 </span>
-            <span>Published {{moment(1452589888000).fromNow()}}</span>
           </div>
         </li>
         
@@ -320,17 +291,21 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">JS</li>
+            <li class="tag-list-item"><a href="/tech/tags/JS/">JS</a></li>
             
-            <li class="tag-list-item">prototype</li>
+            <li class="tag-list-item"><a href="/tech/tags/prototype/">prototype</a></li>
             
-            <li class="tag-list-item">继承</li>
+            <li class="tag-list-item"><a href="/tech/tags/继承/">继承</a></li>
             
-            <li class="tag-list-item">原型</li>
+            <li class="tag-list-item"><a href="/tech/tags/原型/">原型</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 4 </span>
             <span>Published {{moment(1451533014000).fromNow()}}</span>
           </div>
@@ -346,13 +321,17 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">promise chain</li>
+            <li class="tag-list-item"><a href="/tech/tags/promise-chain/">promise chain</a></li>
             
-            <li class="tag-list-item">promise链</li>
+            <li class="tag-list-item"><a href="/tech/tags/promise链/">promise链</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 2 </span>
             <span>Published {{moment(1450755367000).fromNow()}}</span>
           </div>
@@ -367,13 +346,17 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">hoisting</li>
+            <li class="tag-list-item"><a href="/tech/tags/hoisting/">hoisting</a></li>
             
-            <li class="tag-list-item">变量提升</li>
+            <li class="tag-list-item"><a href="/tech/tags/变量提升/">变量提升</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 2 </span>
             <span>Published {{moment(1450664642000).fromNow()}}</span>
           </div>
@@ -386,15 +369,19 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">JS</li>
+            <li class="tag-list-item"><a href="/tech/tags/JS/">JS</a></li>
             
-            <li class="tag-list-item">closure</li>
+            <li class="tag-list-item"><a href="/tech/tags/closure/">closure</a></li>
             
-            <li class="tag-list-item">闭包</li>
+            <li class="tag-list-item"><a href="/tech/tags/闭包/">闭包</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 3 </span>
             <span>Published {{moment(1450524147000).fromNow()}}</span>
           </div>
@@ -407,15 +394,19 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">js</li>
+            <li class="tag-list-item"><a href="/tech/tags/js/">js</a></li>
             
-            <li class="tag-list-item">重要注释</li>
+            <li class="tag-list-item"><a href="/tech/tags/重要注释/">重要注释</a></li>
             
-            <li class="tag-list-item">感叹号</li>
+            <li class="tag-list-item"><a href="/tech/tags/感叹号/">感叹号</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 3 </span>
             <span>Published {{moment(1450073706000).fromNow()}}</span>
           </div>
@@ -428,11 +419,15 @@
           </p>
           <ul class="tag-list clearfix">
             
-            <li class="tag-list-item">promise</li>
+            <li class="tag-list-item"><a href="/tech/tags/promise/">promise</a></li>
             
           </ul>
           <div class="post-info">
-            <span><i class="fa fa-folder-open"></i> JS </span>
+            <span>
+              
+              <a class="category-link" href="/tech/categories/JS/"><i class="fa fa-folder-open"></i> JS</a>
+              
+            </span>
             <span><i class="fa fa-tag"></i> 1 </span>
             <span>Published {{moment(1448966786000).fromNow()}}</span>
           </div>
@@ -442,6 +437,7 @@
     </div>
   </div>
 </div>
+
 </div>
 
 <div class="footer-wrapper container">
@@ -450,7 +446,7 @@
       <i class="fa fa-github"></i>
     </a>
     <ul class="footer-social-link">
-      <li>© 2016 HiiTea</li>
+      <li>© 2018 HiiTea</li>
       <li><a href="https://sabrinaluo.github.io/tech">Home</a></li>
       
       <li><a href="https://github.com/sabrinaluo">Github</a></li>

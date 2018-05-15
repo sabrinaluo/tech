@@ -739,6 +739,12 @@ pre {
   stroke: #000;
   shape-rendering: crispEdges;
 }
+.category-list-count:before {
+  content: ' ';
+}
+.category-list-count:after {
+  content: ' ';
+}
 .blog-intro {
   width: 25%;
   padding-right: 16px;
@@ -1040,6 +1046,9 @@ pre {
 }
 .post-info span {
   margin-right: 16px;
+}
+.post-info a.category-link {
+  color: inherit;
 }
 .archive-list {
   list-style: none;
