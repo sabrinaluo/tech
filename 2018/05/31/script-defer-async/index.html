@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    如何延迟加载script(defer, async) | 小白妹妹写代码
+  </title>
+  <meta name="description" content="JavaScript是世界上第二好的语言😏">
+  
+  <meta name="keywords" content="
+  html,head,script,async,defer
+  ">
+  
+  <meta name="author" content="HiiTea">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 49 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 144 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 17 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="{{moment(1527751109000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1527751109000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>如何延迟加载script(defer, async)</h1>
+    <p><code>&lt;script&gt;</code>的下载和执行都会阻塞页面渲染，因此大多数情况下，我们都把<code>&lt;script&gt;</code>放在<code>&lt;body&gt;</code>d的底部，渲染完前面的html内容之后才加载和执行JS。</p>
+<p>然而有时由于某些限制，只把某些<code>&lt;script&gt;</code>放在<code>&lt;head&gt;</code>里，但又不希望页面渲染被阻塞，这种情况下，可以使用<code>async</code>或<code>defer</code>属性来延迟加载、渲染。</p>
+<p>一张图胜过千言万语<a href="https://stackoverflow.com/a/39711009/3821392" target="_blank" rel="noopener">^1</a><br><img src="https://i.stack.imgur.com/wfL82.png" alt="image"></p>
+<h3 id="script"><a href="#script" class="headerlink" title="script"></a>script</h3><p>如果没有加任何与延迟加载相关的属性，浏览器会先加载、然后执行。这个过程会阻塞后面内容的渲染，也就是说，要等<code>&lt;script&gt;</code>加载并执行之后，才会开始渲染之后的内容。</p>
+<h4 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h4><p>因为可能存在类似需求：在执行脚本时，使用<code>document.write</code>，因此需要阻塞渲染</p>
+<h3 id="async"><a href="#async" class="headerlink" title="async"></a>async</h3><p>如果添加了<code>async</code>属性，浏览器会并行的一边渲染页面一边加载脚本。一旦脚本加载完成，就会执行脚本，执行脚本的过程会阻塞后续内容的渲染。</p>
+<p><strong>!!!注意: 由于是加载完成就立刻执行，因此执行顺序是无法保证的！</strong><br><code>async</code>是html5中才有的属性，因此需要注意旧的浏览器不支持此属性</p>
+<h3 id="defer"><a href="#defer" class="headerlink" title="defer"></a>defer</h3><p>如果添加了<code>defer</code>属性，浏览器会并行的一边渲染页面一边加载脚本。等到页面内容完全渲染完成之后才开始执行，能够节约一点加载时间（因为是并行的）。这么看来使用<code>defer</code>跟放在<code>body</code>底部效果差不多，甚至更胜一筹，那么为什么现在还有很多人还在使用后者(body底部)这种方式呢，这两种方式到底有什么区别呢？<a href="https://stackoverflow.com/questions/5250412/how-exactly-does-script-defer-defer-work" target="_blank" rel="noopener">^2</a></p>
+<h4 id="历史小知识"><a href="#历史小知识" class="headerlink" title="历史小知识"></a>历史小知识</h4><p>最早实现<code>defer</code>的是IE4，然而在IE4-9中的实现并没有按照WHATWG的标准<a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/" target="_blank" rel="noopener">^3</a>，这个bug使得执行脚本时的<strong>顺序无法得到保证</strong>。</p>
+<blockquote>
+<p>deferred scripts should run after the document had parsed, in the order they were added. <a href="https://html.spec.whatwg.org/multipage/scripting.html#attr-script-defer" target="_blank" rel="noopener">^4</a></p>
+</blockquote>
+<blockquote>
+<p>The defer attribute may be specified with the async attribute, so legacy browsers that only support defer (and not async) fall back to the defer behavior instead of the default blocking behavior <a href="https://html.spec.whatwg.org/multipage/scripting.html#attr-script-defer" target="_blank" rel="noopener">^4</a></p>
+</blockquote>
+<p><strong>!!!注意：</strong><br>为了避免在旧的IE浏览器上，脚本的执行顺序不符合预期，因此大多数时候还是使用将脚本放在<code>body</code>底部的方式</p>
+<h3 id="IMPORTANT"><a href="#IMPORTANT" class="headerlink" title="IMPORTANT"></a>IMPORTANT</h3><blockquote>
+<p>The <code>defer</code> and <code>async</code> attributes <strong>must not</strong> be specified if the src attribute is <strong>absent</strong> <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#" target="_blank" rel="noopener">^5</a></p>
+</blockquote>
+<h3 id="body-bottom"><a href="#body-bottom" class="headerlink" title="body bottom"></a>body bottom</h3><p>将<code>&lt;script&gt;</code>放在<code>body</code>底部，能够保证脚本按照顺序加载及执行，缺点是无法节约加载时间</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[1] <a href="https://stackoverflow.com/a/39711009/3821392" target="_blank" rel="noopener">https://stackoverflow.com/a/39711009/3821392</a><br>[2] <a href="https://stackoverflow.com/questions/5250412/how-exactly-does-script-defer-defer-work" target="_blank" rel="noopener">https://stackoverflow.com/questions/5250412/how-exactly-does-script-defer-defer-work</a><br>[3] <a href="https://www.html5rocks.com/en/tutorials/speed/script-loading/" target="_blank" rel="noopener">https://www.html5rocks.com/en/tutorials/speed/script-loading/</a><br>[4] <a href="https://html.spec.whatwg.org/multipage/scripting.html#attr-script-defer" target="_blank" rel="noopener">https://html.spec.whatwg.org/multipage/scripting.html#attr-script-defer</a><br>[5] <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/HTMLScriptElement#</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://sabrinaluo.github.io/tech/2018/05/31/script-defer-async/";
+    this.page.identifier = 1527751109;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hiitea-tech.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <a href="https://sabrinaluo.github.io/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2018 HiiTea</li>
+      <li><a href="https://sabrinaluo.github.io/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+  </footer>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>
