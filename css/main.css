@@ -998,9 +998,26 @@ pre {
     margin: 0;
     padding: 14px;
     border-top: 1px solid #d1d5da;
+    padding: 0;
   }
   .recent-post-item:first-child {
     border-top: none;
+  }
+  .recent-post-item .clearfix {
+    width: 100%;
+  }
+  .recent-post-item .post-title {
+    position: relative;
+  }
+  .recent-post-item .post-title i {
+    position: absolute;
+    top: 20px;
+    left: 14px;
+  }
+  .recent-post-item .post-title a {
+    display: block;
+    padding: 14px;
+    padding-left: 32px;
   }
 }
 .recent-post-item:nth-child(odd) {
