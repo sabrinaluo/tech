@@ -63,14 +63,14 @@ facebook1    |-------------|
 promise链的本质其实就是从头then到尾，但是第一种方法怎么用程序来实现，也就是上面提到的小技巧，就是值得学习的地方了。（反正我觉得太巧妙了！！！我自己就想不到…）
 
 大概跟在做求和运算时候的思想一样：
-```
+```javascript
 //求和的时候通常这么做，先定义一个sum，然后依次往里做加法
 var sum = 0;
 array.forEach(function(item) {
   sum = sum + item;
 });
 ```
-```
+```javascript
 //要得到一个then then then的promise链，先定义一个已经resolve了的promise，然后依次往后then…
 var sequence = Promise.resolve();
 array.forEach(function(item) {
