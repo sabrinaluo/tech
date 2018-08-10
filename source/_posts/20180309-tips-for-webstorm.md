@@ -22,6 +22,8 @@ category: IDE
 关闭当前标签： <kbd>cmd</kbd> + <kbd>w</kbd>
 重新打开刚才关闭的标签： 这个没有默认的快捷键，需要在preference里面搜索reopen后设置
 最近使用的文件列表： <kbd>cmd</kbd> + <kbd>E</kbd>
+收起所有文件夹： <kbd>cmd</kbd> + <kbd>-</kbd>
+打开所有文件夹： <kbd>*</kbd>
 
 ### code
 自动补全： <kbd>tab</kbd>
