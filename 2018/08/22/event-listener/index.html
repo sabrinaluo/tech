@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    关于eventListener的那些事 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="JavaScript是世界上第二好的语言😏">
+  
+  <meta name="keywords" content="
+  js,eventlLstener,chrome dev tool,web api,事件冒泡
+  ">
+  
+  <meta name="author" content="HiiTea">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 50 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 148 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 18 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="{{moment(1534909312000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1534909312000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>关于eventListener的那些事</h1>
+    <blockquote>
+<p>If multiple identical <code>EventListeners</code> are registered on the same <code>EventTarget</code> with the same parameters, the duplicate instances are discarded. They do not cause the <code>EventListener</code> to be called twice, and they do not need to be removed manually with the <code>removeEventListener()</code> method. <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Multiple_identical_event_listeners#Multiple_identical_event_listeners" target="_blank" rel="noopener">^1</a></p>
+</blockquote>
+<p>如果在同一个<code>EventTarget</code>上添加同一个（reference相同）<code>EventListeners</code>，该listener只会执行一次，无需手动调用<code>removeEventListener</code>移除多余的listener</p>
+<p>所以在<code>addEventListener</code>时应尽量<strong>避免使用匿名函数</strong>的形式，而应该引用已定义好的函数，从而避免之后重复添加listener时被重复执行多次，并且也为<code>removeListener</code>提供可能性</p>
+<h2 id="getEventListeners"><a href="#getEventListeners" class="headerlink" title="getEventListeners"></a>getEventListeners</h2><p>有时候我们会想知道document里的全部或某个object上面都绑定了什么listener，除了自己写一段代码<a href="https://gist.github.com/dmnsgn/36b26dfcd7695d02de77f5342b0979c7" target="_blank" rel="noopener">^2</a>去查看之外，chrome dev tools也为我们提供了一些方便的接口<a href="https://developers.google.com/web/tools/chrome-devtools/console/command-line-reference" target="_blank" rel="noopener">^3</a></p>
+<h3 id="查看document中的所有listener"><a href="#查看document中的所有listener" class="headerlink" title="查看document中的所有listener"></a>查看document中的所有listener</h3><script src="//gist.github.com/dmnsgn/36b26dfcd7695d02de77f5342b0979c7.js"></script>
+<h3 id="使用chrome查看单个object上的listener"><a href="#使用chrome查看单个object上的listener" class="headerlink" title="使用chrome查看单个object上的listener"></a>使用chrome查看单个object上的listener</h3><p>直接在chrome的console中使用<code>getEventListeners</code>接口即可<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getEventListeners(<span class="built_in">document</span>)</span><br></pre></td></tr></table></figure></p>
+<p>如果想知道listener的函数源码，可以对该listener右键选择 <strong>store as global variable</strong>， chrome会将其储存为名为<code>tempX</code>的变量(X为正整数)，并打印出该变量内容，即可看到listener函数的具体代码</p>
+<h2 id="addEventListener"><a href="#addEventListener" class="headerlink" title="addEventListener"></a>addEventListener</h2><p>大多数时候我们在<code>addEventListener</code>时，都会省略第三个参数<code>options</code>。要了解<code>options</code>中的各项参数有什么用途，首先我们需要了解，事件冒泡(Event Bubbling)和事件捕捉(Event Capturing)的执行顺序<a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#Event_bubbling_and_capture" target="_blank" rel="noopener">^4</a>。</p>
+<h3 id="事件冒泡-事件捕捉"><a href="#事件冒泡-事件捕捉" class="headerlink" title="事件冒泡 事件捕捉"></a>事件冒泡 事件捕捉</h3><p><img src="https://mdn.mozillademos.org/files/14075/bubbling-capturing.png" alt="img"></p>
+<p>当触发一个event时，现代浏览器可以有两种执行模式/顺序，默认为<strong>事件冒泡</strong></p>
+<ul>
+<li>事件冒泡，由下至上，child 向 ancestor 依次查找eventListner并执行</li>
+<li>事件捕捉，由顶至下，由最外层 ancestor 向 child 依次查找、执行， (until it reaches the element that was actually clicked on)</li>
+</ul>
+<h3 id="options-5"><a href="#options-5" class="headerlink" title="options^5"></a><code>options</code><a href="https://developers.google.com/web/updates/2016/10/addeventlistener-once" target="_blank" rel="noopener">^5</a></h3><p><code>options</code>包括以下几个选项：</p>
+<ul>
+<li><code>capture</code>，如果为<code>true</code>，该event会最先dispatch。 <strong> before any other children doms’ same event </strong> 如同上一节所提到的，如果设置为<code>true</code>，浏览器会按照事件捕捉的顺序来执行相关listener</li>
+<li><code>once</code>，如果为<code>true</code>，listener最多只会执行一次，之后会自动移除</li>
+<li><code>passive</code>，如果为<code>true</code>，不会调用<code>preventDefault()</code>，如果该方法被调用，则该方法会被忽略且抛出警告⚠️。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Unable to preventDefault inside passive event listener invocation.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><code>passive</code>为<code>false</code>时，<code>touch</code>event会阻塞浏览器的主线程，从而影响scroll的性能，因此一些浏览器(chrome, firefox)将<code>touchstart</code> <code>touchemove</code>事件在<code>window</code> <code>document</code> <code>document.body</code>级别的<code>passive</code>默认值设为<code>true</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Improving_scrolling_performance_with_passive_listeners" target="_blank" rel="noopener">^6</a></p>
+<p>MDN的这个例子非常好的解释了各种option搭配下的各种情况<br><iframe scrolling="no" width="100%" height="450px" src="//jsfiddle.net/HiiTea/m2vha9sj/embedded/result,html,js/light" frameborder="0" allowfullscreen></iframe></p>
+<p>另外需要注意的是，我们经常看到这样的写法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(<span class="string">'click'</span>, myClickHandler, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
+<p>第三个参数并非一个<code>object</code>，而是一个<code>boolean</code>，这样的写法是为了兼容一些旧的浏览器，当使用这样的写法时，第三个参数<code>false</code>指代的是<code>capture</code>参数</p>
+<blockquote>
+<p>The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options’s capture.</p>
+</blockquote>
+<h3 id="IE"><a href="#IE" class="headerlink" title="IE"></a>IE</h3><p>IE9之前，没有<code>addEventListener</code>方法，需要使用<code>attachEvent</code>方法代替，该方法不接受第三个参数<a href="https://dom.spec.whatwg.org/#interface-eventtarget" target="_blank" rel="noopener">^7</a></p>
+<h2 id="removeListener"><a href="#removeListener" class="headerlink" title="removeListener"></a>removeListener</h2><blockquote>
+<p>While <code>addEventListener()</code> will let you add the same listener more than once for the same type if the options are different, the only option <code>removeEventListener()</code> checks is the capture/useCapture flag. Its value must match for <code>removeEventListener()</code> to match, but the other values don’t. <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener" target="_blank" rel="noopener">^9</a></p>
+</blockquote>
+<p>这个就是说，如果在<code>addEventListener</code>是添加了某些<code>options</code>，那么移除时也需要添加相应的<code>options</code>才能成功移除listener 😭 真是麻烦<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">"click"</span>, handler, &#123; <span class="attr">passive</span>: <span class="literal">true</span> &#125;);</span><br><span class="line"><span class="built_in">document</span>.removeEventListener(<span class="string">"click"</span>, handler); <span class="comment">// fails</span></span><br></pre></td></tr></table></figure></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://sabrinaluo.github.io/tech/2018/08/22/event-listener/";
+    this.page.identifier = 1534909312;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hiitea-tech.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://sabrinaluo.github.io/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2018 HiiTea</li>
+      <li><a href="https://sabrinaluo.github.io/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+    <div class="footer-pageview">
+        <a href="https://info.flagcounter.com/mx4Y">
+          <img src="//s01.flagcounter.com/count/mx4Y/bg_FFFFFF/txt_000000/border_FFFFFF/columns_3/maxflags_9/viewers_3/labels_0/pageviews_1/flags_0/percent_0/">
+        </a>
+    </div>
+    
+  </footer>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>
