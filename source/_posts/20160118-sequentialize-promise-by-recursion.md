@@ -16,7 +16,7 @@ categories: JS
 
 ### 问题
 我之前提到过一个典型的例子是Facebook的Graph API 中的分页问题（ [Cursor-based Pagination](https://developers.facebook.com/docs/graph-api/using-graph-api#paging)），API的Response如下：
-```
+```json
 {
   "data": [
      ... Endpoint data is here
@@ -37,7 +37,7 @@ categories: JS
 ##### 当知道总共有多少页的时候
 (假设request是一个返回promise对象的函数,resolve的是上面的json)
 - 普通程序员这么做
-```
+```javascript
 var url = 'http://xxx'; //first page
 request(url)
   .then(function(data) {
@@ -56,7 +56,7 @@ request(url)
 不停then的方法就不行了，于是有了文艺的程序员
 - 文艺程序员这么做
 首先要知道的一点是，当没有下一页的时候，返回的`next=null`，于是我们就有了递归的终止条件。
-```
+```javascript
 function run(url) {
   if (!url) return;
   while (url) {
