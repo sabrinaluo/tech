@@ -11,7 +11,7 @@ categories: JS
 类的两个基本元素就是**属性**和**方法**。
 
 JS中类的实现有很多种，构造函数模式、原型模式等等，各有各的优缺点，最常用的是混合了构造函数和原型模式的混合模式。
-```
+```javascript
 function Person(name) {
   this.name = name;
 }
@@ -27,7 +27,7 @@ Person.prototype.sayHi = function() {
 ### 继承的实现
 JS中继承的实现也有很多种，借用构造函数，原型链等等。
 子类继承父类，当然继承的就是父类的**属性和方法**。JS中继承的实现，最常用的也是混合模式。
-```
+```javascript
 function Student(name, age) {
   Person.call(this, name);
   this.age = age;
@@ -36,6 +36,9 @@ function Student(name, age) {
 console.log(Student.prototype.constructor); // Student
 
 Student.prototype = new Person();
+// 补充！有时候我们也会见到如下方式，具体区别请看下一小节
+Student.prototype = Object.create(Person.prototype);
+
 console.log(Student.prototype.constructor); // Person
 
 Student.prototype.constructor = Student; // 重写constructor
@@ -46,12 +49,24 @@ Student.prototype.sayAge = function() {
 ```
 使用**借用构造函数**的方式来继承**属性**，然后使用**原型链**来继承**方法**。通过将子类的原型对象指向父类的实例，子类的实例就可以通过原型链向上查找到父类原型上的方法。
 
+#### `Object.create` vs `new`
+有时候我们也会见到如下的继承方式：
+```javascript
+Student.prototype = Object.create(Person.prototype);
+```
+Object.create - 不调用构造函数, 原型prototype上不会存在`undefined`的属性，（构造函数中的属性不会存在于原型链上，除非原型链上定义了该属性/方法，例如`Person.prototype.sayhi = function(){}`）
+new - 调用构造函数, 但由于`Student.prototype = new Person();`没有传入参数，因此`Student.prototype.name === undefined`
+
+举个🌰
+{% jsfiddle HiiTea/cfy89tru js light 100% 450px %}
+可以看到，student的原型链上多了一个`age: undefined`属性
+![image](https://user-images.githubusercontent.com/36024221/46127882-8f360380-c264-11e8-82af-69f214fe66cc.png)
 
 ### 重写子类构造函数的意义
 `Student.prototype = new Person();`这一步完全改变了Student原型对象的引用，`Student.prototype.constructor` 变为了Person原型对象的constructor。
 个人觉得重写`Student.prototype.constructor = Student;`没有什么实际意义，可能只是**约定俗成的一种潜规则**。
 人们通常可能已经习惯了使用new操作符的时候，构造函数的一致性
-```
+```javascript
 // Student.prototype.constructor = Student; 在上面的代码中注释掉这一句
 var xiaobai = new Student('小白妹妹', 10);
 xiaobai.constructor; // Person
