@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    开发时如何使用本地npm包作为依赖 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="JavaScript是世界上第二好的语言😏">
+  
+  <meta name="keywords" content="
+  npm,local,link
+  ">
+  
+  <meta name="author" content="HiiTea">
+
+  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+  <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 51 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 151 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 19 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="{{moment(1526367679000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1526367679000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>开发时如何使用本地npm包作为依赖</h1>
+    <p>这个问题我已经遇到两次了。</p>
+<p>第一次是我发布了<a href="https://github.com/MoePlayer/react-aplayer" target="_blank" rel="noopener">react-aplayer</a>（第一次发布npm包，好紧张）,然后有人提issue说<code>npm install</code>后用不了。我自己在本地开发demo的时候是直接引用<code>./src</code>，没有试过真的当做一个package来使用，所以我用的时候是没问题的😅</p>
+<p>第二次就是我们有一个把所有API包起来的package，所有请求都添加到这个package里来做，于是除了要写主要的application还要维护这个package，需要测试这个package是否能够正常使用。</p>
+<p>根据Stackoverflow<a href="https://stackoverflow.com/questions/15806241/how-to-specify-local-modules-as-npm-package-dependencies" target="_blank" rel="noopener">^1</a>，在本地使用本地package作为dependency有很多方法可以实现，我经常用到的是<code>npm link</code>，暂时也还没有遇到什么奇奇怪怪的问题。</p>
+<p>官方的例子<a href="https://docs.npmjs.com/cli/link" target="_blank" rel="noopener">^2</a>已经说的很清楚了，这里就不赘述了<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/projects/node-redis    <span class="comment"># go into the package directory </span></span><br><span class="line">npm link                    <span class="comment"># creates global link 先在dependency里创建link</span></span><br><span class="line"><span class="built_in">cd</span> ~/projects/node-bloggy   <span class="comment"># go into some other package directory.</span></span><br><span class="line">npm link redis              <span class="comment"># link-install the package 然后在主项目里安装已连接的dependency</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3>
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://sabrinaluo.github.io/tech/2018/05/15/npm-local-pacakge-as-dependency/";
+    this.page.identifier = 1526367679;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hiitea-tech.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://sabrinaluo.github.io/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2018 HiiTea</li>
+      <li><a href="https://sabrinaluo.github.io/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+    <div class="footer-pageview">
+        <a href="https://info.flagcounter.com/mx4Y">
+          <img src="//s01.flagcounter.com/count/mx4Y/bg_FFFFFF/txt_000000/border_FFFFFF/columns_3/maxflags_9/viewers_3/labels_0/pageviews_1/flags_0/percent_0/">
+        </a>
+    </div>
+    
+  </footer>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>

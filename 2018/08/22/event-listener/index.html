@@ -103,19 +103,19 @@
         <a href="/tech/archives" class="header-toolbar-left"><i
                   class="fa fa-file-text"></i> Posts </a>
         <a href="/tech/archives"
-           class="header-toolbar-right"> 50 </a>
+           class="header-toolbar-right"> 51 </a>
       </li>
       <li>
         <a href="/tech/tags" class="header-toolbar-left"><i
                   class="fa fa-tags"></i> Tags </a>
         <a href="/tech/tags"
-           class="header-toolbar-right"> 148 </a>
+           class="header-toolbar-right"> 151 </a>
       </li>
       <li>
         <a href="/tech/categories" class="header-toolbar-left"><i
                   class="fa fa-folder-open"></i> Categories </a>
         <a href="/tech/categories"
-           class="header-toolbar-right"> 18 </a>
+           class="header-toolbar-right"> 19 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -179,9 +179,9 @@
 <p>另外需要注意的是，我们经常看到这样的写法：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(<span class="string">'click'</span>, myClickHandler, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
 <p>第三个参数并非一个<code>object</code>，而是一个<code>boolean</code>，这样的写法是为了兼容一些旧的浏览器，当使用这样的写法时，第三个参数<code>false</code>指代的是<code>capture</code>参数</p>
 <blockquote>
-<p>The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options’s capture.</p>
+<p>The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options’s capture. <a href="https://dom.spec.whatwg.org/#interface-eventtarget" target="_blank" rel="noopener">^7</a></p>
 </blockquote>
-<h3 id="IE"><a href="#IE" class="headerlink" title="IE"></a>IE</h3><p>IE9之前，没有<code>addEventListener</code>方法，需要使用<code>attachEvent</code>方法代替，该方法不接受第三个参数<a href="https://dom.spec.whatwg.org/#interface-eventtarget" target="_blank" rel="noopener">^7</a></p>
+<h3 id="IE"><a href="#IE" class="headerlink" title="IE"></a>IE</h3><p>IE9之前，没有<code>addEventListener</code>方法，需要使用<code>attachEvent</code>方法代替，该方法不接受第三个参数 <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener#Legacy_Internet_Explorer_and_attachEvent" target="_blank" rel="noopener">^8</a></p>
 <h2 id="removeListener"><a href="#removeListener" class="headerlink" title="removeListener"></a>removeListener</h2><blockquote>
 <p>While <code>addEventListener()</code> will let you add the same listener more than once for the same type if the options are different, the only option <code>removeEventListener()</code> checks is the capture/useCapture flag. Its value must match for <code>removeEventListener()</code> to match, but the other values don’t. <a href="https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/removeEventListener" target="_blank" rel="noopener">^9</a></p>
 </blockquote>
