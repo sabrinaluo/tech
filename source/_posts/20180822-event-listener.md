@@ -52,10 +52,10 @@ element.addEventListener('click', myClickHandler, false);
 ```
 第三个参数并非一个`object`，而是一个`boolean`，这样的写法是为了兼容一些旧的浏览器，当使用这样的写法时，第三个参数`false`指代的是`capture`参数
 
-> The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options’s capture.
+> The options argument sets listener-specific options. For compatibility this can be a boolean, in which case the method behaves exactly as if the value was specified as options’s capture. [^7]
 
 ### IE
-IE9之前，没有`addEventListener`方法，需要使用`attachEvent`方法代替，该方法不接受第三个参数[^7]
+IE9之前，没有`addEventListener`方法，需要使用`attachEvent`方法代替，该方法不接受第三个参数 [^8]
 
 ## removeListener
 > While `addEventListener()` will let you add the same listener more than once for the same type if the options are different, the only option `removeEventListener()` checks is the capture/useCapture flag. Its value must match for `removeEventListener()` to match, but the other values don't. [^9]
