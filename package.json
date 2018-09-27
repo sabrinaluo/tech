@@ -31,6 +31,6 @@
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-sass": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.0",
-    "hexo-server": "^0.3.2"
+    "hexo-server": "^0.3.3"
   }
 }
