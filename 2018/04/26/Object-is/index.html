@@ -157,7 +157,7 @@
 </blockquote>
 <p>以前没见过也没用过<code>Object.is</code>，查了一下发现是ES6的新语法<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is" target="_blank" rel="noopener">^2</a></p>
 <h3 id="Object-is-val1-val2"><a href="#Object-is-val1-val2" class="headerlink" title="Object.is(val1, val2)"></a><code>Object.is(val1, val2)</code></h3><p><code>Object.is</code>方法用于比较两个对象是否相同，与<code>==</code>和<code>===</code>是有一定区别的</p>
-<p>在使用<code>==</code>时，如果等号两边类型不同，js会先进行类型转换，再进行值的比较。<br>而使用<code>===</code>时，只要类型不同就为false<br><code>Object.is</code>在大多数情况下可以等同于<code>===</code>，但有两种情况除外</p>
+<p>在使用<code>==</code>时，如果等号两边类型不同，js会先进行类型转换，再进行值的比较。<br>而使用<code>===</code>时，只要类型不同就为false<br><code>Object.is</code>在大多数情况下可以等同于<code>===</code>，但有两种情况除外</p>
 <ul>
 <li><code>+0</code> / <code>-0</code> <ul>
 <li><code>===</code> 无法区分 <code>+0</code>和<code>-0</code></li>
