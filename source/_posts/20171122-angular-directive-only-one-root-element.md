@@ -12,7 +12,7 @@ category: AngularJS
 Error: [$compile:tplrt] Template for directive 'xxx' must have exactly one root element. 
 ```
 
-但有时候又发现别人写的指令超过一个根元素，却并没有报错，真是非常的confusing🤔
+但有时候又发现别人写的指令超过一个根元素，却并没有报错，真是非常的confusing🤔
 
 ### 文档
 官访文档在directive一节是找不到任何和replace有关的东西，后来是在$compile一节找到的，然而又已经弃用了……(又要感叹了，前端圈真特喵难混)

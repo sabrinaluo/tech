@@ -37,7 +37,7 @@ angular.module('docsScopeProblemExample', [])
 });
 ```
 
-Isolated scope 其实就是当你在directive里要return的那个object里，定义一个scope属性，这个`scope`会override controller中的`$scope`，从而实现isolated。
+Isolated scope 其实就是当你在directive里要return的那个object里，定义一个scope属性，这个`scope`会override controller中的`$scope`，从而实现isolated。
 ``` javascript
 angular.module('docsIsolateScopeDirective', [])
 .controller('Controller', ['$scope', function($scope) {
@@ -74,7 +74,7 @@ app.directive('myDirective', function(){
 
 需要注意的是，传入参数时，是没有花括号的
 ``` html
-<my-directive options="options"></my-directive>
+<my-directive options="options"></my-directive>
 ```
 
 #### `@` 单向绑定(one way binding)
@@ -82,8 +82,8 @@ app.directive('myDirective', function(){
 
 由于传入的是一个字符串，所以是需要花括号的，如下，假如父scope中`name='Lucy'`，第一个指令接收到的是`'name'`这个字符串，第二个指令接受的才是`'Lucy'`这个字符串
 ``` html
-<my-directive name="name"></my-directive>
-<my-directive name="{{name}}"></my-directive>
+<my-directive name="name"></my-directive>
+<my-directive name="{{name}}"></my-directive>
 ```
 
 #### `&` 绑定函数
@@ -93,7 +93,7 @@ app.directive('myDirective', function(){
 
 > Best Practice: use `&attr` in the `scope` option when you want your directive to expose an API for binding to behaviors.
 
-可以理解为传入一个**回调函数**给指令，指令触发该函数，但该函数并不定义在指令的scope中。因为如果该函数定义在directive的scope中，则逻辑是固定的，从外部传入的话，可以传入任意逻辑的函数。
+可以理解为传入一个**回调函数**给指令，指令触发该函数，但该函数并不定义在指令的scope中。因为如果该函数定义在directive的scope中，则逻辑是固定的，从外部传入的话，可以传入任意逻辑的函数。
 
 我的一些**Anti-pattern**
 - 关于函数绑定这个事，我通常直接用`=`绑定函数，也能用……但这个肯定有什么潜在的问题我没发现；  
