@@ -152,7 +152,7 @@
   <article class="post-content">
     <h1>git bisect 二分法查找问题commit</h1>
     <p>前几天刚看到一个git command: <code>git bisect</code>，万万没想到居然这么快就用上了，真是尴尬。更尴尬的是，debug了半天最后发现是自己的commit出问题😆</p>
-<p>在软件开发的过程中，由于测试覆盖率低，没时间回归测试等等原因，经常会遇到一种情况就是，某个feature明明前几天还好好的，不知道从什么时候开始就出Bug了……然后hmm，最笨的方法就是倒回去一个一个commit的checkout出来查找啦，稍微没那么笨的方法就是跟版本来查找，然后手动人工用二人分法（我以前就一直是这么做的，还以为自己很聪明呢，数commit数到头晕😂）</p>
+<p>在软件开发的过程中，由于测试覆盖率低，没时间回归测试等等原因，经常会遇到一种情况就是，某个feature明明前几天还好好的，不知道从什么时候开始就出Bug了……然后hmm，最笨的方法就是倒回去一个一个commit的checkout出来查找啦，稍微没那么笨的方法就是跟版本来查找，然后手动人工用二分法（我以前就一直是这么做的，还以为自己很聪明呢，数commit数到头晕😂）</p>
 <h2 id="git-bisect"><a href="#git-bisect" class="headerlink" title="git bisect"></a>git bisect</h2><blockquote>
 <p>This command uses a binary search algorithm to find which commit in your project’s history introduced a bug. <a href="https://git-scm.com/docs/git-bisect" target="_blank" rel="noopener">^1</a></p>
 </blockquote>
