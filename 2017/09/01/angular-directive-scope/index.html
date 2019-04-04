@@ -2,11 +2,10 @@
 <html lang="zh-CN">
 
 
-<head>
+<head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>
     Angular directive指令相关的scope问题(= @ &amp; ?) | 小白妹妹写代码
   </title>
@@ -18,13 +17,12 @@
   
   <meta name="author" content="HiiTea">
 
-  <meta http-equiv="Cache-Control" content="no-transform"/>
+  <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
 
   <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
   <link rel="stylesheet" href="/tech/css/main.css">
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -88,7 +86,7 @@
           <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
         </li>
         <li class="user-nav-logo">
-          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></a>
         </li>
       </ul>
     </div>
@@ -100,22 +98,16 @@
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
-        <a href="/tech/archives" class="header-toolbar-left"><i
-                  class="fa fa-file-text"></i> Posts </a>
-        <a href="/tech/archives"
-           class="header-toolbar-right"> 55 </a>
+        <a href="/tech/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives" class="header-toolbar-right"> 55 </a>
       </li>
       <li>
-        <a href="/tech/tags" class="header-toolbar-left"><i
-                  class="fa fa-tags"></i> Tags </a>
-        <a href="/tech/tags"
-           class="header-toolbar-right"> 162 </a>
+        <a href="/tech/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags" class="header-toolbar-right"> 162 </a>
       </li>
       <li>
-        <a href="/tech/categories" class="header-toolbar-left"><i
-                  class="fa fa-folder-open"></i> Categories </a>
-        <a href="/tech/categories"
-           class="header-toolbar-right"> 23 </a>
+        <a href="/tech/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories" class="header-toolbar-right"> 23 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -181,7 +173,7 @@
 <li><code>scope.callback({a:1,b:2,c:3})</code>的入参是一个<code>object</code></li>
 <li>如果是这样<code>scope.callback({a:1,b:2})</code>，则<code>c</code>的值会与<code>parentScope.c</code>相同。也就是说，如果<strong>子scope</strong>传入的<code>obj</code>中没有定义对应参数，各参数的默认值与<code>parentScope</code>中的对应值一致。如果<strong>父子scope</strong>中都没有定义相关参数，则为<code>undefined</code></li>
 </ul>
-<h4 id=""><a href="#" class="headerlink" title="?"></a><code>?</code></h4><p>问号这个挺简单的，跟glob啊，正则的里面的<code>?</code>意思相似，就是说该属性是否是必需选项，当有问号的时候，说明对应的属性可以省略，而不会报错<code>NON_ASSIGNABLE_MODEL_EXPRESSION</code></p>
+<h4 id><a href="#" class="headerlink" title="?"></a><code>?</code></h4><p>问号这个挺简单的，跟glob啊，正则的里面的<code>?</code>意思相似，就是说该属性是否是必需选项，当有问号的时候，说明对应的属性可以省略，而不会报错<code>NON_ASSIGNABLE_MODEL_EXPRESSION</code></p>
 <h3 id="无关感言"><a href="#无关感言" class="headerlink" title="无关感言"></a>无关感言</h3><p>我第一次知道AngularJS大约是3年前，除了学校的一些酱油小项目外完全没有任何开发经验，对于JS只知道jQuery却又要去找一份程序员的工作。面试的时候人家问我：会Angular吗？我：？？？当然是没有面上，回去之后到code school学完了入门课程，在官网学完了那个卖手机的demo。当然之后我也没有直接去做一份跟Angular有关的工作。</p>
 <p>如今，在我终于做着一份Angular1.x的工作时，Angular5都快发布了，（再次感叹，前端圈真难混），而我连TypeScript也还没学会，关于Angular的很多基本问题也还是云里雾里……但这并不妨碍我能写出能在生产环境使用的应用🙄，基础和工程经验这是没什么必然关系，（当然也可能是我天赋异禀而不自知🤣）。其实我现在是很不想写Angular1.x的，总觉得是非常outdated的东西，然而🤷‍</p>
 <p>另外，这篇真是50%以上都是抄袭官网…但是不抄根本记不住…</p>
