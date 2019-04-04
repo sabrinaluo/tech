@@ -164,19 +164,39 @@
     <li class="selected">
       <a href="/tech/">Overview</a></li>
     <li class="">
-      <a href="/tech/archives">Posts <span class="counter">54</span></a>
+      <a href="/tech/archives">Posts <span class="counter">55</span></a>
     </li>
     <li class="">
       <a href="/tech/categories">Categories <span
-                class="counter">22</span></a></li>
+                class="counter">23</span></a></li>
     <li class="">
-      <a href="/tech/tags">Tags <span class="counter">159</span></a></li>
+      <a href="/tech/tags">Tags <span class="counter">162</span></a></li>
   </ul>
 </nav>
 
     <div class="body-secondary">
       <p class="right-title">Recent post</p>
       <ul class="recent-post clearfix">
+        
+        <li class="recent-post-item">
+          <div class="clearfix">
+            <h5 class="post-title text-ellipsis">
+              <i class="fa fa-bars"></i>
+              <a href="/tech/2019/04/04/quick-sort/">快速排序</a>
+            </h5>
+            <p class="post-description text-ellipsis desktop-only">
+               算法渣渣的我，一直不理解，为什么我们要学排序算法，毕竟这么多年的前端工作中，没有什么是一句  Ar
+            </p>
+            <p class="post-info desktop-only">
+              <span>
+                
+                  <a class="category-link" href="/tech/categories/Algorithm/"><i class="fa fa-folder-open"></i> Algorithm</a>
+                
+              </span>
+              <span><i class="fa fa-tag"></i> 3 </span>
+            </p>
+          </div>
+        </li>
         
         <li class="recent-post-item">
           <div class="clearfix">
@@ -280,26 +300,6 @@
           </div>
         </li>
         
-        <li class="recent-post-item">
-          <div class="clearfix">
-            <h5 class="post-title text-ellipsis">
-              <i class="fa fa-bars"></i>
-              <a href="/tech/2018/05/21/fixup-and-auto-squash/">使用fixup和auto squash修改git commit</a>
-            </h5>
-            <p class="post-description text-ellipsis desktop-only">
-               在写程序的过程中，经常遇到一些刚提交了commit就发现有个错别字这种尴尬的情况，我以前的做法是 
-            </p>
-            <p class="post-info desktop-only">
-              <span>
-                
-                  <a class="category-link" href="/tech/categories/GIT/"><i class="fa fa-folder-open"></i> GIT</a>
-                
-              </span>
-              <span><i class="fa fa-tag"></i> 5 </span>
-            </p>
-          </div>
-        </li>
-        
       </ul>
       <div class="calendar-container" id="calendar">
   <div class="calendar">
@@ -387,7 +387,7 @@
 
 
 <script>
-  var posts = [{"date":"2018-04-26","title":"Object.is()","url":"https://sabrinaluo.github.io/tech/2018/04/26/Object-is/"},{"date":"2018-05-15","title":"开发时如何使用本地npm包作为依赖","url":"https://sabrinaluo.github.io/tech/2018/05/15/npm-local-pacakge-as-dependency/"},{"date":"2018-05-21","title":"使用fixup和auto squash修改git commit","url":"https://sabrinaluo.github.io/tech/2018/05/21/fixup-and-auto-squash/"},{"date":"2018-05-31","title":"如何延迟加载script(defer, async)","url":"https://sabrinaluo.github.io/tech/2018/05/31/script-defer-async/"},{"date":"2018-08-22","title":"关于eventListener的那些事","url":"https://sabrinaluo.github.io/tech/2018/08/22/event-listener/"},{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"}];
+  var posts = [{"date":"2018-04-26","title":"Object.is()","url":"https://sabrinaluo.github.io/tech/2018/04/26/Object-is/"},{"date":"2018-05-15","title":"开发时如何使用本地npm包作为依赖","url":"https://sabrinaluo.github.io/tech/2018/05/15/npm-local-pacakge-as-dependency/"},{"date":"2018-05-21","title":"使用fixup和auto squash修改git commit","url":"https://sabrinaluo.github.io/tech/2018/05/21/fixup-and-auto-squash/"},{"date":"2018-05-31","title":"如何延迟加载script(defer, async)","url":"https://sabrinaluo.github.io/tech/2018/05/31/script-defer-async/"},{"date":"2018-08-22","title":"关于eventListener的那些事","url":"https://sabrinaluo.github.io/tech/2018/08/22/event-listener/"},{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"},{"date":"2019-04-04","title":"快速排序","url":"https://sabrinaluo.github.io/tech/2019/04/04/quick-sort/"}];
   var today = moment().format('YYYY-MM-DD');
   var oneYearAgo = moment(today).subtract(1, 'years');
   posts = posts.filter(function(post) {
