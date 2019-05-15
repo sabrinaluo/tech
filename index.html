@@ -15,6 +15,9 @@
 
   <meta http-equiv="Cache-Control" content="no-transform">
   <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
 
   <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
   <link rel="stylesheet" href="/tech/css/main.css">
@@ -162,7 +165,7 @@
     <li class="selected">
       <a href="/tech/">Overview</a></li>
     <li class>
-      <a href="/tech/archives">Posts <span class="counter">55</span></a>
+      <a href="/tech/archives">Posts <span class="counter">56</span></a>
     </li>
     <li class>
       <a href="/tech/categories">Categories <span class="counter">23</span></a></li>
@@ -174,6 +177,26 @@
     <div class="body-secondary">
       <p class="right-title">Recent post</p>
       <ul class="recent-post clearfix">
+        
+        <li class="recent-post-item">
+          <div class="clearfix">
+            <h5 class="post-title text-ellipsis">
+              <i class="fa fa-bars"></i>
+              <a href="/tech/2019/05/15/git-rewrite-history/">git重写历史</a>
+            </h5>
+            <p class="post-description text-ellipsis desktop-only">
+               前几天在家写公司的代码，自己电脑上git全局设置用的是私人邮箱，太懒了懒得改，直接commit以后
+            </p>
+            <p class="post-info desktop-only">
+              <span>
+                
+                  <a class="category-link" href="/tech/categories/git/"><i class="fa fa-folder-open"></i> git</a>
+                
+              </span>
+              <span><i class="fa fa-tag"></i> 1 </span>
+            </p>
+          </div>
+        </li>
         
         <li class="recent-post-item">
           <div class="clearfix">
@@ -277,26 +300,6 @@
           </div>
         </li>
         
-        <li class="recent-post-item">
-          <div class="clearfix">
-            <h5 class="post-title text-ellipsis">
-              <i class="fa fa-bars"></i>
-              <a href="/tech/2018/05/31/script-defer-async/">如何延迟加载script(defer, async)</a>
-            </h5>
-            <p class="post-description text-ellipsis desktop-only">
-                &amp;lt;script&amp;gt; 的下载和执行都会阻塞页面渲染，因此大多数情况下，我们都把 &amp;lt;
-            </p>
-            <p class="post-info desktop-only">
-              <span>
-                
-                  <a class="category-link" href="/tech/categories/HTML/"><i class="fa fa-folder-open"></i> HTML</a>
-                
-              </span>
-              <span><i class="fa fa-tag"></i> 5 </span>
-            </p>
-          </div>
-        </li>
-        
       </ul>
       <div class="calendar-container" id="calendar">
   <div class="calendar">
@@ -366,7 +369,7 @@
 
 
 <script>
-  var posts = [{"date":"2018-04-26","title":"Object.is()","url":"https://sabrinaluo.github.io/tech/2018/04/26/Object-is/"},{"date":"2018-05-15","title":"开发时如何使用本地npm包作为依赖","url":"https://sabrinaluo.github.io/tech/2018/05/15/npm-local-pacakge-as-dependency/"},{"date":"2018-05-21","title":"使用fixup和auto squash修改git commit","url":"https://sabrinaluo.github.io/tech/2018/05/21/fixup-and-auto-squash/"},{"date":"2018-05-31","title":"如何延迟加载script(defer, async)","url":"https://sabrinaluo.github.io/tech/2018/05/31/script-defer-async/"},{"date":"2018-08-22","title":"关于eventListener的那些事","url":"https://sabrinaluo.github.io/tech/2018/08/22/event-listener/"},{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"},{"date":"2019-04-04","title":"快速排序","url":"https://sabrinaluo.github.io/tech/2019/04/04/quick-sort/"}];
+  var posts = [{"date":"2018-05-21","title":"使用fixup和auto squash修改git commit","url":"https://sabrinaluo.github.io/tech/2018/05/21/fixup-and-auto-squash/"},{"date":"2018-05-31","title":"如何延迟加载script(defer, async)","url":"https://sabrinaluo.github.io/tech/2018/05/31/script-defer-async/"},{"date":"2018-08-22","title":"关于eventListener的那些事","url":"https://sabrinaluo.github.io/tech/2018/08/22/event-listener/"},{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"},{"date":"2019-04-04","title":"快速排序","url":"https://sabrinaluo.github.io/tech/2019/04/04/quick-sort/"},{"date":"2019-05-15","title":"git重写历史","url":"https://sabrinaluo.github.io/tech/2019/05/15/git-rewrite-history/"}];
   var today = moment().format('YYYY-MM-DD');
   var oneYearAgo = moment(today).subtract(1, 'years');
   posts = posts.filter(function(post) {
