@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -89,7 +89,7 @@
           <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
         </li>
         <li class="user-nav-logo">
-          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></a>
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
         </li>
       </ul>
     </div>
@@ -101,16 +101,22 @@
   <div class="container header-site-detail">
     <ul class="header-toolbar">
       <li class="clearfix">
-        <a href="/tech/archives" class="header-toolbar-left"><i class="fa fa-file-text"></i> Posts </a>
-        <a href="/tech/archives" class="header-toolbar-right"> 56 </a>
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 56 </a>
       </li>
       <li>
-        <a href="/tech/tags" class="header-toolbar-left"><i class="fa fa-tags"></i> Tags </a>
-        <a href="/tech/tags" class="header-toolbar-right"> 162 </a>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 162 </a>
       </li>
       <li>
-        <a href="/tech/categories" class="header-toolbar-left"><i class="fa fa-folder-open"></i> Categories </a>
-        <a href="/tech/categories" class="header-toolbar-right"> 23 </a>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 23 </a>
       </li>
     </ul>
     <h2 class="header-title">
@@ -151,8 +157,8 @@
 <h3 id="修改多个commit的提交信息"><a href="#修改多个commit的提交信息" class="headerlink" title="修改多个commit的提交信息"></a>修改多个commit的提交信息</h3><p>如果是要调整顺序啊之类的需求，都知道要用<code>git rebase -i</code>啦，弹出的编辑窗口中，以前只会用<code>pick</code> <code>squash</code> <code>fixup</code> <code>drop</code>，其他的基本上不清楚不了解不关心…那么怎么修改作者呢？</p>
 <ol>
 <li>把需要修改的commit前面改成<code>edit</code>并保存</li>
-<li>之后cmd就会跳到最早的那个commit，<code>git commit --amend --no--edit --author &quot;aa &lt;aa@aa.com&gt;&quot;</code> (using the standard <code>A U Thor &lt;author@example.com&gt;</code> format)[^1]</li>
-<li><code>git rebase --continue</code> 然后会跳到下一个刚刚标记为<code>edit</code>的commit，重复第二步，知道所有commit都修改完成即可</li>
+<li>之后cmd就会跳到最早的那个commit，<code>git commit --amend --no--edit --author &quot;aa &lt;aa@aa.com&gt;&quot;</code> (using the standard <code>A U Thor &lt;author@example.com&gt;</code> format)<a href="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorltauthorgt" target="_blank" rel="noopener">^1</a></li>
+<li><code>git rebase --continue</code> 然后会跳到下一个刚刚标记为<code>edit</code>的commit，重复第二步，直到所有commit都修改完成即可</li>
 </ol>
 <p>p.s. 刚刚上面提到，要使用<code>A U Thor &lt;author@example.com&gt;</code>格式，这到底是什么鬼格式呢？根本搜不到什么是<code>A U Thor</code>, 测试了一下，大概应该是说：</p>
 <ul>

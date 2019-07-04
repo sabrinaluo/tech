@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
 
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -85,7 +85,7 @@
           <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
         </li>
         <li class="user-nav-logo">
-          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></a>
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
         </li>
       </ul>
     </div>
@@ -164,12 +164,13 @@
   <ul class="clearfix">
     <li class="selected">
       <a href="/tech/">Overview</a></li>
-    <li class>
+    <li class="">
       <a href="/tech/archives">Posts <span class="counter">56</span></a>
     </li>
-    <li class>
-      <a href="/tech/categories">Categories <span class="counter">23</span></a></li>
-    <li class>
+    <li class="">
+      <a href="/tech/categories">Categories <span
+                class="counter">23</span></a></li>
+    <li class="">
       <a href="/tech/tags">Tags <span class="counter">162</span></a></li>
   </ul>
 </nav>
@@ -311,27 +312,45 @@
         <svg width="676" height="104" @mouseout="mouseoverDate=null">
           <g transform="translate(16, 20)">
             <g v-for="week in calendar" :transform="week.transform">
-              <rect v-for="day in week.days" :x="day.x" :y="day.y" :fill="day.fill" @click="selectedDate=day.date" @mouseover="mouseoverDate=day.date" :class="{active:selectedDate===day.date}" data-count="{{day.posts.length}}" data-date="{{day.date}}" class="day" width="10" height="10"/>
+              <rect v-for="day in week.days"
+                    :x="day.x"
+                    :y="day.y"
+                    :fill="day.fill"
+                    @click="selectedDate=day.date"
+                    @mouseover="mouseoverDate=day.date"
+                    :class="{active:selectedDate===day.date}"
+                    data-count="{{day.posts.length}}"
+                    data-date="{{day.date}}"
+                    class="day" width="10" height="10"
+              ></rect>
             </g>
 
-            <text v-for="month in monthLabels" :x="month.x" y="-5" class="month">{{month.text}}
+            <text v-for="month in monthLabels"
+                  :x="month.x"
+                  y="-5"
+                  class="month">{{month.text}}
             </text>
 
 
-            <text text-anchor="start" class="wday" dx="-14" dy="8" style="display: none;">S
+            <text text-anchor="start" class="wday" dx="-14" dy="8"
+                  style="display: none;">S
             </text>
             <text text-anchor="start" class="wday" dx="-14" dy="20">Mon</text>
-            <text text-anchor="start" class="wday" dx="-14" dy="32" style="display: none;">T
+            <text text-anchor="start" class="wday" dx="-14" dy="32"
+                  style="display: none;">T
             </text>
             <text text-anchor="start" class="wday" dx="-14" dy="44">Wed</text>
-            <text text-anchor="start" class="wday" dx="-14" dy="57" style="display: none;">T
+            <text text-anchor="start" class="wday" dx="-14" dy="57"
+                  style="display: none;">T
             </text>
             <text text-anchor="start" class="wday" dx="-14" dy="69">Fri</text>
-            <text text-anchor="start" class="wday" dx="-14" dy="81" style="display: none;">S
+            <text text-anchor="start" class="wday" dx="-14" dy="81"
+                  style="display: none;">S
             </text>
           </g>
         </svg>
-        <div class="svg-tip svg-tip-one-line" v-bind:style="{ top: svgtip.top, left: svgtip.left, display: svgtip.display}">
+        <div class="svg-tip svg-tip-one-line"
+             v-bind:style="{ top: svgtip.top, left: svgtip.left, display: svgtip.display}">
           <strong>{{svgtip.text}}</strong> on
           {{moment(mouseoverDate).format('MMM DD, YYYY')}}
         </div>
@@ -369,7 +388,7 @@
 
 
 <script>
-  var posts = [{"date":"2018-05-21","title":"使用fixup和auto squash修改git commit","url":"https://sabrinaluo.github.io/tech/2018/05/21/fixup-and-auto-squash/"},{"date":"2018-05-31","title":"如何延迟加载script(defer, async)","url":"https://sabrinaluo.github.io/tech/2018/05/31/script-defer-async/"},{"date":"2018-08-22","title":"关于eventListener的那些事","url":"https://sabrinaluo.github.io/tech/2018/08/22/event-listener/"},{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"},{"date":"2019-04-04","title":"快速排序","url":"https://sabrinaluo.github.io/tech/2019/04/04/quick-sort/"},{"date":"2019-05-15","title":"git重写历史","url":"https://sabrinaluo.github.io/tech/2019/05/15/git-rewrite-history/"}];
+  var posts = [{"date":"2018-08-22","title":"关于eventListener的那些事","url":"https://sabrinaluo.github.io/tech/2018/08/22/event-listener/"},{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"},{"date":"2019-04-04","title":"快速排序","url":"https://sabrinaluo.github.io/tech/2019/04/04/quick-sort/"},{"date":"2019-05-15","title":"git重写历史","url":"https://sabrinaluo.github.io/tech/2019/05/15/git-rewrite-history/"}];
   var today = moment().format('YYYY-MM-DD');
   var oneYearAgo = moment(today).subtract(1, 'years');
   posts = posts.filter(function(post) {
