@@ -12,7 +12,7 @@ category: git
 如果是要调整顺序啊之类的需求，都知道要用`git rebase -i`啦，弹出的编辑窗口中，以前只会用`pick` `squash` `fixup` `drop`，其他的基本上不清楚不了解不关心…那么怎么修改作者呢？
 1. 把需要修改的commit前面改成`edit`并保存
 2. 之后cmd就会跳到最早的那个commit，`git commit --amend --no--edit --author "aa <aa@aa.com>"` (using the standard `A U Thor <author@example.com>` format)[^1]
-3. `git rebase --continue` 然后会跳到下一个刚刚标记为`edit`的commit，重复第二步，知道所有commit都修改完成即可
+3. `git rebase --continue` 然后会跳到下一个刚刚标记为`edit`的commit，重复第二步，直到所有commit都修改完成即可
 
 p.s. 刚刚上面提到，要使用`A U Thor <author@example.com>`格式，这到底是什么鬼格式呢？根本搜不到什么是`A U Thor`, 测试了一下，大概应该是说：
 - first name, second name, last name之间用空格隔开
@@ -31,4 +31,4 @@ $ git config --local user.email johndoe@example.com
 设置好之后，还是需要根据刚才的3个step，其中1，3步都相同，只是第二步的步骤改成`git commit --amend --no-edit --reset-author`即可
 
 
-[1]: https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorltauthorgt
+[^1]: https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---authorltauthorgt
