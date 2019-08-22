@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>
+    css selector 选择器 | 小白妹妹写代码
+  </title>
+  <meta name="description" content="JavaScript是世界上第二好的语言😏">
+  
+  <meta name="keywords" content="
+  css,css selector,面试复习
+  ">
+  
+  <meta name="author" content="HiiTea">
+
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+  <meta name="theme-color" content="#1e2327">
+  <link rel="apple-touch-icon" href="https://github.githubassets.com/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://github.githubassets.com/apple-touch-icon-180x180.png">
+
+  <link rel="icon" type="image/x-icon" href="https://github.githubassets.com/favicon.ico">
+  <link rel="stylesheet" href="/tech/css/main.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-52574938-4', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  
+<script>
+  var _hmt = _hmt || [];
+  (function(){var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?d8749b933af749e1e5ec931bb403628f";
+    var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();
+</script>
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/vue/1.0.25-csp/vue.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+</head>
+
+<body id="replica-app">
+
+<nav class="navbar-wrapper">
+  <div class="navbar">
+    <div class="container clearfix">
+      <a href="/tech/" class="navbar-logo"><i class="fa fa-github"></i></a>
+
+      <div class="navbar-search float-left desktop-only">
+        <div class="navbar-search-form">
+          <label for="gsc-i-id1">This website</label>
+          <div id="google-search">
+            <gcse:search></gcse:search>
+          </div>
+        </div>
+      </div>
+
+      <ul class="navbar-nav float-left">
+        
+        <li><a href="/tech/archives">Archives</a></li>
+        
+        
+        <li><a href="/tech/categories">Categories</a></li>
+        
+        
+        <li><a href="/tech/tags">Tags</a></li>
+        
+        
+        <li class="desktop-only"><a href="/tech/atom.xml" target="_blank">RSS</a></li>
+        
+      </ul>
+
+      <ul class="navbar-nav user-nav float-right desktop-only">
+        <li class="user-nav-notification">
+          <a><span class="user-nav-unread"></span><i class="fa fa-bell"></i></a>
+        </li>
+        <li>
+          <a><i class="fa fa-plus"></i> <i class="fa fa-caret-down"></i></a>
+        </li>
+        <li class="user-nav-logo">
+          <a><img src="https://avatars2.githubusercontent.com/u/5300359?v=4&amp;s=460"> <i class="fa fa-caret-down"></i></i></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="main-container">
+  <header class="header-wrapper desktop-only">
+  <div class="container header-site-detail">
+    <ul class="header-toolbar">
+      <li class="clearfix">
+        <a href="/tech/archives" class="header-toolbar-left"><i
+                  class="fa fa-file-text"></i> Posts </a>
+        <a href="/tech/archives"
+           class="header-toolbar-right"> 57 </a>
+      </li>
+      <li>
+        <a href="/tech/tags" class="header-toolbar-left"><i
+                  class="fa fa-tags"></i> Tags </a>
+        <a href="/tech/tags"
+           class="header-toolbar-right"> 164 </a>
+      </li>
+      <li>
+        <a href="/tech/categories" class="header-toolbar-left"><i
+                  class="fa fa-folder-open"></i> Categories </a>
+        <a href="/tech/categories"
+           class="header-toolbar-right"> 23 </a>
+      </li>
+    </ul>
+    <h2 class="header-title">
+      <i class="fa fa-book text-muted"></i>
+      <a href="/tech/">小白妹妹写代码</a>
+      
+      
+    </h2>
+  </div>
+
+  <div class="container">
+    <div class="header-tab-wrapper clearfix">
+      <span class="header-tab header-tab-selected"><i class="fa fa-thumbs-o-up"></i> Like</span>
+      <span class="header-tab"><i class="fa fa-share-alt"></i> Share</span>
+      <span class="header-tab"><i class="fa fa-comments-o"></i> Discussion</span>
+      <span class="header-tab"><i class="fa fa-bookmark-o"></i> Bookmark </span>
+      <span class="header-tab"><i class="fa fa-smile-o"></i> Smile <i class="fa fa-caret-down"></i></span>
+    </div>
+  </div>
+</header>
+
+
+<div class="post-container container">
+  <h3>
+    <i class="fa fa-user-o"></i>
+    HiiTea
+
+    <span class="post-date float-right" title="{{moment(1566487410000).format('MMM DD, YYYY, h:mm:ss A')}}">
+      <i class="fa fa-pencil-square-o"></i>
+      {{moment(1566487410000).fromNow()}}
+    </span>
+  </h3>
+
+  <article class="post-content">
+    <h1>css selector 选择器</h1>
+    <p>写了快两年 <code>styled-components</code> 的本宝宝，压根就用不到什么选择器了。可想而知那帮搞出 css-in-js 的工程师肯定都是不喜欢没逻辑的 css。</p>
+<p>我来复习复习，css选择器是面试大概率会问的问题吧😝</p>
+<h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>选择器</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element</td>
+<td>element</td>
+<td>e.g. <code>div</code></td>
+</tr>
+<tr>
+<td>id</td>
+<td>#</td>
+<td></td>
+</tr>
+<tr>
+<td>class</td>
+<td>.</td>
+<td>e.g. <code>.btn</code></td>
+</tr>
+<tr>
+<td>全部</td>
+<td>*</td>
+</tr>
+</tbody>
+</table>
+<h4 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h4><p>属性选择器有以下几种语法，一般也就前两个比较常用</p>
+<ol>
+<li><code>[attr]</code> 所有包含 attr 属性的元素</li>
+<li><code>[attr=value]</code> 属性等于 xx 的元素，e.g. <code>a[target=&quot;_blank&quot;]</code></li>
+<li><code>[attr~=value]</code> 属性包含 xx 完整“单词”的元素，xx必须是完整的<strong>“单词”</strong>，与其他用空格分开，e.g. <code>[class~=top]</code> 将会选中<code>class=&quot;abc top&quot;</code>，但不会选中<code>class=&quot;abc ttoppic&quot;</code></li>
+<li><code>[attr|=value]</code> 属性由 xx 开始的元素，e.g. <code>[class|=top]</code>，将会选中类似<code>class=&quot;top&quot;</code> <code>class=&quot;top-btn&quot;</code>的元素，value必须是一个完整的<strong>“单词”</strong>，在这个选择器下，<code>class=&quot;topic&quot;</code><strong>不会被选中</strong></li>
+<li><code>[attr^=value]</code> 以 xx 开始的元素，类似正则<br>6.<code>[attr$=value]</code> 以 xx 结尾的元素，类似正则</li>
+<li><code>[attr*=value]</code> 包含 xx 的元素，与上面例3不同，e.g. <code>[class*=top]</code> 将会选中<code>class=&quot;abc top&quot;</code> 以及<code>class=&quot;abc ttoppic&quot;</code></li>
+</ol>
+<p>学习了以上，就会有关于<strong>引号</strong>的问题，有时候见到属性选择器中的value是有引号的，有时候又是没有引号的。关于引号的问题，css中有一套规则，满足规则的情况下可以不使用引号，否则则需要使用<a href="https://stackoverflow.com/a/5578880/3821392" target="_blank" rel="noopener">^3</a>。通常情况下，为了保险起见，就全都加上引号吧。</p>
+<h3 id="结合选择器-Combinators"><a href="#结合选择器-Combinators" class="headerlink" title="结合选择器 Combinators"></a>结合选择器 Combinators</h3><table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>英文</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>div p</code></td>
+<td>desendant combinator</td>
+<td>div 里的所有 p</td>
+</tr>
+<tr>
+<td><code>div &gt; p</code></td>
+<td>child combinator</td>
+<td>div的直接孩子p，direct child</td>
+</tr>
+<tr>
+<td><code>div + p</code></td>
+<td>adjacent sibling combinator</td>
+<td>同一层级兄弟选择器，紧跟div的p，</td>
+</tr>
+<tr>
+<td><code>div ~ p</code></td>
+<td>general sibling combinator</td>
+<td>div的所有兄弟p</td>
+</tr>
+</tbody>
+</table>
+<h3 id="伪类-Pseudo-class-4"><a href="#伪类-Pseudo-class-4" class="headerlink" title="伪类 Pseudo-class^4"></a>伪类 Pseudo-class<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes" target="_blank" rel="noopener">^4</a></h3><p>比较常用的伪类有<code>a:link,a:hover,a:visited</code>,<code>button:focus</code>, 各种child系列<code>:first-child, :last-child, :nth-child()</code></p>
+<h3 id="伪元素-Pseudo-element"><a href="#伪元素-Pseudo-element" class="headerlink" title="伪元素 Pseudo-element"></a>伪元素 Pseudo-element</h3><p>比较常用的有<code>::before ::after</code></p>
+<p>第一次知道居然还有这种 <code>p::first-line</code> 和这种 <code>p::first-letter</code>!简直不可思议，以及看到这两个伪元素的时候，在一次convince了<strong>很多事情其实并不需要js，css就完全可以搞定了！</strong></p>
+<p>关于伪元素的冒号问题<code>::</code>，平时写styled-component不管是伪类还是伪元素，都写一个冒号，但是有时候会看到有的地方是两个冒号🤔。简单的来说<a href="https://css-tricks.com/to-double-colon-or-not-do-double-colon/" target="_blank" rel="noopener">^5</a></p>
+<ul>
+<li>历史原因，CSS2中所有都是一个冒号，CSS3中一个冒号是伪类，两个冒号是伪元素</li>
+<li>在现代浏览器（&gt;IE8）中一个冒号是伪类，两个冒号是伪元素</li>
+<li>由于大量网页仍然使用旧的写法，浏览器为了向后兼容，所以伪元素可以使用一个冒号或两个冒号，两种都可以</li>
+</ul>
+<p>虽然写一个冒号可以减少一个字节，但是如果应用本身并不兼容IE8及以下，那么为了让代码更清晰，个人偏向于伪元素应该使用两个冒号。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>[1] <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors</a><br>[2] <a href="https://www.w3schools.com/css/css_attribute_selectors.asp" target="_blank" rel="noopener">https://www.w3schools.com/css/css_attribute_selectors.asp</a><br>[3] <a href="https://stackoverflow.com/a/5578880/3821392" target="_blank" rel="noopener">https://stackoverflow.com/a/5578880/3821392</a></p>
+
+  </article>
+</div>
+
+
+    
+<div class="container disqus-container">
+  <div id="disqus_thread"></div>
+</div>
+
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://sabrinaluo.github.io/tech/2019/08/22/css-selector/";
+    this.page.identifier = 1566487410;
+  };
+
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://hiitea-tech.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+
+
+
+
+
+</div>
+
+<div class="footer-wrapper container">
+  <footer class="footer clearfix">
+    <div class="clearfix">
+    <a href="https://sabrinaluo.github.io/tech" class="footer-logo">
+      <i class="fa fa-github"></i>
+    </a>
+    <ul class="footer-social-link">
+      <li>© 2019 HiiTea</li>
+      <li><a href="https://sabrinaluo.github.io/tech">Home</a></li>
+      
+      <li><a href="https://github.com/sabrinaluo">Github</a></li>
+      
+      <li><a href="http://weibo.com/206663121">Weibo</a></li>
+      
+    </ul>
+    <div class="footer-theme-info">
+      Theme <a href="//github.com/sabrinaluo/hexo-theme-replica">Replica</a>
+      by <a href="//github.com/sabrinaluo">Hiitea</a> ❤ Powered by Hexo
+    </div>
+    </div>
+    
+    <div class="footer-pageview">
+        <a href="https://info.flagcounter.com/mx4Y">
+          <img src="//s01.flagcounter.com/count/mx4Y/bg_FFFFFF/txt_000000/border_FFFFFF/columns_3/maxflags_9/viewers_3/labels_0/pageviews_1/flags_0/percent_0/">
+        </a>
+    </div>
+    
+  </footer>
+</div>
+
+
+<script>
+  (function() {
+    var cx = '015579750388200492852:dnpv83myu4a';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+      '//cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+<script src="/tech/js/main.js"></script>
+
+</body>
+</html>

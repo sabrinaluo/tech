@@ -165,19 +165,39 @@
     <li class="selected">
       <a href="/tech/">Overview</a></li>
     <li class="">
-      <a href="/tech/archives">Posts <span class="counter">56</span></a>
+      <a href="/tech/archives">Posts <span class="counter">57</span></a>
     </li>
     <li class="">
       <a href="/tech/categories">Categories <span
                 class="counter">23</span></a></li>
     <li class="">
-      <a href="/tech/tags">Tags <span class="counter">162</span></a></li>
+      <a href="/tech/tags">Tags <span class="counter">164</span></a></li>
   </ul>
 </nav>
 
     <div class="body-secondary">
       <p class="right-title">Recent post</p>
       <ul class="recent-post clearfix">
+        
+        <li class="recent-post-item">
+          <div class="clearfix">
+            <h5 class="post-title text-ellipsis">
+              <i class="fa fa-bars"></i>
+              <a href="/tech/2019/08/22/css-selector/">css selector 选择器</a>
+            </h5>
+            <p class="post-description text-ellipsis desktop-only">
+               写了快两年  styled-components  的本宝宝，压根就用不到什么选择器了。可想而知那
+            </p>
+            <p class="post-info desktop-only">
+              <span>
+                
+                  <a class="category-link" href="/tech/categories/css/"><i class="fa fa-folder-open"></i> css</a>
+                
+              </span>
+              <span><i class="fa fa-tag"></i> 3 </span>
+            </p>
+          </div>
+        </li>
         
         <li class="recent-post-item">
           <div class="clearfix">
@@ -280,27 +300,6 @@
           </div>
         </li>
         
-        <li class="recent-post-item">
-          <div class="clearfix">
-            <h5 class="post-title text-ellipsis">
-              <i class="fa fa-bars"></i>
-              <a href="/tech/2018/08/22/event-listener/">关于eventListener的那些事</a>
-            </h5>
-            <p class="post-description text-ellipsis desktop-only">
-               
- If multiple identical  EventListeners  are regi
-            </p>
-            <p class="post-info desktop-only">
-              <span>
-                
-                  <a class="category-link" href="/tech/categories/WebAPI/"><i class="fa fa-folder-open"></i> WebAPI</a>
-                
-              </span>
-              <span><i class="fa fa-tag"></i> 5 </span>
-            </p>
-          </div>
-        </li>
-        
       </ul>
       <div class="calendar-container" id="calendar">
   <div class="calendar">
@@ -388,7 +387,7 @@
 
 
 <script>
-  var posts = [{"date":"2018-08-22","title":"关于eventListener的那些事","url":"https://sabrinaluo.github.io/tech/2018/08/22/event-listener/"},{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"},{"date":"2019-04-04","title":"快速排序","url":"https://sabrinaluo.github.io/tech/2019/04/04/quick-sort/"},{"date":"2019-05-15","title":"git重写历史","url":"https://sabrinaluo.github.io/tech/2019/05/15/git-rewrite-history/"}];
+  var posts = [{"date":"2018-11-20","title":"取模(mod)和取余(rem) 在数学和计算机中的不同","url":"https://sabrinaluo.github.io/tech/2018/11/20/remainder-and-modulo/"},{"date":"2018-11-29","title":"git bisect 二分法查找问题commit","url":"https://sabrinaluo.github.io/tech/2018/11/29/git-bisect/"},{"date":"2019-03-29","title":"css长度单位及font-size","url":"https://sabrinaluo.github.io/tech/2019/03/29/css-length/"},{"date":"2019-04-04","title":"快速排序","url":"https://sabrinaluo.github.io/tech/2019/04/04/quick-sort/"},{"date":"2019-05-15","title":"git重写历史","url":"https://sabrinaluo.github.io/tech/2019/05/15/git-rewrite-history/"},{"date":"2019-08-22","title":"css selector 选择器","url":"https://sabrinaluo.github.io/tech/2019/08/22/css-selector/"}];
   var today = moment().format('YYYY-MM-DD');
   var oneYearAgo = moment(today).subtract(1, 'years');
   posts = posts.filter(function(post) {
