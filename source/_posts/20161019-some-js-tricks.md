@@ -2,40 +2,50 @@
 title: 一些js小技巧
 date: 2016-10-19 15:08:33
 tags: [js, tricks, js小技巧]
-categories: JS
+category: JS
 ---
-一直以为这篇已经发过了，结果前两天搜的时候发现搜不到。一直扔在草稿里，今天整理一下之前和最近学到的一些JS小技巧
+
+一直以为这篇已经发过了，结果前两天搜的时候发现搜不到。一直扔在草稿里，今天整理一下之前和最近学到的一些 JS 小技巧
 
 ### 利用位运算取整
+
 利用位运算，与、或、异或、左右移位，`&` `|` `^` `>>` `>>>` `<<` ，舍去小数点后的数字[^1][^2]，[jsPerf](http://jsperf.com/coercion-vs-casting/3)
+
 ```
 var a = 6.54321;
 console.log(a | 0); //6
 console.log(a & 0); //6
 ```
+
 > 按位**非非**运算也是可以的，所以你也可以用**呻吟号**把代码写成这样`~~a`
 
 ### + 字符串转换为数字
+
 利用加号 `+` 将数字字符串转换为数字类型
+
 ```
 var a = "56789";
 var b = +a;
 console.log(typeof b); //number
 console.log(b); //56789
 ```
+
 > - 只能是十进制
+
 - 如果`a`是非数字字符串，则会返回`NaN`
 
 ### !! 强制转换为布林类型
+
 利用`!!`将变量类型强制转换为`boolean`类型
 
-``` 
+```
 var a=123;
 typeof a; //nmuber
 typeof !!a; //boolean
 ```
 
 ### 避免`can not read property ‘xxx’ of null`的小技巧
+
 经常会遇到的一个情况是下面的代码会报错`can not read property 'c' of null`
 
 ```
@@ -64,7 +74,7 @@ if(((a||{}).b||{}).c === 1){
 
 ```
 function abc(a, b){
-    a = a || 1; 
+    a = a || 1;
     b = b || 2;
 
     return a + b;
