@@ -19,7 +19,7 @@ category: GIT
 
 首先在根文件夹`~`下创建一个`.gitignore_global`文件，（也可以在其他文件夹创建，但通常习惯于根文件夹下），然后运行以下命令：
 
-```
+```bash
 git config --global core.excludesfile ~/.gitignore_global
 ```
 

@@ -7,11 +7,11 @@ category: JS
 
 昨天无聊在 github 上看代码，看到如下片段，反正看不太懂这是在干啥，但这就是传说中的闭包了…
 
-```
+```js
 function isType(type) {
-  return function(obj) {
-    return {}.toString.call(obj) === '[object ' + type + ']'
-  }
+  return function (obj) {
+    return {}.toString.call(obj) === '[object ' + type + ']';
+  };
 }
 ```
 
@@ -23,11 +23,11 @@ _以上来自目测是个阿里女神的 repo: [utilx](https://github.com/fool2f
 
 ###闭包长什么样子？
 
-```
-function bibao(a){
-  return function(b){
-    return a+b;
-  }
+```js
+function bibao(a) {
+  return function (b) {
+    return a + b;
+  };
 }
 ```
 
@@ -63,10 +63,10 @@ var text = bibao('你好')('小白妹妹')
 
 大多数情况下，都是像例 1 一样，分开两次传入参数的。当你分开传的时候，第一次传入参数`a`，也就是`var hello = bibao('你好');`其实等于：
 
-```
-var hello = function(b){
-  return '你好'+b;
-}
+```js
+var hello = function (b) {
+  return '你好' + b;
+};
 ```
 
 所以当你给`hello()`传入参数`b`的时候，`var text = hello('小白妹妹')`，返回的是“你好小白妹妹”。也就等于说，当你在调用`hello()`这个函数的时候，其实访问到了 bibao()这个函数中的变量`a`，值为'你好'。
@@ -79,50 +79,50 @@ var hello = function(b){
 假如我的老板认识了一大堆妹子，要我写个程序跟她们每个人说早安、午安、晚安，并告诉他们昨天是几号，最后还要问候他的老婆，“吃饭了吗？亲爱的”
 通常我会这么实现：
 
-```
-function yesterday(){
- return new Date().getDate() -1;
+```js
+function yesterday() {
+  return new Date().getDate() - 1;
 }
-function goodmorning(name){
-  return '早安'+name + '昨天是' + yesterday() + '号';
+function goodmorning(name) {
+  return '早安' + name + '昨天是' + yesterday() + '号';
 }
-function goodafternoon(name){
-  return '午安'+name + '昨天是' + yesterday() + '号';
+function goodafternoon(name) {
+  return '午安' + name + '昨天是' + yesterday() + '号';
 }
-function goodnight(name){
-  return '晚安'+name + '昨天是' + yesterday() + '号';
+function goodnight(name) {
+  return '晚安' + name + '昨天是' + yesterday() + '号';
 }
 //eating()这个函数不一定非要定义，可以直接console.log()也能满足需求，
 //但是想到老板将来又会去问候其他的人，吃饭了吗？xxx，
 //所以定义了一个函数，以便将来可以偷懒
-function eating(name){
+function eating(name) {
   return '吃饭了吗？' + name;
 }
-var list = ['小白妹妹','小红妹妹','小黑妹妹','小灰妹妹'];
-list.forEach(function(item){
+var list = ['小白妹妹', '小红妹妹', '小黑妹妹', '小灰妹妹'];
+list.forEach(function (item) {
   console.log(goodmorning(item));
   console.log(goodafternoon(item));
   console.log(goodnight(item));
 });
-console.log(eating('亲爱的'))
+console.log(eating('亲爱的'));
 ```
 
 使用闭包这么实现：
 
-```
-function yesterday(){
- return new Date().getDate()-1;
+```js
+function yesterday() {
+  return new Date().getDate() - 1;
 }
-function bibao(greeting){
-  return function(name){
-    return greeting + name +'昨天是' + yesterday() + '号';
-  }
+function bibao(greeting) {
+  return function (name) {
+    return greeting + name + '昨天是' + yesterday() + '号';
+  };
 }
 var goodmorning = bibao('早安');
 var goodafternoon = bibao('午安');
 var goodnight = bibao('晚安');
-var list = ['小白妹妹','小红妹妹','小黑妹妹','小灰妹妹'];
-list.forEach(function(item){
+var list = ['小白妹妹', '小红妹妹', '小黑妹妹', '小灰妹妹'];
+list.forEach(function (item) {
   console.log(goodmorning(item));
   console.log(goodafternoon(item));
   console.log(goodnight(item));

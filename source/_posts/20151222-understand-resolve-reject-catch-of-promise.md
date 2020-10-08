@@ -16,7 +16,7 @@ category: JS
 
 如果有这样一个 promise 链：
 
-```javascript
+```js
 p1()
   .then(p2)
   .then(p3)
@@ -69,7 +69,7 @@ error: 456
 
 假如我现在有一堆 promise 对象，大概长这样：
 
-```javascript
+```js
 //p2, p3与p1相似
 //当doSomething()执行完毕的时候，调用resolve()
 //使得当前promise状态转变为fulfilled即可

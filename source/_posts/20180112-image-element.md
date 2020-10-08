@@ -13,7 +13,7 @@ category: HTML
 
 搜了一下 google，发现是非常基础的知识，这种时候就觉得自己基础实在是太差了…☹
 
-```javascript
+```js
 var image = new Image();
 // 相当于 document.createElement('img')
 ```
@@ -26,7 +26,7 @@ var image = new Image();
 
 当图片加载出现错误时，触发 image.onerror
 
-```javascript
+```js
 // 继续上面的例子
 image.onload = function () {
   console.log('ok');

@@ -23,7 +23,7 @@ uncaught ReferenceError: React is not defined
 
 `/src`里的文件都是`ES6`和`JSX`形式，第一反应是我的文件没有被 webpack 里的`babel-loader`成功编译，查了一些资料之后发现问题是在`create-react-app`的 webpack 配置中，只会编译`./src`下的文件，而当我的库作为第三方依赖引入时，是在`./node_modules`下，因此没有被编译。（使用 webpack 编译时通常都会忽略`./node_modules`下的文件，没理由去编译别人的包呀，也就是说别人发布这个包的时候，就应该是编译好的了，然而偷懒的我没有编译就直接发布了）(⊙﹏⊙)b
 
-```javascript
+```js
 // ./react-scripts/config/webpack.config.prod.js
 // Process JS with Babel.
 {

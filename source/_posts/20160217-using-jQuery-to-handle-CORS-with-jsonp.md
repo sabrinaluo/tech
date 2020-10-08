@@ -13,15 +13,15 @@ category: JQUERY
 
 jQuery 的 ajax 请求其实能很简单的在客户端进行跨域 GET 请求，具体如下：
 
-```
+```js
 var options = {
   url: 'http://xx.xx.com/xxx',
   method: 'GET',
   dataType: 'jsonp',
   //jsonp: 'callback',
-  success: function(data){
+  success: function (data) {
     //do something here;
-  }
+  },
 };
 
 $.ajax(options);

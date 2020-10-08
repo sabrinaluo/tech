@@ -17,13 +17,13 @@ travis 和 heroku 都有自己的命令行工具（CLI），尤其 travis cli �
 
 travis-cli 是 ruby 写的，所以安装之前需要安装 ruby
 
-```
+```bash
 sudo apt-get install ruby-full
 ```
 
 详细的安装教程可以看官方的这个https://github.com/travis-ci/travis.rb#installation
 
-```
+```bash
 gem install travis -v 1.8.2 --no-rdoc --no-ri
 ```
 
@@ -35,17 +35,17 @@ heroku-cli 也是 ruby 写的……有点不懂为啥都喜欢用 ruby 写 cli�
 - https://toolbelt.heroku.com
 - https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli
 
-```
+```bash
 wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 ```
 
 ### 登陆
 
-```
+```bash
 travis login
 ```
 
-```
+```bash
 heroku login
 ```
 

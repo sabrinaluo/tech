@@ -11,7 +11,7 @@ category: JS
 
 利用位运算，与、或、异或、左右移位，`&` `|` `^` `>>` `>>>` `<<` ，舍去小数点后的数字[^1][^2]，[jsPerf](http://jsperf.com/coercion-vs-casting/3)
 
-```
+```js
 var a = 6.54321;
 console.log(a | 0); //6
 console.log(a & 0); //6
@@ -23,8 +23,8 @@ console.log(a & 0); //6
 
 利用加号 `+` 将数字字符串转换为数字类型
 
-```
-var a = "56789";
+```js
+var a = '56789';
 var b = +a;
 console.log(typeof b); //number
 console.log(b); //56789
@@ -38,8 +38,8 @@ console.log(b); //56789
 
 利用`!!`将变量类型强制转换为`boolean`类型
 
-```
-var a=123;
+```js
+var a = 123;
 typeof a; //nmuber
 typeof !!a; //boolean
 ```
@@ -48,36 +48,36 @@ typeof !!a; //boolean
 
 经常会遇到的一个情况是下面的代码会报错`can not read property 'c' of null`
 
-```
-if(a.b.c === 1){
-    //do something
+```js
+if (a.b.c === 1) {
+  //do something
 }
 ```
 
 以前自己的写法以及经常见到的写法是这样
 
-```
-if(a && a.b && a.b.c === 1){
-    //do something
+```js
+if (a && a.b && a.b.c === 1) {
+  //do something
 }
 ```
 
 前几天看到一个逼格很高的写法，不过我觉得括号太多了，容易写错，而且也没有上面的那种写法简单。不过还是要记录一下，以免以后见到不知道是什么意思。
 
-```
-if(((a||{}).b||{}).c === 1){
-    //do something
+```js
+if (((a || {}).b || {}).c === 1) {
+  //do something
 }
 ```
 
 ### || 设置默认值
 
-```
-function abc(a, b){
-    a = a || 1;
-    b = b || 2;
+```js
+function abc(a, b) {
+  a = a || 1;
+  b = b || 2;
 
-    return a + b;
+  return a + b;
 }
 
 abc(); //3

@@ -46,20 +46,23 @@ path 和 domain 这个…感觉不太用得到，具体可以看[这篇文章](h
 
 JS 原生方法：
 
-```
+```js
 var cookies = document.cookie;
 ```
 
 读取的 cookie 是一个分号分隔的包含所有 cookie 键值字符串，可以通过正则表达式来提取需要的 cookie
 
-```
-var cookieA = document.cookie.replace(/(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+```js
+var cookieA = document.cookie.replace(
+  /(?:(?:^|.*;\s*)cookieA\s*\=\s*([^;]*).*$)|^.*$/,
+  '$1'
+);
 ```
 
 ### request cookie 浏览器端设置 cookie
 
-```
-document.cookie = 'cookie_example=123'+';expires='+expire+';path=/';
+```js
+document.cookie = 'cookie_example=123' + ';expires=' + expire + ';path=/';
 ```
 
 如果要设置多个 cookie，多次调用`document.cookie`即可

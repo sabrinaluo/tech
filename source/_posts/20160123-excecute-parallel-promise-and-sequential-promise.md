@@ -76,7 +76,7 @@ promise 链的本质其实就是从头 then 到尾，但是第一种方法怎么
 
 大概跟在做求和运算时候的思想一样：
 
-```javascript
+```js
 //求和的时候通常这么做，先定义一个sum，然后依次往里做加法
 var sum = 0;
 array.forEach(function (item) {
@@ -84,7 +84,7 @@ array.forEach(function (item) {
 });
 ```
 
-```javascript
+```js
 //要得到一个then then then的promise链，先定义一个已经resolve了的promise，然后依次往后then…
 var sequence = Promise.resolve();
 array.forEach(function(item) {

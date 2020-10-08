@@ -13,7 +13,7 @@ category: JS
 
 例如，我们需要显示的数字**值**为 1, 2, 3 ... 10, 11 ..。 100, 200 等等，但希望显示的格式为所有数字都是固定的三位数，001, 002 这样
 
-```javascript
+```js
 var number = 1;
 number.toLocaleString('en-US', { minimumIntegerDigits: 3, useGrouping: false });
 // output '001'
@@ -23,7 +23,7 @@ number.toLocaleString('en-US', { minimumIntegerDigits: 3, useGrouping: false });
 
 不使用`toLocaleString`的实现方法：思路是将带转换数字转换为字符串后，在前面补足够多的零，然后用`slice`获取需要的最后若干位数。（我第一次看到这种实现方法的时候觉得，哇，还有这种骚操作！）
 
-```javascript
+```js
 var number = 12;
 ('00' + number).slice(-3);
 // → '012'
@@ -39,7 +39,7 @@ var number = 1;
 
 > When formatting large numbers of numbers, it is better to create a NumberFormat object and use the function provided by its `NumberFormat.format` property. [^2], [^3]
 
-```javascript
+```js
 var number = 123456.789;
 console.log(new Intl.NumberFormat('en-US').format(number));
 // → 123,456.789

@@ -19,7 +19,7 @@ category: AngularJS
 </div>
 ```
 
-```javascript
+```js
 angular
   .module('docsScopeProblemExample', [])
   .controller('NaomiController', [
@@ -51,7 +51,7 @@ angular
 
 Isolated scope 其实就是当你在 directive 里要 return 的那个 object 里，定义一个 scope 属性，这个`scope`会 override controller 中的`$scope`，从而实现 isolated。
 
-```javascript
+```js
 angular
   .module('docsIsolateScopeDirective', [])
   .controller('Controller', [
@@ -76,7 +76,7 @@ angular
 
 通常在写 Angular 的时候经常看到别人的指令 scope 里会有下面着这样`=` `@` `&`的符号，我自己呢，90%的时候都是用`=`，也不知道其他符号到底是干什么用的。今天无心工作，仔细研究了一下。
 
-```javascript
+```js
 app.directive('myDirective', function () {
   return {
     scope: {

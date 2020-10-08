@@ -14,7 +14,7 @@ tags: [Google Map, Google Map API, 谷歌地图API, 谷歌地图]
 - 首先需要一个 marker 的位置列表 `markerList`，单个元素长这样`{lat:xxx,lng:xxx}`
 - 遍历列表，把元素传入`google.maps.LatLngBounds`实例的`extend`方法
 
-```
+```js
 var latlngbounds = new google.maps.LatLngBounds();
 markerList.forEach(function (item) {
   latlngbounds.extend(item);
@@ -44,7 +44,7 @@ API 提供三种效果：`BOUNCE` `DROP` `NULL`
 
 https://snazzymaps.com/ 这个网站有很多已经设计好的样式，选喜欢的直接复制代码放到`StyledMapType()`方法中即可，然后给这个样式取个名字，下例中我使用了[light dream](https://snazzymaps.com/style/134/light-dream) 这个样式
 
-```
+```js
 var mapStyle = new google.maps.StyledMapType([....])
 map.mapTypes.set('lightDream', mapStyle);
 map.setMapTypeId('lightDream');
@@ -58,7 +58,7 @@ map.setMapTypeId('lightDream');
 
 不用闭包的话，用 promise 应该也能解决这个问题，但是感觉 promise 需要写的 code 会比较多一些。
 
-```
+```js
 var cityList=[{marker:googleMapMarker,city:'Beijing'},...];
 cityList.forEach(function(item){
   (function (marker, city) {

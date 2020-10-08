@@ -20,7 +20,7 @@ category: Algorithm
 3. 将比基准值大的都排在后面
 4. 针对 2, 3 持续重复 1-3 步，直到可分割的数组只包含零个或一个元素
 
-```javascript
+```js
 const qsort = (arr) => {
   if (arr.length <= 1) return arr; // 基线条件
 

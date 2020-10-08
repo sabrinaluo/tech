@@ -14,7 +14,7 @@ category: GIT
 
 在克隆时使用 `--bare`参数来克隆一个裸仓库
 
-```
+```bash
 git init --bare xxx-bare
 ```
 
@@ -39,7 +39,7 @@ git init --bare xxx-bare
 
 可以在本地同一个文件夹下先创建一个裸仓库名为 xxx-remote（模拟远程服务器），再创建一个 xxx-local 仓库（模拟本地），将 xxx-remote 添加为本地仓库的远程仓库，在本地仓库写一个`README.md`文件，提交并 push
 
-```
+```bash
 git init --bare xxx-remote
 git init xxx-local
 cd xxx-local
@@ -52,7 +52,7 @@ git push -u origin master
 
 之后切换到远程仓库文件夹，查看 git log
 
-```
+```bash
 cd ..
 cd xxx-remote
 git log
@@ -93,7 +93,7 @@ To ../xxx
 
 1. 在这台远程服务器上创建一个裸仓库，假如名叫 xxx。克隆 repo 取名为 website，用于存放网站文件
 
-```
+```bash
 git init --bare xxx
 git clone ./xxx website
 ```
@@ -109,7 +109,7 @@ git checkout
 
 3. 在本地 repo 添加远程仓库
 
-```
+```bash
 git remote add origin ubuntu@59.64.123.123:home/xxx.git
 ```
 

@@ -28,19 +28,19 @@ $ sudo apt-get install oracle-java8-set-default
 - 解压文件
 - 进入文件目录执行以下命令：
 
-```
+```bash
 java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 ```
 
 3. 安装 awscli，执行以下命令：
 
-```
+```bash
 pip install awscli
 ```
 
 4. 配置环境变量，执行以下命令：
 
-```
+```bash
 aws configure
 ```
 
@@ -49,7 +49,7 @@ aws configure
 
 5. 启动 dynamodb，进入 dynamodb 目录（也就是你解压 dynamodb 的地方），执行以下命令：
 
-```
+```bash
 java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 ```
 

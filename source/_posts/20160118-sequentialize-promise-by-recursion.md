@@ -45,7 +45,7 @@ category: JS
 
 - 普通程序员这么做
 
-```javascript
+```js
 var url = 'http://xxx'; //first page
 request(url)
   .then(function (data) {
@@ -68,7 +68,7 @@ request(url)
 - 文艺程序员这么做
   首先要知道的一点是，当没有下一页的时候，返回的`next=null`，于是我们就有了递归的终止条件。
 
-```javascript
+```js
 function run(url) {
   if (!url) return;
   while (url) {

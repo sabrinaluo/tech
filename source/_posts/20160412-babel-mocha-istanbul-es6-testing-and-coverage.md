@@ -29,13 +29,13 @@ category: TOOLS
 
 生成覆盖率的测试命令：（`_mocha` 是有下划线的）[^1]
 
-```
+```bash
 istanbul cover _mocha --  --opts ./test/mocha.opts
 ```
 
 ### 编译
 
-```
+```bash
 babel src/ -d lib/ --presets es2015 --source-map both
 ```
 

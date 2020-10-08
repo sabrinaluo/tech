@@ -16,9 +16,9 @@ category: CSS
 一开始我听说 CSS 可以 disable 超链接的时候我是拒绝的，因为通常在有`href`属性的时候，都是用 js 来禁止超链接的。
 然鹅…CSS 里居然有 pointer-events[^1]这种黑科技！
 
-```
-a{
-    pointer-events: none;
+```css
+a {
+  pointer-events: none;
 }
 ```
 

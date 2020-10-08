@@ -7,12 +7,8 @@ category:'CODE STYLE'
 
 以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：
 
-```
-var foo = [
-    1,
-    2,
-    3,
-];
+```js
+var foo = [1, 2, 3];
 ```
 
 作为一个懒癌晚期患者，觉得要多加一个逗号，真是好麻烦！那是 naive 的我，当然还不知道有版本控制 diff 这种高级工具，还停留在复制粘贴文件夹的人工版本控制低级阶段…
@@ -23,29 +19,22 @@ var foo = [
 
 Before
 
-```
-var foo = [
-    1,
-    2
-];
+```js
+var foo = [1, 2];
 ```
 
 After
 
-```
-var foo = [
-    1,
-    2,
-    3
-];
+```js
+var foo = [1, 2, 3];
 ```
 
 这样一来，diff view 中就会显示修改了**两行**代码。如果使用尾逗号，则添加一个元素只需要**1.换行添加新内容**即可，diff view 中显示只修改（添加）了一行代码。
 
 ### 一点人生感悟
 
-这个世界上，凡事都是 trade off，算法复杂度里要么时间换空间要么空间换时间。  
-尾逗号也一样，想要 diff view clean，代码就不那么 clean；想要代码 clean，diff view 就不那么 clean。  
+这个世界上，凡事都是 trade off，算法复杂度里要么时间换空间要么空间换时间。
+尾逗号也一样，想要 diff view clean，代码就不那么 clean；想要代码 clean，diff view 就不那么 clean。
 所以搞清楚自己想要什么，又有什么可以去 trade off，就很重要了。
 
 ### Reference

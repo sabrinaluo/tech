@@ -23,7 +23,7 @@ https://gist.github.com/dmnsgn/36b26dfcd7695d02de77f5342b0979c7
 
 直接在 chrome 的 console 中使用`getEventListeners`接口即可
 
-```javascript
+```js
 getEventListeners(document);
 ```
 
@@ -61,7 +61,7 @@ https://jsfiddle.net/HiiTea/m2vha9sj/embedded/result,html,js
 
 另外需要注意的是，我们经常看到这样的写法：
 
-```javascript
+```js
 element.addEventListener('click', myClickHandler, false);
 ```
 
@@ -79,7 +79,7 @@ IE9 之前，没有`addEventListener`方法，需要使用`attachEvent`方法代
 
 这个就是说，如果在`addEventListener`是添加了某些`options`，那么移除时也需要添加相应的`options`才能成功移除 listener 😭 真是麻烦
 
-```javascript
+```js
 document.addEventListener('click', handler, { passive: true });
 document.removeEventListener('click', handler); // fails
 ```

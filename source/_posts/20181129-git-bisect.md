@@ -20,20 +20,20 @@ category: git
 
 那么首先 checkout develop 分支，然后
 
-```
+```bash
 git bisect start
 git bisect bad
 ```
 
 然后 checkout G commit
 
-```
+```bash
 git bisect good
 ```
 
 此时 git 会自动 checkout D commit 并显示还剩下 3 个 commit 需要检查，然后我们不停的重复以上标记`good`和`bad`的步骤，直到找出有问题的 commit E，此时会显示还剩下 0 个 commit 需要检查， 记下这个 commit 的 hash（不知道这一步有没有什么自动记下的方法？），然后
 
-```
+```bash
 git bisect reset
 ```
 

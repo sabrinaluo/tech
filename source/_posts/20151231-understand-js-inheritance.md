@@ -15,7 +15,7 @@ category: JS
 
 JS 中类的实现有很多种，构造函数模式、原型模式等等，各有各的优缺点，最常用的是混合了构造函数和原型模式的混合模式。
 
-```javascript
+```js
 function Person(name) {
   this.name = name;
 }
@@ -35,7 +35,7 @@ Person.prototype.sayHi = function () {
 JS 中继承的实现也有很多种，借用构造函数，原型链等等。
 子类继承父类，当然继承的就是父类的**属性和方法**。JS 中继承的实现，最常用的也是混合模式。
 
-```javascript
+```js
 function Student(name, age) {
   Person.call(this, name);
   this.age = age;
@@ -62,7 +62,7 @@ Student.prototype.sayAge = function () {
 
 有时候我们也会见到如下的继承方式：
 
-```javascript
+```js
 Student.prototype = Object.create(Person.prototype);
 ```
 
@@ -87,7 +87,7 @@ https://jsfiddle.net/HiiTea/cfy89tru/embedded/js
 如果没有重写，`student instanceof Person` 的结果将会是`false`，因为`instanceof`的内部机制是，**判断对象的原型链中是否能找到对应的`prototype`**
 == update end ==
 
-```javascript
+```js
 // Student.prototype.constructor = Student; 在上面的代码中注释掉这一句
 var xiaobai = new Student('小白妹妹', 10);
 xiaobai.constructor; // Person

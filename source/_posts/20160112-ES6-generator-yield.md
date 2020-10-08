@@ -13,7 +13,7 @@ category: ES6
 
 一个 generator 函数大概长这样：
 
-```
+```js
 function* foo() {
   console.log(111);
   yield 123;
@@ -39,11 +39,11 @@ yield 到底是一个什么东东呢？操作符？对象？还是别的什么�
 
 看看阮一峰老师的这个例子，有助于理解参数的一些问题：
 
-```
+```js
 function* foo(x) {
-  var y = 2 * (yield (x + 1));
-  var z = yield (y / 3);
-  return (x + y + z);
+  var y = 2 * (yield x + 1);
+  var z = yield y / 3;
+  return x + y + z;
 }
 
 var a = foo(5);
@@ -82,12 +82,12 @@ b.next(13); // { value:42, done:true }，此时x=5，y=24，
 - 感觉 yield 像一个“函数”，执行的时候遇到这个函数就会暂停
 - 这个函数返回的值等于`.next(xxx)`调用时传入的参数 xxx，如果没有参数，返回值就是`undefined`
 
-```
+```js
 function* foo() {
   console.log(yield);
   console.log(yield);
 }
-var a=foo();
+var a = foo();
 a.next(); // 遇到第一个yield暂停，什么也不打印
 a.next(); // 遇到第二个yield暂停，打印上一句console.log(yield)，由于没有传入参数，yield返回undefined
 a.next('hello'); //后面没有yield了，函数执行完毕，打印第二个console.log，由于传入参数，将会打印出hello
@@ -95,8 +95,12 @@ a.next('hello'); //后面没有yield了，函数执行完毕，打印第二个co
 
 - yield 用在表达式中必须加括号扩起来，比如这样`var a = 1 + (yield 1+1)`，有点类似于把一个函数写到表达式中要用括号括起来
 
-```
-var a = 1 + (function(){return 123}());
+```js
+var a =
+  1 +
+  (function () {
+    return 123;
+  })();
 ```
 
 ### 好奇宝宝

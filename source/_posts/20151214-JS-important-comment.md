@@ -9,7 +9,7 @@ category: JS
 我的 JS 基本都是靠自学，我的大神同学们都是搞后端强类型语言的，所以我只能上网搜搜，买点书看看，加几个参差不齐的 QQ 群问一问。然而我这种月亮处女座的强迫症细节好奇宝宝常常会有奇奇怪怪找不到答案的问题……
 有一天我看代码的时候发现很多规范的 JS 都会有这样的注释：
 
-```javascript
+```js
 /*!
  * EJS
  * Copyright(c) 2012 TJ Holowaychuk <tj@vision-media.ca>

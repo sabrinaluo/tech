@@ -28,13 +28,13 @@ commit 2aad0182a613b2e73b44ebbf0d5536126f714cb9
 
 1. 从 HEAD 版本开始往过去数 3 个版本
 
-```
+```bash
 git rebase -i HEAD~3
 ```
 
 2. 指名要合并的版本之前的版本号
 
-```
+```bash
 git rebase -i 2aad018
 ```
 
