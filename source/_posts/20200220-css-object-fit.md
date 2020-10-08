@@ -5,15 +5,18 @@ tags: [object-fit, replaced element]
 category: css
 ---
 
-偷懒很久了，昨天好不容易花点时间做了一下css的一些测验，发现自己居然连 `object-fit` 都不会用，连 `replaced element`都没听过，居然也能测出expert水平…但有进步总是比什么都不做强一些。
+偷懒很久了，昨天好不容易花点时间做了一下 css 的一些测验，发现自己居然连 `object-fit` 都不会用，连 `replaced element`都没听过，居然也能测出 expert 水平…但有进步总是比什么都不做强一些。
 
 > object-fit 是用于控制可替换元素(replaced element[^2])在容器中如何显示的属性[^1]
 
 ## 可替换元素 replaced element
-可替换元素是独立于CSS的外部对象，其展现效果不由所继承的父文档css所控制，例如 `<iframe>` 本身有自己的样式，其样式不会受父文档中样式的影响
+
+可替换元素是独立于 CSS 的外部对象，其展现效果不由所继承的父文档 css 所控制，例如 `<iframe>` 本身有自己的样式，其样式不会受父文档中样式的影响
 
 ### 典型的可替换元素
+
 典型可替换元素有以下几种：
+
 - `<iframe>`
 - `<video>`
 - `<embed>`
@@ -21,7 +24,8 @@ category: css
 
 某些元素在特定情况下也被视为可替换元素，例如 `<option>`, `<audio>`, `<canvas>`, `<object>`, `<applet>`（这个我都不知道是啥）
 
-## CSS控制控制可替换元素的样式
+## CSS 控制控制可替换元素的样式
+
 `object-fit` 控制可替换元素在容器中如何显示，有以下几种值，以图片做例子进行说明：
 
 - `fill` 不按物件本身的宽高比的填充，而是按容器的大小填充，会出现图片变形等情况
@@ -32,10 +36,8 @@ category: css
 
 `object-position` 控制在容器中的位置，类似 `bakcground-position`
 
-
 一张图胜过千言万语
 ![image](https://user-images.githubusercontent.com/5300359/74955610-db787980-543f-11ea-911f-9ef0f30788ea.png)
 
-
-[^1]: https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit  
+[^1]: https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit
 [^2]: https://developer.mozilla.org/en-US/docs/Web/CSS/Replaced_element
