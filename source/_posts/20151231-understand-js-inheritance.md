@@ -70,7 +70,7 @@ Object.create - 不调用构造函数, 原型 prototype 上不会存在`undefine
 new - 调用构造函数, 但由于`Student.prototype = new Person();`没有传入参数，因此`Student.prototype.name === undefined`
 
 举个 🌰
-{% jsfiddle HiiTea/cfy89tru js light 100% 450px %}
+https://jsfiddle.net/HiiTea/cfy89tru/embedded/js
 可以看到，student 的原型链上多了一个`age: undefined`属性
 ![image](https://user-images.githubusercontent.com/36024221/46127882-8f360380-c264-11e8-82af-69f214fe66cc.png)
 

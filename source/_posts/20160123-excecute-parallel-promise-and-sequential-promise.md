@@ -60,7 +60,7 @@ facebook1    |-------------|
 ### Promise 并行执行
 
 对于场景 1，主要就是用到`Promise.all`，因为是数组，所以在处理的过程中通常会用到`.map`或`.forEach`
-{% jsfiddle HiiTea/zfjvr4pz/1 %}
+https://jsfiddle.net/HiiTea/zfjvr4pz/1/embedded/js
 ![promise例1网络请求时间线](http://7xow88.com1.z0.glb.clouddn.com/tech-promise1.png)
 可以看到 3 个 user 请求是同时进行（并行），3 个 repos 请求也是同时进行（并行），由于使用了`Promise.all`，所以 repos 请求等待 users 请求全部完成才开始。
 
@@ -93,14 +93,14 @@ array.forEach(function(item) {
 ```
 
 下面给出场景 2 的代码：
-{% jsfiddle HiiTea/sq2aga08 %}
+https://jsfiddle.net/HiiTea/sq2aga08/embedded/js
 ![promise例2网络请求时间线](http://7xow88.com1.z0.glb.clouddn.com/tech-promise2.png)
 可以看到请求是按顺序依次发出
 
 ### 并行执行和顺序执行混用
 
 场景 3:
-{% jsfiddle HiiTea/z09xjowq/1 %}
+https://jsfiddle.net/HiiTea/z09xjowq/1/embedded/js
 ![promise例3网络请求时间线](http://7xow88.com1.z0.glb.clouddn.com/tech-promise3.png)
 可以看到 users 请求是并行发出，但完成时间不一样，而 repos 请求是在**对应的**users 请求完成后就立即执行
 

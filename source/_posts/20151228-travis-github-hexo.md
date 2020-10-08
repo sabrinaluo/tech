@@ -24,7 +24,7 @@ category: DEVOPS
 注册一个 travis 账号，绑定 github，并为相应的 repo 开启 travis 服务
 在 repo 中添加`.travis.yml`文件，下面是我个人的配置。我是将 source 和 public 放在同一个 repo 的不同分支里，源文件放在 master 分支，生成后的网页放在 gh-pages 分支。
 
-{% gist d905eeed53d9368fdee6 %}
+https://gist.github.com/d905eeed53d9368fdee6.js
 
 ```
 ## 目录结构如下，其中.travis文件夹用于存放github的sshkey加密文件，以及ssh的相关配置
