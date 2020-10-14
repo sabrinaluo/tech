@@ -1,6 +1,6 @@
 ---
 title: 尾逗号(Trailing Comma)的意义
-date: 2017-07-12 11:01:13
+date: 2017-07-12 11:01:13 +8
 tags: ['trailing comma', 'comma-dangle', 尾逗号, 版本控制]
 category:'CODE STYLE'
 ---
@@ -36,11 +36,6 @@ var foo = [1, 2, 3];
 这个世界上，凡事都是 trade off，算法复杂度里要么时间换空间要么空间换时间。
 尾逗号也一样，想要 diff view clean，代码就不那么 clean；想要代码 clean，diff view 就不那么 clean。
 所以搞清楚自己想要什么，又有什么可以去 trade off，就很重要了。
-
-### Reference
-
-[1] https://medium.com/@nikgraf/why-you-should-enforce-dangling-commas-for-multiline-statements-d034c98e36f8
-[2] https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Trailing_commas
 
 [^1]: https://github.com/airbnb/javascript#functions--signature-invocation-indentation
 [^2]: https://google.github.io/styleguide/jsguide.html#features-arrays-trailing-comma

@@ -1,6 +1,6 @@
 ---
 title: 以太坊智能合约应用初体验
-date: 2018-01-16 22:57:42
+date: 2018-01-16 22:57:42 +8
 tags: [Ethereum, Smart Contract, DApp, Blockchain]
 category: Blockchain
 ---
@@ -35,6 +35,8 @@ category: Blockchain
 - 前端通过 web3 生成的实例进行相应操作
 
 如果是按照以上的流程来走的话，前后端就是完全可以分开开发的了。初来乍到，如有猜的不对的地方还请各位大佬多多指教。:)
+
+---
 
 **Reference:**
 http://truffleframework.com/tutorials/pet-shop

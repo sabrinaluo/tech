@@ -1,6 +1,6 @@
 ---
 title: 对module.exports和exports的一些理解
-date: 2015-12-16 11:00:27
+date: 2015-12-16 11:00:27 +8
 tags: [NodeJS, Module.exports, exports, 模块导出]
 category: NodeJS
 ---

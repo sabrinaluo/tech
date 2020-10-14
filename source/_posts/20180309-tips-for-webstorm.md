@@ -1,6 +1,6 @@
 ---
 title: WebStorm的一些小技巧
-date: 2018-03-09 12:06:02
+date: 2018-03-09 12:06:02 +8
 tags: [WebStorm, IDE, shortcut]
 category: IDE
 ---

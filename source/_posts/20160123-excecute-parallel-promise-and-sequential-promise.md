@@ -1,7 +1,7 @@
 ---
 title: Promise的顺序执行和并行执行
-date: 2016-01-23 22:52:26
-tags: [Promise, parallel, sequential, 顺序执行，并行执行]
+date: 2016-01-23 22:52:26 +8
+tags: [Promise, parallel, sequential, 顺序执行, 并行执行]
 category: JS
 ---
 
@@ -120,6 +120,8 @@ https://jsfiddle.net/HiiTea/z09xjowq/1/embedded/js
 
 如果看到的区别不是很明显，很可能是已经缓存了，清空浏览器的缓存在重复上面的步骤就能看到比较明显的区别了。
 
-### 参考：
+---
+
+**Reference:**
 
 [1] https://www.udacity.com/course/viewer#!/c-ud898

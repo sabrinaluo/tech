@@ -1,6 +1,6 @@
 ---
 title: 一些js小技巧
-date: 2016-10-19 15:08:33
+date: 2016-10-19 15:08:33 +8
 tags: [js, tricks, js小技巧]
 category: JS
 ---

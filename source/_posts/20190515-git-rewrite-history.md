@@ -1,6 +1,6 @@
 ---
 title: git重写历史
-date: 2019-05-15 23:50:46
+date: 2019-05-15 23:50:46 +8
 tags: [git]
 category: git
 ---

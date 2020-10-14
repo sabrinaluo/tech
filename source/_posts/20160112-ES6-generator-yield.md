@@ -1,6 +1,6 @@
 ---
 title: 对generator和yield的一些理解
-date: 2016-01-12 17:11:28
+date: 2016-01-12 17:11:28 +8
 tags: [ES6, generator, yield]
 category: ES6
 ---
@@ -57,7 +57,7 @@ b.next(12); // { value:8, done:false }，此时x=5，y=24，var z还没执行
 b.next(13); // { value:42, done:true }，此时x=5，y=24，
 ```
 
-当上面的函数运行`b.next(12)`这一句时，x=5，y=24，var z 还没执行，返回对象为{ value:8, done:false }
+当上面的函数运行`b.next(12)`这一句时，x=5，y=24，var z 还没执行，返回对象为`{ value:8, done:false }`
 
 > Q: 为什么 y=24？
 > A: 因为第二个 next 方法的参数传给*上一个 yield*，也就是第一个 yield，所以 var y = 2 \* 12

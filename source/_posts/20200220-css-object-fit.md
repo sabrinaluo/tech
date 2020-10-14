@@ -1,6 +1,6 @@
 ---
 title: css中使用 object-fit 来控制可替换元素的样式
-date: 2020-02-20 23:46:35
+date: 2020-02-20 23:46:35 +8
 tags: [object-fit, replaced element]
 category: css
 ---

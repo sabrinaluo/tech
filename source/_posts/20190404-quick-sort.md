@@ -1,6 +1,6 @@
 ---
 title: 快速排序
-date: 2019-04-04 23:41:10
+date: 2019-04-04 23:41:10 +8
 tags: [sort, qsort, 快排]
 category: Algorithm
 ---

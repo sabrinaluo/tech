@@ -1,6 +1,6 @@
 ---
 title: 结合使用Babel Mocha Istanbul进行ES6代码测试和覆盖率测试
-date: 2016-04-12 12:32:01
+date: 2016-04-12 12:32:01 +8
 tags: [ES6, mocha, istanbul, babel, 测试, 代码覆盖率]
 category: TOOLS
 ---
@@ -64,9 +64,5 @@ No coverage information was collected, exit without writing coverage information
 
 平时遇到的问题十有八九一搜都能找到阮一峰老师的教程…这覆盖率也太高了？！
 
-### 参考
-
-[1] http://www.ruanyifeng.com/blog/2015/06/istanbul.html
-[2] http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html
 [^1]: http://www.ruanyifeng.com/blog/2015/06/istanbul.html
 [^2]: http://www.ruanyifeng.com/blog/2015/12/a-mocha-tutorial-of-examples.html

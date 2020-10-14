@@ -1,6 +1,6 @@
 ---
 title: 对Promise中的resolve，reject，catch的理解
-date: 2015-12-22 11:36:07
+date: 2015-12-22 11:36:07 +8
 tags: [promise chain, promise链]
 category: JS
 ---

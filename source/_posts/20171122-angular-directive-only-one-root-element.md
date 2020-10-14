@@ -1,6 +1,6 @@
 ---
 title: angular指令什么情况下只能有一个根元素(root element)
-date: 2017-12-05 15:28:03
+date: 2017-12-05 15:28:03 +8
 tags: [angular, directive]
 category: AngularJS
 ---

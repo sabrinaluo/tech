@@ -1,6 +1,6 @@
 ---
 title: AWS DynamoDB的本地安装及环境配置
-date: 2015-12-14 14:39:35
+date: 2015-12-14 14:39:35 +8
 tags: [AWS, DynamoDB, 环境配置, 本地安装, 亚马逊, 云服务]
 category: AWS
 ---
@@ -53,7 +53,9 @@ aws configure
 java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb
 ```
 
-参考：
+---
+
+**Reference:**
 [1] http://tecadmin.net/install-oracle-java-8-jdk-8-ubuntu-via-ppa/
 [2] [DynamoDBLocal Downloading And Running](http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tools.DynamoDBLocal.html#Tools.DynamoDBLocal.DownloadingAndRunning)
 [3] http://aws.amazon.com/cli/

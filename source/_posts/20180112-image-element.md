@@ -1,6 +1,6 @@
 ---
 title: HTML DOM Element - image
-date: 2018-01-12 16:42:54
+date: 2018-01-12 16:42:54 +8
 tags: [HTML, DOM, image]
 category: HTML
 ---
@@ -41,7 +41,8 @@ image.src = 'https://ticket.urbtix.hk/internet/p_image/cover/34505.jpg';
 
 以上，就是辣么简单啦。
 
-### Reference:
+---
 
+**Reference:**
 https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement/Image
 https://developer.mozilla.org/en-US/docs/Mozilla/Tech/XUL/image

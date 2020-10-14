@@ -1,6 +1,6 @@
 ---
 title: AWS API Gateway与AWS Lambda的整合及开发/测试/生产环境的设置
-date: 2015-12-15 10:55:13
+date: 2015-12-15 10:55:13 +8
 tags:
   [
     AWS,

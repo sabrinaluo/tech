@@ -1,6 +1,6 @@
 ---
 title: 如何通过Git钩子自动部署(Push to Deploy)
-date: 2016-04-14 18:59:37
+date: 2016-04-14 18:59:37 +8
 tags: [git, hook, 自动部署]
 category: GIT
 ---
@@ -116,9 +116,5 @@ git remote add origin ubuntu@59.64.123.123:home/xxx.git
 4.在本地仓库修改文件并 push
 
 至此整个 git 自动部署的过程就完成了
-
-### 参考
-
-[1]: https://www.kernel.org/pub/software/scm/git/docs/githooks.html
 
 [^1]: https://www.kernel.org/pub/software/scm/git/docs/githooks.html

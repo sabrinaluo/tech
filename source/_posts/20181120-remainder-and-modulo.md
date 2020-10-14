@@ -1,6 +1,6 @@
 ---
 title: 取模(mod)和取余(rem) 在数学和计算机中的不同
-date: 2018-11-20 12:18:29
+date: 2018-11-20 12:18:29 +8
 tags: [mod, remainder]
 category: Math
 ---
@@ -86,12 +86,6 @@ wiki 抄来的图，红色为商，绿色为余数，其实我不是很看得懂
 ![img](https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Divmod.svg/250px-Divmod.svg.png)
 
 总的来说，求商的时候会分为向零取整、向下取整、欧几里得除法，读书的时候就最烦数学定义这种东西了，然而现在发现“定义”才是一切的根本，真是悔不当初…
-
-## 参考
-
-[1] https://ramdajs.com/docs/#mathMod
-[2] https://en.wikipedia.org/wiki/Modulo_operation#Remainder_calculation_for_the_modulo_operation
-[3] http://blog.thpiano.com/?p=1023
 
 [^1]: https://ramdajs.com/docs/#mathMod
 [^2]: https://en.wikipedia.org/wiki/Modulo_operation#Remainder_calculation_for_the_modulo_operation

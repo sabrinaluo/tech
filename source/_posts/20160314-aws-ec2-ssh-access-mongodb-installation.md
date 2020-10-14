@@ -1,6 +1,6 @@
 ---
 title: AWS EC2 SSH访问 & mongodb 安装
-date: 2016-03-14 18:33:31
+date: 2016-03-14 18:33:31 +8
 tags: [AWS, EC2, ssh, mongodb]
 category: AWS
 ---

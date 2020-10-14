@@ -1,6 +1,6 @@
 ---
 title: git如何ignore已经track的文件
-date: 2016-02-01 14:01:03
+date: 2016-02-01 14:01:03 +8
 tags: [git, gitignore, 'update index']
 category: GIT
 ---

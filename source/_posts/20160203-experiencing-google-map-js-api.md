@@ -1,6 +1,6 @@
 ---
 title: 谷歌地图 Google Map API 初体验
-date: 2016-02-03 18:32:51
+date: 2016-02-03 18:32:51 +8
 tags: [Google Map, Google Map API, 谷歌地图API, 谷歌地图]
 ---
 
@@ -73,6 +73,7 @@ cityList.forEach(function(item){
 
 http://mabp.kiev.ua/2010/01/12/google-map-markers/
 
-### 参考：
+---
 
+**Reference:**
 https://developers.google.com/maps/documentation/javascript/reference

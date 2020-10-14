@@ -1,6 +1,6 @@
 ---
 title: git bisect 二分法查找问题commit
-date: 2018-11-29 11:47:01
+date: 2018-11-29 11:47:01 +8
 tags: [git, 二分法, debug, bisect]
 category: git
 ---

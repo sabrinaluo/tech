@@ -1,6 +1,6 @@
 ---
 title: git merge commits 如何合并多个提交为一个
-date: 2015-12-24 15:08:49
+date: 2015-12-24 15:08:49 +8
 tags: [git, merge commits, 合并提交]
 category: GIT
 ---

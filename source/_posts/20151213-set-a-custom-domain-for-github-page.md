@@ -1,6 +1,6 @@
 ---
 title: GitHub Page如何绑定域名
-date: 2015-12-13 00:34:42
+date: 2015-12-13 00:34:42 +8
 tags: [github, github page, custom domain, 域名绑定, 二级域名, 域名解析]
 category: DEVOPS
 ---

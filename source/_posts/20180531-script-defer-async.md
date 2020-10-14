@@ -1,6 +1,6 @@
 ---
 title: 如何延迟加载script(defer, async)
-date: 2018-05-31 15:18:29
+date: 2018-05-31 15:18:29 +8
 tags: [html, head, script, async, defer]
 category: HTML
 ---

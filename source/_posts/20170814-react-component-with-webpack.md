@@ -1,6 +1,6 @@
 ---
 title: 用webpack打包react组件
-date: 2017-08-14 10:36:56
+date: 2017-08-14 10:36:56 +8
 tags: [webpack, react, react-component]
 category: WEBPACK
 ---
@@ -51,11 +51,6 @@ uncaught ReferenceError: React is not defined
 ```
 
 然而，加上这个时候我的噩梦就来啦，永远都提示`React is undefined`，试了各种各样的`external`写法，对象、数组…都不管用。花了两三天时间，才搜到一个说`libiaryTarget: 'umd'`的[^2]
-
-### 参考
-
-1: https://github.com/facebookincubator/create-react-app/issues/1492
-2: https://github.com/zhengweikeng/blog/issues/10
 
 [^1]: https://github.com/facebookincubator/create-react-app/issues/1492
 [^2]: https://github.com/zhengweikeng/blog/issues/10

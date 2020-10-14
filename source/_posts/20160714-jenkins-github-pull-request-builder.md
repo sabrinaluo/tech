@@ -1,6 +1,6 @@
 ---
 title: Jenkins集成github pull request插件
-date: 2016-07-14 14:41:02
+date: 2016-07-14 14:41:02 +8
 tags: [jenkins, github, CI, 持续集成]
 category: DEVOPS
 ---

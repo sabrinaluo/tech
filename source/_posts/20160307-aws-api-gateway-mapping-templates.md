@@ -1,6 +1,6 @@
 ---
 title: AWS API Gateway Mapping Template 获取IP, header等
-date: 2016-03-07 14:33:03
+date: 2016-03-07 14:33:03 +8
 tags: [AWS, API Gateway, lambda, mapping templates, header]
 category: AWS
 ---
@@ -44,8 +44,6 @@ lambda 返回的内容，只是 response body，因此设置 header 要在 api g
 
 - 如果想使用 lambda 返回的数据，设置为`integration.response.body.KEY`
 - 如果不是使用 lambda（即把 gateway 用作代理），而是使用实际服务器返回的 header，设置为`integration.response.header.KEY`
-
-### 参考
 
 [^1]: http://docs.aws.amazon.com/zh_cn/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html
 

@@ -1,6 +1,6 @@
 ---
 title: Angular directive指令相关的scope问题(= @ & ?)
-date: 2017-09-01 15:59:44
+date: 2017-09-01 15:59:44 +8
 tags: [angular, directive, scope, 'isolated scope']
 category: AngularJS
 ---
@@ -159,8 +159,8 @@ https://stackoverflow.com/questions/29857998/proper-way-to-pass-functions-to-dir
 
 ### 参考
 
-[1] https://docs.angularjs.org/guide/directive  
-[2] https://blog.coding.net/blog/angularjs-directive-isolate-scope  
-[3] https://stackoverflow.com/questions/14908133/what-is-the-difference-between-vs-and-in-angularjs  
-[4] https://stackoverflow.com/questions/20447786/whats-the-meaning-of-in-angularjs-directive-isolate-scope-declaration  
+[1] https://docs.angularjs.org/guide/directive
+[2] https://blog.coding.net/blog/angularjs-directive-isolate-scope
+[3] https://stackoverflow.com/questions/14908133/what-is-the-difference-between-vs-and-in-angularjs
+[4] https://stackoverflow.com/questions/20447786/whats-the-meaning-of-in-angularjs-directive-isolate-scope-declaration
 [5] https://stackoverflow.com/questions/29857998/proper-way-to-pass-functions-to-directive-for-execution-in-link

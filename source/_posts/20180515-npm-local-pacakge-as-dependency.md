@@ -1,6 +1,6 @@
 ---
 title: 开发时如何使用本地npm包作为依赖
-date: 2018-05-15 15:01:19
+date: 2018-05-15 15:01:19 +8
 tags: [npm, local, link]
 category: NPM
 ---
@@ -22,10 +22,5 @@ cd ~/projects/node-bloggy   # go into some other package directory.
 npm link redis              # link-install the package 然后在主项目里安装已连接的dependency
 ```
 
-### 参考
-
 [^1]: https://stackoverflow.com/questions/15806241/how-to-specify-local-modules-as-npm-package-dependencies
 [^2]: https://docs.npmjs.com/cli/link
-
-[1]: https://stackoverflow.com/questions/15806241/how-to-specify-local-modules-as-npm-package-dependencies
-[2]: https://docs.npmjs.com/cli/link

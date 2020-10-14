@@ -1,6 +1,6 @@
 ---
 title: 微博开放平台的Basic Auth和OAuth2.0认证
-date: 2016-06-20 17:59:09
+date: 2016-06-20 17:59:09 +8
 tags: [OAuth2.0]
 category: AUTH
 ---

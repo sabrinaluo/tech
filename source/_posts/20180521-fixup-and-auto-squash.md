@@ -1,6 +1,6 @@
 ---
 title: 使用fixup和auto squash修改git commit
-date: 2018-05-21 14:38:40
+date: 2018-05-21 14:38:40 +8
 tags: [git, fixup, squash, conventional commit, patch]
 category: GIT
 ---
@@ -23,7 +23,7 @@ category: GIT
 
 #### 正确的使用方法及流程[^2]
 
-- `git commit --fixup fb2f677`  
+- `git commit --fixup fb2f677`
   假设 fixup 后 git log 如下
 
 ```
@@ -33,7 +33,7 @@ fb2f677 Feature A is done
 ac5db87 Previous commit
 ```
 
-- `git rebase -i --autosquash ac5db87`  
+- `git rebase -i --autosquash ac5db87`
   需要注意，`autosquash`后面的 hash 必须是将要 squash 的 commit 的前一个
 
 ### patch

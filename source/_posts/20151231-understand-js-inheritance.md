@@ -1,6 +1,6 @@
 ---
 title: 对JS类和继承的一些理解
-date: 2015-12-31 11:36:54
+date: 2015-12-31 11:36:54 +8
 tags: [JS, prototype, 继承, 原型]
 category: JS
 ---

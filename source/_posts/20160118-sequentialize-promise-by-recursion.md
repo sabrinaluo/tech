@@ -1,6 +1,6 @@
 ---
 title: 递归实现按顺序执行Promise
-date: 2016-01-18 17:23:18
+date: 2016-01-18 17:23:18 +8
 tags: [promise, 递归]
 category: JS
 ---

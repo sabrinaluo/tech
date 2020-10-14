@@ -1,6 +1,6 @@
 ---
 title: CSS的几个小技巧：pointer-events, transform垂直居中,nth-child
-date: 2016-09-20 16:44:46
+date: 2016-09-20 16:44:46 +8
 tags: [css, tricks]
 category: CSS
 ---
