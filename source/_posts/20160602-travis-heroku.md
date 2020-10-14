@@ -2,7 +2,7 @@
 title: 利用travis进行heroku部署
 date: 2016-06-02 15:27:46 +8
 tags: [travis, heroku, 持续集成, 自动部署]
-category: DEVOPS
+category: DevOps
 ---
 
 好久么有写东西了，总感觉一直忙的跟狗一样，身心俱疲，但是又不知道到底在忙什么。

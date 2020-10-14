@@ -2,7 +2,7 @@
 title: 利用travis自动部署hexo搭建在github的博客
 date: 2015-12-28 12:00:56 +8
 tags: [travis, github, hexo, 博客, 自动部署, 持续集成]
-category: DEVOPS
+category: DevOps
 ---
 
 这篇应该属于不务正业系列…

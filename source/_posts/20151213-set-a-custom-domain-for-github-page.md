@@ -2,7 +2,7 @@
 title: GitHub Page如何绑定域名
 date: 2015-12-13 00:34:42 +8
 tags: [github, github page, custom domain, 域名绑定, 二级域名, 域名解析]
-category: DEVOPS
+category: DevOps
 ---
 
 本文假设你已经在 github 建立了一个 yourname.github.io 的网站，为了看起来逼格更高，更好记，更 professional，所以要绑定域名？！

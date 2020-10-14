@@ -2,7 +2,7 @@
 title: CSS的几个小技巧：pointer-events, transform垂直居中,nth-child
 date: 2016-09-20 16:44:46 +8
 tags: [css, tricks]
-category: CSS
+category: css
 ---
 
 > 千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！千万不要用没有自动保存功能的编辑器！:(

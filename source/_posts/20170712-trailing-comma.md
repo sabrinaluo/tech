@@ -2,7 +2,7 @@
 title: 尾逗号(Trailing Comma)的意义
 date: 2017-07-12 11:01:13 +8
 tags: ['trailing comma', 'comma-dangle', 尾逗号, 版本控制]
-category:'CODE STYLE'
+category: CODE STYLE
 ---
 
 以前在网上看别人写的代码，有时候会看到这样，数组的最后一个元素后面多一个逗号：

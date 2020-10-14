@@ -2,7 +2,7 @@
 title: global .gitignore
 date: 2018-03-27 12:39:44 +8
 tags: [git, gitignore]
-category: GIT
+category: git
 ---
 
 ### 为什么需要全局 `.gitignore`

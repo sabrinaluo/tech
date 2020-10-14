@@ -1,7 +1,7 @@
 ---
 title: Promise的顺序执行和并行执行
 date: 2016-01-23 22:52:26 +8
-tags: [Promise, parallel, sequential, 顺序执行, 并行执行]
+tags: [promise, parallel, sequential, 顺序执行, 并行执行]
 category: JS
 ---
 

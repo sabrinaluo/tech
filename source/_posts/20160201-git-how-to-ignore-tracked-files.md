@@ -2,7 +2,7 @@
 title: git如何ignore已经track的文件
 date: 2016-02-01 14:01:03 +8
 tags: [git, gitignore, 'update index']
-category: GIT
+category: git
 ---
 
 我也不想中英文混杂的取标题……但我实在翻译无能…\_(:з」∠)\_

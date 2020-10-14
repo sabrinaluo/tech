@@ -43,9 +43,9 @@ AWS Lambda 目前支持 python，JAVA，NodeJS。这个 Lambda 函数呢，只�
 1. **为 API Gateway 创建不同的 stage[^1]，假设创建了 3 个分别是 dev，qa，prod。** *（教程是官方英文的，点引用的链接就可以看到，憋让我翻译，我懒…我知道还有 pre-prod，多加一个下面的解释就得多写好多字(ಥ*ಥ)）\_
    > 设置了 stage 之后你的 api endpoin 看起来大概长这样：
 
-- <aws-apiID>.execute-api.<aws-region>.amazonaws.com/dev
-- <aws-apiID>.execute-api.<aws-region>.amazonaws.com/qa
-- <aws-apiID>.execute-api.<aws-region>.amazonaws.com/prod
+- `<aws-apiID>.execute-api.<aws-region>.amazonaws.com/dev`
+- `<aws-apiID>.execute-api.<aws-region>.amazonaws.com/qa`
+- `<aws-apiID>.execute-api.<aws-region>.amazonaws.com/prod`
 
 2. **为每个的 Stage 设置 stageVariables[^2]，假设为每个 Stage 都设置了一个名为 env 的变量**
 

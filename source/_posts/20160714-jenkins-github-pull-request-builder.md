@@ -2,7 +2,7 @@
 title: Jenkins集成github pull request插件
 date: 2016-07-14 14:41:02 +8
 tags: [jenkins, github, CI, 持续集成]
-category: DEVOPS
+category: DevOps
 ---
 
 前不久给 bootstrap 提了个[issue](https://github.com/twbs/bootstrap/issues/19997)，然后被他们的高科技自动回复机器人吓萌比了。

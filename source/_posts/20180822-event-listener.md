@@ -1,7 +1,7 @@
 ---
 title: 关于eventListener的那些事
 date: 2018-08-22 11:41:52 +8
-tags: [js, eventlLstener, chrome dev tool, web api, 事件冒泡]
+tags: [js, event listener, chrome dev tool, web api, 事件冒泡]
 category: WebAPI
 ---
 

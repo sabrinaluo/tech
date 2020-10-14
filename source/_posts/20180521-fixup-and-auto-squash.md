@@ -2,7 +2,7 @@
 title: 使用fixup和auto squash修改git commit
 date: 2018-05-21 14:38:40 +8
 tags: [git, fixup, squash, conventional commit, patch]
-category: GIT
+category: git
 ---
 
 在写程序的过程中，经常遇到一些刚提交了 commit 就发现有个错别字这种尴尬的情况，我以前的做法是`git reset HEAD~1` 将 HEAD 指向提交之前的一个 commit 然后改完再重新提交 ‍🤦‍
