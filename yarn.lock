@@ -6057,10 +6057,10 @@ gatsby-telemetry@^1.3.35:
     node-fetch "^2.6.0"
     uuid "3.4.0"
 
-gatsby-theme-replica@^0.0.2-1761fa1.0:
-  version "0.0.2-1761fa1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-theme-replica/-/gatsby-theme-replica-0.0.2-1761fa1.0.tgz#65d39bda3f112202a85a9f3523ed78dd3c1331c6"
-  integrity sha512-9502P11UQl7pmmMt6WrNXlv6yrXNSKhLS602sJ71f/DGduqLXy3+VSMNLwJeH788aQwO9V4pTYxdR6N7hGexBg==
+gatsby-theme-replica@^0.0.2-eedd2da.0:
+  version "0.0.2-eedd2da.0"
+  resolved "https://registry.yarnpkg.com/gatsby-theme-replica/-/gatsby-theme-replica-0.0.2-eedd2da.0.tgz#e26ac6b4b35a4f9f46a6570a7391e412cf100e58"
+  integrity sha512-hsDQZYkBvCxX8KXzIvfiQ5EhfwZonjd91lo+m3fibZM81P+2o+tsfkxLz1hsE7iSA13QdC3YoYrqIHikbFW3Ww==
   dependencies:
     babel-plugin-styled-components "^1.11.1"
     gatsby-plugin-disqus "^1.2.2"

@@ -17,7 +17,7 @@
   "dependencies": {
     "gatsby": "^2.24.63",
     "gatsby-plugin-google-gtag": "^2.1.13",
-    "gatsby-theme-replica": "^0.0.2-1761fa1.0",
+    "gatsby-theme-replica": "^0.0.2-eedd2da.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "ts-node": "^9.0.0"
