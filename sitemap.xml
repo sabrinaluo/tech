@@ -72,6 +72,7 @@
 <url> <loc>https://hiitea.io/tech/tags/dom</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/dynamodb</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/ec2</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
+<url> <loc>https://hiitea.io/tech/tags/es6</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/ethereum</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/google-map</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/google-map-api</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
@@ -106,7 +107,6 @@
 <url> <loc>https://hiitea.io/tech/tags/debug</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/defer</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/directive</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
-<url> <loc>https://hiitea.io/tech/tags/es6</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/event-listener</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/exports</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
 <url> <loc>https://hiitea.io/tech/tags/fixup</loc> <changefreq>daily</changefreq> <priority>0.7</priority> </url>
