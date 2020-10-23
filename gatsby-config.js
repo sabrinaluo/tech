@@ -26,6 +26,12 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `hiitea-tech`,
+      },
+    },
+    {
       resolve: 'gatsby-theme-replica',
       options: {
         contentPath: 'source/_posts',
