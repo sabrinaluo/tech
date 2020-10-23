@@ -1,7 +1,7 @@
 ---
 title: 神奇的toLocaleString, Intl.NumberFormat
 date: 2018-01-05 12:00:00 +8
-tags: [JS, internationalization, 国际化]
+tags: [js, internationalization, 国际化]
 category: JS
 ---
 

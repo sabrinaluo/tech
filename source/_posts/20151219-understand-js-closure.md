@@ -1,7 +1,7 @@
 ---
 title: 对JS闭包(Closure)的一些理解
 date: 2015-12-19 19:22:27 +8
-tags: [JS, closure, 闭包]
+tags: [js, closure, 闭包]
 category: JS
 ---
 
