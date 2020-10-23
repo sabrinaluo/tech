@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{Tgqd:function(n,o,t){"use strict";t.d(o,"a",(function(){return e}));var r=t("Lnxd");function e(n){return Object(r.a)({tag:"svg",attr:{viewBox:"0 0 24 24",fill:"none",stroke:"currentColor",strokeWidth:"2",strokeLinecap:"round",strokeLinejoin:"round"},child:[{tag:"polygon",attr:{points:"12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"}}]})(n)}}}]);
+//# sourceMappingURL=5e2a4920-50d33517b006c67c759c.js.map
