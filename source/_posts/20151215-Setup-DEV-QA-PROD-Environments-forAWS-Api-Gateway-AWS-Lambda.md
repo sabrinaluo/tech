@@ -53,7 +53,7 @@ AWS Lambda 目前支持 python，JAVA，NodeJS。这个 Lambda 函数呢，只�
 - qa 这个 stage 中 env 变量的值为 QA
 - prod 这个 stage 中 env 变量的值为 PROD
 
-3. **Lambda stageTest()函数创建不同的 alias[^3][^4]，假设创建了 3 个分别是 DEV，QA，PROD，分别指向不同的版本。**
+3. **Lambda stageTest()函数创建不同的 alias[^3] [^4]，假设创建了 3 个分别是 DEV，QA，PROD，分别指向不同的版本。**
    > - 在每次 deploy 后，都是\$LATEST 版本，点 action>publish new version 发布不同的版本
 
 - 建议 DEV 指向\$LATEST 版本，QA 和 PROD 指向其他稳定的版本
@@ -61,7 +61,7 @@ AWS Lambda 目前支持 python，JAVA，NodeJS。这个 Lambda 函数呢，只�
 
 4. **整合 API /stageTest 的 GET 方法与 Lambda stageTest()[^5]**
 
-- 首先在 API Gateway 的界面中设置每个 API 方法的**Integration Request**：Integration Type 选择 Lambda Function；Lambda Function 填`stageTest:${stageVariables.env}`，**\${stageVariables.env}**就是第 2 步中，设置的变量。
+- 首先在 API Gateway 的界面中设置每个 API 方法的**Integration Request**：Integration Type 选择 Lambda Function；Lambda Function 填`stageTest:${stageVariables.env}`，**`${stageVariables.env}`**就是第 2 步中，设置的变量。
 - 设置 Lambda Function 名称的时候一定要记得点旁边的 √ 保存，保存的时候，AWS 会弹出一个对话框，需要给函数加上权限才能使用 stageVariables 变量。加的时候记得要执行三次命令，也就是在 AWS 给出的命令的对应的位置改成 `stageTest:DEV`，`stageTest:QA`，`stageTest:PROD` 每个执行一次。
 - 执行以上命令之前，你必须：
   - 安装 AWS CLI
@@ -74,12 +74,13 @@ AWS Lambda 目前支持 python，JAVA，NodeJS。这个 Lambda 函数呢，只�
 
 这个时候，你就必须研究[AWS CLI](https://aws.amazon.com/cli/)，然后写 shell 以及借助其他工具来进行自动化部署了…
 
-其他参考：
+** Reference **
 
 - http://docs.aws.amazon.com/apigateway/latest/developerguide/stage-variables.html
 - http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#stagevariables-template-reference
-  [^1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html
-  [^2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html
-  [^3]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
-  [^4]: http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
-  [^5]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html
+
+[^1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html
+[^2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-set-stage-variables-aws-console.html
+[^3]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+[^4]: http://docs.aws.amazon.com/lambda/latest/dg/aliases-intro.html
+[^5]: http://docs.aws.amazon.com/apigateway/latest/developerguide/getting-started.html
